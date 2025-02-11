@@ -1,0 +1,194 @@
+<!--components/loading/index.wxml-->
+<!-- From Uiverse.io by Nawsome -->
+<view wx:if="{{loading}}">
+  <view class="socket">
+    <view class="gel center-gel">
+      <view class="hex-brick h1"></view>
+      <view class="hex-brick h2"></view>
+      <view class="hex-brick h3"></view>
+    </view>
+    <view class="gel c1 r1">
+      <view class="hex-brick h1"></view>
+      <view class="hex-brick h2"></view>
+      <view class="hex-brick h3"></view>
+    </view>
+    <view class="gel c2 r1">
+      <view class="hex-brick h1"></view>
+      <view class="hex-brick h2"></view>
+      <view class="hex-brick h3"></view>
+    </view>
+    <view class="gel c3 r1">
+      <view class="hex-brick h1"></view>
+      <view class="hex-brick h2"></view>
+      <view class="hex-brick h3"></view>
+    </view>
+    <view class="gel c4 r1">
+      <view class="hex-brick h1"></view>
+      <view class="hex-brick h2"></view>
+      <view class="hex-brick h3"></view>
+    </view>
+    <view class="gel c5 r1">
+      <view class="hex-brick h1"></view>
+      <view class="hex-brick h2"></view>
+      <view class="hex-brick h3"></view>
+    </view>
+    <view class="gel c6 r1">
+      <view class="hex-brick h1"></view>
+      <view class="hex-brick h2"></view>
+      <view class="hex-brick h3"></view>
+    </view>
+
+    <view class="gel c7 r2">
+      <view class="hex-brick h1"></view>
+      <view class="hex-brick h2"></view>
+      <view class="hex-brick h3"></view>
+    </view>
+
+    <view class="gel c8 r2">
+      <view class="hex-brick h1"></view>
+      <view class="hex-brick h2"></view>
+      <view class="hex-brick h3"></view>
+    </view>
+    <view class="gel c9 r2">
+      <view class="hex-brick h1"></view>
+      <view class="hex-brick h2"></view>
+      <view class="hex-brick h3"></view>
+    </view>
+    <view class="gel c10 r2">
+      <view class="hex-brick h1"></view>
+      <view class="hex-brick h2"></view>
+      <view class="hex-brick h3"></view>
+    </view>
+    <view class="gel c11 r2">
+      <view class="hex-brick h1"></view>
+      <view class="hex-brick h2"></view>
+      <view class="hex-brick h3"></view>
+    </view>
+    <view class="gel c12 r2">
+      <view class="hex-brick h1"></view>
+      <view class="hex-brick h2"></view>
+      <view class="hex-brick h3"></view>
+    </view>
+    <view class="gel c13 r2">
+      <view class="hex-brick h1"></view>
+      <view class="hex-brick h2"></view>
+      <view class="hex-brick h3"></view>
+    </view>
+    <view class="gel c14 r2">
+      <view class="hex-brick h1"></view>
+      <view class="hex-brick h2"></view>
+      <view class="hex-brick h3"></view>
+    </view>
+    <view class="gel c15 r2">
+      <view class="hex-brick h1"></view>
+      <view class="hex-brick h2"></view>
+      <view class="hex-brick h3"></view>
+    </view>
+    <view class="gel c16 r2">
+      <view class="hex-brick h1"></view>
+      <view class="hex-brick h2"></view>
+      <view class="hex-brick h3"></view>
+    </view>
+    <view class="gel c17 r2">
+      <view class="hex-brick h1"></view>
+      <view class="hex-brick h2"></view>
+      <view class="hex-brick h3"></view>
+    </view>
+    <view class="gel c18 r2">
+      <view class="hex-brick h1"></view>
+      <view class="hex-brick h2"></view>
+      <view class="hex-brick h3"></view>
+    </view>
+    <view class="gel c19 r3">
+      <view class="hex-brick h1"></view>
+      <view class="hex-brick h2"></view>
+      <view class="hex-brick h3"></view>
+    </view>
+    <view class="gel c20 r3">
+      <view class="hex-brick h1"></view>
+      <view class="hex-brick h2"></view>
+      <view class="hex-brick h3"></view>
+    </view>
+    <view class="gel c21 r3">
+      <view class="hex-brick h1"></view>
+      <view class="hex-brick h2"></view>
+      <view class="hex-brick h3"></view>
+    </view>
+    <view class="gel c22 r3">
+      <view class="hex-brick h1"></view>
+      <view class="hex-brick h2"></view>
+      <view class="hex-brick h3"></view>
+    </view>
+    <view class="gel c23 r3">
+      <view class="hex-brick h1"></view>
+      <view class="hex-brick h2"></view>
+      <view class="hex-brick h3"></view>
+    </view>
+    <view class="gel c24 r3">
+      <view class="hex-brick h1"></view>
+      <view class="hex-brick h2"></view>
+      <view class="hex-brick h3"></view>
+    </view>
+    <view class="gel c25 r3">
+      <view class="hex-brick h1"></view>
+      <view class="hex-brick h2"></view>
+      <view class="hex-brick h3"></view>
+    </view>
+    <view class="gel c26 r3">
+      <view class="hex-brick h1"></view>
+      <view class="hex-brick h2"></view>
+      <view class="hex-brick h3"></view>
+    </view>
+    <view class="gel c28 r3">
+      <view class="hex-brick h1"></view>
+      <view class="hex-brick h2"></view>
+      <view class="hex-brick h3"></view>
+    </view>
+    <view class="gel c29 r3">
+      <view class="hex-brick h1"></view>
+      <view class="hex-brick h2"></view>
+      <view class="hex-brick h3"></view>
+    </view>
+    <view class="gel c30 r3">
+      <view class="hex-brick h1"></view>
+      <view class="hex-brick h2"></view>
+      <view class="hex-brick h3"></view>
+    </view>
+    <view class="gel c31 r3">
+      <view class="hex-brick h1"></view>
+      <view class="hex-brick h2"></view>
+      <view class="hex-brick h3"></view>
+    </view>
+    <view class="gel c32 r3">
+      <view class="hex-brick h1"></view>
+      <view class="hex-brick h2"></view>
+      <view class="hex-brick h3"></view>
+    </view>
+    <view class="gel c33 r3">
+      <view class="hex-brick h1"></view>
+      <view class="hex-brick h2"></view>
+      <view class="hex-brick h3"></view>
+    </view>
+    <view class="gel c34 r3">
+      <view class="hex-brick h1"></view>
+      <view class="hex-brick h2"></view>
+      <view class="hex-brick h3"></view>
+    </view>
+    <view class="gel c35 r3">
+      <view class="hex-brick h1"></view>
+      <view class="hex-brick h2"></view>
+      <view class="hex-brick h3"></view>
+    </view>
+    <view class="gel c36 r3">
+      <view class="hex-brick h1"></view>
+      <view class="hex-brick h2"></view>
+      <view class="hex-brick h3"></view>
+    </view>
+    <view class="gel c37 r3">
+      <view class="hex-brick h1"></view>
+      <view class="hex-brick h2"></view>
+      <view class="hex-brick h3"></view>
+    </view>
+
+  </view>
+</view>

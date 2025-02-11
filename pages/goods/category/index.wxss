@@ -1,0 +1,60 @@
+page {
+  --font-color: #4c88ff;
+  --bg-color: #f2f3f7;
+  --button-bg-color: #f2f3f7;
+  --button-shadow: -12rpx -12rpx 16rpx rgba(255, 255, 255, 0.9), 10rpx 10rpx 16rpx rgba(0, 0, 0, 0.07);
+  background-color: #f2f3f7;
+  padding-bottom: calc(env(safe-area-inset-bottom) + 96rpx);
+}
+
+.home-page-header {
+  background: linear-gradient(#fff, #f5f5f5);
+  padding: 10px;
+  position: fixed;
+  top: 0;
+  z-index: 1000;
+  width: calc(100% - 20px);
+}
+
+.container {
+  padding-top: 70px;
+}
+
+button::after {
+  border: none;
+}
+
+.module-list {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.button {
+  color: var(--font-color);
+  position: relative;
+  border-radius: 15px;
+  background: var(--button-bg-color);
+  transition: all 100ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow: var(--button-shadow);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  text-align: left;
+  width: 92%;
+  /* height: 60px; */
+  margin-bottom: 15px;
+
+}
+
+.icon-menu {
+  height: 60rpx;
+  font-size: 66rpx;
+}
+
+.module-name {
+  color: #222222;
+  font-weight: 700;
+  font-size: 28rpx;
+}

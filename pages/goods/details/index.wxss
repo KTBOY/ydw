@@ -1,0 +1,19 @@
+/* pages/goods/details/index.wxss */
+
+.details {
+  padding: 5px;
+}
+
+.title {
+  font-weight: bold;
+}
+
+/* From Uiverse.io by Codewithvinay */
+.url-name {
+  text-align: center;
+
+}
+
+.btn {
+  background-color: #2a2a2a;
+}

@@ -1,0 +1,4 @@
+@import 'style/iconfont.wxss';
+
+@import 'style/theme.wxss';
+@import 'style/page.wxss';
