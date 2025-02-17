@@ -1,7 +1,8 @@
 // pages/goods/category/index.js
 import {
-  getGameList
-} from "../../../common/games"
+  getGameList,
+  readGameList,
+} from "../../../utils/gameList/games"
 import {
   fuzzySearch
 } from "../../../utils/gameUtils"
@@ -11,7 +12,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    list: getGameList(),
+    list: [],
     loading: true
   },
 
@@ -46,13 +47,16 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad(options) {
-
+  async onLoad(options) {
+    const res = await getGameList()
+    this.setData({
+      list: res
+    })
     setTimeout(() => {
       this.setData({
         loading: false
       })
-    }, 1000)
+    }, 1500)
   },
 
   /**
