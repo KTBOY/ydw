@@ -16,24 +16,28 @@ Page({
     loading: true
   },
 
-  onChangeValue(v) {
-    if (!v.detail.value) {
+  async onChangeValue(v) {
+    if (!v.detail?.value) {
+      const res = await getGameList()
       this.setData({
-        list: getGameList()
+        list: res
       })
-      return
-    }
 
+      return
+
+
+    }
+    console.log(v)
     this.setData({
       list: fuzzySearch(v.detail.value, this.data.list, 'name')
     })
 
   },
 
-  onClose() {
-    console.log('关闭')
+  async onClose() {
+    const res = await getGameList()
     this.setData({
-      list: getGameList()
+      list: res
     })
   },
 

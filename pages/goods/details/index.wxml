@@ -1,14 +1,14 @@
 <!--pages/goods/details/index.wxml-->
 <view class="details">
   <view class="title">{{detailsData.name}}</view>
-  <view class="url">
+  <view class="url" wx:if="{{detailsData.urlK}}">
     <view class="url-name">夸克</view>
     <view>{{detailsData.urlK}}</view>
     <view>解压密码/安装码：{{detailsData.passWord}}</view>
     <t-button class="btn" theme="primary" size="small" data-url="{{detailsData.urlK}}" bind:tap="handCopyKK">复制链接</t-button>
   </view>
 
-  <view class="url">
+  <view class="url" wx:if="{{detailsData.urlB}}">
     <view class="url-name">百度</view>
     <view>{{detailsData.urlB}}</view>
     <view>提取码：{{detailsData.urlBCode}}</view>

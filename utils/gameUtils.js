@@ -15,14 +15,21 @@ export const fuzzySearch = (query, data, key) => {
  * @returns {Object} - 包含链接和提取码的对象
  */
 export const extractLinkInfo = (text) => {
+  text.split(/\s+/).join('');
+  console.log(text)
   const linkRegex = /(https:\/\/pan\.baidu\.com\/s\/[a-zA-Z0-9_-]+)/;
   const codeRegex = /提取码：(\w+)/;
 
   const linkMatch = text.match(linkRegex);
   const codeMatch = text.match(codeRegex);
+  let code = codeMatch ? codeMatch[1] : null;
+  if (!code) {
+    const match = text.match(/提取码:\s*([a-zA-Z0-9]+)/);
+    code = match ? match[1] : null;
+  }
 
   return {
     link: linkMatch ? linkMatch[0] : null,
-    code: codeMatch ? codeMatch[1] : null
+    code,
   };
 }
