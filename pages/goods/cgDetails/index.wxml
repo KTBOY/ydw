@@ -1,0 +1,8 @@
+<view class="details">
+  <view class="title">橙光合集</view>
+  <view class="url">
+    <url-copy url="https://pan.quark.cn/s/2698b3d4137c"></url-copy>
+    <view class="tip">提示：先复制链接保存到自己"夸克网盘"，然后在盘里面搜索对应名称即可。</view>
+  </view>
+
+</view>

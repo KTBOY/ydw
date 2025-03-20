@@ -1,0 +1,5 @@
+<!-- From Uiverse.io by Alaner-xs -->
+<div class="switch">
+  <input type="checkbox" />
+  <span class="slider"></span>
+</div>

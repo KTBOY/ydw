@@ -1,0 +1,28 @@
+<view class="hot-biz">
+  <view class="hot-top">
+    <view class="tx">当下热门</view>
+  </view>
+  <view class="hot-item-list">
+    <scroll-view scroll-x>
+      <view class="hot-biz-list">
+        <view class="item" wx:for="{{list}}" wx:key="id">
+          <image bindtap='selectImg' data-id='{{item}}' data-src='../../../images/hat{{item}}.png' src="/asserts/images/gq/hat{{item}}.png" mode='aspectFill'></image>
+        </view>
+      </view>
+    </scroll-view>
+  </view>
+</view>
+
+<view class="canvas-view">
+  <view style="width:150px;margin-left:20px;border: 2px solid #ffffff;">
+    <canvas id="myCanvas" style="width:150px;" type="2d"></canvas>
+  </view>
+
+  <!-- 预览区域  -->
+  <view class='canvas-view-right'>
+    <button size="large" variant="outline" bindtap="chooseImage" class="btn">选择头像</button>
+    <t-button bindtap="save" class="btn" disabled="{{!avatarUrl}}">保存头像</t-button>
+    <!-- <button open-type="share" bindtap='handleShare' class="btn">分享好友</button> -->
+  </view>
+
+</view>

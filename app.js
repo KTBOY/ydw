@@ -1,12 +1,12 @@
-// import updateManager from './utils/gameList/games';
-import {
-  readGameList
-} from './utils/gameList/games';
-App({
-  onLaunch: function () {
-
-  },
-  onShow: function () {
-    // updateManager();
-  },
-});
+ import updateManager from './utils/gameList/updateManager';
+ import {
+   readGameList
+ } from './utils/gameList/games';
+ App({
+   onLaunch: function () {
+     updateManager();
+   },
+   onShow: function () {
+     // updateManager();
+   },
+ });

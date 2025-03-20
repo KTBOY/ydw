@@ -1,0 +1,24 @@
+<!--index.wxml-->
+<scroll-view class="scrollarea" scroll-y type="list" wx:if="{{!loading}}">
+  <view class="home-page-header">
+    <view class="search">
+      <t-search bind:clear="onClose" bind:change="onChangeValue" t-class-input="t-search__input" t-class-input-container="t-search__input-container" placeholder="请输入游戏名称" leftIcon="" disabled="{{false}}">
+
+      </t-search>
+    </view>
+  </view>
+
+
+  <view class="container">
+    <view class="module-list">
+      <view wx:for="{{list}}" wx:for-index="idx" wx:for-item="item" bindtap="navToDetailsPage" data-item="{{item}}">
+        <button class="button" wx:if="{{item.name}}">
+          <view class="module-name">{{item.name}}</view>
+        </button>
+      </view>
+    </view>
+  </view>
+
+
+</scroll-view>
+<!-- <my-loading loading="{{loading}}"></my-loading> -->

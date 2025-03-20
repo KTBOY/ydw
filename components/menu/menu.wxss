@@ -1,0 +1,99 @@
+page {
+  --font-color: #4c88ff;
+  --bg-color: #f2f3f7;
+  --button-bg-color: #f2f3f7;
+  --button-shadow: -12rpx -12rpx 16rpx rgba(255, 255, 255, 0.9), 10rpx 10rpx 16rpx rgba(0, 0, 0, 0.07);
+  background-color: #f2f3f7;
+}
+
+.head {
+  padding: 20rpx 30rpx;
+}
+
+/* 轮播 */
+
+.img {
+  width: 100%;
+  height: 100%;
+}
+
+/* 轮播end */
+
+
+button::after {
+  border: none;
+}
+
+.cover {
+  position: relative;
+  width: 120rpx;
+  height: 130rpx;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2rpx solid #f1f8fd;
+  box-shadow: 20rpx 20rpx 20rpx rgba(0, 0, 0, 0.07), -20rpx -20rpx 20rpx rgba(255, 255, 255, 0.7),
+    6rpx 6rpx 6rpx rgba(0, 0, 0, 0.09), -6rpx -6rpx 6rpx rgba(255, 255, 255, 0.9);
+
+
+}
+
+.logo {
+  width: 100%;
+  height: 100%;
+}
+
+.name {
+  color: #aeafb0;
+  padding: 10rpx 0;
+}
+
+
+
+
+.module-list {
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  flex-direction: row;
+}
+
+.button {
+  color: var(--font-color);
+  position: relative;
+  border-radius: 15px;
+  background: var(--button-bg-color);
+  transition: all 100ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow: var(--button-shadow);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: left;
+  width: 45%;
+  height: 200rpx;
+
+
+}
+
+/* .button:last-child {
+  width: 95%;
+  margin: 20rpx 0;
+} */
+
+
+
+.icon-menu {
+  width: 100rpx;
+  height: 100rpx;
+}
+
+.button:last-child .icon-menu {
+  width: 150rpx !important;
+}
+
+.module-name {
+  color: #222222;
+  font-weight: 700;
+  font-size: 28rpx;
+}

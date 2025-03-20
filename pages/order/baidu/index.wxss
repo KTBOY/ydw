@@ -1,0 +1,34 @@
+/* pages/order/baidu/index.wxss */
+
+.baidu {
+  text-align: center;
+  padding: 0 15rpx;
+}
+
+.title {
+  font-weight: bold;
+  margin: 5rpx 0;
+}
+
+.url-box {
+  font-size: 26rpx;
+  border: 1rpx solid rgb(194, 194, 194);
+  text-align: left;
+  border-radius: 10rpx;
+
+}
+
+.url {
+  padding: 15rpx;
+}
+
+.copy {
+  width: 100%;
+  background: var(--td-brand-color);
+  color: #fff;
+  height: 30px;
+  text-align: center;
+  line-height: 30px;
+  border-bottom-left-radius: 10rpx;
+  border-bottom-right-radius: 10rpx;
+}

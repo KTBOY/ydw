@@ -1,27 +1,14 @@
 {
   "pages": [
-    "pages/goods/category/index",
     "pages/home/home",
     "pages/goods/search/index",
-    "pages/goods/details/index"
+    "pages/goods/details/index",
+    "pages/goods/cgDetails/index",
+    "pages/order/baidu/index",
+    "pages/my_module/flag/index",
+    "pages/my_module/yueyu/index",
+    "pages/my_module/calc_relative/index"
   ],
-  "tabBar": {
-    "custom": true,
-    "color": "#666666",
-    "selectedColor": "#FF5F15",
-    "backgroundColor": "#ffffff",
-    "borderStyle": "black",
-    "list": [
-      {
-        "pagePath": "pages/home/home",
-        "text": "首页"
-      },
-      {
-        "pagePath": "pages/goods/category/index",
-        "text": "分类"
-      }
-    ]
-  },
   "requiredPrivateInfos": [
     "chooseAddress"
   ],

@@ -1,0 +1,14 @@
+.details {
+  padding: 5px;
+}
+
+.title {
+  font-weight: bold;
+  margin: 15rpx 0;
+}
+
+.tip {
+  color: red;
+  font-size: 26rpx;
+  margin: 15rpx 0;
+}

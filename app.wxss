@@ -1,4 +1,12 @@
 @import 'style/iconfont.wxss';
 
 @import 'style/theme.wxss';
-@import 'style/page.wxss';
+
+page {
+  box-sizing: border-box;
+  --my-bg-color: #f2f3f7;
+  --td-brand-color: #030303;
+  background: var(--my-bg-color);
+  padding-bottom: calc(constant(safe-area-inset-bottom) +140rpx);
+  padding-bottom: calc(env(safe-area-inset-bottom) + 140rpx);
+}
