@@ -43,14 +43,17 @@
     "showES6CompileOption": false,
     "useCompilerPlugins": false,
     "ignoreUploadUnusedFiles": true,
-    "useStaticServer": true
+    "useStaticServer": true,
+    "condition": true
   },
   "compileType": "miniprogram",
-  "libVersion": "3.7.7",
+  "libVersion": "3.8.9",
   "appid": "wxebd883a58cd230c5",
   "projectname": "tdesign-miniprogram-starter-retail",
   "simulatorType": "wechat",
-  "simulatorPluginLibVersion": {},
+  "simulatorPluginLibVersion": {
+    "wxext14566970e7e9f62": "3.6.5-35"
+  },
   "condition": {
     "miniprogram": {
       "list": [
@@ -138,5 +141,6 @@
   "editorSetting": {
     "tabIndent": "insertSpaces",
     "tabSize": 2
-  }
+  },
+  "projectArchitecture": "multiPlatform"
 }

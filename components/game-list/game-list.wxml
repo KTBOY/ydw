@@ -1,8 +1,8 @@
 <!--index.wxml-->
-<scroll-view class="scrollarea" scroll-y type="list" wx:if="{{!loading}}">
+<scroll-view class="scrollarea" scroll-y type="list">
   <view class="home-page-header">
     <view class="search">
-      <t-search bind:clear="onClose" bind:change="onChangeValue" t-class-input="t-search__input" t-class-input-container="t-search__input-container" placeholder="请输入游戏名称" leftIcon="" disabled="{{false}}">
+      <t-search bind:clear="onClose" bind:change="onChangeValue" t-class-input="t-search__input" t-class-input-container="t-search__input-container" placeholder="请输入搜索名称" leftIcon="" disabled="{{false}}">
 
       </t-search>
     </view>

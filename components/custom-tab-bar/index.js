@@ -1,14 +1,31 @@
 import TabMenu from './data';
 Component({
+  /**
+   * 组件的属性列表
+   */
+  properties: {
+    indexTab: {
+      type: Number
+    }
+  },
+
   data: {
     active: 0,
     currIndex: 0,
     list: TabMenu,
   },
 
+  observers: {
+    'indexTab': function (v) {
+      this.setData({
+        currIndex: v
+      })
+    }
+  },
+
   methods: {
     tabClick(event) {
-      console.log(this.data.currIndex)
+
 
       const {
         index,

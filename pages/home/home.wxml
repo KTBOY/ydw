@@ -1,7 +1,8 @@
 <view class="home">
 
 
-  <menu wx:if="{{currIndex==0}}"></menu>
-  <game-list wx:if="{{currIndex==1}}" />
-  <custom-tab-bar bindtabClick="tabClick"></custom-tab-bar>
+  <menu wx:if="{{currIndex==0}}" bindchange="onChangeMenu"></menu>
+  <game-list wx:if="{{currIndex==1}}" list="{{list}}" />
+  <!-- <ad unit-id="adunit-73225c369f75b51c" bindload="adLoad" binderror="adError"></ad> -->
+  <custom-tab-bar bindtabClick="tabClick" indexTab="{{currIndex}}"></custom-tab-bar>
 </view>

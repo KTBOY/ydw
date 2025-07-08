@@ -31,13 +31,52 @@ Component({
         image: '/asserts/images/caid/fam.png',
         name: '亲戚关系计算器',
         router: '/pages/my_module/calc_relative/index',
-        show: true
+        show: true,
+        style: {
+          width: '70rpx',
+          height: '70rpx'
+        }
       }, {
         image: '/asserts/images/caid/cg.png',
         name: '橙光资源',
         router: '/pages/goods/cgDetails/index',
-        show: true
+        show: true,
+        style: {
+          width: '110rpx',
+          height: '76rpx'
+        }
+      },
+      {
+        image: '/asserts/images/caid/rj.png',
+        name: '软件资源',
+        router: '/pages/rj/index',
+        show: true,
+        style: {
+          width: '70rpx',
+          height: '70rpx'
+        }
+      },
+      {
+        image: '/asserts/images/caid/az.png',
+        name: '手机资源',
+        router: '/pages/phone/index',
+        show: true,
+        style: {
+          width: '70rpx',
+          height: '70rpx'
+        }
+      },
+      {
+        image: '/asserts/images/caid/steam.png',
+        name: '电脑资源',
+        router: '',
+        show: true,
+        style: {
+          width: '90rpx',
+          height: '86rpx'
+        }
       }
+
 
     ],
     current: 1,
@@ -52,12 +91,19 @@ Component({
    */
   methods: {
     handlerPageRouter(v) {
-      console.log(v);
       const {
         item
       } = v.currentTarget.dataset.params
-      wx.navigateTo({
-        url: item.router
+      if (item.router) {
+        wx.navigateTo({
+          url: item.router
+        })
+        return
+      }
+
+
+      this.triggerEvent('change', {
+        item
       })
     },
 
@@ -68,6 +114,7 @@ Component({
           url: '/pages/order/baidu/index'
         })
       }
+
 
 
     }

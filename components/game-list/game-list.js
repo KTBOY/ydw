@@ -11,14 +11,16 @@ Component({
    * 组件的属性列表
    */
   properties: {
-
+    list: {
+      type: Array
+    }
   },
 
   /**
    * 组件的初始数据
    */
   data: {
-    list: [],
+    // list: [],
     loading: true
   },
 
@@ -60,18 +62,19 @@ Component({
   },
   lifetimes: {
     async ready() {
-      const res = await getGameList()
-      this.setData({
-        list: res
-      })
-      setTimeout(() => {
-        this.setData({
-          loading: false
-        })
-      }, 10)
+      // console.log(this.data.list);
+      // const res = await getGameList()
+      // this.setData({
+      //   list: res
+      // })
+      // setTimeout(() => {
+      //   this.setData({
+      //     loading: false
+      //   })
+      // }, 10)
     },
     detached() {
-      console.log(22)
+      //console.log(22)
     },
   },
 })

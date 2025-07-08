@@ -72,28 +72,26 @@ button::after {
   text-align: left;
   width: 45%;
   height: 200rpx;
-
+  margin-bottom: 20rpx;
 
 }
 
-/* .button:last-child {
+
+
+.button:last-child {
   width: 95%;
-  margin: 20rpx 0;
-} */
-
-
+}
 
 .icon-menu {
   width: 100rpx;
   height: 100rpx;
 }
 
-.button:last-child .icon-menu {
-  width: 150rpx !important;
-}
+
 
 .module-name {
   color: #222222;
   font-weight: 700;
   font-size: 28rpx;
+  margin-top: 10rpx;
 }

@@ -1,6 +1,9 @@
 {
   "pages": [
     "pages/home/home",
+    "pages/rj/index",
+    "pages/phone/index",
+    "pages/cg/index",
     "pages/goods/search/index",
     "pages/goods/details/index",
     "pages/goods/cgDetails/index",
