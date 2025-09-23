@@ -1,4 +1,325 @@
 export const list = [{
+  "name": "牧场物语 来吧!风之繁华集市|豪华中文|全DLC|解压即撸v1.0.3",
+  "urlK": "https://pan.quark.cn/s/58393f5b524f",
+  "urlB": "https://pan.baidu.com/s/1DH7idYsl1Cd7xl_28aUaTg?pwd=2214 \n提取码: 2214",
+  "passWord": "88888888"
+}, {
+  "name": "心动恋旅 樱花篇|豪华中文|全DLC|解压即撸|Build.19747457-1.0.1",
+  "urlK": "https://pan.quark.cn/s/db81263bcdbe",
+  "urlB": "https://pan.baidu.com/s/1kXjYnpX_Muuxi14EhPiVEQ?pwd=6c82\n提取码: 6c82",
+  "passWord": "88888888"
+}, {
+  "name": "主题医院|豪华中文|赠送修改器|完全版|解压即玩|约109.4MB",
+  "urlK": "https://pan.quark.cn/s/f1daf0d76c98",
+  "urlB": "https://pan.baidu.com/s/1U1zL82QrlPdZ-Lzxi9mJxA?pwd=rbnc\n提取码: rbnc",
+  "passWord": "88888888"
+}, {
+  "name": "战争机器 重装上阵|豪华中文|预购特典+全DLC|解压即撸|约62.6GB|Build.19762918",
+  "urlK": "https://pan.quark.cn/s/003e65e75957",
+  "urlB": "https://pan.baidu.com/s/1oh6DmAFuN72pdJ8Bzm3_mQ?pwd=85ka \n提取码: 85ka",
+  "passWord": "88888888"
+}, {
+  "name": "孢子 最终收藏版|汉化中文|解压可玩|约3.7G",
+  "urlK": "https://pan.quark.cn/s/bdeeaec5e4cd",
+  "urlB": "https://pan.baidu.com/s/1qn5JRvYXOmZfd7bTfhOvJQ?pwd=37aj \n提取码: 37aj",
+  "passWord": "88888888"
+}, {
+  "name": "战争号令 地狱之门|豪华中文|全DLC+黑暗光辉-黎明守卫|解压即撸|V1.040.0",
+  "urlK": "https://pan.quark.cn/s/6aa4bd3ad1e5",
+  "urlB": "https://pan.baidu.com/s/1N68na4sXx_Q0PbgUG2z6DA?pwd=8189 \n提取码: 8189",
+  "passWord": "88888888"
+}, {
+  "name": "合金装备3 重制版|豪华中文|预购特典+全DLC-支持手柄|解压即撸|约84.2GB\n|Build.19224093",
+  "urlK": "https://pan.quark.cn/s/9b31bc255d28",
+  "urlB": "https://pan.baidu.com/s/1qq9U8WTw6nHuqEirpiRJZQ?pwd=reea \n提取码: reea ",
+  "passWord": "88888888"
+}, {
+  "name": "镜头人生 模特写真馆|中字-国语|全DLC|解压即撸Build.19714416",
+  "urlK": "https://pan.quark.cn/s/041ed9857378",
+  "passWord": "88888888"
+}, {
+  "name": "香港都市传说：鱼蛋妹 |官方中文|完整版|解压即玩|约454.9MB|Build.19439418",
+  "urlK": "https://pan.quark.cn/s/69d155735bda",
+  "passWord": "88888888"
+}, {
+  "name": "火鹰FPV：无人机战争模拟器|官方中文|完整版|解压即玩|约5.8GB|Build.19708406",
+  "urlK": "https://pan.quark.cn/s/bf31daeb6ed9",
+  "passWord": "88888888"
+}, {
+  "name": "忍者外传：怒之羁绊 |官方中文|完整版|解压即玩v36158",
+  "urlK": "https://pan.quark.cn/s/559b8a1d64f4",
+  "passWord": "88888888"
+}, {
+  "name": "哈迪斯2|豪华中文|完整版+修改器|解压即撸|约6.7G|v0.125553",
+  "urlK": "https://pan.quark.cn/s/d651fb0023cd",
+  "urlB": "https://pan.baidu.com/s/1mI75xEEFLs4FjALqPWW3qA?pwd=z8m1 \n提取码: z8m1",
+  "passWord": "88888888"
+}, {
+  "name": "切尔诺贝利人2 禁区|豪华中文|+预购特典+全DLC-支持手柄|解压即撸|94.6G|v69605",
+  "urlK": "https://pan.quark.cn/s/ffac7a70cdce",
+  "urlB": "https://pan.baidu.com/s/1YFdL9_GCwstzqVcevol17A?pwd=1wur\n提取码: 1wur ",
+  "passWord": "88888888"
+}, {
+  "name": "王座陨落|豪华中文|完整版|解压即撸|约254MB|V2.06",
+  "urlK": "https://pan.quark.cn/s/aac539814da4",
+  "urlB": "https://pan.baidu.com/s/1K1t5eNxGUZ_SiFU4OW65hQ?pwd=fffh \n提取码: fffh",
+  "passWord": "88888888"
+}, {
+  "name": "废品机械师|豪华中文|完全版|解压即撸| v0.7.3",
+  "urlK": "https://pan.quark.cn/s/9235be607d94",
+  "passWord": "88888888"
+}, {
+  "name": "装甲核心6：境界天火|赠送修改器|豪华中文|预购特典+全DLC|解压即撸|v1.09.1",
+  "urlK": "https://pan.quark.cn/s/011fb1bc6383",
+  "passWord": "88888888"
+}, {
+  "name": "名利游戏|豪华中文|完全版|解压即撸|V1.0",
+  "urlB": "https://pan.baidu.com/s/1dz6vj6i0wJ-IIZOUnIWVhw?pwd=bn7n\n提取码: bn7n",
+  "passWord": "88888888"
+}, {
+  "name": "赤痕·：夜之仪式|赠送修改器|全DLC|豪华中文|完整版|解压即撸|约13G| v1.6",
+  "urlK": "https://pan.quark.cn/s/25cf508ff47a",
+  "urlB": "https://pan.baidu.com/s/1q7zgAWFDvu-qFqzsxvGFpw?pwd=fx85 \n提取码: fx85",
+  "passWord": "88888888"
+}, {
+  "name": "英雄传说6：空之轨迹3RD|豪华汉化|完整版|解压即撸|约5.1GB",
+  "urlK": "https://pan.quark.cn/s/d325bae08c9c",
+  "urlB": "https://pan.baidu.com/s/1U_nqhyags_KX4KVTm4hQAg?pwd=gx9a \n提取码: gx9a",
+  "passWord": 212182
+}, {
+  "name": "杀戮空间3|豪华中文-尸潮突袭预购特典+全DLC|约17.9G|解压即玩|Build.19273238",
+  "urlK": "https://pan.quark.cn/s/3f05933c5d0b",
+  "urlB": "https://pan.baidu.com/s/1HO2y0p_ZRtOTRoOdQIITqA?pwd=eqp2 \n提取码: eqp2",
+  "passWord": "88888888"
+}, {
+  "name": "我和七个俏房客|豪华中文|完整版|解压即撸|约16.59G",
+  "urlK": "https://pan.quark.cn/s/c15be4337650",
+  "urlB": "https://pan.baidu.com/s/1U8P8LJJKlef6BipfD1S6og?pwd=jcu5\n 提取码: jcu5",
+  "passWord": "88888888"
+}, {
+  "name": "火山的女儿|豪华中文|完整版|解压即撸|约1.2G|v2.01.05",
+  "urlK": "https://pan.quark.cn/s/214ecb1bdb36",
+  "urlB": "https://pan.baidu.com/s/1XQPvTFT3v0yO0ts7eHwdDg?pwd=n7gp \n提取码: n7gp",
+  "passWord": "88888888"
+}, {
+  "name": "进击的巨人2 终战|豪华中文|全DLC|解压即撸|约34.51G|V23.08.29.2.0.5",
+  "urlK": "https://pan.quark.cn/s/3be3191122dd",
+  "urlB": "https://pan.baidu.com/s/1k-rVxofdFnx-On0K2GGLPQ?pwd=1cmx \n提取码: 1cmx",
+  "passWord": 785593
+}, {
+  "name": "街头霸王X铁拳|赠送修改器|豪华中文|全DLC|解压即玩|约5.8G|V1.08",
+  "urlK": "https://pan.quark.cn/s/2e6019c61ca4",
+  "passWord": "88888888"
+}, {
+  "name": "魔兽争霸3|重制版|完整版|约29.47G|解压即玩|v2.0.1",
+  "urlK": "https://pan.quark.cn/s/7297ecb22358",
+  "urlB": "链接: https://pan.baidu.com/s/1o4T0jgtmnTZIg8UqJ6YgOw?pwd=mg9q 提取码: mg9q",
+  "passWord": "88888888"
+}, {
+  "name": "要塞 终极决定版|豪华中文|铁甲烽火-骑士之盾+全DLC|解压即撸|约11G|V1.33",
+  "urlK": "https://pan.quark.cn/s/f002a7222bc4",
+  "urlB": "https://pan.baidu.com/s/1UxKYDhS1hvE9pOQ80a2vbw?pwd=ejp9 \n提取码: ejp9",
+  "passWord": "88888888"
+}, {
+  "name": "我在地府打麻将|豪华中文|+全DLC|解压即撸|约1.8GB|Build.19343054",
+  "urlK": "https://pan.quark.cn/s/455f74ad1004",
+  "urlB": "https://pan.baidu.com/s/1_rxLon45B0q6s5sgfqOFlQ?pwd=hc7g \n提取码: hc7g",
+  "passWord": "88888888"
+}, {
+  "name": "地痞街区|豪华中文|全DLC|解压即撸|约285.7MB|Build.19266903",
+  "urlK": "https://pan.quark.cn/s/7e751140fa38",
+  "urlB": "https://pan.baidu.com/s/1sp1SKhs8oezfXxGrSmhURQ?pwd=njnn \n提取码: njnn",
+  "passWord": 644423
+}, {
+  "name": "伊苏6：纳比斯汀的方舟|汉化版|赠送修改器|全DLC|完整版|约2.26G",
+  "urlK": "https://pan.quark.cn/s/e367e5f852fb",
+  "urlB": "https://pan.baidu.com/s/1j9TBUqsZwwRZIrDa9WoGKA?pwd=x753 \n提取码: x753",
+  "passWord": "88888888"
+}, {
+  "name": "伊苏7|汉化版|赠送修改器|全DLC|完整版|约1.32G",
+  "urlK": "https://pan.quark.cn/s/fc9f52ee71fd",
+  "urlB": "https://pan.baidu.com/s/1Y17om5ufTu46GWHz4Z3FOg?pwd=mutf 提取码: mutf",
+  "passWord": "88888888"
+}, {
+  "name": "我和未来有个约定|豪华中文|全DLC|解压即撸|Build.19357133",
+  "urlK": "https://pan.quark.cn/s/642cd98d3704",
+  "urlB": "https://pan.baidu.com/s/1rqhcy81RMcOdMXRz65EFrQ?pwd=k6fh \n提取码: k6fh",
+  "passWord": "88888888"
+}, {
+  "name": "实况足球2021|豪华中文|赠送修改器|约31.9GB|完整版| v1.01.00",
+  "urlK": "https://pan.quark.cn/s/aea8a96de409",
+  "urlB": "https://pan.baidu.com/s/1cMvUrEN75qv1zOvASdhGbg?pwd=8tca\n提取码: 8tca",
+  "passWord": 369112
+}, {
+  "name": "神笔谈兵|豪华中文|完整版|解压即撸|约3.89G|1.47.2",
+  "urlK": "https://pan.quark.cn/s/af69f81aef96",
+  "urlB": "https://pan.baidu.com/s/1EmqefvnsoYviPfuESM3gJw?pwd=mjcc \n提取码: mjcc",
+  "passWord": "88888888"
+}, {
+  "name": "咸鱼殿下|豪华中文|全DLC|安装即玩|Build.18713168|约31GB",
+  "urlK": "https://pan.quark.cn/s/7bdfcd2b556b",
+  "urlB": "https://pan.baidu.com/s/18uBuYehD4xCrMxCd4B8A7Q?pwd=cbkw\n提取码: cbkw",
+  "passWord": "88888888"
+}, {
+  "name": "百妖试禅心|中字-国语|Build.19290636-百妖乱意-梦入禅门+全DLC|解压即撸|",
+  "urlK": "https://pan.quark.cn/s/6633e708add2",
+  "urlB": "https://pan.baidu.com/s/1mZm80uflwrhVdntPmsNxSQ?pwd=vmbg \n提取码: vmbg",
+  "passWord": "88888888"
+}, {
+  "name": "英雄连1|豪华中文|完整版|全DLC|解压即玩|约44GB",
+  "urlK": "https://pan.quark.cn/s/fe2d96c9f5ec",
+  "urlB": "https://pan.baidu.com/s/1HmD7APAIXtDDVlneqX5Rfw?pwd=8k47 \n提取码: 8k47",
+  "passWord": "88888888"
+}, {
+  "name": "夜勤旅店|豪华中文|全DLC|Build.19237123|解压即撸|",
+  "urlK": "https://pan.quark.cn/s/a6582fc72376",
+  "urlB": "https://pan.baidu.com/s/1IDc7cdDxbwbppPANTKo7iQ?pwd=qm4q\n提取码: qm4q",
+  "passWord": "88888888"
+}, {
+  "name": "魂斗罗：加鲁加行动|豪华中文|全DLC|解压即撸|约7-8G|v13626439",
+  "urlK": "https://pan.quark.cn/s/138466d986d3",
+  "urlB": "https://pan.baidu.com/s/1fvEBM2y_b_aYc-GNpeHjfw?pwd=5x7g \n提取码: 5x7g ",
+  "passWord": "88888888"
+}, {
+  "name": "天地有私 宿命之主|中字-国语|Build.19205271+全DLC|解压即撸|",
+  "urlK": "https://pan.quark.cn/s/21b66980e716",
+  "urlB": "https://pan.baidu.com/s/1-KhSOt5Q94haJ91hj0osZA?pwd=zse8 \n提取码: zse8",
+  "passWord": "88888888"
+}, {
+  "name": "伊甸星原|豪华中文|预购特典|全DLC|支持手柄|解压即撸|10.45g|Build.17858893",
+  "urlK": "https://pan.quark.cn/s/a28ef3fa97d8",
+  "urlB": "https://pan.baidu.com/s/13ETb2PmDgpV9cbKlaT9uMA?pwd=w4fu \n提取码: w4fu",
+  "passWord": "88888888"
+}, {
+  "name": "try fpv无人机赛车模拟器|豪华中文|解压即撸|约11.2 GB|Build.17094439-4K支持优化",
+  "urlK": "https://pan.quark.cn/s/211c79047916",
+  "urlB": "https://pan.baidu.com/s/1tRhqdsXZK-n_Ux1867VLQQ?pwd=t7gt \n提取码: t7gt",
+  "passWord": "88888888"
+}, {
+  "name": "uncrashed无人机模拟器|全地图|20张地图|豪华中文|完整版|解压即玩约17GB|Build.18480550",
+  "urlK": "https://pan.quark.cn/s/d7cbefdf91de",
+  "urlB": "https://pan.baidu.com/s/1wqsiOI_cIdsNIns29iePNQ?pwd=icht\n提取码: icht",
+  "passWord": "88888888"
+}, {
+  "name": "请不要欺负我 大小姐们!|豪华中文|Build.19128690-韩语音+全DLC-多结局|解压即撸|",
+  "urlK": "https://pan.quark.cn/s/3f11c77477b7",
+  "urlB": "https://pan.baidu.com/s/1WWhRNNVmcQjJQVxyMSSgpw?pwd=xjh6\n提取码: xjh6",
+  "passWord": "88888888"
+}, {
+  "name": "雪地奔驰|豪华中文|全DLC|解压即撸|约45.1GB|v37.1",
+  "urlK": "https://pan.quark.cn/s/9fb1eeb71f1e",
+  "passWord": "88888888"
+}, {
+  "name": "房产达人2|豪华中文|沙盒模式+全DLC|解压即撸|约11.7GB|Build.18783168",
+  "urlK": "https://pan.quark.cn/s/d554dfb216a1",
+  "passWord": "88888888"
+}, {
+  "name": "女神保卫战|豪华中文|Build.14471888+全DLC|解压即撸|",
+  "urlK": "https://pan.quark.cn/s/d0faa16e879a",
+  "urlB": "https://pan.baidu.com/s/1CGt2qWv5QqgVvXYdO1RDjA?pwd=8j87 \n提取码: 8j87",
+  "passWord": "88888888"
+}, {
+  "name": "泰坦陨落2|赠送修改器|全DLC|赠送存档|解压即完|约46.1GB| v2.0.11.0",
+  "urlK": "https://pan.quark.cn/s/fe83a66fcf77",
+  "urlB": "https://pan.baidu.com/s/1y16LncOayXW7TLoFElDadA?pwd=cyt6 \n提取码: cyt6",
+  "passWord": "88888888"
+}, {
+  "name": "非常英雄|赠修改器|豪华中文|完整版|解压即撸|约2.87GB|Build 5202350",
+  "urlK": "https://pan.quark.cn/s/d388a5c102fa",
+  "urlB": "https://pan.baidu.com/s/1ODLnodNGlHkM-RKLy4eIMA?pwd=g6gm \n提取码: g6gm",
+  "passWord": 675567
+}, {
+  "name": "鬼谷八荒v1.2.111.259+五朵金花DLC|官方中文|解压可玩",
+  "urlK": "https://pan.quark.cn/s/720307b27a77",
+  "urlB": "https://pan.baidu.com/s/1bf6I9Sy9ow2EQE1o5m-A_A?pwd=pb5d \n提取码: pb5d",
+  "passWord": "88888888"
+}, {
+  "name": "机械战警 暴戾都市|豪华中文|全DLC|解压即撸|约38.9G|v1.6.0.0",
+  "urlK": "https://pan.quark.cn/s/bb6c9ffb9884",
+  "urlB": "https://pan.baidu.com/s/1F5a6rkO9zt8FEqOXHiEROQ?pwd=v2k5 \n提取码: v2k5",
+  "passWord": 395854
+}, {
+  "name": "狙击精英4|终极版|赠送修改器|豪华中文|全DLC|解压即撸|约51.41G|v1.5.0",
+  "urlB": "https://pan.baidu.com/s/1ZsbAv1gpzp7U3Jh86HcplQ?pwd=5ve9 \n提取码: 5ve9",
+  "passWord": 978572
+}, {
+  "name": "狙击精英3|终极版|赠送修改器|豪华中文|全DLC|解压即撸|约20.92G|V3.12.24",
+  "urlB": "https://pan.baidu.com/s/1q1DiyP7PVta-E2FJKQJUpQ?pwd=5a9u \n提取码: 5a9u",
+  "passWord": "88888888"
+}, {
+  "name": "死侍|豪华中文|完整版|解压即玩|约5G",
+  "urlB": "https://pan.baidu.com/s/1NK2GkKXuGZsvkHsi4cIVRQ?pwd=mgg5 \n提取码: mgg5",
+  "passWord": "88888888"
+}, {
+  "name": "幸运房东|豪华中文|完整版|沙盒|解压即撸|约90MB|Build.16940935",
+  "urlK": "https://pan.quark.cn/s/611a5f068e75",
+  "urlB": "https://pan.baidu.com/s/1e30Z-DFKpfAn1l3a6cEqLA?pwd=wbp2 \n提取码: wbp2",
+  "passWord": 981971
+}, {
+  "name": "中国式相亲|新女主索菲亚|豪华中文|解压可玩|v2.0.0",
+  "urlK": "https://pan.quark.cn/s/8bca62479c7e",
+  "urlB": "https://pan.baidu.com/s/1RX3tJ0BK5HqOTQg04nSmKg?pwd=p2wf \n提取码: p2wf",
+  "passWord": "88888888"
+}, {
+  "name": "七日杀7|豪华中文|完整版|沙盒|解压即撸|V2.0|约12.5GB",
+  "urlK": "https://pan.quark.cn/s/62fdcb120e3f",
+  "urlB": "https://pan.baidu.com/s/1yyYfxKXVqVrs50y_7j9a3w?pwd=7c6w \n提取码: 7c6w",
+  "passWord": "88888888"
+}, {
+  "name": "心之彼端 ToHeart|豪华中文|Build.18895210+赛莉欧 佐藤雅史DLC|解压即撸",
+  "urlK": "https://pan.quark.cn/s/4c321e000e18",
+  "urlB": "https://pan.baidu.com/s/1RjhqjPmsa_DhPBlqoCbgbA?pwd=z8e2 \n提取码: z8e2",
+  "passWord": "88888888"
+}, {
+  "name": "孤岛危机3重制版|全DLC|豪华中文|支援4K+光追-官方中文|解压即撸|约16GB",
+  "urlK": "https://pan.quark.cn/s/2a067b5712c8",
+  "urlB": "https://pan.baidu.com/s/1Ercv3Jo-eeSIQiHO3sFAdg?pwd=v8ds \n提取码: v8ds",
+  "passWord": "88888888"
+}, {
+  "name": "孤岛危机2 2022重制版|官方中文|支持4K-光追|安装即撸|约46GB",
+  "urlK": "https://pan.quark.cn/s/ff4a1ab680d4",
+  "urlB": "https://pan.baidu.com/s/1HywOFQ7pxT_4YG9JVFuMuQ?pwd=p2bp\n提取码: p2bp",
+  "passWord": "88888888"
+}, {
+  "name": "维多利亚3|豪华中文|商贸宪章DLC+全DLC|解压即撸|V1.9.2|约7.8GB",
+  "urlK": "https://pan.quark.cn/s/59e7781ffe56",
+  "passWord": "88888888"
+}, {
+  "name": "二之国2 亡灵之国|汉化中文|全DLC|解压即撸|约22.49G|V4.0",
+  "urlB": "https://pan.baidu.com/s/1T1jjpRqmGzFYrFwdf6f8qg?pwd=z4rt\n提取码: z4rt",
+  "passWord": "88888888"
+}, {
+  "name": "二之国 白色圣灰的女王|汉化中文|全DLC|解压即撸|约69.75G|V1.1",
+  "urlB": "https://pan.baidu.com/s/1-fz0lSgDnTRpjIwFsOWf8g?pwd=xv4s\n提取码: xv4s",
+  "passWord": "88888888"
+}, {
+  "name": "真人快打11|全DLC|赠送修改器|豪华中文|完整版|解压即玩|约101G",
+  "urlB": "https://pan.baidu.com/s/1qWmAI9RDUHgK197arVX6pg?pwd=fdyw \n提取码: fdyw",
+  "passWord": 227578
+}, {
+  "name": "情感反诈模拟器|全DLC|多结局|豪华中文|完整版|解压即玩|约21.43G",
+  "urlK": "https://pan.quark.cn/s/ac8f70ca3aeb",
+  "urlB": "https://pan.baidu.com/s/1pcT9GFdz7LHavGS35EEvtA?pwd=sanh \n提取码: sanh",
+  "passWord": "88888888"
+}, {
+  "name": "AI少女|全DLC|豪华中文|完整版|解压即玩",
+  "urlB": "https://pan.baidu.com/s/1KhRMqimuZIadbYr_TMSGSw?pwd=ivgz\n提取码: ivgz",
+  "passWord": "88888888"
+}, {
+  "name": "美女 请别影响我成仙|中字-国语|全DLC-多结局|解压即撸 ",
+  "urlB": "https://pan.baidu.com/s/1bJSN40AyYR699slzkmiSdg?pwd=2yuc\n提取码: 2yuc",
+  "passWord": "88888888"
+}, {
+  "name": "勇者斗恶龙3 HD-2D|重制版|豪华中文|全DLC|解压即撸|约15G|V1.2.0.0",
+  "urlK": "https://pan.quark.cn/s/8f0ac54a7bcc",
+  "urlB": "https://pan.baidu.com/s/1a4kcocuv3cg4eNIZWQW7Ug?pwd=zv7y \n提取码: zv7y",
+  "passWord": "88888888"
+}, {
+  "name": "星空-数字高级版|全DLC|豪华中文|支持手柄|解压即撸|约101.6GB|v1.15.216.0",
+  "urlK": "https://pan.quark.cn/s/6795548b41c6",
+  "urlB": "https://pan.baidu.com/s/1gaWmZKMXSNaHrOLPFdIBSQ?pwd=p7me\n提取码: p7me",
+  "passWord": "88888888"
+}, {
   "name": "模拟农场22|豪华中文|终极版+全DLC|解压即玩，v1.14.0",
   "urlK": "https://pan.quark.cn/s/2c625d522719",
   "urlB": "链接：https://pan.baidu.com/s/1ccfUi-Cg2YrhrwtwFbzufA\n提取码：bff4",
@@ -42,14 +363,13 @@ export const list = [{
   "urlK": "https://pan.quark.cn/s/51826b0a8da7",
   "passWord": "88888888"
 }, {
-  "name": "装机模拟器2|豪华中文|全DLC|解压即撸|V1.10.16",
-  "urlK": "https://pan.quark.cn/s/84c07c1166a8",
+  "name": "装机模拟器2|赠送修改器|豪华中文|全DLC|解压即撸|约10.5GB|V1.12.14",
+  "urlK": "https://pan.quark.cn/s/94092f28db26",
   "urlB": "https://pan.baidu.com/s/1vhr707sANuGUi-P5kV15Bw?pwd=hw56 \n提取码: hw56 ",
   "passWord": "88888888"
 }, {
-  "name": "装机模拟器1|豪华中文|全DLC|解压即撸|v1.15.2",
-  "urlK": "https://pan.quark.cn/s/7067a2363559",
-  "urlB": "https://pan.baidu.com/s/1AOUt_ttSdko_n8LBbeAVUw?pwd=k3f8\n提取码：k3f8",
+  "name": "装机模拟器1|豪华中文|全DLC|解压即撸|约15.1GB|v1.15.2",
+  "urlK": "https://pan.quark.cn/s/192c6105f5ca",
   "passWord": "88888888"
 }, {
   "name": "勇者的残局 自走棋|豪华中文|完整版|解压即撸|v16515887",
@@ -81,8 +401,6 @@ export const list = [{
   "urlB": "https://pan.baidu.com/s/1Jqq_ZePU5M0AR3ia2QpwSA?pwd=jsxb \n提取码: jsxb",
   "passWord": "88888888"
 }, {
-  "passWord": "88888888"
-}, {
   "name": "怪物猎人物语|豪华中文|全DLC|解压即撸|Build.16484822",
   "urlK": "https://pan.quark.cn/s/e21204ba8d38",
   "urlB": "https://pan.baidu.com/s/1CXSApsEC5ArUWGWZaV3t1w?pwd=xqg9 \n提取码: xqg9 ",
@@ -100,7 +418,7 @@ export const list = [{
   "urlB": "https://pan.baidu.com/s/1YYExF7Y7yMrk-fIeYK5PAw\n提取码: fvga",
   "passWord": "88888888"
 }, {
-  "name": "失落城堡2|豪华中文|裂空破天-炎龙啸天+全DLC|解压即撸|V0.62.2|约1.3G",
+  "name": "失落城堡2|豪华中文|裂空破天-炎龙啸天+全DLC|解压即撸|V0.7|约1.3G",
   "urlB": "https://pan.baidu.com/s/1ATv-hd71KLXM6aLgV3lvnA\n提取码: hete",
   "passWord": "88888888"
 }, {
@@ -249,7 +567,8 @@ export const list = [{
   "urlB": " https://pan.baidu.com/s/1lB7rZPSLGvDrcLxB6VOneQ?pwd=xk5q \n提取码: xk5q",
   "passWord": "88888888"
 }, {
-  "name": "缉私警察|官方中文|Build.16695652-铁血守卫-边境危机+全DLC|解压即撸",
+  "name": "缉私警察|官方中文|Build.19426600-铁血守卫-边境危机+全DLC|解压即撸",
+  "urlK": "https://pan.quark.cn/s/3e14c7824c4a",
   "urlB": "https://pan.baidu.com/s/1azqRTsLKdOtXNemDqHAf9Q?pwd=bxi3 \n提取码: bxi3",
   "passWord": "88888888"
 }, {
@@ -263,6 +582,7 @@ export const list = [{
   "passWord": "88888888"
 }, {
   "name": "仁王2|豪华中文|全DLC|解压即玩|约56G|v1.28.06",
+  "urlK": "https://pan.quark.cn/s/35092b56975c",
   "urlB": "https://pan.baidu.com/s/1H3yVvM0fDLJx7f9lR2DUIg?pwd=k7i8 \n提取码: k7i8",
   "passWord": "88888888"
 }, {
@@ -292,7 +612,8 @@ export const list = [{
   "urlB": "https://pan.baidu.com/s/1DyUXvU5H4RD9jqXozzlXxg?pwd=tr5w \n提取码: tr5w",
   "passWord": "88888888"
 }, {
-  "name": "严阵以待|豪华中文|全DLC+入侵家园DLC|安装即撸|约53G|V56549正式版本20241211",
+  "name": "严阵以待|豪华中文|MOD整合版 送修改器全DLC+入侵家园DLC|安装即撸|约53G|v88602 ",
+  "urlK": "https://pan.quark.cn/s/424378e3450d",
   "urlB": "https://pan.baidu.com/s/1C8EqmemBxsQC1AQf8xXYKw?pwd=vn9k \n提取码: vn9k",
   "passWord": "XDGAME"
 }, {
@@ -300,7 +621,8 @@ export const list = [{
   "urlB": "https://pan.baidu.com/s/16N8mCH39mmHIQ6jYRM3XEQ?pwd=t62d \n提取码: t62d",
   "passWord": "XDGAME"
 }, {
-  "name": "赛博朋克2077 终极版|中字-国语|V2.20-新功能+往日之影DLC+全DLC+新版修改器|解压即撸|",
+  "name": "赛博朋克2077 终极版|中字-国语|V2.30-新功能+往日之影DLC+全DLC+新版修改器|解压即撸|",
+  "urlK": "https://pan.quark.cn/s/181636eff027",
   "urlB": "https://pan.baidu.com/s/14U3nW7hYUy9zVx7UE6WQ_Q?pwd=qrpy \n提取码: qrpy",
   "passWord": "88888888"
 }, {
@@ -434,6 +756,10 @@ export const list = [{
   "urlB": "https://pan.baidu.com/s/1CYdP2WbcBHpkqUBnHgSKYQ?pwd=swen \n提取码: swen",
   "passWord": "88888888"
 }, {
+  "name": "刺客信条5：大革命|豪华中文|终极版|解压即撸|约44.52G|v1.5",
+  "urlB": "https://pan.baidu.com/s/1ehkT4O8lmWCIWfLUe88bHg?pwd=vubq \n提取码: vubq",
+  "passWord": "88888888"
+}, {
   "name": "刺客信条7 起源|豪华中文|终极版+全DLC+修改器|解压即撸|约58.17G",
   "urlB": "https://pan.baidu.com/s/11rwIkSccM9HzICHDE9F3zw?pwd=5uwd \n提取码: 5uwd ",
   "passWord": "88888888"
@@ -458,7 +784,8 @@ export const list = [{
   "urlB": "https://pan.baidu.com/s/1F3IHmXwylPsxINyjl2kTbw?pwd=82r3 \n提取码: 82r3 ",
   "passWord": "88888888"
 }, {
-  "name": "死或生6|豪华中文|全DLC|解锁全部服装|解压即撸|约45.2G|Build.5161996",
+  "name": "死或生6|豪华中文|全DLC|解锁全部服装|解压即撸|约45.2G|v1.04",
+  "urlK": "https://pan.quark.cn/s/28a050bdfddd",
   "urlB": "https://pan.baidu.com/s/179zdmFJDybY5AqNJphKNDw?pwd=pmgr \n提取码: pmgr ",
   "passWord": "88888888"
 }, {
@@ -470,8 +797,6 @@ export const list = [{
   "urlB": "https://pan.baidu.com/s/1ox3_LdVIkdWYt-dPKYvVwg?pwd=wa1m \n提取码: wa1m ",
   "passWord": "88888888"
 }, {
-  "name": " uncrashed无人机模拟器|豪华中文|完整终极版|Build.12393320|解压即撸|",
-  "urlB": "https://pan.baidu.com/s/1iBgdflRVHNRjLjPlmCi5kg?pwd=icwu \n提取码: icwu",
   "passWord": "88888888"
 }, {
   "name": "邪圣 Nunholy|豪华中文-血月猎命-恶魔誓约|解压即撸|约500MB|Build.17037650",
@@ -494,12 +819,20 @@ export const list = [{
   "urlB": "https://pan.baidu.com/s/18qQFPzCAPo77wFC8WIFypg?pwd=ktda \n提取码: ktda",
   "passWord": 313547
 }, {
+  "name": "终结者 黑暗命运 反抗|官方中文|Build.19446121+崛起DLC-孤城绝战-机械风暴+全DLC|解压即撸|",
+  "urlK": "https://pan.quark.cn/s/dc9a5608e553",
+  "passWord": "88888888"
+}, {
   "name": "瘟疫公司：进化|豪华中文|全DLC|完整版|安装即玩|约435.96M|V17183545",
   "urlB": "https://pan.baidu.com/s/1qwCDoY_cYIOt-N3OsNSYHw?pwd=cxvn \n提取码: cxvn",
   "passWord": "88888888"
 }, {
   "name": "三国志8 重制版|豪华中文|女将集结+预购特典+全DLC+季票|解压即撸|约15.2G|v1.06",
   "urlB": "https://pan.baidu.com/s/1MoZN4wyDNFnIaqejm9-dxQ?pwd=pdd3\n提取码: pdd3 ",
+  "passWord": "88888888"
+}, {
+  "name": "三国志14 威力加强版|豪华中文|终极版+全DLC|解压即撸|约18.55G",
+  "urlB": "https://pan.baidu.com/s/1megXBbqIQr4SOV65D-8c4A?pwd=jbkz \n提取码: jbkz",
   "passWord": "88888888"
 }, {
   "name": "美女 请别影响我学习|豪华中文|全DLC|解压即撸|约40.15G|Build.13867681",
@@ -518,8 +851,30 @@ export const list = [{
   "urlB": "https://pan.baidu.com/s/1Nl4fIJVOZ8bhoOdNZWMVAg?pwd=c7bq \n提取码: c7bq",
   "passWord": "88888888"
 }, {
+  "name": "NBA集合|13-19系列|完整版|解压即玩|集合包约274.66G",
+  "urlB": "https://pan.baidu.com/s/1EbrvOvLt0kY7VROrPyyzDA?pwd=y1t9 \n提取码: y1t9",
+  "passWord": 931228
+}, {
   "name": "仙剑奇侠传7全DLC人间如梦+集成女角色除裤光腿MOD+赵灵儿风格服装+赠送修改器|豪华中文|解压即玩|V2.1\n仙剑奇侠传7全DLC人间如梦|豪华中文|解压即玩|V2.1",
   "urlB": "https://pan.baidu.com/s/1mXdin3S4510HPljgvMe64Q?pwd=cjkw \n提取码: cjkw",
+  "passWord": "88888888"
+}, {
+  "name": "仙剑奇侠传1|豪华中文|完整版|解压即玩|约358MB",
+  "urlK": "https://pan.quark.cn/s/95848f46c5e2",
+  "urlB": "https://pan.baidu.com/s/1og3xWnitud8GD5tP6RIsXA?pwd=xmmj \n提取码: xmmj",
+  "passWord": "88888888"
+}, {
+  "name": "仙剑奇侠传98柔情版|豪华中文|完整版|解压即玩|约358MB",
+  "urlK": "https://pan.quark.cn/s/253252354886",
+  "passWord": "88888888"
+}, {
+  "name": "新仙剑奇侠传|豪华中文|完整版|解压即玩|约1GB",
+  "urlK": "https://pan.quark.cn/s/b8f20ab6e53c",
+  "urlB": "https://pan.baidu.com/s/1RSispvVaBZBjzfVZjXjBmg?pwd=5wxy \n提取码: 5wxy",
+  "passWord": "88888888"
+}, {
+  "name": "仙剑奇侠传2|赠送存档|赠送修改器|豪华中文|完整版|解压即玩|约1.3GB",
+  "urlK": "https://pan.quark.cn/s/2cf47a28d951",
   "passWord": "88888888"
 }, {
   "name": "仙剑奇侠传1-6合集+前传+新外传+问情篇|官方中文|解压即撸",
@@ -574,6 +929,122 @@ export const list = [{
   "urlB": "https://pan.baidu.com/s/1W4mXqiJbC9-xe6oAxV49ww?pwd=q1c9 \n提取码:q1c9",
   "passWord": "88888888"
 }, {
+  "name": "变形金刚：塞伯坦之战|豪华中文|完全版|解压即玩|约7G",
+  "urlB": "https://pan.baidu.com/s/1Jg1mjvcSFuCFJyrsG9ofcA?pwd=smf7\n提取码: smf7",
+  "passWord": 999746
+}, {
+  "name": "WWE 2K22|豪华中文|全DLC|免安装|解压即撸|V1.14|约52.6G",
+  "urlB": "https://pan.baidu.com/s/1sDBg3MoArXgXgWRhP1Sp3Q?pwd=6hh3\n提取码:6hh3",
+  "passWord": "88888888"
+}, {
+  "name": "魔界战记 DISGAEA 7|豪华中文|V1.12-终极版+全DLC+特典|解压即撸|约10.78G",
+  "urlB": "https://pan.baidu.com/s/1-bO6kfRZIOfWHWiwUT7ikA?pwd=dxnk \n提取码: dxnk",
+  "passWord": "88888888"
+}, {
+  "name": "终极钓鱼模拟器|豪华中文|全DLC|解压即撸|约7.97G|V2.3.23.12",
+  "urlB": "链接：https://pan.baidu.com/s/18nLmnWCRRG5zBDvl3Kf0rw?pwd=2ome \n提取码：2ome \n",
+  "passWord": "88888888"
+}, {
+  "name": "终极钓鱼模拟器2|豪华中文|完整版|约9.33G|Build.13061465",
+  "urlB": "链接：https://pan.baidu.com/s/1po4M0Gt4w5V8Aoef6WCZew?pwd=lqtj \n提取码：lqtj \n",
+  "passWord": "88888888"
+}, {
+  "name": "电工模拟器|豪华中文|完整终极版|解压即玩|约5.87G",
+  "urlB": "https://pan.baidu.com/s/1zDeqHuYWb4zf4jEJmpQK2A?pwd=gffm\n提取码: gffm",
+  "passWord": "88888888"
+}, {
+  "name": "机场：模拟地勤/AirportSim|豪华中文|完整终极版|全DLC|解压即撸|约3.37G",
+  "urlB": "https://pan.baidu.com/s/1EGQn5VaYjVgxJpe3V4EAbw?pwd=wtse\n提取码: wtse",
+  "passWord": "88888888"
+}, {
+  "name": "足球经理（终极）2023V20230304-大量球员数据更新-优化招募逻辑等",
+  "urlB": "https://pan.baidu.com/s/1n6O61YvT4N7R0QowBMXa0Q?pwd=qtdb\n提取码: qtdb",
+  "passWord": "88888888"
+}, {
+  "name": "足球经理（豪华）2023V20230304-大量球员数据更新-优化招募逻辑等",
+  "urlB": "https://pan.baidu.com/s/1__-7kO3IXSSRr8IlmXd4mg?pwd=uhwe \n提取码: uhwe",
+  "passWord": "88888888"
+}, {
+  "name": "足球经理（普通）2023V20230304-大量球员数据更新-优化招募逻辑等",
+  "urlB": "https://pan.baidu.com/s/1SwjPtslmsjA6WaAYLJ0WVg?pwd=tfcv \n提取码: tfcv",
+  "passWord": "88888888"
+}, {
+  "name": "队长小翼 新秀崛起|豪华中文|完整版|约18.55G|V1.2",
+  "urlB": "https://pan.baidu.com/s/1b0k_c-82_DGJrUy0x4FPVw?pwd=7hcs \n提取码: 7hcs",
+  "passWord": "88888888"
+}, {
+  "name": "网球世界巡回赛2|豪华中文版|全DLC|V1.0.4637|约11.98",
+  "urlB": "https://pan.baidu.com/s/1xmQNxESJDZx-zPZTv7PTBA?pwd=fp2i\n 提取码: fp2i",
+  "passWord": "88888888"
+}, {
+  "name": "小猫钓鱼|豪华中文|支持全屏版|解压即撸|完整版|约34.38M",
+  "urlB": "https://pan.baidu.com/s/1_Py0H-LFnvquBkYJx8egkw?pwd=uzem\n提取码: uzem",
+  "passWord": "88888888"
+}, {
+  "name": "漫威复仇者联盟 终极版|豪华中文|全DLC|解压即撸|V2.8.1HF2",
+  "urlB": " https://pan.baidu.com/s/1pHt88-zCxTBRHmAwMEezRA?pwd=3da8 \n提取码: 3da8",
+  "passWord": "88888888"
+}, {
+  "name": "剑风传奇无双 豪华版|整合汉化|全DLC|修改器|通关存档|约17.15G",
+  "urlB": "https://pan.baidu.com/s/1cF3I3HA0tsW60WUdJd-XXw?pwd=h6xc\n提取码: h6xc",
+  "passWord": "88888888"
+}, {
+  "name": "伊苏6：纳比斯汀的方舟|汉化版|赠送修改器|全DLC|完整版|约2.26G",
+  "urlB": "https://pan.baidu.com/s/1j9TBUqsZwwRZIrDa9WoGKA?pwd=x753 \n提取码: x753",
+  "passWord": "88888888"
+}, {
+  "name": "双人成行|豪华中文|同行共赴-伙伴之旅+全DLC|解压即玩| V1.0.0.2",
+  "urlB": "https://pan.baidu.com/s/1Dy7T-hULatqVqJnSpZtOTA?pwd=fvpu \n提取码: fvpu ",
+  "passWord": "88888888"
+}, {
+  "name": "皇牌空战7：未知空域|豪华中文|全DLC+赠送修改器+赠送存档|解压即撸|V2.3.0.13",
+  "urlB": "https://pan.baidu.com/s/1BygpkeeHHNIG9KoUP1SWAw?pwd=p3s6 \n提取码: p3s6 ",
+  "passWord": "XDGAME"
+}, {
+  "name": "炎龙传说3炽凤|豪华中文|支持同屏双人|纯净无修Flash版",
+  "urlB": "https://pan.baidu.com/s/17R6jO_CjkyldGXdAB2xudw?pwd=dg97 \n提取码: dg97",
+  "passWord": "88888888"
+}, {
+  "name": "炎龙传说3双燕|豪华中文|支持同屏双人|纯净无修Flash版",
+  "urlB": "https://pan.baidu.com/s/1nTqr8zCBpGb8h3vH4qpluQ?pwd=8k82 \n提取码: 8k82",
+  "passWord": "88888888"
+}, {
+  "name": "极品飞车21：热度|豪华中文|全DLC|法拉利DLC|赠送存档|送修改器|解压即玩",
+  "urlB": "https://pan.baidu.com/s/1xhcRXPGk_lqnYCzRCBNjNw?pwd=u9bj \n提取码: u9bj",
+  "passWord": "88888888"
+}, {
+  "name": "极品飞车20：复仇|豪华中文|全DLC|解压即玩|约20G",
+  "urlK": "https://pan.quark.cn/s/ee8751de7b01",
+  "urlB": "https://pan.baidu.com/s/1byboPPBL1jaAvZEd-XVT_w?pwd=dqv9 \n提取码: dqv9",
+  "passWord": 798153
+}, {
+  "name": "极品飞车18：宿敌|豪华中文|全DLC|法拉利DLC|解压即玩|约8.3GB",
+  "urlK": "https://pan.quark.cn/s/6c9e4148ff75",
+  "urlB": "https://pan.baidu.com/s/1UQIS0GkzerW5y3TW6dCciw\n提取码:jrsv",
+  "passWord": 798153
+}, {
+  "name": "世界盒子 上帝模拟器|豪华中文|完整版|解压即玩",
+  "urlK": "https://pan.quark.cn/s/499c423e8084",
+  "passWord": "88888888"
+}, {
+  "name": "杀手3|豪华中文|修改器|破坏者扩展包+全DLC|解压即撸|V3.230.0|约71.6GB",
+  "urlK": "https://pan.quark.cn/s/916362414121",
+  "passWord": "88888888"
+}, {
+  "name": "杀手5:赦免|豪华中文|完全版|解压即撸|约12.56G",
+  "urlB": "https://pan.baidu.com/s/1vvSwVzNL6_joOMpBgU7stA?pwd=5uk9\n提取码: 5uk9",
+  "passWord": 559266
+}, {
+  "name": "爱情，死亡与比基尼|豪华中文|完整版|解压即撸",
+  "urlK": "https://pan.quark.cn/s/e7a063301c03",
+  "urlB": "https://pan.baidu.com/s/1yZZH6kXnf6BCQ2NNXdgLbA?pwd=hunt \n提取码: hunt",
+  "passWord": "88888888"
+}, {
+  "name": "九王 9 Kings|豪华中文|完整版|解压即撸| v0.7.44|约105.8M",
+  "urlK": "https://pan.quark.cn/s/6b268c4e2dd5",
+  "urlB": "https://pan.baidu.com/s/1N8R5Ju-OUqPECDIT_jexdQ?pwd=j7m5\n提取码: j7m5",
+  "passWord": "88888888"
+}, {
   "name": "老家奇妙日记|豪华中文|全DLC|解压即撸|11.5GB|v1.2.2",
   "urlK": "https://pan.quark.cn/s/ffb06be93e9b",
   "urlB": "https://pan.baidu.com/s/1sd44GKI7KTgYWXtb2E2Z6g\n提取码: rasv",
@@ -594,7 +1065,7 @@ export const list = [{
   "urlB": "https://pan.baidu.com/s/1t9V_XGpzVBmXsR3Ac-kMrA?pwd=jfpt \n提取码: jfpt",
   "passWord": "88888888"
 }, {
-  "name": "最后生还者2 重制版|豪华中文|预购特典+全DLC-支持手柄|解压即撸|约98.7GB| V1.0.10402.1014",
+  "name": "最后生还者2 重制版|豪华中文|预购特典+全DLC-支持手柄|解压即撸|约98.7GB| v1.4.10515.0636",
   "urlK": "https://pan.quark.cn/s/ec36e1efe86f",
   "urlB": "https://pan.baidu.com/s/17pdv8Kx2kabjunNdsy9sRw?pwd=vdck \n提取码: vdck",
   "passWord": "88888888"
@@ -604,12 +1075,12 @@ export const list = [{
   "urlB": "https://pan.baidu.com/s/1gWjUUbQw2f06NFe4eC_kdA\n提取码: ua8i",
   "passWord": "88888888"
 }, {
-  "name": "易红2|淞沪会战DLC|豪华中文|全DLC|完整版|V1.5|约8.4G",
+  "name": "易红2|淞沪会战DLC|豪华中文|全DLC|完整版|v1.5.5|约8.4G",
   "urlK": "https://pan.quark.cn/s/fa111d373f68",
   "urlB": "https://pan.baidu.com/s/1M8ObkhCs2eRivjYI_Sblew?pwd=i176 \n提取码: i176 ",
   "passWord": "88888888"
 }, {
-  "name": "出租生涯 模拟城市驾驶|支持者版|全DLC|豪华中文|解压即撸|3.6G|V20241212",
+  "name": "出租生涯 模拟城市驾驶|支持者版|全DLC|豪华中文|解压即撸|3.6G|v1.17.30088",
   "urlK": "https://pan.quark.cn/s/0e13bac75f04",
   "urlB": "https://pan.baidu.com/s/16ZTRtWibPw0hMC4veFfe-g?pwd=5795 \n提取码: 5795",
   "passWord": "88888888"
@@ -710,6 +1181,7 @@ export const list = [{
   "passWord": "88888888"
 }, {
   "name": "天国 拯救2 黄金版|豪华中文|全DLC+雄狮纹章DLC|完整版|解压即撸|约106G| v1.1.1",
+  "urlK": "https://pan.quark.cn/s/8a37777f78fd",
   "urlB": "https://pan.baidu.com/s/1zwIGqpGfjuaGVbHSMvJvKw?pwd=9nrx \n提取码: 9nrx",
   "passWord": "88888888"
 }, {
@@ -748,9 +1220,9 @@ export const list = [{
   "urlB": "https://pan.baidu.com/s/1KYMYnSuFqhYA9OiSeT7x0A?pwd=tsp6 \n提取码: tsp6",
   "passWord": "88888888"
 }, {
-  "name": "云族裔 inZOI|豪华中文|全DLC|完整版|解压即撸|约20G|Build.17883557-1308.W",
-  "urlK": "https://pan.quark.cn/s/0875eb9f0d4f",
-  "urlB": "https://pan.baidu.com/s/1plSQrfjQ8WjyhGoALo5MfQ?pwd=6j9s \n提取码: 6j9s",
+  "name": "云族裔 inZOI|豪华中文|全DLC|完整版|解压即撸|约25G|V0.3",
+  "urlK": "https://pan.quark.cn/s/1ad83474453d",
+  "urlB": "https://pan.baidu.com/s/1dmQGGvawOgoHTqW894tVMQ?pwd=6yy6 提取码: 6yy6",
   "passWord": "88888888"
 }, {
   "name": "战争交响曲 尼菲林传奇|豪华中文|使徒破灭-光明的来临+全DLC|安装即撸|约1.28G|V1.10.23",
@@ -798,7 +1270,7 @@ export const list = [{
   "urlB": "https://pan.baidu.com/s/1KuWN-Z52ckB3Z3sQOzoVwg?pwd=2iav \n提取码: 2iav",
   "passWord": "88888888"
 }, {
-  "name": "光与影 33号远征队|豪华中文|预购特典+全DLC-支持手柄|解压即撸|约38.8GB|Build.18195500",
+  "name": "光与影 33号远征队|豪华中文|预购特典+全DLC-支持手柄|解压即撸|约50GB| v57069 送修改器+原声音乐",
   "urlK": "https://pan.quark.cn/s/82b1d6f5184d",
   "urlB": "https://pan.baidu.com/s/1BLV7QIvyPMHnpg-RfiywXQ?pwd=tpjd \n提取码: tpjd",
   "passWord": "88888888"
@@ -862,9 +1334,49 @@ export const list = [{
   "urlB": "https://pan.baidu.com/s/1purmPEyJ9OdRlQrsKyB0Gw?pwd=r2g6\n提取码: r2g6",
   "passWord": "88888888"
 }, {
+  "name": "使命召唤13|豪华中文|全DLC|赠送修改器|解压即撸|约61G",
+  "urlK": "https://pan.quark.cn/s/9489e2446590",
+  "urlB": "https://pan.baidu.com/s/1QPEL11PpqpaPTsfT4NuXew?pwd=tidi \n提取码: tidi ",
+  "passWord": 951782
+}, {
+  "name": "使命召唤14|豪华中文|全DLC|赠送修改器|解压即撸|约147.8GB",
+  "urlK": "https://pan.quark.cn/s/40302795fc26",
+  "urlB": "https://pan.baidu.com/s/1yfohOOxjc2BxK8x7ZouaXQ?pwd=kq4n \n提取码: kq4n",
+  "passWord": 951782
+}, {
+  "name": "使命召唤18：先锋|豪华中文|全DLC|解压即撸|约78.4GB",
+  "urlK": "https://pan.quark.cn/s/2376ee7232fb",
+  "urlB": "https://pan.baidu.com/s/1iz9kfOLgO-JU8PPfdsMJmA?pwd=mscp \n提取码: mscp",
+  "passWord": "88888888"
+}, {
   "name": "使命召唤19：现代战争2|豪华中文|全DLC|解压即撸|v9.2.12721522|约31.7GB",
   "urlK": "https://pan.quark.cn/s/b68d29725256",
   "urlB": "https://pan.baidu.com/s/1_WF5-0rgr05gp2rzYKlisg?pwd=p916 \n提取码: p916",
+  "passWord": "88888888"
+}, {
+  "name": "艾尔登法环 黑夜君临|豪华中文|全DLC+预购特典|解压即撸|约20.3G|v1.01.1",
+  "urlK": "https://pan.quark.cn/s/191e5f78a8c8",
+  "urlB": "https://pan.baidu.com/s/1FoQp1q0NRT4DaACAZkGjyA?pwd=ma72 \n提取码: ma72",
+  "passWord": "88888888"
+}, {
+  "name": "小镇惊魂：重制版|豪华中文|集合版|解压即撸|",
+  "urlK": "https://pan.quark.cn/s/467690bfa1ed",
+  "urlB": "https://pan.baidu.com/s/1zGLwKZMS5xvrRpBCnublDQ?pwd=wt7f \n提取码: wt7f",
+  "passWord": "88888888"
+}, {
+  "name": "星之海|豪华中文|全DLC+钟表匠之痛DLC|解压即撸|V2.0.58811|约14.1G",
+  "urlK": "https://pan.quark.cn/s/f092433e85e8",
+  "urlB": "https://pan.baidu.com/s/1YyP4Mc8AQW2R9ohCYwWbcA?pwd=dar2 \n提取码: dar2",
+  "passWord": "88888888"
+}, {
+  "name": "百日战纪 最终防卫学园|豪华中文|预购特典+全DLC-支持手柄|解压即撸|v1.0.6.0|39.8GB",
+  "urlK": "https://pan.quark.cn/s/d2aa40b86a72",
+  "urlB": "https://pan.baidu.com/s/1xAy-ekIVXgaEuRvl3DhY1w?pwd=vdf7 \n提取码: vdf7",
+  "passWord": "88888888"
+}, {
+  "name": "叛逆神魂 GODSOUL|豪华中文|全DLC|解压即撸|v1.48|约5.2GB",
+  "urlK": "https://pan.quark.cn/s/21e202ac0fdd",
+  "urlB": "https://pan.baidu.com/s/1nOBjMZw6TjhvHOVBY6wRiQ?pwd=2sir \n提取码: 2sir",
   "passWord": "88888888"
 }, {
   "name": "龙珠：超宇宙2|豪华中文|全DLC|解压即撸|约31.7GB|V1.24",
@@ -878,6 +1390,10 @@ export const list = [{
 }, {
   "name": "漫威银河护卫队|赠送修改器|豪华中文|全DLC|解压即撸|约45.1G|v2984448",
   "urlK": "https://pan.quark.cn/s/094c4793d0de",
+  "passWord": "88888888"
+}, {
+  "name": "漫威VS卡普空 无限|全DLC|送修改器+赠存档|解压即玩|约65.7GB| v2757512 ",
+  "urlK": "https://pan.quark.cn/s/acd6ce1286eb",
   "passWord": "88888888"
 }, {
   "name": "乐高旋风忍者大电影|豪华中文|完整版|安装即玩|约16.1G",
@@ -936,8 +1452,6 @@ export const list = [{
   "urlK": " https://pan.quark.cn/s/e7514064fcd2",
   "passWord": "88888888"
 }, {
-  "name": "中国式相亲|豪华中文|完整版|约1.3G|17078038",
-  "urlK": "https://pan.quark.cn/s/8f168808c1cf",
   "passWord": "88888888"
 }, {
   "name": "莎拉的黑店|豪华中文|完整版|解压即撸|约223.3M|Build.16996073",
@@ -1104,6 +1618,10 @@ export const list = [{
   "urlK": "https://pan.quark.cn/s/4afa27b2c10b",
   "passWord": "88888888"
 }, {
+  "name": "请做coser的主人6|豪华中文|全DLC|安装即玩|约74GB",
+  "urlK": "https://pan.quark.cn/s/77685bee7736",
+  "passWord": "88888888"
+}, {
   "name": "最终幻想16|豪华中文|赠送修改器|预购特典+扩充通票+全DLC+支持手柄|解压即撸|148.5GB|V1.03",
   "urlK": "https://pan.quark.cn/s/e446a01f03f4",
   "passWord": "88888888"
@@ -1222,6 +1740,7 @@ export const list = [{
 }, {
   "name": "卡普空街机合集|豪华中文|完整版+支持手柄|解压即撸|约1.6GB|v20250322",
   "urlK": "https://pan.quark.cn/s/c4edcf719282",
+  "urlB": "https://pan.baidu.com/s/1LztgqkoAddXVzIl5FhtouQ?pwd=pzwv \n提取码: pzwv",
   "passWord": "88888888"
 }, {
   "name": "小动物餐吧 Party Club|豪华中文|完整版|解压即撸|约1.1G",
@@ -1294,6 +1813,7 @@ export const list = [{
 }, {
   "name": "圣斗士星矢：战士之魂|豪华中文|全DLC|解压即撸|约3.1GB",
   "urlK": "https://pan.quark.cn/s/449b9cf2575d",
+  "urlB": "https://pan.baidu.com/s/1DbVOt1_4pqGULtdIsudUDA?pwd=hvnw \n提取码: hvnw",
   "passWord": "88888888"
 }, {
   "name": "假面骑士：巅峰争夺豪华中文|全DLC|解压即撸|约2.9GB",
@@ -1367,63 +1887,277 @@ export const list = [{
   "name": "猎天使魔女3|官方中文|V1.2.0-妖艳战姬-暗夜魔舞-模拟器整合版|解压即撸|",
   "urlK": "https://pan.quark.cn/s/a5bbd755dd1d",
   "passWord": "88888888"
+}, {
+  "name": "JOJO的奇妙冒险 群星之战 重制版|豪华中文|解压即撸|约4.9G",
+  "urlK": "https://pan.quark.cn/s/e962f8df83aa",
+  "passWord": "88888888"
+}, {
+  "name": "十字军之王3|官方中文|v1.16.0 +草原可汗DLC+季票+全DLC+修改器|解压即撸",
+  "urlK": "https://pan.quark.cn/s/34d9048dfc96",
+  "passWord": "88888888"
+}, {
+  "name": "请做coser的主人1-4合集",
+  "urlK": "https://pan.quark.cn/s/3f0ea2feb58b",
+  "passWord": "88888888"
+}, {
+  "name": "花园魔三国2|v1.05|官方中文|三国萌娘为主题的魔幻RPG",
+  "urlK": "https://pan.quark.cn/s/64bdf0beb1e5",
+  "passWord": "88888888"
+}, {
+  "name": "像素工厂|解锁所有内容",
+  "urlK": "https://pan.quark.cn/s/8802260cc353",
+  "passWord": "88888888"
+}, {
+  "name": "异世界归来的我错过了爱情",
+  "urlK": "https://pan.quark.cn/s/25713b508260",
+  "passWord": "88888888"
+}, {
+  "name": "尘埃5|全DLC|豪华中文| 联机版|解压即玩|约33.2GB",
+  "urlK": "https://pan.quark.cn/s/55bc04626bfd",
+  "passWord": "88888888"
+}, {
+  "name": "纵横七海 船运世界|豪华中文|解压即撸|V1.10.3|约1G",
+  "urlK": "https://pan.quark.cn/s/5b3febcedb6c",
+  "passWord": "88888888"
+}, {
+  "name": "月亮三部曲|豪华中文|全DLC|解压即玩|约8.5GB",
+  "urlK": "https://pan.quark.cn/s/b8f733acc4f4",
+  "passWord": "88888888"
+}, {
+  "name": "攀爬动物：在一起|豪华中文|完整版|解压即玩|约115M",
+  "urlK": "https://pan.quark.cn/s/cf66e00437f8",
+  "passWord": "88888888"
+}, {
+  "name": "路边美食模拟器|豪华中文|完整版|解压即玩|约4.91GB|v0.1.06",
+  "urlK": "https://pan.quark.cn/s/7d4ef57fdfef",
+  "passWord": "88888888"
+}, {
+  "name": "C|全DLC|官方中文|解压可玩",
+  "urlK": "https://pan.quark.cn/s/71a12e84dd36",
+  "passWord": "88888888"
+}, {
+  "name": "环世界 MOD整合版| 全DLC|完整版|豪华中文|解压即玩|v1.5.4297",
+  "urlK": "https://pan.quark.cn/s/cf2cc033541b",
+  "passWord": "88888888"
+}, {
+  "name": "都市 天际线2|豪华中文|预购特典+季票+全DLC|解压即撸|V1.3.3F1",
+  "urlK": "https://pan.quark.cn/s/cd01534b9008",
+  "passWord": "88888888"
+}, {
+  "name": "多重人生 The Alters|豪华中文|预购特典+全DLC-支持手柄|解压即撸Build.18996100",
+  "urlK": "https://pan.quark.cn/s/f053d966bcef",
+  "passWord": "88888888"
+}, {
+  "name": "要战便战 正式版|豪华中文|完整版|解压即撸|约7.1GB|V1.0.46",
+  "urlK": "https://pan.quark.cn/s/1accff25492f",
+  "passWord": "88888888"
+}, {
+  "name": "怪物的王座|豪华中文|全DCL|解压即撸|约1.4GB|V1.13",
+  "urlK": "https://pan.quark.cn/s/ee27f3672cf1",
+  "passWord": "88888888"
+}, {
+  "name": "超级便利店（超级迷你超市）|豪华中文|完整版|解压即玩|Build 18974742",
+  "urlK": "https://pan.quark.cn/s/43bdd479ccc1",
+  "passWord": "88888888"
+}, {
+  "name": "向左一点|豪华中文|全DCL|解压即玩|约2.8GB|v3.1.0",
+  "urlK": "https://pan.quark.cn/s/aa506d6941b6",
+  "passWord": "88888888"
+}, {
+  "name": "降灵 Spiritfall|豪华中文|完整版|解压即撸|约1.6GB|V1.6.27",
+  "urlK": "https://pan.quark.cn/s/2e04adf16bc1",
+  "passWord": "88888888"
+}, {
+  "name": "我和她的世界末日|豪华中文|完整版|解压即撸|约1.6GB|V1.6.27",
+  "urlK": "https://pan.quark.cn/s/07fd0b3b2a8b",
+  "passWord": "88888888"
+}, {
+  "name": "专业飞行模拟12|全DLC|豪华中文|解压即玩| v12.2.0|约148.7GB",
+  "urlK": "https://pan.quark.cn/s/457ba1aacd51",
+  "passWord": "88888888"
+}, {
+  "name": "迪士尼梦幻星谷 送修改器|豪华中文|全DLC-支持手柄|解压即撸|v1.17.11.6",
+  "urlK": "https://pan.quark.cn/s/738f1fcccac1",
+  "passWord": "88888888"
+}, {
+  "name": "魔法门之英雄无敌1-6全集",
+  "urlK": "https://pan.quark.cn/s/accb885c40d3",
+  "passWord": "88888888"
+}, {
+  "name": "魔法门之英雄无敌：上古纪元",
+  "urlK": "https://pan.quark.cn/s/6dc71fc6c163",
+  "passWord": "88888888"
+}, {
+  "name": "方舟： 生存飞升|豪华版|阿斯特雷奥斯DLC+预购特典+全DLC-支持手柄|豪华中文|解压即玩|v65.18",
+  "urlK": "https://pan.quark.cn/s/0e33553b233a",
+  "passWord": "88888888"
+}, {
+  "name": "潜行者 晴空 增强版|豪华中文|全DLC-支持手柄|解压即撸| v1.7.1",
+  "urlK": "https://pan.quark.cn/s/176a3b861e79",
+  "passWord": "88888888"
+}, {
+  "name": "农场经营世界|豪华中文|全DLC|官方中文|解压可玩|19.3GB",
+  "urlK": "https://pan.quark.cn/s/fc01cefa227e",
+  "passWord": "88888888"
+}, {
+  "name": "仓库猎人模拟器|豪华中文|全DLC|官方中文|解压可玩|约56.2GB",
+  "urlK": "https://pan.quark.cn/s/6a16707d3e25",
+  "passWord": "88888888"
+}, {
+  "name": "超自然车旅|豪华中文|赠送修改器+全DLC|解压即撸|v1.9",
+  "urlK": "https://pan.quark.cn/s/8843da932418",
+  "passWord": "88888888"
+}, {
+  "name": "玛岛 Luma Island|豪华中文|解压即撸|完整版|解压即玩|约2GB",
+  "urlK": "https://pan.quark.cn/s/26c23f0e983e",
+  "passWord": "88888888"
+}, {
+  "name": "鬼灭之刃 火之神血风谭|全DLC|豪华中文|完整版|约8.9GB|v 1.10",
+  "urlK": "https://pan.quark.cn/s/ffe010946978",
+  "passWord": "88888888"
+}, {
+  "name": "鬼灭之刃 火之神血风谭2|全DLC|豪华中文|完整版|约19.6GB| v1.0.2",
+  "urlK": "https://pan.quark.cn/s/26b5d0bdf077",
+  "urlB": "https://pan.baidu.com/s/1hz-4tztgL-Fx2nM5xqtgGQ?pwd=e3jr \n提取码: e3jr",
+  "passWord": "88888888"
+}, {
+  "name": "往日不再 终极复刻版 |全DLC|豪华中文|赠送修改器|存档|v20250625 ",
+  "urlK": "https://pan.quark.cn/s/ef0079e616d4",
+  "passWord": "88888888"
+}, {
+  "name": "NBA2K24 科比布莱恩特版|豪华中文|完整版|解压即玩|约57.4GB",
+  "urlK": "https://pan.quark.cn/s/d5cc2ad2fa39",
+  "passWord": "88888888"
+}, {
+  "name": "爱与生活：幸福学生|全DLC|豪华中文|完整版|解压即玩v1.0.3.1",
+  "urlK": "https://pan.quark.cn/s/83859127303e",
+  "passWord": "88888888"
+}, {
+  "name": "心之眼|豪华中文|预购特典+全DLC-支持手柄|解压即撸|约42.9GB|Build.19177340",
+  "urlK": "https://pan.quark.cn/s/a91b5fa0cf76",
+  "passWord": "88888888"
+}, {
+  "name": "领地：种田与征战全DLC|豪华中文|完整版|解压即玩",
+  "urlK": "https://pan.quark.cn/s/3c25a28d9bac",
+  "passWord": "88888888"
+}, {
+  "name": "泡姆泡姆|豪华中文|支持本地2-4人|完整版|解压即撸|约8.1GB|Build.19006112",
+  "urlK": "https://pan.quark.cn/s/c36d175d6f3b",
+  "passWord": "88888888"
+}, {
+  "name": "烈焰之刃 Blades of Fire|豪华中文|V1.3.4.0-梦陨战魂-灰烬宿命+全DLC|解压即撸",
+  "urlK": "https://pan.quark.cn/s/9d756800fba8",
+  "passWord": "88888888"
+}, {
+  "name": "地下矿工2|矿坑之下2 v0.3.23933（UnderMine 2）免安装中文版",
+  "urlK": "https://pan.quark.cn/s/1a1c2628c965",
+  "passWord": "88888888"
+}, {
+  "name": "王国与城堡|豪华中文|完整版|解压即撸|约685.5MB|V230622",
+  "urlK": "https://pan.quark.cn/s/11962f340dc0",
+  "passWord": "88888888"
+}, {
+  "name": "钢铁雄心IV|赠送修改器|豪华中文|扩展通行证DLC+全DLC|解压即撸V1.16.6",
+  "urlK": "https://pan.quark.cn/s/87e09a265db0",
+  "passWord": "88888888"
+}, {
+  "name": "禁闭求生2|豪华中文|预购特典+全DLC-支持手柄|解压即撸|约14.6GB|Build.19446520",
+  "urlK": "https://pan.quark.cn/s/46e1edd99517",
+  "passWord": "88888888"
+}, {
+  "name": "饿狼传说：群狼之城|全DLC|豪华中文|完整版|解压即玩|约22.3GB|v1.2",
+  "urlK": "https://pan.quark.cn/s/bceb569d6c5c",
+  "passWord": "amuyouxi"
+}, {
+  "name": "驾驶地平线|豪华中文|完整版|解压即撸|约7.3GB|v20250416 ",
+  "urlK": "https://pan.quark.cn/s/245d467a1034",
+  "passWord": "88888888"
+}, {
+  "name": "星露谷物语 大型MOD整合包 一方乐土1.0|豪华中文|约2.2GB",
+  "urlK": "https://pan.quark.cn/s/27e4c1ddc083",
+  "passWord": "88888888"
+}, {
+  "name": "祇：女神之道|全DLC|支持手臂|豪华中文|完整版|解压即撸|约22.2GB|v1.4.1.0 ",
+  "urlK": "https://pan.quark.cn/s/1ad8ca50bdc7",
+  "passWord": "88888888"
+}, {
+  "name": "死神vs火影|电脑+手机双端|完整版| v3.6 ",
+  "urlK": "https://pan.quark.cn/s/81fcebb94ee1",
+  "passWord": "88888888"
+}, {
+  "name": "咒语旅团 The Spell Brigade|官方中文|Build.17605384-魔灵共战-法阵争锋|解压即撸",
+  "urlK": "https://pan.quark.cn/s/43871aae2b06",
+  "passWord": "88888888"
+}, {
+  "name": "反恐精英1.6|豪华中文|完整版|带机器人|解压即玩|赠送安装视频|约335.9MB",
+  "urlK": "https://pan.quark.cn/s/19698e04d3a7",
+  "passWord": "88888888"
+}, {
+  "name": "银行模拟器|豪华中文|全DLC|安装可玩|Build.19430579|约1.3G",
+  "urlK": "https://pan.quark.cn/s/725272f33d20",
+  "passWord": "88888888"
+}, {
+  "name": "猫猫钓游记 Fischers Fishing Journey|完整版|官方中文|解压即撸|约268MB",
+  "urlK": "https://pan.quark.cn/s/68dec3257308",
+  "passWord": "88888888"
+}, {
+  "name": "泰坦之旅2|豪华汉化|全DLC+修改器-支持手柄|解压即撸|约76.3GB",
+  "urlK": "https://pan.quark.cn/s/b02ee8cd9723",
+  "passWord": "88888888"
+}, {
+  "name": "四海兄弟3 最终版|豪华中文|预购DLC+全DLC|约3.2G|解压即撸V1.0.1",
+  "urlK": "https://pan.quark.cn/s/26b15a6adfe1",
+  "passWord": "88888888"
+}, {
+  "name": "英雄传说6：空之轨迹3RD|豪华汉化|完整版|解压即撸|约5.1GB",
+  "urlK": "https://pan.quark.cn/s/d325bae08c9c",
+  "passWord": "88888888"
+}, {
+  "name": "恋爱模拟器|豪华中文|全DLC|官方中文|解压可玩|约580.7MB",
+  "urlK": "https://pan.quark.cn/s/1258b1cb9402",
+  "passWord": "88888888"
+}, {
+  "name": "剑星MOD|大型MOD整合包 一键换装-保姆级安装教程",
+  "urlK": "https://pan.quark.cn/s/1adf94d4ea06",
+  "passWord": "88888888"
+}, {
+  "name": "酒馆经理模拟器|豪华中文|完整版-客盈门庭-宴席风华|解压即撸|约1.2G|v1.5.1",
+  "urlK": "https://pan.quark.cn/s/62449efc61e6",
+  "urlB": "https://pan.baidu.com/s/165EI1avUAnAdonb7sqhcxQ?pwd=3nh6 \n提取码: 3nh6",
+  "passWord": "88888888"
+}, {
+  "name": "监寓|豪华中文|全DLC|官方中文|解压可玩|约56.2GB",
+  "urlK": "https://pan.quark.cn/s/58cfa046e03e",
+  "urlB": "https://pan.baidu.com/s/1lKtEPZofGfdTjIV0tYMIYA?pwd=uris\n提取码: uris",
+  "passWord": "88888888"
 }];
-export const listRj = [{
-  "name": "最美电子证件照|解锁VIP|豪华会员版本|安卓直装|v2.2.6.43",
-  "urlK": "https://pan.quark.cn/s/24ee8039d4a5"
-}, {
-  "name": "知音漫客|解锁VIP|去广告|安卓直装|豪华中文",
-  "urlK": "https://pan.quark.cn/s/9e904876c8d6"
-}, {
-  "name": "Wallcraft|解锁高级版|去广告|安卓直装|豪华中文",
-  "urlK": "https://pan.quark.cn/s/281ba45023ae"
-}, {
-  "name": "车轮驾|解锁VIP|去广告|安卓直装|豪华中文",
-  "urlK": "https://pan.quark.cn/s/54d01de9e2d3"
-}, {
-  "name": "坎影|全网影视动漫短剧全部免费|超级魔改版本v3.1.31",
-  "urlK": "https://pan.quark.cn/s/69cb4ef2d0a0"
-}, {
-  "name": "ChatGPT安卓直装版！解锁高级Pro会员无限制 合集包",
-  "urlK": "https://pan.quark.cn/s/7f03e69e0b52"
-}, {
-  "name": "自动脚本精灵|辅助脚本、日常化自动工具",
-  "urlK": "https://pan.quark.cn/s/472b9457dc60"
-}, {
-  "name": "虾皮影视|豪华中文|安卓直装",
-  "urlK": "https://pan.quark.cn/s/43ebbb1883b8"
-}, {
-  "name": "包子漫画",
-  "urlK": "https://pan.quark.cn/s/525ca6047682"
-}, {
-  "name": "漫蛙",
-  "urlK": "https://pan.quark.cn/s/ce2da19cb9bc"
-}, {
-  "name": "酷咖游戏解锁版|豪华中文|解锁版|安卓直装",
-  "urlK": "https://pan.quark.cn/s/74dda21d2056"
-}, {
-  "name": "溏心视频|解锁VIP|豪华中文|安卓直装",
-  "urlK": "https://pan.quark.cn/s/e30148bcbc42"
-}, {
-  "name": "爱养成3|免费内购|豪华中文|完整版|安卓直装|V1.5.3.1",
-  "urlK": "https://pan.quark.cn/s/b3ee15868899"
-}, {
-  "name": "乐享云|解锁版|豪华中文|安卓直装",
-  "urlK": "https://pan.quark.cn/s/5c8d5108f920"
-}, {
-  "name": "囧次元|免费追番|无广告版|豪华中文|安卓直装",
-  "urlK": "https://pan.quark.cn/s/dd8ccbde353c"
-}, {
-  "name": "长风视频|解锁VIP|豪华中文|安卓直装",
-  "urlK": "https://pan.quark.cn/s/7e7e952de9f6"
-}, {
-  "name": "起源书阁|看书神器|解锁版|去广告|豪华中文|安卓直装",
-  "urlK": "https://pan.quark.cn/s/4cc9c17f9e56"
-}, {
-  "name": "岸听音乐|解锁版|去广告|豪华中文|安卓直装v1.0.9",
-  "urlK": "https://pan.quark.cn/s/6f17f119ae4b"
-}];
+export const listRj = [];
 export const listPhone = [{
+  "name": "灵魂猎手：地牢豪华中文|完整版|安卓直装|v1.0.7"
+}, {
+  "name": "暴击TV豪华中文|完整版|安卓直装|v2507.23",
+  "urlK": "https://pan.quark.cn/s/7ce98297bb5a"
+}, {
+  "name": "伊始之地|豪华中文|完整版|安卓直装|V1.2",
+  "urlK": "https://pan.quark.cn/s/c42bb59e6e2b"
+}, {
+  "name": "猛鬼大厦|粤语配音|豪华中文|完整版|安卓直装|v1.3.6",
+  "urlK": "https://pan.quark.cn/s/09b66e674d9b"
+}, {
+  "name": "魔女之泉4|全DLC|完整版|V2.6|安卓直装",
+  "urlK": "https://pan.quark.cn/s/e42ba7949a59"
+}, {
+  "name": "超战记|豪华中文|完整版|安卓直装|v1.06",
+  "urlK": "https://pan.quark.cn/s/3bc80091f512"
+}, {
+  "name": "异形大战铁血战|豪华中文|高清优化版|安卓直装|v2.1",
+  "urlK": "https://pan.quark.cn/s/d90319672054"
+}, {
+  "name": "这是我的战争 父亲的承诺|豪华中文|终极版+全DLC|安卓直装",
+  "urlK": "https://pan.quark.cn/s/5db36c521c90"
+}, {
+  "name": "仙剑98安卓"
+}, {
   "name": "怒之铁拳4|豪华中文|终极版+全DLC|安卓直装",
   "urlK": "https://pan.quark.cn/s/72beac82c759"
 }, {
@@ -1531,7 +2265,7 @@ export const listPhone = [{
 }, {
   "name": "宅男的人间冒险|豪华中文|完整版|安卓直装",
   "urlK": "https://pan.quark.cn/s/7adaacdfb297"
-}, {}, {
+}, {
   "name": "大富翁4fun安卓版最新版本 v7.1 中文完整版",
   "urlK": "https://pan.quark.cn/s/801cbe816d1e"
 }, {
@@ -1648,12 +2382,207 @@ export const listPhone = [{
 }, {
   "name": "星露谷物语（病娇联机版）",
   "urlK": "https://pan.quark.cn/s/a0229a5b8b1d"
+}, {
+  "name": "小丑牌|整合MOD版|v1.0.1.14",
+  "urlK": "https://pan.quark.cn/s/dba00556e5cc"
+}, {
+  "name": "守卫大作战|汉化版cc免广告获取奖励|内置mod菜单（无限金币、钻石、英雄碎片）",
+  "urlK": "https://pan.quark.cn/s/f7b6ffad7d6e"
+}, {
+  "name": "魔王城的开店还债之旅|v1.0.0293|全DLC",
+  "urlK": "https://pan.quark.cn/s/4e062a1bcb97"
+}, {
+  "name": "地球末日生存|豪华中文|内置修改器|无敌版|v1.36.0",
+  "urlK": "https://pan.quark.cn/s/73380f3c3e0a"
+}, {
+  "name": "百日战纪",
+  "urlK": "https://pan.quark.cn/s/f80cc0496f3f"
+}, {
+  "name": "放置妖怪少女|去谷歌验证|第二次进入游戏大量货币|解锁去广告特权|v2.228.2",
+  "urlK": "https://pan.quark.cn/s/e485fc3e9f26"
+}, {
+  "name": "生存城市：皇家僵尸 汉化；解锁大量货币v1.7",
+  "urlK": "https://pan.quark.cn/s/441c47d16ce1"
+}, {
+  "name": "骗子酒馆|豪华中文|去广告|安卓直装|v1.0.1",
+  "urlK": "https://pan.quark.cn/s/3869e7d88522"
+}, {
+  "name": "Steam移植手游《光明记忆无限》v1.31，最新MOD菜单版，解锁全服装",
+  "urlK": "https://pan.quark.cn/s/bcc9e841fba8"
+}, {
+  "name": "永恒之夜v1.0.2，最新MOD菜单版",
+  "urlK": "https://pan.quark.cn/s/bcc9e841fba9"
+}, {
+  "name": "幕府将军对决|解锁完整版|v1.0.7",
+  "urlK": "https://pan.quark.cn/s/14cb86cd200b"
+}, {
+  "name": "世界盒子:上帝模拟器(全解锁+内置mod菜单)",
+  "urlK": "https://pan.quark.cn/s/08a7fbc5a583"
+}, {
+  "name": "火影忍者：终极忍者风暴安卓APK直装，最新解锁全部人物版！",
+  "urlK": "https://pan.quark.cn/s/48987b68cec9"
+}, {
+  "name": "侠客风云传前传单机版|完整版+DLC+菜单版|v109.0.1",
+  "urlK": "https://pan.quark.cn/s/635381f4da0d"
+}, {
+  "name": "刮刮乐模拟器|豪华中文|去广告获得奖励|v10",
+  "urlK": "https://pan.quark.cn/s/194296c22b40"
+}, {
+  "name": "方舟：生存进化 豪华中文|免谷歌|免付费解锁焦土和畸变地图DLC|v10",
+  "urlK": "https://pan.quark.cn/s/806d889b2b6f"
+}, {
+  "name": "秘境少女育成战|免广告获得奖励 无敌 秒杀 时间加速 |内置修改器v10.0.3 ",
+  "urlK": "https://pan.quark.cn/s/6ea67be7d56f"
+}, {
+  "name": "像素工厂 解锁所有内容",
+  "urlK": "https://pan.quark.cn/s/e8bf90160513"
 }];
 export const listCg = [{
   "name": "https://pan.quark.cn/s/2698b3d4137c"
-}, {}, {}, {}, {}, {}, {
+}, {}, {}, {}, {
   "name": "游戏名称",
   "urlK": "夸克网盘（点击可打开跳转）"
+}, {}, {
+  "name": "闯关大乱斗",
+  "urlK": "https://pan.quark.cn/s/0d4b732c0438"
+}, {
+  "name": "凤唳九州鉴无限鲜花版",
+  "urlK": "https://pan.quark.cn/s/9be8cebc939d"
+}, {
+  "name": "我太难了",
+  "urlK": "https://pan.quark.cn/s/62cdcef88673"
+}, {
+  "name": "exo穿越系统之天赋影后",
+  "urlK": "https://pan.quark.cn/s/9da331ba5f93"
+}, {
+  "name": "蜜糖担当",
+  "urlK": "https://pan.quark.cn/s/b0c423180c47"
+}, {
+  "name": "晚风之后等星光2024.3.11",
+  "urlK": "https://pan.quark.cn/s/d69f7a3058bb"
+}, {
+  "name": "药罐子倒了扶一扶2024.2.26",
+  "urlK": "https://pan.quark.cn/s/fee92db066ab"
+}, {
+  "name": "乱臣贼子",
+  "urlK": "https://pan.quark.cn/s/05c31b0b81e1"
+}, {
+  "name": "我的娘子是老虎",
+  "urlK": "https://pan.quark.cn/s/ff1da36cc4a8#/list/share"
+}, {
+  "name": "惊变31天［清软］完结 男性向",
+  "urlK": "https://pan.quark.cn/s/23f4c5b44a94"
+}, {
+  "name": "所谓富贵险中求",
+  "urlK": "https://pan.quark.cn/s/d26e8574c67a"
+}, {
+  "name": "这届神仙好难带",
+  "urlK": "https://pan.quark.cn/s/16183a57bdb3"
+}, {
+  "name": "零度空间",
+  "urlK": "https://pan.quark.cn/s/bebc6e88d312"
+}, {
+  "name": "锦绣缎",
+  "urlK": "https://pan.quark.cn/s/2cd97149e7be"
+}, {
+  "name": "好可爱小姐",
+  "urlK": "https://pan.quark.cn/s/3a4227578e6b"
+}, {
+  "name": "重华一梦",
+  "urlK": "https://pan.quark.cn/s/da0b67019846"
+}, {
+  "name": "世家望月录",
+  "urlK": "https://pan.quark.cn/s/bce7638fb399"
+}, {
+  "name": "太子妃的退休生活",
+  "urlK": "https://pan.quark.cn/s/683105fe0564"
+}, {
+  "name": "约会大作战或守Install6",
+  "urlK": "https://pan.quark.cn/s/9fc46fcff453"
+}, {
+  "name": "exo穿书之暖甜系恋爱",
+  "urlK": "https://pan.quark.cn/s/db7fb240c9fe"
+}, {
+  "name": "灼灼",
+  "urlK": "https://pan.quark.cn/s/db906c9c0d30"
+}, {
+  "name": "零度空间",
+  "urlK": "https://pan.quark.cn/s/48b0808bf8d8"
+}, {
+  "name": "快穿之前女友联盟",
+  "urlK": "https://pan.quark.cn/s/1ad06bfb8a59"
+}, {
+  "name": "青铜日记",
+  "urlK": "https://pan.quark.cn/s/b0cd956ae1e7"
+}, {
+  "name": "三界之最强微商",
+  "urlK": "https://pan.quark.cn/s/786c5e5837a9"
+}, {
+  "name": "bts我是万人迷",
+  "urlK": "https://pan.quark.cn/s/f4a89bf0ade3"
+}, {
+  "name": "悉听神的指引",
+  "urlK": "https://pan.quark.cn/s/27788fb3b26d"
+}, {
+  "name": "缠妖",
+  "urlK": "https://pan.quark.cn/s/f40c45340e24"
+}, {
+  "name": "晚风与烈阳",
+  "urlK": "https://pan.quark.cn/s/884b06101b6b"
+}, {
+  "name": "杠上那个厂花",
+  "urlK": "https://pan.quark.cn/s/8049b2993e38"
+}, {
+  "name": "邪神怎能如此邪门",
+  "urlK": "https://pan.quark.cn/s/2fd7dd01ffc0"
+}, {
+  "name": "仙隐人间",
+  "urlK": "https://pan.quark.cn/s/f1a0ddd9a972"
+}, {
+  "name": "世家望月录",
+  "urlK": "https://pan.quark.cn/s/42f7e162637c"
+}, {
+  "name": "好可爱小姐",
+  "urlK": "https://pan.quark.cn/s/1b002d929567"
+}, {
+  "name": "太子妃的退休生活",
+  "urlK": "https://pan.quark.cn/s/d8c5ce6bfaa9"
+}, {
+  "name": "谁说嫡女最好命",
+  "urlK": "https://pan.quark.cn/s/847b01dd7452"
+}, {
+  "name": "白衣使命",
+  "urlK": "https://pan.quark.cn/s/20b246117c85"
+}, {
+  "name": "春风不解意",
+  "urlK": "https://pan.quark.cn/s/a7b6ebbbb805"
+}, {
+  "name": "妖界百态图鉴",
+  "urlK": "https://pan.quark.cn/s/14f77759aa6b"
+}, {
+  "name": "声息 La Voix",
+  "urlK": "https://pan.quark.cn/s/c0789b721f5b"
+}, {
+  "name": "撞南墙",
+  "urlK": "https://pan.quark.cn/s/992d3c6660b3"
+}, {
+  "name": "快穿马甲掉了",
+  "urlK": "https://pan.quark.cn/s/da55f4ecc0be"
+}, {
+  "name": "重华一梦",
+  "urlK": "https://pan.quark.cn/s/509cb862019c"
+}, {
+  "name": "上古祸起",
+  "urlK": "https://pan.quark.cn/s/8df5ec53f6d6"
+}, {
+  "name": "相思成瓜",
+  "urlK": "https://pan.quark.cn/s/ff8b2e9e8284"
+}, {
+  "name": "绿茶永不翻车",
+  "urlK": "https://pan.quark.cn/s/94d6ae81e283"
+}, {
+  "name": "后宫蜜事",
+  "urlK": "https://pan.quark.cn/s/b87682d227c7"
 }, {
   "name": "山间有点田|无限鲜花|大礼包|完结|安卓直装",
   "urlK": "https://pan.quark.cn/s/24ee8039d4a5"
@@ -1780,6 +2709,85 @@ export const listCg = [{
 }, {
   "name": "偷心天使",
   "urlK": "https://pan.quark.cn/s/efb1a9651e17"
-}, {}, {
-  "name": "妻主请善良"
-}]
+}, {
+  "name": "女配黑化历程",
+  "urlK": "https://pan.quark.cn/s/8785a1fcbe1e"
+}, {
+  "name": "妻主请善良",
+  "urlK": "https://pan.quark.cn/s/ee9caaf9d39b"
+}, {
+  "name": "你的心愿已签收",
+  "urlK": "https://pan.quark.cn/s/e44af5a3b8e3"
+}, {
+  "name": "沧海仙途",
+  "urlK": "https://pan.quark.cn/s/5ba2a5e796e3"
+}, {
+  "name": "妃鸿印雪",
+  "urlK": "https://pan.quark.cn/s/f1bf82e50417"
+}, {
+  "name": "我那温柔大方的娘子",
+  "urlK": "https://pan.quark.cn/s/295887121eb1"
+}, {
+  "name": "娱乐坊",
+  "urlK": "https://pan.quark.cn/s/591bb994cd4c"
+}, {
+  "name": "修仙渡情劫",
+  "urlK": "https://pan.quark.cn/s/aee7705c64c2"
+}, {
+  "name": "名门贵女",
+  "urlK": "https://pan.quark.cn/s/02d5fb9eeefd"
+}, {
+  "name": "兽世冤种实录|23.12.14",
+  "urlK": "https://pan.quark.cn/s/5997b7930627"
+}, {
+  "name": "花间事|22.5.10",
+  "urlK": "https://pan.quark.cn/s/51c3fcf2e097"
+}, {
+  "name": "京华客",
+  "urlK": "https://pan.quark.cn/s/e62004e7590a"
+}, {
+  "name": "国服校花2022.4.21解锁全部服装.apk",
+  "urlK": "https://pan.quark.cn/s/47ddef0a2028"
+}, {
+  "name": "蜜桃四季春",
+  "urlK": "https://pan.quark.cn/s/af845e5f2851"
+}, {
+  "name": "太后攻略",
+  "urlK": "https://pan.quark.cn/s/a571446015ae"
+}, {
+  "name": "深宫曲",
+  "urlK": "https://pan.quark.cn/s/adf3c92c48e9"
+}, {
+  "name": "仅仅是外人2023.10.20",
+  "urlK": "https://pan.quark.cn/s/45b99716d84b"
+}, {
+  "name": "君心如玉",
+  "urlK": "https://pan.quark.cn/s/ac0af7a8680f"
+}, {
+  "name": "谋臣",
+  "urlK": "https://pan.quark.cn/s/6f23fb752935"
+}, {
+  "name": "诚不我欺也",
+  "urlK": "https://pan.quark.cn/s/a4133e3bbe96"
+}, {
+  "name": "双面女神",
+  "urlK": "https://pan.quark.cn/s/5b1747658182"
+}, {
+  "name": "首富人生",
+  "urlK": "https://pan.quark.cn/s/386722443cbe"
+}, {
+  "name": "两个世界",
+  "urlK": "https://pan.quark.cn/s/697ebd95ca1a"
+}, {
+  "name": "血之礼赞",
+  "urlK": "https://pan.quark.cn/s/f093b11ca10e"
+}, {
+  "name": "会读心后我遁了",
+  "urlK": "https://pan.quark.cn/s/8fc6dc22dc6a"
+}, {
+  "name": "阿房宫覆",
+  "urlK": "https://pan.quark.cn/s/6cf1cd4fa894"
+}, {
+  "name": "韶时尽",
+  "urlK": "https://pan.quark.cn/s/b1443b0a31b2"
+}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}]

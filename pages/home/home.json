@@ -4,7 +4,7 @@
   "backgroundTextStyle": "light",
   "enablePullDownRefresh": false,
   "usingComponents": {
-    "game-list": "/components/game-list/game-list",
+    "url-list": "/components/url-list/url-list",
     "menu": "/components/menu/menu",
     "custom-tab-bar": "/components/custom-tab-bar/index"
   }
