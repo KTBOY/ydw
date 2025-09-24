@@ -4,7 +4,7 @@ const imageCdn = 'https://tdesign.gtimg.com/mobile/demos';
 const swiperList = [
 
   `${imageCdn}/swiper1.png`,
-  `/asserts/images/wp.png`,
+
   // `/asserts/images/pass.jpg`,
 ];
 
@@ -40,7 +40,7 @@ Component({
         image: '/asserts/images/caid/cg.png',
         name: '橙光资源',
         router: '/pages/goods/cgDetails/index',
-        show: true,
+        show: false,
         style: {
           width: '110rpx',
           height: '76rpx'
@@ -50,7 +50,7 @@ Component({
         image: '/asserts/images/caid/rj.png',
         name: '软件资源',
         router: '/pages/rj/index',
-        show: true,
+        show: false,
         style: {
           width: '70rpx',
           height: '70rpx'
@@ -60,7 +60,7 @@ Component({
         image: '/asserts/images/caid/az.png',
         name: '手机资源',
         router: '/pages/phone/index',
-        show: true,
+        show: false,
         style: {
           width: '70rpx',
           height: '70rpx'
@@ -69,6 +69,59 @@ Component({
       {
         image: '/asserts/images/caid/steam.png',
         name: '电脑资源',
+        router: '',
+        show: false,
+        style: {
+          width: '90rpx',
+          height: '86rpx'
+        }
+      },
+
+      {
+        image: '/asserts/images/smcs.png',
+        name: '色盲测试',
+        router: '/packageA/pages/bind/bind',
+        show: true,
+        style: {
+          width: '70rpx',
+          height: '70rpx'
+        }
+      },
+      {
+        image: '/asserts/images/bz.png',
+        name: '手持弹幕',
+        router: '/packageA/pages/danmu/danmu',
+        show: true,
+        style: {
+          width: '70rpx',
+          height: '70rpx'
+        }
+      },
+      {
+        image: '/asserts/images/bcz.png',
+        name: '量尺子',
+        router: '/packageA/pages/ruler/ruler',
+        show: true,
+        style: {
+          width: '70rpx',
+          height: '70rpx'
+        }
+      },
+
+      {
+        image: '/asserts/images/caid/az.png',
+        name: '房贷计算器',
+        router: '/pages/phone/index',
+        show: false,
+        style: {
+          width: '70rpx',
+          height: '70rpx'
+        }
+      },
+
+      {
+        image: '/asserts/images/caid/steam.png',
+        name: '网站收录',
         router: '',
         show: true,
         style: {

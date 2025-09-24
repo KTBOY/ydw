@@ -4,7 +4,13 @@
   <!-- <web-view id="test" src="{{h5Url}}" bindload="onH5Load" bindmessage="onH5Message"></web-view> -->
 
   <menu wx:if="{{currIndex==0}}" bindchange="onChangeMenu"></menu>
-  <game-list wx:if="{{currIndex==1}}" list="{{list}}" />
+  <!-- <game-list wx:if="{{currIndex==1}}" list="{{list}}" /> -->
+
+  <url-list wx:if="{{currIndex==1}}" />
+
+
+
+
   <!-- <ad unit-id="adunit-73225c369f75b51c" bindload="adLoad" binderror="adError"></ad> -->
   <custom-tab-bar bindtabClick="tabClick" indexTab="{{currIndex}}"></custom-tab-bar>
 </view>

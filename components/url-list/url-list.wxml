@@ -1,24 +1,24 @@
-<!--index.wxml-->
-<scroll-view class="scrollarea" scroll-y type="list">
-  <view class="home-page-header">
-    <view class="search">
-      <t-search bind:clear="onClose" bind:change="onChangeValue" t-class-input="t-search__input" t-class-input-container="t-search__input-container" placeholder="请输入搜索名称" leftIcon="" disabled="{{false}}">
+<view class="details">
+  <view class="title">收录列表(持续更新)</view>
+  <view class="url">
+    <url-copy url="https://www.ps520.asia/"></url-copy>
 
-      </t-search>
-    </view>
   </view>
 
+  <view class="url">
+    <url-copy url="https://same.new/"></url-copy>
 
-  <view class="container">
-    <view class="module-list">
-      <view wx:for="{{list}}" wx:for-index="idx" wx:for-item="item" bindtap="navToDetailsPage" data-item="{{item}}">
-        <button class="button" wx:if="{{item.name}}">
-          <view class="module-name">{{item.name}}</view>
-        </button>
-      </view>
-    </view>
   </view>
 
+  <view class="url">
+    <url-copy url="https://www.jiaotuai.cn/"></url-copy>
 
-</scroll-view>
+  </view>
+
+  <view class="url">
+    <url-copy url="https://yuanbao.tencent.com/chat/naQivTmsDa"></url-copy>
+  </view>
+</view>
+
+<view class="tip">提示：如果网站有问题，及时联系作者删除</view>
 <!-- <my-loading loading="{{loading}}"></my-loading> -->

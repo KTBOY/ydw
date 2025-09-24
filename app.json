@@ -12,6 +12,16 @@
     "pages/my_module/yueyu/index",
     "pages/my_module/calc_relative/index"
   ],
+  "subPackages": [
+    {
+      "root": "packageA",
+      "pages": [
+        "pages/bind/bind",
+        "pages/danmu/danmu",
+        "pages/ruler/ruler"
+      ]
+    }
+  ],
   "requiredPrivateInfos": [
     "chooseAddress"
   ],
