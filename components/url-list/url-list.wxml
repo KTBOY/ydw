@@ -2,17 +2,9 @@
   <view class="title">收录列表(持续更新)</view>
   <view class="url">
     <url-copy url="https://www.ps520.asia/"></url-copy>
-
   </view>
-
-  <view class="url">
-    <url-copy url="https://same.new/"></url-copy>
-
-  </view>
-
   <view class="url">
     <url-copy url="https://www.jiaotuai.cn/"></url-copy>
-
   </view>
 
   <view class="url">

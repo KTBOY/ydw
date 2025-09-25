@@ -118,6 +118,28 @@ Component({
           height: '70rpx'
         }
       },
+      {
+        image: '/asserts/images/ewm.png',
+        name: '二维码创建',
+        router: '/packageA/pages/createQrcode/createQrcode',
+        show: true,
+        style: {
+          width: '70rpx',
+          height: '70rpx'
+        }
+      },
+      {
+        image: '/asserts/images/screen.png',
+        name: '图片拼接',
+        router: '/packageA/pages/screenshotConnect/screenshotConnect',
+        show: true,
+        style: {
+          width: '70rpx',
+          height: '70rpx'
+        }
+      },
+
+
 
       {
         image: '/asserts/images/caid/steam.png',

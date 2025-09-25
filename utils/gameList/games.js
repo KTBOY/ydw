@@ -44,6 +44,9 @@ export const readGameList = () => {
 
 
 export const getGameList = async () => {
+  if (!list) {
+    return []
+  }
   await wx.setStorageSync(storeKey, JSON.stringify(list))
   const data = JSON.parse(wx.getStorageSync(storeKey));
   return data

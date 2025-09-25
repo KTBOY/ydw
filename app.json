@@ -18,7 +18,9 @@
       "pages": [
         "pages/bind/bind",
         "pages/danmu/danmu",
-        "pages/ruler/ruler"
+        "pages/screenshotConnect/screenshotConnect",
+        "pages/ruler/ruler",
+        "pages/createQrcode/createQrcode"
       ]
     }
   ],
