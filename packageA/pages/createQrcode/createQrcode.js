@@ -3,10 +3,13 @@ var t = function (t) {
     default: t
   };
 }(require("./weapp.qrcode.js"));
-
+const cloud = require('wx-server-sdk')
+cloud.init({
+  env: cloud.DYNAMIC_CURRENT_ENV,
+})
 Page({
   data: {
-    
+
     canvasInfo: {
       id: "mycanvas",
       width: 200,
@@ -102,8 +105,20 @@ Page({
       }
     });
   },
-  inputSave: function (t) {
-    this.saveAndGetData(t.detail.value, !1);
+  inputSave: async function (t) {
+    try {
+      const result = await cloud.openapi.security.msgSecCheck({
+        "openid": 'OPENID',
+        "scene": 1,
+        "version": 2,
+        "content": 'hello world!'
+      })
+      console.log(result);
+      this.saveAndGetData(t.detail.value, !1);
+    } catch (err) {
+      return err
+    }
+
   },
   previewImage: function (t) {
     var e = this,

@@ -3,8 +3,8 @@
 const imageCdn = 'https://tdesign.gtimg.com/mobile/demos';
 const swiperList = [
 
-  `${imageCdn}/swiper1.png`,
-
+  `https://s21.ax1x.com/2025/09/28/pVoZPjH.jpg`,
+  'https://s21.ax1x.com/2025/09/28/pVoZ4rd.jpg'
   // `/asserts/images/pass.jpg`,
 ];
 
@@ -122,7 +122,7 @@ Component({
         image: '/asserts/images/ewm.png',
         name: '二维码创建',
         router: '/packageA/pages/createQrcode/createQrcode',
-        show: true,
+        show: false,
         style: {
           width: '70rpx',
           height: '70rpx'
@@ -136,6 +136,7 @@ Component({
         style: {
           width: '70rpx',
           height: '70rpx'
+
         }
       },
 
@@ -147,8 +148,13 @@ Component({
         router: '',
         show: true,
         style: {
-          width: '90rpx',
-          height: '86rpx'
+          // width: '90rpx',
+          // height: '86rpx'
+          width: '70rpx',
+          height: '70rpx'
+        },
+        blockStyle: {
+          width: '45%'
         }
       }
 
@@ -183,12 +189,8 @@ Component({
     },
 
     handlerSwiper(v) {
-      console.log('555', v)
-      if (v.detail.index === 1) {
-        wx.navigateTo({
-          url: '/pages/order/baidu/index'
-        })
-      }
+
+      this.triggerEvent('change')
 
 
 

@@ -1,13 +1,16 @@
 <view class="details">
   <view class="title">收录列表(持续更新)</view>
   <view class="url">
+    壁纸
     <url-copy url="https://www.ps520.asia/"></url-copy>
   </view>
   <view class="url">
+    椒图AI
     <url-copy url="https://www.jiaotuai.cn/"></url-copy>
   </view>
 
   <view class="url">
+    腾讯元宝
     <url-copy url="https://yuanbao.tencent.com/chat/naQivTmsDa"></url-copy>
   </view>
 </view>

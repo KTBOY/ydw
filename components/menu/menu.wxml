@@ -18,7 +18,7 @@
   <view class="body">
     <view class="module-list">
       <block wx:for="{{list}}" wx:for-item="item" wx:for-index="index" wx:key="{{index}}">
-        <div wx:if="{{item.show}}" class="button" bind:tap="handlerPageRouter" data-params="{{ {item, index} }}">
+        <div wx:if="{{item.show}}" style="width: {{item.blockStyle.width}}" class="button" bind:tap="handlerPageRouter" data-params="{{ {item, index} }}">
           <image class="icon-menu" src="{{item.image}}" style="width: {{item.style.width}};height: {{item.style.height}}"></image>
           <view class="module-name">{{item.name}}</view>
         </div>
