@@ -6,8 +6,25 @@ page {
   background-color: #f2f3f7;
 }
 
+.content {
+  position: relative;
+
+}
+
+.bz-box {
+  border: 2rpx solid #fff;
+  text-align: center;
+  border-radius: 15rpx;
+  padding: 10rpx 15rpx;
+  position: absolute;
+  left: 40rpx;
+  top: 30rpx;
+  color: #fff;
+  font-size: 19rpx;
+}
+
 .head {
-  padding: 20rpx 30rpx;
+  padding: 10rpx 25rpx;
 }
 
 /* 轮播 */

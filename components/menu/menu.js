@@ -2,9 +2,12 @@
 
 const imageCdn = 'https://tdesign.gtimg.com/mobile/demos';
 const swiperList = [
+  'https://s21.ax1x.com/2025/09/29/pVo0UJK.jpg',
+  'https://s21.ax1x.com/2025/09/29/pVo0YIx.jpg',
+  'https://s21.ax1x.com/2025/09/29/pVo0Ni6.jpg',
+  'https://s21.ax1x.com/2025/09/29/pVo0dzD.jpg',
+  'https://s21.ax1x.com/2025/09/29/pVo00Qe.jpg'
 
-  `https://s21.ax1x.com/2025/09/28/pVoZPjH.jpg`,
-  'https://s21.ax1x.com/2025/09/28/pVoZ4rd.jpg'
   // `/asserts/images/pass.jpg`,
 ];
 
