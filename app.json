@@ -19,8 +19,11 @@
         "pages/bind/bind",
         "pages/danmu/danmu",
         "pages/screenshotConnect/screenshotConnect",
+        "pages/screenshotConnect/showImage",
+        "pages/danmu/show_danmu",
         "pages/ruler/ruler",
-        "pages/createQrcode/createQrcode"
+        "pages/createQrcode/createQrcode",
+        "pages/videoDow/video"
       ]
     }
   ],
@@ -32,7 +35,7 @@
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "粤电玩",
+    "navigationBarTitleText": "珊瑚",
     "navigationBarTextStyle": "black"
   },
   "sitemapLocation": "sitemap.json",

@@ -1,0 +1,49 @@
+/* packageA/pages/videoDow/video.wxss */
+
+.foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #fff;
+  padding: 15rpx;
+}
+
+.copy {
+  width: 300rpx;
+
+  background: var(--td-brand-color);
+  color: #fff;
+  height: 50px;
+  text-align: center;
+  line-height: 50px;
+  border-radius: 15rpx;
+
+
+}
+
+.down {
+  width: 300rpx;
+  background: rgba(32, 19, 221, 0.76);
+  color: #fff;
+  height: 50px;
+  text-align: center;
+  line-height: 50px;
+  border-radius: 15rpx;
+
+}
+
+.video-box {
+  /* background-color: #fff;
+  border-radius: 15rpx;
+  padding: 35rpx 15rpx; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* width: 650rpx; */
+  margin: 20rpx auto;
+}

@@ -74,5 +74,5 @@ button {
   bottom: -146rpx;
   color: #fff;
   position: relative;
-  width: 100%;
+  width: 300rpx
 }

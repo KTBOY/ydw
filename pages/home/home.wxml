@@ -9,7 +9,7 @@
   <url-list wx:if="{{currIndex==1}}" />
 
 
-
+  
 
   <!-- <ad unit-id="adunit-73225c369f75b51c" bindload="adLoad" binderror="adError"></ad> -->
   <custom-tab-bar bindtabClick="tabClick" indexTab="{{currIndex}}"></custom-tab-bar>

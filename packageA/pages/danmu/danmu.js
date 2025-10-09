@@ -26,12 +26,12 @@ Page({
     var e = o.detail.value,
       t = e.content;
     null != t && " " != t && "" != t || (t = "请输入弹幕内容"), console.log(e), wx.navigateTo({
-      url: "show_danmu?content=" + t + "&speed=" + e.speed + "&fontSize=" + e.fontSize + "&fontColor=" + e.fontColor + "&bgColor=" + e.bgColor + "&direction=" + e.direction
+      url: "/packageA/pages/danmu/show_danmu?content=" + t + "&speed=" + e.speed + "&fontSize=" + e.fontSize + "&fontColor=" + e.fontColor + "&bgColor=" + e.bgColor + "&direction=" + e.direction
     });
   },
   onShareAppMessage: function (o) {
     return {
-      title: "明星工具箱--手持弹幕",
+      title: "珊瑚打码--手持弹幕",
       path: "/pages/my_module/danmu/danmu"
     };
   },

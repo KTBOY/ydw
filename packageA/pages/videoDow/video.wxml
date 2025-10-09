@@ -1,0 +1,15 @@
+<!--packageA/pages/videoDow/video.wxml-->
+<view class="video-dow">
+  <t-textarea t-class="external-class" label="抖音分享地址" placeholder="请输入需要解析下载的视频" disableDefaultPadding="{{true}}" indicator bind:blur="handleBlur" />
+
+
+
+  <view class="video-box" wx:if="{{video.cover}}">
+    <t-image src="{{video.cover}}" width="200" height="230" aria-label="{{video.title}}" />
+
+  </view>
+  <view class="foot">
+    <view class="copy" bind:tap="handCopyBD" data-url="{{url}}">解析</view>
+    <view class="down" bind:tap="handDwonBD" data-url="{{url}}">下载</view>
+  </view>
+</view>

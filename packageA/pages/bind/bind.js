@@ -21,7 +21,7 @@ Page({
   },
   again: function () {
     wx.redirectTo({
-      url: "../blind/blind"
+      url: "/packageA/pages/bind/bind"
     });
   },
   stop: function () {

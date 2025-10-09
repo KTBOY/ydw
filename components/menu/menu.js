@@ -2,11 +2,8 @@
 
 const imageCdn = 'https://tdesign.gtimg.com/mobile/demos';
 const swiperList = [
-  'https://s21.ax1x.com/2025/09/29/pVo0UJK.jpg',
-  'https://s21.ax1x.com/2025/09/29/pVo0YIx.jpg',
-  'https://s21.ax1x.com/2025/09/29/pVo0Ni6.jpg',
-  'https://s21.ax1x.com/2025/09/29/pVo0dzD.jpg',
-  'https://s21.ax1x.com/2025/09/29/pVo00Qe.jpg'
+  'https://cdn.sanity.io/images/vrmep2m5/production/3b12339fd824da58934ea0bba667e51dd59f3e6d-1920x1080.jpg',
+  'https://cdn.sanity.io/images/vrmep2m5/production/738cc8398d0272a8994f483fec7a6f29e8477f11-3840x2160.jpg',
 
   // `/asserts/images/pass.jpg`,
 ];
@@ -29,6 +26,19 @@ Component({
         name: '头像制作',
         router: '/pages/my_module/flag/index',
         show: false
+      },
+      {
+        image: '/asserts/images/caid/logoko.png',
+        name: '抖音视频解析',
+        router: '/packageA/pages/videoDow/video',
+        show: true,
+        style: {
+          width: '70rpx',
+          height: '70rpx'
+        },
+        blockStyle: {
+          width: '92%'
+        }
       },
       {
         image: '/asserts/images/caid/fam.png',
@@ -151,8 +161,6 @@ Component({
         router: '',
         show: true,
         style: {
-          // width: '90rpx',
-          // height: '86rpx'
           width: '70rpx',
           height: '70rpx'
         },
