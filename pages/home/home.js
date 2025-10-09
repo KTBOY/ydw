@@ -81,18 +81,6 @@ Page({
 
 
 
-    wx.request({
-      url: 'https://parse.shenzjd.com/api/douyin',
-      data: {
-        url: 'https://v.douyin.com/hFwHnBuKEgg/ '
-      },
-      header: {
-        'content-type': 'application/json' // 默认值
-      },
-      success(res) {
-        console.log(res.data)
-      }
-    })
 
   },
 

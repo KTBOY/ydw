@@ -17,41 +17,20 @@ Page({
 
   handleBlur(v) {
 
-
+    console.log(v);
     this.setData({
       urlText: v.detail.value
     })
+
+    console.log(this.data.urlText);
   },
 
-  async handCopyBD() {
-    const url = await this.extractAllDouyinLinks(this.data.urlText)
-    console.log(res)
-    if (!url.length) {
-      this.setData({
-        urlText: ''
-      })
-      return wx.showToast({
-        title: '输入内容无效',
-        icon: 'error'
-      })
 
-    }
-    const res = await videoDyApi({
-      url: url[0]
-    })
-
-    console.log(res);
-    this.setData({
-      video: res.data.data
-    })
-  },
   extractAllDouyinLinks(text) {
     if (!text) return [];
 
-    const regex = /https:\/\/v\.douyin\.com\/[A-Za-z0-9]{8,12}\//g;
-    const matches = text.match(regex);
-
-    return matches ? [...new Set(matches)] : [];
+    const regex = /https:\/\/v\.douyin\.com\/[a-zA-Z0-9_\-~!@#$%^&*()+=|{}[\]';:,.<>?/]+\//g;
+    return text.match(regex) || [];
   },
   isValidDouyinLink(link) {
     // 验证是否是抖音短链接格式
@@ -59,8 +38,32 @@ Page({
     return douyinRegex.test(link);
   },
 
-  handDwonBD() {
-    downLoadVideo(this.data.video.url)
+  async handDwonBD() {
+    setTimeout(async () => {
+      const url = await this.extractAllDouyinLinks(this.data.urlText)
+      console.log(url)
+      if (!url.length) {
+        this.setData({
+          urlText: ''
+        })
+        return wx.showToast({
+          title: '输入内容无效',
+          icon: 'error'
+        })
+
+      }
+      const res = await videoDyApi({
+        url: url[0]
+      })
+
+      console.log(res);
+      this.setData({
+        video: res.data.data
+      })
+      downLoadVideo(res.data.data.url)
+    }, 500);
+    console.log(this.data.urlTex);
+
 
   },
 

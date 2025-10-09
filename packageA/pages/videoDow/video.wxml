@@ -9,7 +9,7 @@
 
   </view>
   <view class="foot">
-    <view class="copy" bind:tap="handCopyBD" data-url="{{url}}">解析</view>
+    <!-- <view class="copy" bind:tap="handCopyBD" data-url="{{url}}">解析</view> -->
     <view class="down" bind:tap="handDwonBD" data-url="{{url}}">下载</view>
   </view>
 </view>
