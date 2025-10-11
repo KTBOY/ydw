@@ -1,0 +1,11 @@
+{
+  "navigationStyle": "custom",
+  "navigationBarTitleText": "星座运势",
+  "usingComponents": {
+    "tip-dialog": "../../components/TipDialog",
+    "loading-custom": "../../components/LoadingCustom",
+    "animation-box": "../../components/AnimationBox",
+    "nav-custom": "../../components/NavCustom",
+    "iconfont": "../../components/Iconfont/Iconfont"
+  }
+}

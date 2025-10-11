@@ -25,6 +25,12 @@
         "pages/createQrcode/createQrcode",
         "pages/videoDow/video"
       ]
+    },
+    {
+      "root": "xingzuo",
+      "pages": [
+        "pages/xingzuo/index"
+      ]
     }
   ],
   "requiredPrivateInfos": [

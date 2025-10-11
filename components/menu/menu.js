@@ -31,6 +31,19 @@ Component({
         image: '/asserts/images/caid/logoko.png',
         name: '抖音视频解析',
         router: '/packageA/pages/videoDow/video',
+        show: false,
+        style: {
+          width: '70rpx',
+          height: '70rpx'
+        },
+        blockStyle: {
+          width: '92%'
+        }
+      },
+      {
+        image: '/asserts/images/caid/logoko.png',
+        name: '星座运势',
+        router: '/xingzuo/pages/xingzuo/index',
         show: true,
         style: {
           width: '70rpx',
@@ -104,7 +117,7 @@ Component({
         image: '/asserts/images/bz.png',
         name: '手持弹幕',
         router: '/packageA/pages/danmu/danmu',
-        show: true,
+        show: false,
         style: {
           width: '70rpx',
           height: '70rpx'
@@ -165,7 +178,7 @@ Component({
           height: '70rpx'
         },
         blockStyle: {
-          width: '45%'
+          width: '95%'
         }
       }
 
