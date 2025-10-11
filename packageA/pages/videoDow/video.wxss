@@ -11,6 +11,8 @@
   right: 0;
   background-color: #fff;
   padding: 15rpx;
+  padding-bottom: calc(constant(safe-area-inset-bottom) + 15rpx);
+  padding-bottom: calc(env(safe-area-inset-bottom) + 15rpx);
 }
 
 .copy {
@@ -34,6 +36,7 @@
   text-align: center;
   line-height: 50px;
   border-radius: 15rpx;
+
 
 }
 
