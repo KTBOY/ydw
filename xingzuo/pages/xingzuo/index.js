@@ -3,7 +3,9 @@ import {
   dateNavData
 } from './initData'
 import dayjs from 'dayjs'
-
+import {
+  xingzuoApi
+} from "../../../api/xingzuo"
 //获取应用实例
 const app = getApp()
 
@@ -18,6 +20,8 @@ Page({
     dateActiveIndex: 0, // 选中的当前日期下标
     starData: [],
     starInfo: {},
+    isDescExpanded: false, // 描述文本展开状态
+
   },
 
   onLoad() {
@@ -57,7 +61,7 @@ Page({
   onShareAppMessage() {
     return {
       title: '快来看看你的今日运势~',
-      path: '/pages/index/index',
+      path: '/xingzuo/pages/xingzuo/index',
       imageUrl: `../../assets/images/share.png`,
     }
   },
@@ -133,6 +137,7 @@ Page({
     })
     wx.setStorageSync('starKey', index)
     this.getData()
+    console.log(this.data.starActiveIndex);
   },
 
   // 改变日期
@@ -161,14 +166,128 @@ Page({
     }, 100)
   },
   // 数据请求
-  getData() {
+  async getData() {
     this.setData({
-      loading: false,
+      loading: true,
     })
     const {
       starActiveIndex,
-      dateActiveIndex
+      dateActiveIndex,
+      starNavData
     } = this.data
 
+    let res, currentData
+    const storeData = wx.getStorageSync('xingzuo')
+    const getApi = async () => {
+      res = await xingzuoApi({
+        code: starNavData[starActiveIndex].code,
+        key: 'CNXd86VHqqal3RuuHcnRBengAf'
+      })
+      currentData = res.data.data;
+      wx.setStorageSync('time', currentData.date)
+      if (storeData) {
+
+        const findCun = wx.getStorageSync('xingzuo').find((item) => item.star == currentData.star)
+        console.log('aaaaa', findCun);
+        if (!findCun) {
+          storeData.push(currentData)
+          console.log('storeData', storeData);
+          wx.setStorageSync('xingzuo', storeData)
+        }
+
+      } else {
+        wx.setStorageSync('xingzuo', [currentData])
+      }
+
+
+    }
+
+    console.log('a', storeData);
+    try {
+
+      if (!storeData && !storeData.length) {
+        await getApi()
+
+      } else {
+        console.log(starNavData[starActiveIndex]);
+        console.log(wx.getStorageSync('xingzuo'));
+        const findCun = wx.getStorageSync('xingzuo').find((item) => item.star == starNavData[starActiveIndex].astroname)
+        if (dayjs().format('YYYY-MM-DD') != wx.getStorageSync('time')) {
+          await getApi()
+          console.log('999');
+        } else {
+          console.log('aa', findCun);
+          if (!findCun) {
+            await getApi()
+
+          } else {
+            currentData = findCun
+          }
+
+        }
+      }
+
+
+
+
+      console.log(currentData);
+
+
+
+      let starInfo = {
+        vdate: currentData.date,
+        desc: currentData.today.day_notice,
+        exponents: currentData.today.exponents,
+        lucky_time: currentData.today.lucky_time,
+        lucky_color: currentData.today.lucky_color,
+        lucky_num: currentData.today.lucky_num,
+        grxz: currentData.today.grxz,
+        content: [{
+            t: '综合运势',
+            v: currentData.today.exponents.zonghe.content
+          },
+          {
+            t: '财运运势',
+            v: currentData.today.exponents.caiyun.content
+          },
+          {
+            t: '爱情运势',
+            v: currentData.today.exponents.aiqing.content
+          },
+          {
+            t: '工作运势',
+            v: currentData.today.exponents.gongzuo.content
+          }
+        ],
+        month: currentData.this_month,
+        week: currentData.this_week,
+        year: currentData.this_year,
+        tomorrow: currentData.tomorrow
+      };
+
+      this.setData({
+        starInfo: starInfo,
+        loading: false
+      });
+
+    } catch (error) {
+      console.error('获取星座数据失败:', error);
+      this.setData({
+        loading: false
+      });
+    }
+  },
+
+  // 改变日期
+  changeDate({
+    target
+  }) {
+    const index = target ? target.dataset.index : 0;
+    this.setData({
+      dateActiveIndex: index,
+    });
+
+    // 这里需要根据index切换today/tomorrow/this_week等数据
+    this.getData();
   },
 })

@@ -27,25 +27,35 @@
       </view>
     </view>
     <view class="star_content">
-      <view class="star_desc">
+      <view class="star_desc {{isDescExpanded ? 'expanded' : ''}}">
         <text>{{starInfo.desc}}</text>
       </view>
-      <view class="star_content_li" wx:for="{{starInfo.index}}" wx:key="index">
-        <text class="li_label">{{item.t}}</text>
+      <view class="star_content_li" wx:for="{{['综合','财运','爱情','工作']}}" wx:key="*this">
+        <text class="li_label">{{item}}</text>
         <view class="li_val">
-          <block wx:if="{{item.s}}">
-            <block wx:for="{{5}}" wx:key="*this" wx:for-item="itemChild">
-              <view class="iconfont icon-pingfen {{item.s >= itemChild + 1 ? 'yellow' : ''}}"></view>
-            </block>
+          <block wx:for="{{5}}" wx:key="*this" wx:for-item="itemChild">
+            <view class="iconfont icon-pingfen {{starInfo.exponents[['zonghe','caiyun','aiqing','gongzuo'][index]].star >= itemChild + 1 ? 'yellow' : ''}}"></view>
           </block>
-          <block wx:else>{{item.v || '-'}}</block>
+          <!-- <text class="star_desc">{{starInfo.exponents[['zonghe','caiyun','aiqing','gongzuo'][index]].content}}</text> -->
         </view>
       </view>
+
       <view class="share_btn" bindtap="showAd">
         <animation-box></animation-box>
       </view>
     </view>
     <view class="star_textbox_ul">
+      <view class="star_textbox">
+        <view class="star_textbox_title">
+          <text>幸运信息</text>
+        </view>
+        <view class="star_textbox_li">
+          <view>幸运时间: {{starInfo.lucky_time}}</view>
+          <view>幸运颜色: {{starInfo.lucky_color}}</view>
+          <view>幸运数字: {{starInfo.lucky_num}}</view>
+          <view>贵人星座: {{starInfo.grxz}}</view>
+        </view>
+      </view>
       <block wx:for="{{starInfo.content}}" wx:key="index">
         <view class="star_textbox" animation="{{item.animation}}">
           <view class="star_textbox_title">
@@ -55,7 +65,7 @@
         </view>
       </block>
     </view>
-    <ad unit-id="adunit-4beff9d2a32f3af1" ad-intervals="30" />
+    <ad unit-id="adunit-bc918a8ab7d6066f" ad-intervals="30" />
     <official-account style="width:100%;height:188rpx;"></official-account>
   </view>
 </view>

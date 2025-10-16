@@ -95,20 +95,17 @@ const dateNavData = [{
   },
   {
     name: '本周',
-    key: 'week',
+    key: 'this_week',
   },
   {
     name: '本月',
-    key: 'month',
+    key: 'this_month',
   },
   {
     name: '今年',
-    key: 'year',
+    key: 'this_year',
   },
-  {
-    name: '爱情',
-    key: 'love',
-  },
+
 ]
 
 module.exports = {
