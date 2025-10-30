@@ -79,19 +79,21 @@ Component({
     // 返回
     BackPage(e) {
       console.warn('BackPageBackPageBackPage', e.currentTarget.dataset);
-      const {
-        gotype
-      } = e.currentTarget.dataset
-      switch (gotype) {
+
+      switch (this.data.gotype) {
         case 'page':
           this.triggerEvent('NavBackPage')
+          wx.navigateBack()
           break;
         case 'home':
           wx.reLaunch({
-            url: '/pages/index/index'
+            url: '/pages/home/home',
           })
           break;
         default:
+          wx.reLaunch({
+            url: '/pages/home/home',
+          })
           break;
       }
     },

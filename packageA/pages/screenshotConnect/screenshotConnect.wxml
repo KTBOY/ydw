@@ -1,4 +1,4 @@
-<view class="images" wx:if="{{!isRelease}}">
+<view class="images">
   <view bindtap="changePreview" class="preview-image" data-src="{{item.url}}" style="background-image:url({{item.url}});background-repeat:no-repeat;background-size:100% auto;" wx:for="{{imageInfo}}">
     <view catchtap="removeImage" class="remove" data-index="{{index}}">移除{{index+1}}</view>
   </view>

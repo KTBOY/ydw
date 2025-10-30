@@ -145,25 +145,78 @@ Page({
     target
   }) {
     const index = target ? target.dataset.index : 0
+    console.log(this.data.dateNavData[index]);
+    console.log(this.data.starInfo);
+    const currentData = this.data.starInfo[this.data.dateNavData[index].key]
+
+    if (this.data.dateNavData[index].key === 'year') {
+      let starInfoYear = {
+        ...this.data.starInfo,
+        content: [{
+            t: '综合运势',
+            v: currentData.general.general_txt,
+            num: currentData.general.general_index
+          },
+          {
+            t: '财运运势',
+            v: currentData.money.money_txt,
+            num: currentData.money.money_index
+          },
+          {
+            t: '健康运势',
+            v: currentData.health.health_txt,
+            num: currentData.health.health_index
+          },
+          {
+            t: '爱情运势',
+            v: currentData.love.love_txt,
+            num: currentData.love.love_index
+          },
+          {
+            t: '工作运势',
+            v: currentData.work.work_txt,
+            num: currentData.work.work_index
+          }
+        ],
+      }
+
+      this.setData({
+        dateActiveIndex: index,
+        starInfo: starInfoYear
+      })
+      return
+    }
+    let starInfo = {
+      ...this.data.starInfo,
+      desc: currentData?.day_notice || currentData?.week_notice,
+      exponents: currentData.exponents,
+      lucky_time: currentData.lucky_time,
+      lucky_color: currentData.lucky_color,
+      lucky_num: currentData.lucky_num,
+      grxz: currentData.grxz,
+      content: [{
+          t: '综合运势',
+          v: currentData.exponents.zonghe.content
+        },
+        {
+          t: '财运运势',
+          v: currentData.exponents.caiyun.content
+        },
+        {
+          t: '爱情运势',
+          v: currentData.exponents.aiqing.content
+        },
+        {
+          t: '工作运势',
+          v: currentData.exponents.gongzuo.content
+        }
+      ],
+
+    };
     this.setData({
       dateActiveIndex: index,
+      starInfo
     })
-    const info = this.data.starData[index]
-    for (let i = 0; i < info.content.length; i++) {
-      info.content[i].animation = this.animationShow(i * -50, 0, 0, 0)
-    }
-
-    this.setData({
-      starInfo: info,
-    })
-    setTimeout(() => {
-      for (let i = 0; i < info.content.length; i++) {
-        info.content[i].animation = this.animationShow(0, 1, (i + 1) * 20)
-      }
-      this.setData({
-        starInfo: info,
-      })
-    }, 100)
   },
   // 数据请求
   async getData() {
@@ -188,10 +241,10 @@ Page({
       if (storeData) {
 
         const findCun = wx.getStorageSync('xingzuo').find((item) => item.star == currentData.star)
-        console.log('aaaaa', findCun);
+
         if (!findCun) {
           storeData.push(currentData)
-          console.log('storeData', storeData);
+
           wx.setStorageSync('xingzuo', storeData)
         }
 
@@ -202,21 +255,19 @@ Page({
 
     }
 
-    console.log('a', storeData);
     try {
 
       if (!storeData && !storeData.length) {
         await getApi()
 
       } else {
-        console.log(starNavData[starActiveIndex]);
-        console.log(wx.getStorageSync('xingzuo'));
+
         const findCun = wx.getStorageSync('xingzuo').find((item) => item.star == starNavData[starActiveIndex].astroname)
         if (dayjs().format('YYYY-MM-DD') != wx.getStorageSync('time')) {
           await getApi()
-          console.log('999');
+
         } else {
-          console.log('aa', findCun);
+
           if (!findCun) {
             await getApi()
 
@@ -230,7 +281,7 @@ Page({
 
 
 
-      console.log(currentData);
+
 
 
 
@@ -262,7 +313,8 @@ Page({
         month: currentData.this_month,
         week: currentData.this_week,
         year: currentData.this_year,
-        tomorrow: currentData.tomorrow
+        tomorrow: currentData.tomorrow,
+        today: currentData.today
       };
 
       this.setData({
@@ -278,16 +330,5 @@ Page({
     }
   },
 
-  // 改变日期
-  changeDate({
-    target
-  }) {
-    const index = target ? target.dataset.index : 0;
-    this.setData({
-      dateActiveIndex: index,
-    });
 
-    // 这里需要根据index切换today/tomorrow/this_week等数据
-    this.getData();
-  },
 })

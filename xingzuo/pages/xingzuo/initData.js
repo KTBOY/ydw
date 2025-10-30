@@ -95,15 +95,15 @@ const dateNavData = [{
   },
   {
     name: '本周',
-    key: 'this_week',
+    key: 'week',
   },
   {
     name: '本月',
-    key: 'this_month',
+    key: 'month',
   },
   {
     name: '今年',
-    key: 'this_year',
+    key: 'year',
   },
 
 ]

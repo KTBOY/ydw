@@ -10,6 +10,7 @@
 .cu-custom .cu-bar .content {
   width: calc(100% - 440rpx);
 } */
+@import '../../assets/icon/icon.wxss';
 
 .cu-bar .action {
   display: flex;
@@ -109,6 +110,7 @@
   top: 0;
   z-index: 1024;
 }
+
 .cu-custom .bar_white {
   color: var(--text-title);
   background-color: #ffffff;

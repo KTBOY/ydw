@@ -1,4 +1,4 @@
-<view wx:if="{{!isRelease}}">
+<view>
   <view class="container">
     <view style="width:90%;margin-left:5%;display:flex;flex-direction:row;justify-content:space-between;color:white">
       <text>得分：{{score}}</text>
