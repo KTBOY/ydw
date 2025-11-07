@@ -1,0 +1,32 @@
+<view class="container">
+  <scroll-view class="left-nav" scroll-y>
+    <view 
+      wx:for="{{types}}" 
+      wx:key="value" 
+      data-index="{{index}}"
+      class="nav-item {{activeIndex === index ? 'active' : ''}}"
+      bindtap="switchCategory"
+    >
+      <text class="nav-text">{{item.label}}</text>
+    </view>
+  </scroll-view>
+
+  <scroll-view class="right-content" scroll-y>
+    <view class="tag-list">
+      <view class="tag-title">{{types[activeIndex].label}}</view>
+      <view class="tag-area">
+        <view 
+          wx:for="{{activeChildren}}" 
+          wx:for-item="tag"
+          wx:key="value"
+          data-label="{{tag.label}}"
+          data-value="{{tag.value}}"
+          class="tag-item"
+          bindtap="selectTag"
+        >
+          {{tag.label}}
+        </view>
+      </view>
+    </view>
+  </scroll-view>
+</view>

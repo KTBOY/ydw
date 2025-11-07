@@ -1,0 +1,53 @@
+<view class="page">
+  <!-- nav -->
+  <view class="nav">
+    <text class="title">少女感壁纸</text>
+    <image class="search" src="/static/search.png"></image>
+  </view>
+
+  <!-- tabs -->
+  <scroll-view class="tabs" scroll-x>
+    <block wx:for="{{tabs}}" wx:key="index">
+      <view class="tab" data-index="{{index}}" bindtap="switchTab">
+        <text class="{{currentTab==index?'active':''}}">{{item}}</text>
+      </view>
+    </block>
+  </scroll-view>
+
+  <!-- fortune -->
+  <view class="fortune">
+    <text class="f-title">今日命定壁纸占卜</text>
+    <text class="f-sub">今天适合温柔一点</text>
+  </view>
+
+  <!-- 瀑布流，两列 -->
+  <!-- <scroll-view class="waterfall-wrap" scroll-y scroll-with-animation bindscrolltolower="onReachBottom">
+    <view class="waterfall">
+      <view class="col">
+        <block wx:for="{{leftList}}" wx:key="url">
+          <view class="card">
+            <image src="{{item.url}}" class="wall" mode="widthFix" />
+          </view>
+        </block>
+      </view>
+
+      <view class="col">
+        <block wx:for="{{rightList}}" wx:key="url">
+          <view class="card">
+            <image src="{{item.url}}" class="wall" mode="widthFix" />
+          </view>
+        </block>
+      </view>
+    </view>
+
+    <view class="loading" wx:if="{{loading}}">加载中...</view>
+  </scroll-view> -->
+
+  <scroll-view type="custom">
+    <grid-view type="masonry" cross-axis-count="2">
+      <view wx:for="{{leftList}}">
+        <image src="{{item}}" mode="widthFix"></image>
+      </view>
+    </grid-view>
+  </scroll-view>
+</view>

@@ -45,10 +45,12 @@ Page({
 
   },
   onChangeMenu(e) {
-    this.setData({
-      currIndex: 1
+    // this.setData({
+    //   currIndex: 1
+    // })
+    wx.navigateTo({
+      url: '/bz/pages/bz/index'
     })
-    console.log('555');
   },
   load(v) {
     console.log(v)
