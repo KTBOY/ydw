@@ -1,0 +1,7 @@
+<!--bz/pages/wallpaperDetail/wallpaperDetail.wxml-->
+
+<view class="detail">
+  <t-image class="wall-img" src="{{img}}" mode="widthFix" />
+
+  <view class="down-btn">下载壁纸</view>
+</view>

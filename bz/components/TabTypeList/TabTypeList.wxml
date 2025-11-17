@@ -1,0 +1,33 @@
+<!-- <t-tabs defaultValue="{{0}}" bind:change="onTabsChange" bind:click="onTabsClick" t-class="custom-tabs">
+
+
+  <t-tab-panel label="{{item.label}}" value="{{item.value}}" wx:for="{{types}}" wx:key="value" data-index="{{index}}" />
+
+</t-tabs> -->
+<view class="tab-box">
+  <scroll-view class="left-scroll" scroll-x>
+
+    <view class="two-clr">
+      <view class="left-list">
+        <view wx:for="{{types}}" wx:key="index" data-index="{{index}}" class="nav-item {{activeIndex === index ? 'active' : ''}}" bindtap="switchCategory">
+          <text class="nav-text">{{item.label}}</text>
+        </view>
+        <!-- :style="{{ transform: `translateY(${leftVesselState.moveY}px)`, ...leftBarStyle}}" -->
+      </view>
+      <view class="item-active" style="transform: translateX({{leftVesselState.moveX}}px); width: {{leftVesselState.activeWidth}}px;">
+
+      </view>
+    </view>
+
+
+  </scroll-view>
+  <scroll-view class="grid-scroll" scroll-x>
+    <view class="grid-list">
+      <view wx:for="{{gridState.list}}" wx:key="index" data-index="{{index}}" class="grid-item {{gridState.gridActiveIndex === index ? 'grid-active' : ''}}" bindtap="gridSwitchCategory">
+        <text class="nav-text">{{item.label}}</text>
+      </view>
+    </view>
+  </scroll-view>
+
+
+</view>

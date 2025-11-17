@@ -37,7 +37,7 @@
       "pages": [
         "pages/bz/index",
         "pages/wallpaper/wallpaper",
-        "pages/wallpaper2/wallpaper2"
+        "pages/wallpaperDetail/wallpaperDetail"
       ]
     }
   ],
