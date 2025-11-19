@@ -49,7 +49,7 @@ Page({
     //   currIndex: 1
     // })
     wx.navigateTo({
-      url: '/bz/pages/bz/index'
+      url: '/bz/pages/wallpaper/wallpaper'
     })
   },
   load(v) {

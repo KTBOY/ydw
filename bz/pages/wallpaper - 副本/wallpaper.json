@@ -1,0 +1,10 @@
+{
+  "usingComponents": {
+    "t-image": "tdesign-miniprogram/image/image",
+    "t-tabs": "tdesign-miniprogram/tabs/tabs",
+    "t-image-viewer": "tdesign-miniprogram/image-viewer/image-viewer",
+    "t-tab-panel": "tdesign-miniprogram/tab-panel/tab-panel",
+    "tab-type-list": "/bz/components/TabTypeList/TabTypeList",
+    "t-action-sheet": "tdesign-miniprogram/action-sheet/action-sheet"
+  }
+}

@@ -5,7 +5,7 @@
 
 </t-tabs> -->
 <view class="tab-box">
-  <scroll-view class="left-scroll" scroll-x>
+  <scroll-view class="left-scroll" scroll-x show-scrollbar="false">
 
     <view class="two-clr">
       <view class="left-list">
@@ -21,7 +21,7 @@
 
 
   </scroll-view>
-  <scroll-view class="grid-scroll" scroll-x>
+  <scroll-view class="grid-scroll" scroll-x show-scrollbar="false">
     <view class="grid-list">
       <view wx:for="{{gridState.list}}" wx:key="index" data-index="{{index}}" class="grid-item {{gridState.gridActiveIndex === index ? 'grid-active' : ''}}" bindtap="gridSwitchCategory">
         <text class="nav-text">{{item.label}}</text>

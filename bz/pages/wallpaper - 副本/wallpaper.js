@@ -43,6 +43,7 @@ Page({
 
     // 如果有缓存且不是强制更新，使用缓存数据
     if (cachedData && !isUpdate) {
+      console.log('使用缓存数据:', cacheKey);
       this.processWallpaperData(cachedData, isLoadMore);
       this.setData({
         loading: false,
@@ -51,6 +52,7 @@ Page({
     }
 
     // 没有缓存或强制更新时请求API
+    console.log('请求API数据:', cacheKey);
     const res = await wallpaperApi({
       id: this.data.category || '',
       num: this.data.paseSize,
@@ -62,9 +64,11 @@ Page({
         key: cacheKey,
         data: res.data,
         success: () => {
+          console.log('缓存数据成功:', cacheKey);
           this.processWallpaperData(res.data, isLoadMore);
         },
         fail: (err) => {
+          console.log('缓存数据失败:', err);
           this.processWallpaperData(res.data, isLoadMore);
         },
       });
@@ -83,6 +87,7 @@ Page({
       });
       return;
     }
+    console.log('处理壁纸数据:', data, 'isLoadMore:', isLoadMore);
 
     // 如果是加载更多，保留原有数据；否则重置列表
     const picList = data.pic;
@@ -119,16 +124,16 @@ Page({
       list: list,
       loading: false,
     });
-
   },
 
   tabChange(v) {
+    console.log(v);
     const newCategory = v.detail.value;
 
     // 切换分类时，重置分页和数据
     this.setData({
       category: newCategory,
-      paseSize: 20,
+      paseSize: 5,
       leftList: [],
       rightList: [],
       leftH: 0,

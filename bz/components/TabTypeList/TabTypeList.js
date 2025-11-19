@@ -82,7 +82,7 @@ Component({
         this.setData({
           leftVesselState
         })
-        console.log(this.data.leftVesselState);
+
 
       }).exec()
 

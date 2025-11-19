@@ -5,12 +5,12 @@
   <view class="waterfall">
     <view class="column">
       <view wx:for="{{leftList}}" wx:key="url" style="height: {{item.height}};" bindtap="handleImage" data-img="{{item.img}}">
-        <t-image class="wall-img" src="{{item.img}}" mode="widthFix" lazy-load fade-in show-menu-by-longpress />
+        <t-image class="wall-img" src="{{item.img}}" mode="widthFix" />
       </view>
     </view>
     <view class="column">
       <view wx:for="{{rightList}}" wx:key="url" bindtap="handleImage" data-img="{{item.img}}">
-        <t-image class="wall-img" src="{{item.img}}" mode="widthFix" lazy-load fade-in show-menu-by-longpress />
+        <t-image class="wall-img" src="{{item.img}}" mode="widthFix" />
       </view>
     </view>
   </view>

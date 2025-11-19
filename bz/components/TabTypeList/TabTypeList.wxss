@@ -1,3 +1,9 @@
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  color: transparent;
+}
+
 .tab-box {}
 
 .left-scroll {
@@ -49,13 +55,16 @@
 }
 
 
-.grid-scroll {}
+.grid-scroll {
+  background-color: #fff;
+}
 
 .grid-list {
   display: flex;
   background-color: #fff;
   margin: 0 10rpx;
-
+  padding-bottom: 15rpx;
+  padding-top: 5rpx;
 }
 
 .grid-item {
