@@ -2,8 +2,8 @@
 
 const imageCdn = 'https://tdesign.gtimg.com/mobile/demos';
 const swiperList = [
-  'https://cdn.sanity.io/images/vrmep2m5/production/3b12339fd824da58934ea0bba667e51dd59f3e6d-1920x1080.jpg',
-  'https://cdn.sanity.io/images/vrmep2m5/production/738cc8398d0272a8994f483fec7a6f29e8477f11-3840x2160.jpg',
+  '/asserts/images/bz1.jpg',
+  '/asserts/images/bz2.jpg',
 
   // `/asserts/images/pass.jpg`,
 ];
