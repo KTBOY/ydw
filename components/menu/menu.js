@@ -156,8 +156,8 @@ Component({
       },
       {
         image: '/asserts/images/screen.png',
-        name: '图片拼接',
-        router: '/packageA/pages/screenshotConnect/screenshotConnect',
+        name: '壁纸',
+        router: '/bz/pages/wallpaper/wallpaper',
         show: true,
         style: {
           width: '70rpx',

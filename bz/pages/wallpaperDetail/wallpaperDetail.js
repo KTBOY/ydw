@@ -113,6 +113,11 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage() {
+    return {
+      title: '壁纸',
+      path: '/bz/pages/wallpaper/wallpaper',
+      imageUrl: '/asserts/images/fx.jpg',
 
+    }
   }
 })
