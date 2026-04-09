@@ -3,5 +3,5 @@
 <view class="detail">
   <t-image class="wall-img" src="{{img}}" mode="widthFix" />
 
-  <view class="down-btn" bindtap="handleImage">下载壁纸</view>
+  <view class="down-btn" bindtap="handleImage">下载壁纸 <text class="video-text">（观看视频后自动下载）</text></view>
 </view>

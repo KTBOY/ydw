@@ -8,12 +8,16 @@ https://github.com/5ime/Video_spider
 
 壁纸网
 https://github.com/mengkunsoft/wallpaper/blob/master/css/wallpaper.css
-
+https://qgpzjg3jr9.coze.site/
 小程序目前使用：
 //https: //blog.csdn.net/weixin_51635312/article/details/144133666
 //https://img.moehu.org/pic.php?return=json&id=img1&num=5
 
 
+2 单词乐园
+https://93w35krfxn.coze.site/
+
+https://93w35krfxn.coze.site/
 
 任务执行
 1.小程序

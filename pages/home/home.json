@@ -7,6 +7,7 @@
     "url-list": "/components/url-list/url-list",
     "menu": "/components/menu/menu",
     "custom-tab-bar": "/components/custom-tab-bar/index",
-    "url-copy": "/components/url-copy/url"
+    "url-copy": "/components/url-copy/url",
+    "fund": "/components/fund/fund"
   }
 }

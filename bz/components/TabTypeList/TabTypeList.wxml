@@ -5,7 +5,7 @@
 
 </t-tabs> -->
 <view class="tab-box">
-  <scroll-view class="left-scroll" scroll-x show-scrollbar="false">
+  <scroll-view class="left-scroll" scroll-x show-scrollbar="false" scroll-left="{{leftVesselState.scrollLeft}}">
 
     <view class="two-clr">
       <view class="left-list">

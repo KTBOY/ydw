@@ -24,6 +24,8 @@ Component({
     leftVesselState: {
       activeWidth: 0,
       moveX: 0,
+      scrollLeft: 0,
+      scrollViewWidth: 0
 
     },
     gridState: {
@@ -45,10 +47,14 @@ Component({
       const activeIndex = v.currentTarget.dataset.index
       const activeWidth = this.data.leftVesselState.itemHeightList[activeIndex].width
       const moveXRpx = this.data.leftVesselState.itemHeightList[activeIndex].left
+      let offsetLeft = v.currentTarget.offsetLeft + 50
+
+
 
       this.setData({
         activeIndex,
         ['leftVesselState.moveX']: moveXRpx,
+        ['leftVesselState.scrollLeft']: offsetLeft - this.data.leftVesselState.scrollViewWidth / 2,
         ['leftVesselState.activeWidth']: activeWidth,
         ['gridState.list']: this.data.types[activeIndex].children,
         ['gridState.gridActiveIndex']: 0
@@ -73,6 +79,16 @@ Component({
       this.triggerEvent('change', trgItem)
     },
     getLeftItemRect() {
+      let scrollViewWidth
+      this.createSelectorQuery().select('.left-scroll').boundingClientRect((rect) => {
+        scrollViewWidth = Math.round(rect.width)
+
+        this.setData({
+          ['leftVesselState.scrollViewWidth']: scrollViewWidth
+        })
+      }).exec()
+
+
 
       this.createSelectorQuery().selectAll(`.nav-item`).boundingClientRect((rect) => {
         let leftVesselState = {}
@@ -80,7 +96,9 @@ Component({
         leftVesselState.activeWidth = rect[0].width
         leftVesselState.moveX = rect[0].left
         this.setData({
-          leftVesselState
+          ['leftVesselState.itemHeightList']: leftVesselState.itemHeightList,
+          ['leftVesselState.activeWidth']: leftVesselState.activeWidth,
+          ['leftVesselState.moveX']: leftVesselState.moveX
         })
 
 

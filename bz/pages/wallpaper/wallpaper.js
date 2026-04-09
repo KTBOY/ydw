@@ -42,19 +42,20 @@ Page({
     const cachedData = wx.getStorageSync(cacheKey);
 
     // 如果有缓存且不是强制更新，使用缓存数据
-    if (cachedData && !isUpdate) {
-      this.processWallpaperData(cachedData, isLoadMore);
-      this.setData({
-        loading: false,
-      });
-      return;
-    }
+    // if (cachedData && !isUpdate) {
+    //   this.processWallpaperData(cachedData, isLoadMore);
+    //   this.setData({
+    //     loading: false,
+    //   });
+    //   return;
+    // }
 
     // 没有缓存或强制更新时请求API
-    const res = await wallpaperApi({
-      id: this.data.category || '',
-      num: this.data.paseSize,
-    });
+    // {
+    //   id: this.data.category || '',
+    //   num: this.data.paseSize,
+    // }
+    const res = await wallpaperApi();
 
     // 缓存新数据
     if (res && res.data) {

@@ -23,7 +23,9 @@
         "pages/danmu/show_danmu",
         "pages/ruler/ruler",
         "pages/createQrcode/createQrcode",
-        "pages/videoDow/video"
+        "pages/videoDow/video",
+        "pages/zhendong/index",
+        "pages/fundSearch/fundSearch"
       ]
     },
     {

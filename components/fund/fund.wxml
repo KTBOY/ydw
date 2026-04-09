@@ -1,0 +1,85 @@
+<!-- components/fund/fund.wxml -->
+<view class="fund-card">
+  <view class="example-search">
+    <!-- <t-search value="{{value}}" center placeholder="搜索基金代码" action="{{actionText}}" bind:blur="blurHandle" bind:focus="focusHandle" bind:action-click="actionHandle" /> -->
+    <view class="search-info" bind:tap="onSearchFundCode">搜索基金代码</view>
+    <!-- <t-search placeholder="输入tdesign，有预览结果" resultList="{{resultList}}" bind:change="onChangeValue" />
+    <view class="test">
+      <view class="result-list" wx:for="{{resultList}}" wx:key="index">
+        {{item}}
+      </view>
+    </view> -->
+  </view>
+</view>
+<view class="fund-card">
+  <view class="fund-header">
+    <view class="title-wrap">
+      <view class="title-icon"></view>
+      <text class="title-text">中国基金行情</text>
+    </view>
+    <view class="live-tag">
+      <text class="live-dot"></text>
+      <text class="live-text">Live</text>
+    </view>
+  </view>
+
+  <view class="fund-grid">
+    <view class="fund-item" wx:for="{{renderList}}" wx:key="code">
+      <text class="fund-name">{{item.name}}</text>
+      <text class="fund-code">{{item.code}}</text>
+      <text class="fund-current">{{item.current}}</text>
+      <view class="fund-change-row">
+        <text class="change {{item.trend}}">{{item.changeText}}</text>
+        <text class="rate {{item.trend}}">{{item.rateText}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- <view class="bar-board">
+    <view class="bar-item" wx:for="{{renderList}}" wx:key="code">
+      <view class="bar {{item.trend}}" style="height: {{item.barHeight}}rpx;"></view>
+    </view>
+  </view> -->
+
+  <!-- <view class="footer-row">
+    <text class="footer-label">近7日指数波动</text>
+    <view class="footer-btn" bindtap="onViewDetail">
+      <text class="footer-btn-text">查看详情</text>
+      <text class="footer-btn-arrow">></text>
+    </view>
+  </view> -->
+</view>
+
+
+
+<view class="fund-card">
+  <view class="my-fund">
+    <view class="my-fund-header">
+      <view class="my-fund-title-wrap">
+        <text class="my-fund-star">*</text>
+        <text class="my-fund-title">我的自选</text>
+      </view>
+      <text class="my-fund-count">{{myFundCount}}只</text>
+    </view>
+
+    <view class="my-fund-list">
+      <view class="my-fund-item" wx:for="{{myFundRenderList}}" wx:key="code">
+        <view class="my-fund-left">
+          <text class="my-fund-name">{{item.name}}</text>
+          <text class="my-fund-code">{{item.code}}</text>
+        </view>
+
+        <view class="my-fund-right">
+          <view class="my-fund-change-wrap">
+            <text class="my-fund-change {{item.trend}}">{{item.changeText}}</text>
+            <text class="my-fund-remove">x</text>
+          </view>
+          <text class="my-fund-time">{{item.timeText}}</text>
+        </view>
+      </view>
+
+
+
+    </view>
+  </view>
+</view>

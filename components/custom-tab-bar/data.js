@@ -5,7 +5,7 @@ export default [{
   },
   {
     icon: 'icon-tubiao',
-    text: '资源列表',
+    text: '基金',
     url: 'pages/goods/category/index',
   },
 

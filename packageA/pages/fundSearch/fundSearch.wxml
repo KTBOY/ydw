@@ -1,0 +1,93 @@
+<!-- packageA/pages/fundSearch/fundSearch.wxml -->
+<view class="fund-search-page">
+  <view class="search-row">
+    <view class="search-input-wrap">
+      <text class="search-prefix">搜</text>
+      <input
+        class="search-input"
+        placeholder="输入基金名称或代码"
+        confirm-type="search"
+        value="{{searchValue}}"
+        bindinput="onSearchInput"
+        bindconfirm="onSearchConfirm"
+      />
+    </view>
+    <view class="search-btn" bindtap="onSearchSubmit">搜索</view>
+  </view>
+
+  <view class="section-card" wx:if="{{hotWords.length}}">
+    <view class="section-title">热门搜索</view>
+    <view class="tag-list">
+      <view
+        class="tag-item tag-hot"
+        wx:for="{{hotWords}}"
+        wx:key="*this"
+        bindtap="onTapHotWord"
+        data-word="{{item}}"
+      >
+        {{item}}
+      </view>
+    </view>
+  </view>
+
+  <view class="section-card" wx:if="{{searchHistory.length}}">
+    <view class="section-header">
+      <text class="section-title">搜索历史</text>
+      <text class="clear-btn" bindtap="onClearHistory">清空</text>
+    </view>
+    <view class="tag-list">
+      <view
+        class="tag-item"
+        wx:for="{{searchHistory}}"
+        wx:key="*this"
+        bindtap="onTapHistoryWord"
+        data-word="{{item}}"
+      >
+        {{item}}
+      </view>
+    </view>
+  </view>
+
+  <view class="rank-card">
+    <view class="rank-header">
+      <view class="rank-title-wrap">
+        <text class="rank-title">今日热搜</text>
+        <text class="rank-subtitle">理财热门搜索排行</text>
+      </view>
+      <text class="rank-date" wx:if="{{updateDate}}">{{updateDate}}</text>
+    </view>
+
+    <view class="rank-column-head">
+      <text class="col-fund">基金</text>
+      <text class="col-net">净值</text>
+      <text class="col-change">日涨幅</text>
+    </view>
+
+    <view class="rank-list" wx:if="{{renderRanking.length}}">
+      <view
+        class="rank-item"
+        wx:for="{{renderRanking}}"
+        wx:key="code"
+        bindtap="onTapRankingItem"
+        data-name="{{item.name}}"
+      >
+        <view class="item-left">
+          <text class="rank-index {{item.rankClass}}">{{item.rank}}</text>
+          <view class="item-info">
+            <text class="item-name">{{item.name}}</text>
+            <text class="item-meta">{{item.code}}</text>
+          </view>
+        </view>
+        <view class="item-right">
+          <text class="item-net">{{item.netValue}}</text>
+          <text class="item-change {{item.changeClass}}">{{item.dayChangeText}}</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="state-text" wx:if="{{loading}}">加载中...</view>
+    <view class="state-text" wx:if="{{!loading && noResult}}">没有匹配的基金</view>
+    <view class="state-text" wx:if="{{!loading && !noResult && !renderRanking.length}}">暂无榜单数据</view>
+    <view class="state-text state-warn" wx:if="{{errorMsg}}">{{errorMsg}}</view>
+  </view>
+</view>

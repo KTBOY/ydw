@@ -1,0 +1,23 @@
+<view class="container">
+  <view class="heart-container">
+    <view class="heart" wx:if="{{waveLevel == 0}}" style="animation: heart-animation-0 1s linear infinite;"></view>
+    <view class="heart" wx:elif="{{waveLevel == 1}}" style="animation: heart-animation-1 0.8s linear infinite;"></view>
+    <view class="heart" wx:elif="{{waveLevel == 2}}" style="animation: heart-animation-2 0.6s linear infinite;"></view>
+    <view class="heart" wx:else style="animation: heart-animation-3 0.4s linear infinite;"></view>
+  </view>
+
+  <view style="text-align: center;display:flex;justify-content:center;margin-top: 200rpx;">
+    <view bindtap="toCollect1" class="download" style="width: 35%;margin: 10px">
+      <image src="1.png" style="width: 120rpx; height: 120rpx" wx:if="{{isCollect1==false}}"></image>
+      <image src="run.png" style="width: 120rpx; height: 120rpx" wx:elif="{{isCollect1==true}}"></image>
+    </view>
+    <view bindtap="toCollect2" class="download" style="width: 35%;margin: 10px">
+      <image src="2.png" style="width: 120rpx; height: 120rpx" wx:if="{{isCollect2==false}}"></image>
+      <image src="run.png" style="width: 120rpx; height: 120rpx" wx:elif="{{isCollect2==true}}"></image>
+    </view>
+    <view bindtap="toCollect3" class="download" style="width: 35%;margin: 10px">
+      <image src="3.png" style="width: 120rpx; height: 120rpx" wx:if="{{isCollect3==false}}"></image>
+      <image src="run.png" style="width: 120rpx; height: 120rpx" wx:elif="{{isCollect3==true}}"></image>
+    </view>
+  </view>
+</view>

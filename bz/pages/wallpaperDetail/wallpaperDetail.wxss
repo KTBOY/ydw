@@ -19,7 +19,7 @@ page {
   position: absolute;
   bottom: 20rpx;
   /* background-color: var(--td-brand-color); */
-  width: 310rpx;
+  width: 460rpx;
   height: 80rpx;
   line-height: 80rpx;
   color: var(--td-brand-color);
@@ -29,4 +29,8 @@ page {
   font-weight: bold;
 
 
+}
+
+.video-text {
+  color: rgb(153, 153, 153);
 }

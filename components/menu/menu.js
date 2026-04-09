@@ -42,7 +42,7 @@ Component({
       },
       {
         image: '/asserts/images/caid/logoko.png',
-        name: '星座运势',
+        name: '十二星座',
         router: '/xingzuo/pages/xingzuo/index',
         show: true,
         style: {
@@ -166,7 +166,17 @@ Component({
         }
       },
 
+      {
+        image: '/asserts/images/zd.png',
+        name: '震动',
+        router: '/packageA/pages/zhendong/index',
+        show: true,
+        style: {
+          width: '70rpx',
+          height: '70rpx'
 
+        }
+      },
 
       {
         image: '/asserts/images/caid/steam.png',
@@ -177,9 +187,7 @@ Component({
           width: '70rpx',
           height: '70rpx'
         },
-        blockStyle: {
-          width: '95%'
-        }
+
       }
 
 
@@ -214,9 +222,11 @@ Component({
 
     handlerSwiper(v) {
 
-      this.triggerEvent('change')
+      // this.triggerEvent('change')
 
-
+      wx.navigateTo({
+        url: '/bz/pages/wallpaper/wallpaper'
+      })
 
     }
   }

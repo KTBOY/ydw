@@ -1,6 +1,6 @@
 {
   "navigationStyle": "custom",
-  "navigationBarTitleText": "星座运势",
+  "navigationBarTitleText": "十二星座",
   "usingComponents": {
     "tip-dialog": "../../components/TipDialog",
     "loading-custom": "../../components/LoadingCustom",

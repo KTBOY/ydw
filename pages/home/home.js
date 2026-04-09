@@ -45,16 +45,15 @@ Page({
 
   },
   onChangeMenu(e) {
-    // this.setData({
-    //   currIndex: 1
-    // })
-    wx.navigateTo({
-      url: '/bz/pages/wallpaper/wallpaper'
+    this.setData({
+      currIndex: 1
     })
+    // wx.navigateTo({
+    //   url: '/bz/pages/wallpaper/wallpaper'
+    // })
   },
   load(v) {
-    console.log(v)
-    console.log('555');
+
 
     wx.miniProgram.postMessage({
       data: {

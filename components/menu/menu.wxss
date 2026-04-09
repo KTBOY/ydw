@@ -95,9 +95,9 @@ button::after {
 
 
 
-.button:last-child {
+/* .button:last-child {
   width: 95%;
-}
+} */
 
 .icon-menu {
   width: 100rpx;
