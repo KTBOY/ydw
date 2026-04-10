@@ -1,100 +1,177 @@
 // packageA/pages/fundSearch/fundSearch.js
-import { baseRanking } from "../../../api/fund.api";
-
 const SEARCH_HISTORY_KEY = "fund_search_history";
+const FUND_CODE_URL = "https://fund.eastmoney.com/js/fundcode_search.js";
+const MAX_HISTORY_COUNT = 10;
+const MAX_RESULT_COUNT = 30;
 
-const RANKING_FALLBACK = [
-  { code: "014352", name: "东方创新成长混合A", type: "2026-04-08", netValue: "1.3228", dayChange: 11.1 },
-  { code: "014353", name: "东方创新成长混合C", type: "2026-04-08", netValue: "1.2943", dayChange: 11.1 },
-  { code: "009317", name: "金信核心竞争力混合A", type: "2026-04-08", netValue: "1.2652", dayChange: 10.7 },
-  { code: "020064", name: "西部利得科技创新混合A", type: "2026-04-08", netValue: "1.801", dayChange: 10.15 },
-  { code: "020065", name: "西部利得科技创新混合C", type: "2026-04-08", netValue: "1.7844", dayChange: 10.14 },
-  { code: "016388", name: "汇安均衡成长混合A", type: "2026-04-08", netValue: "1.6669", dayChange: 9.98 },
-  { code: "016389", name: "汇安均衡成长混合C", type: "2026-04-08", netValue: "1.6484", dayChange: 9.98 },
-  { code: "005358", name: "东方阿尔法精选混合A", type: "2026-04-08", netValue: "0.8224", dayChange: 9.89 },
-  { code: "005359", name: "东方阿尔法精选混合C", type: "2026-04-08", netValue: "0.79", dayChange: 9.87 },
-  { code: "018463", name: "德邦稳盈增长灵活配置混合C", type: "2026-04-08", netValue: "1.0201", dayChange: 9.23 },
-  { code: "004260", name: "德邦稳盈增长灵活配置混合A", type: "2026-04-08", netValue: "1.0346", dayChange: 9.23 },
-  { code: "013721", name: "信澳景气优选混合A", type: "2026-04-08", netValue: "2.0001", dayChange: 9.22 },
-  { code: "013722", name: "信澳景气优选混合C", type: "2026-04-08", netValue: "1.9327", dayChange: 9.22 },
-  { code: "001252", name: "中海进取收益混合", type: "2026-04-08", netValue: "1.257", dayChange: 9.21 },
-  { code: "026476", name: "西部利得创新驱动鑫选混合发起C", type: "2026-04-08", netValue: "1.1229", dayChange: 9.2 },
-];
+const FALLBACK_SOURCE = [["000001", "HXCZHH", "华夏成长混合", "混合型-灵活", "HUAXIACHENGZHANGHUNHE"]];
 
-function pickRankingList(response) {
-  const candidates = [
-    response?.data?.ranking,
-    response?.data?.data?.ranking,
-    response?.ranking,
-    response?.data,
-  ];
-
-  for (let i = 0; i < candidates.length; i += 1) {
-    if (Array.isArray(candidates[i])) {
-      return candidates[i];
-    }
+function normalizeFundItem(row) {
+  if (!Array.isArray(row)) {
+    return null;
   }
-  return [];
+  const [code, abbr, name, type, pinyin] = row;
+  if (!code || !name) {
+    return null;
+  }
+  return {
+    code: String(code),
+    abbr: String(abbr || ""),
+    name: String(name),
+    type: String(type || ""),
+    pinyin: String(pinyin || ""),
+  };
 }
 
-function normalizeRankingItem(item, index) {
-  const dayChangeNumber = Number(item?.dayChange);
-  const safeDayChange = Number.isFinite(dayChangeNumber) ? dayChangeNumber : 0;
-  const dayChangeText = `${safeDayChange >= 0 ? "+" : ""}${safeDayChange.toFixed(2)}%`;
-  const changeClass = safeDayChange > 0 ? "up" : safeDayChange < 0 ? "down" : "flat";
-  const rankClass = index < 3 ? `top-${index + 1}` : "normal";
+function parseFundCodeSource(scriptText) {
+  if (typeof scriptText !== "string" || !scriptText.trim()) {
+    return [];
+  }
 
-  return {
-    rank: index + 1,
-    rankClass,
-    changeClass,
-    code: String(item?.code || "--"),
-    name: String(item?.name || "--"),
-    type: String(item?.type || "--"),
-    netValue: String(item?.netValue ?? "--"),
-    dayChangeText,
-  };
+  const matched = scriptText.match(/var\s+r\s*=\s*(\[[\s\S]*\])\s*;?/);
+  if (!matched || !matched[1]) {
+    return [];
+  }
+
+  let parsed = [];
+  try {
+    parsed = JSON.parse(matched[1]);
+  } catch (error) {
+    try {
+      parsed = new Function(`return ${matched[1]}`)();
+    } catch (evalError) {
+      console.error("parse fundcode_search.js failed:", evalError);
+    }
+  }
+
+  if (!Array.isArray(parsed)) {
+    return [];
+  }
+  return parsed.map(normalizeFundItem).filter(Boolean);
+}
+
+function getMatchScore(item, keyword, keywordLower) {
+  let score = 0;
+  const code = item.code;
+  const name = item.name;
+  const abbr = item.abbr.toLowerCase();
+  const pinyin = item.pinyin.toLowerCase();
+  const type = item.type.toLowerCase();
+  const nameLower = name.toLowerCase();
+
+  if (code === keyword) {
+    score += 220;
+  } else if (code.startsWith(keyword)) {
+    score += 120;
+  } else if (code.includes(keyword)) {
+    score += 80;
+  }
+
+  if (name === keyword) {
+    score += 220;
+  } else if (nameLower.startsWith(keywordLower)) {
+    score += 140;
+  } else if (nameLower.includes(keywordLower)) {
+    score += 90;
+  }
+
+  if (abbr.startsWith(keywordLower)) {
+    score += 70;
+  } else if (abbr.includes(keywordLower)) {
+    score += 40;
+  }
+
+  if (pinyin.startsWith(keywordLower)) {
+    score += 60;
+  } else if (pinyin.includes(keywordLower)) {
+    score += 35;
+  }
+
+  if (type.includes(keywordLower)) {
+    score += 20;
+  }
+
+  return score;
+}
+
+function filterFundList(sourceList, keyword) {
+  const safeKeyword = String(keyword || "").trim();
+  if (!safeKeyword) {
+    return [];
+  }
+
+  const keywordLower = safeKeyword.toLowerCase();
+  return sourceList
+    .map((item) => ({
+      ...item,
+      score: getMatchScore(item, safeKeyword, keywordLower),
+    }))
+    .filter((item) => item.score > 0)
+    .sort((a, b) => b.score - a.score || a.code.localeCompare(b.code))
+    .slice(0, MAX_RESULT_COUNT)
+    .map((item) => ({
+      code: item.code,
+      abbr: item.abbr,
+      name: item.name,
+      type: item.type,
+      pinyin: item.pinyin,
+    }));
+}
+
+function fetchFundCodeScript() {
+  return new Promise((resolve, reject) => {
+    wx.request({
+      url: FUND_CODE_URL,
+      method: "GET",
+      dataType: "text",
+      responseType: "text",
+      success: (res) => {
+        if (res.statusCode >= 200 && res.statusCode < 300) {
+          resolve(typeof res.data === "string" ? res.data : "");
+          return;
+        }
+        reject(new Error(`request failed with status ${res.statusCode}`));
+      },
+      fail: reject,
+    });
+  });
 }
 
 Page({
   data: {
     searchValue: "",
     loading: false,
-    noResult: false,
     errorMsg: "",
-    updateDate: "",
-    hotWords: [],
+    sourceList: [],
+    renderList: [],
     searchHistory: [],
-    rankingList: [],
-    renderRanking: [],
   },
 
   onLoad() {
-    this.initPage();
-  },
-
-  async initPage() {
     this.loadSearchHistory();
-    await this.fetchRanking();
+    this.fetchFundList();
   },
 
-  async fetchRanking() {
+  async fetchFundList() {
     this.setData({
       loading: true,
       errorMsg: "",
     });
 
     try {
-      const response = await baseRanking();
-      const ranking = pickRankingList(response);
-      const source = ranking.length ? ranking : RANKING_FALLBACK;
-      this.applyRanking(source);
-    } catch (error) {
-      console.error("fund ranking fetch failed:", error);
-      this.applyRanking(RANKING_FALLBACK);
+      const rawText = await fetchFundCodeScript();
+      const sourceList = parseFundCodeSource(rawText);
       this.setData({
-        errorMsg: "接口加载失败，已展示本地数据",
+        sourceList: sourceList.length ? sourceList : FALLBACK_SOURCE.map(normalizeFundItem).filter(Boolean),
       });
+      this.updateRenderList(this.data.searchValue);
+    } catch (error) {
+      console.error("fetch fund list failed:", error);
+      this.setData({
+        sourceList: FALLBACK_SOURCE.map(normalizeFundItem).filter(Boolean),
+        errorMsg: "基金列表加载失败，请检查合法域名配置",
+      });
+      this.updateRenderList(this.data.searchValue);
     } finally {
       this.setData({
         loading: false,
@@ -102,38 +179,15 @@ Page({
     }
   },
 
-  applyRanking(source) {
-    const rankingList = source.map((item, index) => normalizeRankingItem(item, index));
-    const hotWords = rankingList.slice(0, 8).map((item) => item.name);
-    const updateDate = rankingList[0]?.type || "";
-
-    this.setData({
-      rankingList,
-      hotWords,
-      updateDate,
-    });
-    this.updateRenderList(this.data.searchValue);
-  },
-
   updateRenderList(keyword = "") {
-    const text = String(keyword || "").trim();
-    const keywordLower = text.toLowerCase();
-    const renderRanking = text
-      ? this.data.rankingList.filter((item) => {
-          const nameText = String(item.name || "").toLowerCase();
-          const codeText = String(item.code || "");
-          return nameText.includes(keywordLower) || codeText.includes(text);
-        })
-      : this.data.rankingList;
-
+    const renderList = filterFundList(this.data.sourceList, keyword);
     this.setData({
-      renderRanking,
-      noResult: !this.data.loading && !renderRanking.length,
+      renderList,
     });
   },
 
   onSearchInput(e) {
-    const searchValue = e.detail.value || "";
+    const searchValue = (e.detail.value || "").trim();
     this.setData({ searchValue });
     this.updateRenderList(searchValue);
   },
@@ -154,16 +208,16 @@ Page({
     }
   },
 
-  onTapHotWord(e) {
-    const word = e.currentTarget.dataset.word || "";
-    if (!word) {
+  onTapResultItem(e) {
+    const { name = "", code = "" } = e.currentTarget.dataset;
+    if (!name) {
       return;
     }
     this.setData({
-      searchValue: word,
+      searchValue: name,
     });
-    this.updateRenderList(word);
-    this.pushHistory(word);
+    this.pushHistory(name || code);
+    this.updateRenderList(name);
   },
 
   onTapHistoryWord(e) {
@@ -177,11 +231,11 @@ Page({
     this.updateRenderList(word);
   },
 
-  onTapRankingItem(e) {
-    const name = e.currentTarget.dataset.name || "";
-    if (name) {
-      this.pushHistory(name);
-    }
+  onClearInput() {
+    this.setData({
+      searchValue: "",
+      renderList: [],
+    });
   },
 
   onClearHistory() {
@@ -204,7 +258,10 @@ Page({
       return;
     }
 
-    const mergedHistory = [safeKeyword, ...this.data.searchHistory.filter((item) => item !== safeKeyword)].slice(0, 10);
+    const mergedHistory = [safeKeyword, ...this.data.searchHistory.filter((item) => item !== safeKeyword)].slice(
+      0,
+      MAX_HISTORY_COUNT
+    );
     this.setData({
       searchHistory: mergedHistory,
     });

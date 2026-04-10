@@ -51,11 +51,11 @@ Page({
     // }
 
     // 没有缓存或强制更新时请求API
-    // {
-    //   id: this.data.category || '',
-    //   num: this.data.paseSize,
-    // }
-    const res = await wallpaperApi();
+
+    const res = await wallpaperApi({
+      id: this.data.category || '',
+      num: this.data.paseSize,
+    });
 
     // 缓存新数据
     if (res && res.data) {

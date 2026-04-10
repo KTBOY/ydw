@@ -19,7 +19,7 @@ page {
   position: absolute;
   bottom: 20rpx;
   /* background-color: var(--td-brand-color); */
-  width: 460rpx;
+  width: 500rpx;
   height: 80rpx;
   line-height: 80rpx;
   color: var(--td-brand-color);

@@ -12,7 +12,7 @@ import http from "../utils/wxReques/http"
 //https://docs.api.lolicon.app/#/setu?id=tag
 // V1.0'https://img.moehu.org/pic.php?return=json'
 export const wallpaperApi = (data) => {
-  return http.get('https://api.btstu.cn/sjbz/api.php?lx=dongman&format=json', data, {
+  return http.get('https://img.moehu.org/pic.php?return=json', data, {
     isLoading: true,
     allUrl: true,
     headers: {
