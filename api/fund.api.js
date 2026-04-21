@@ -1,5 +1,5 @@
 import http from "../utils/wxReques/http"
-const base = 'https://fund-cn.chuankangkk.top/api/'
+const base = 'https://fund-cn.chuankangkk.top/api'
 
 
 

@@ -3,12 +3,7 @@
   <view class="example-search">
     <!-- <t-search value="{{value}}" center placeholder="搜索基金代码" action="{{actionText}}" bind:blur="blurHandle" bind:focus="focusHandle" bind:action-click="actionHandle" /> -->
     <view class="search-info" bind:tap="onSearchFundCode">搜索基金代码</view>
-    <!-- <t-search placeholder="输入tdesign，有预览结果" resultList="{{resultList}}" bind:change="onChangeValue" />
-    <view class="test">
-      <view class="result-list" wx:for="{{resultList}}" wx:key="index">
-        {{item}}
-      </view>
-    </view> -->
+
   </view>
 </view>
 <view class="fund-card">

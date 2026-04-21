@@ -1,4 +1,7 @@
 // components/fund/fund.js
+import {
+  baseIndices
+} from "../../api/fund.api"
 const DEFAULT_FUND_LIST = [{
     code: '000001',
     name: '上证指数',
@@ -79,8 +82,10 @@ Component({
   },
 
   methods: {
-    setRenderList(list) {
-      const source = Array.isArray(list) && list.length ? list : DEFAULT_FUND_LIST;
+    async setRenderList(list) {
+      const res = await baseIndices()
+
+      const source = res.data.indices
       const renderList = source.map((item) => {
         const rateNumber = Number(item.rate) || 0;
         const changeNumber = Number(item.change) || 0;
