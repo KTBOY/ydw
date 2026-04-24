@@ -1,10 +1,16 @@
 // packageA/pages/fundSearch/fundSearch.js
+import {
+  debounce
+} from "../../../../utils/util"
+
 const SEARCH_HISTORY_KEY = "fund_search_history";
 const FUND_CODE_URL = "https://fund.eastmoney.com/js/fundcode_search.js";
 const MAX_HISTORY_COUNT = 10;
 const MAX_RESULT_COUNT = 30;
 
-const FALLBACK_SOURCE = [["000001", "HXCZHH", "华夏成长混合", "混合型-灵活", "HUAXIACHENGZHANGHUNHE"]];
+const FALLBACK_SOURCE = [
+  ["000001", "HXCZHH", "华夏成长混合", "混合型-灵活", "HUAXIACHENGZHANGHUNHE"]
+];
 
 function normalizeFundItem(row) {
   if (!Array.isArray(row)) {
@@ -150,6 +156,7 @@ Page({
   onLoad() {
     this.loadSearchHistory();
     this.fetchFundList();
+    this.updateRenderList = debounce(this.updateRenderList, 500);
   },
 
   async fetchFundList() {
@@ -180,6 +187,7 @@ Page({
   },
 
   updateRenderList(keyword = "") {
+    console.log(keyword);
     const renderList = filterFundList(this.data.sourceList, keyword);
     this.setData({
       renderList,
@@ -188,11 +196,18 @@ Page({
 
   onSearchInput(e) {
     const searchValue = (e.detail.value || "").trim();
-    this.setData({ searchValue });
+    this.setData({
+      searchValue
+    });
+
     this.updateRenderList(searchValue);
   },
 
-  onSearchConfirm() {
+  /**
+ * 当搜索确认时触发的事件处理函数
+ * 调用submitSearch方法执行实际的搜索操作
+ */
+onSearchConfirm() {
     this.submitSearch();
   },
 
@@ -209,7 +224,9 @@ Page({
   },
 
   onTapResultItem(e) {
-    const { name = "", code = "" } = e.currentTarget.dataset;
+    const {
+      name = "", code = ""
+    } = e.currentTarget.dataset;
     if (!name) {
       return;
     }
@@ -218,6 +235,9 @@ Page({
     });
     this.pushHistory(name || code);
     this.updateRenderList(name);
+    wx.navigateTo({
+      url: `/packageA/pages/fundPage/fundItem/fundItem?code=${code}`
+    })
   },
 
   onTapHistoryWord(e) {

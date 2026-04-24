@@ -59,18 +59,23 @@
 
     <view class="my-fund-list">
       <view class="my-fund-item" wx:for="{{myFundRenderList}}" wx:key="code">
-        <view class="my-fund-left">
-          <text class="my-fund-name">{{item.name}}</text>
-          <text class="my-fund-code">{{item.code}}</text>
-        </view>
 
-        <view class="my-fund-right">
-          <view class="my-fund-change-wrap">
-            <text class="my-fund-change {{item.trend}}">{{item.changeText}}</text>
-            <text class="my-fund-remove">x</text>
+        <t-swipe-cell>
+          <view class="my-fund-left">
+            <text class="my-fund-name">{{item.name}}</text>
+            <text class="my-fund-code">{{item.code}}</text>
           </view>
-          <text class="my-fund-time">{{item.timeText}}</text>
-        </view>
+
+          <view class="my-fund-right">
+            <view class="my-fund-change-wrap">
+              <text class="my-fund-change {{item.trend}}">{{item.changeText}}</text>
+              <text class="my-fund-remove">x</text>
+            </view>
+            <text class="my-fund-time">{{item.timeText}}</text>
+          </view>
+          <view slot="right" class="btn delete-btn" bind:tap="onDelete">删除</view>
+        </t-swipe-cell>
+
       </view>
 
 

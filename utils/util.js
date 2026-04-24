@@ -220,6 +220,37 @@ const getEnvToken = () => {
   console.log(data)
   return data
 }
+// utils/debounce.js
+/**
+ * 防抖函数
+ * @param {Function} fn 需要防抖的函数
+ * @param {Number} delay 延迟时间(ms)
+ * @returns {Function} 防抖后的函数，附带 cancel 方法
+ */
+function debounce(fn, delay = 300) {
+  let timer = null;
+
+  const debounced = function (...args) {
+    // 清除上一次定时器
+    if (timer) clearTimeout(timer);
+    // 重新设定定时器
+    timer = setTimeout(() => {
+      fn.apply(this, args);
+      timer = null;
+    }, delay);
+  };
+
+  // 取消定时器（用于页面卸载时清理）
+  debounced.cancel = function () {
+    if (timer) {
+      clearTimeout(timer);
+      timer = null;
+    }
+  };
+
+  return debounced;
+}
+
 
 
 
@@ -232,5 +263,6 @@ module.exports = {
   phoneEncryption,
   phoneRegCheck,
   getMianSystemInfo,
-  getEnvToken
+  getEnvToken,
+  debounce
 };

@@ -1,0 +1,55 @@
+<view class="page">
+  <!-- 顶部卡片 -->
+  <view class="glass-card header">
+    <view class="title-row">
+      <text class="name">{{detail.name}}</text>
+      <text class="code">{{detail.code}}</text>
+    </view>
+
+    <view class="rate {{estimateChange >= 0 ? 'up' : 'down'}}">
+      {{estimateChange >= 0 ? '+' : ''}}{{estimateChange}}%
+    </view>
+
+    <view class="time">{{estimateTime || '--'}} 估值</view>
+  </view>
+
+  <!-- 基金信息 -->
+  <view class="glass-card">
+    <view class="section-title">基金信息</view>
+
+    <view class="info-grid">
+      <view class="info-item">
+        <text class="label">单位净值</text>
+        <text class="value">{{netValue}}</text>
+      </view>
+
+      <view class="info-item">
+        <text class="label">基金规模</text>
+        <text class="value">{{detail.scale}}</text>
+      </view>
+
+      <view class="info-item">
+        <text class="label">基金公司</text>
+        <text class="value">{{detail.company}}</text>
+      </view>
+
+      <view class="info-item">
+        <text class="label">基金经理</text>
+        <text class="value">{{detail.manager}}</text>
+      </view>
+
+      <view class="info-item">
+        <text class="label">成立日期</text>
+        <text class="value">{{detail.establishDate}}</text>
+      </view>
+
+      <view class="info-item">
+        <text class="label">管理费率</text>
+        <text class="value">{{detail.manageFee}}</text>
+      </view>
+    </view>
+  </view>
+
+  <t-fab icon="add" style="background:'#091950'" color="#091b5a" button-props="{{fabButton}}" bind:click="handleClick"
+    text="添加自选" />
+</view>

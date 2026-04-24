@@ -25,7 +25,8 @@
         "pages/createQrcode/createQrcode",
         "pages/videoDow/video",
         "pages/zhendong/index",
-        "pages/fundSearch/fundSearch"
+        "pages/fundPage/fundSearch/fundSearch",
+        "pages/fundPage/fundItem/fundItem"
       ]
     },
     {

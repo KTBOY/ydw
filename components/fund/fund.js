@@ -77,12 +77,14 @@ Component({
   lifetimes: {
     attached() {
       this.setRenderList(this.properties.fundList);
-      this.setMyFundRenderList(this.properties.myFundList);
+      this.setMyFundRenderList(wx.getStorageSync('fundDetail'));
+
+      console.log();
     },
   },
 
   methods: {
-    async setRenderList(list) {
+    async setRenderList() {
       const res = await baseIndices()
 
       const source = res.data.indices
@@ -164,7 +166,7 @@ Component({
       // });
 
       wx.navigateTo({
-        url: '/packageA/pages/fundSearch/fundSearch',
+        url: '/packageA/pages/fundPage/fundSearch/fundSearch',
       })
 
 
