@@ -14,7 +14,7 @@
   </view>
 
   <!-- 基金信息 -->
-  <view class="glass-card">
+  <view class="glass-card info-card">
     <view class="section-title">基金信息</view>
 
     <view class="info-grid">
@@ -50,6 +50,6 @@
     </view>
   </view>
 
-  <t-fab icon="add" style="background:'#091950'" color="#091b5a" button-props="{{fabButton}}" bind:click="handleClick"
+  <t-fab icon="add" style="background:'#eef1f6'" color="#646e84" button-props="{{fabButton}}" bind:click="handleClick"
     text="添加自选" />
 </view>

@@ -1,12 +1,12 @@
 <!-- components/fund/fund.wxml -->
-<view class="fund-card">
+<view class="fund-card search-card">
   <view class="example-search">
     <!-- <t-search value="{{value}}" center placeholder="搜索基金代码" action="{{actionText}}" bind:blur="blurHandle" bind:focus="focusHandle" bind:action-click="actionHandle" /> -->
     <view class="search-info" bind:tap="onSearchFundCode">搜索基金代码</view>
 
   </view>
 </view>
-<view class="fund-card">
+<view class="fund-card market-card">
   <view class="fund-header">
     <view class="title-wrap">
       <view class="title-icon"></view>
@@ -47,7 +47,7 @@
 
 
 
-<view class="fund-card">
+<view class="fund-card favorite-card">
   <view class="my-fund">
     <view class="my-fund-header">
       <view class="my-fund-title-wrap">
