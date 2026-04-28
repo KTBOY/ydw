@@ -1,3 +1,5 @@
+@import "../../asserts/wxss/iconFont.wxss"
+
 .fund-card {
   margin: 20rpx 24rpx 0;
   padding: 22rpx;
@@ -142,8 +144,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10rpx;
   margin-top: 8rpx;
+}
+
+.fund-change-row .change {
+  margin-right: 10rpx;
 }
 
 .change,
@@ -209,7 +214,7 @@
   padding: 18rpx;
 }
 
-.my-fund-item + .my-fund-item {
+.my-fund-item+.my-fund-item {
   border-top: 1rpx solid #dfe3eb;
 }
 
@@ -268,7 +273,11 @@
   align-items: center;
   justify-content: center;
   min-width: 90rpx;
-  color: #ffffff;
   font-size: 24rpx;
-  background: #ff808b;
+  height: 100%;
+}
+
+.iconfont {
+  color: #000;
+  font-size: 35rpx;
 }

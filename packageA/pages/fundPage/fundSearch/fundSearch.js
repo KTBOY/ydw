@@ -187,7 +187,7 @@ Page({
   },
 
   updateRenderList(keyword = "") {
-    console.log(keyword);
+
     const renderList = filterFundList(this.data.sourceList, keyword);
     this.setData({
       renderList,
@@ -204,10 +204,10 @@ Page({
   },
 
   /**
- * 当搜索确认时触发的事件处理函数
- * 调用submitSearch方法执行实际的搜索操作
- */
-onSearchConfirm() {
+   * 当搜索确认时触发的事件处理函数
+   * 调用submitSearch方法执行实际的搜索操作
+   */
+  onSearchConfirm() {
     this.submitSearch();
   },
 

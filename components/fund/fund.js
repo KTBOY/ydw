@@ -78,23 +78,24 @@ Component({
     attached() {
       this.setRenderList(this.properties.fundList);
       this.setMyFundRenderList(wx.getStorageSync('fundDetail'));
-
-      console.log();
     },
   },
 
   methods: {
-    async setRenderList() {
-      const res = await baseIndices()
+    async setRenderList(list) {
+      let source = list;
+      if (!source || !source.length) {
+        const res = await baseIndices();
+        source = res.data.indices;
+      }
 
-      const source = res.data.indices
       const renderList = source.map((item) => {
         const rateNumber = Number(item.rate) || 0;
         const changeNumber = Number(item.change) || 0;
         const trend =
-          rateNumber > 0 || changeNumber > 0 ?
+          rateNumber > 0 && changeNumber > 0 ?
           'up' :
-          rateNumber < 0 || changeNumber < 0 ?
+          rateNumber < 0 && changeNumber < 0 ?
           'down' :
           'flat';
         const barHeight = 44 + Math.min(Math.abs(rateNumber) * 26, 56);
@@ -117,7 +118,7 @@ Component({
       const sourceList = Array.isArray(list) ?
         list :
         list && typeof list === 'object' ? [list] : [];
-      const source = sourceList.length ? sourceList : DEFAULT_MY_FUND_LIST;
+      const source = list === undefined || list === null ? DEFAULT_MY_FUND_LIST : sourceList;
       const myFundRenderList = source.map((item) => {
         const estimateChangeNumber = Number(item.estimateChange);
         const hasChangeValue = Number.isFinite(estimateChangeNumber);
@@ -171,6 +172,39 @@ Component({
 
 
       console.log(this.data.resultList);
+    },
+
+    onDelete(e) {
+      const {
+        code = ''
+      } = e.currentTarget.dataset;
+
+      if (!code) {
+        return;
+      }
+
+      const storeList = wx.getStorageSync('fundDetail');
+      const sourceList = Array.isArray(storeList) ?
+        storeList :
+        storeList && typeof storeList === 'object' ? [storeList] : [];
+      const nextList = sourceList.filter((item) => item.code !== code);
+
+      wx.setStorageSync('fundDetail', nextList);
+      this.setMyFundRenderList(nextList);
+      wx.showToast({
+        title: '删除成功',
+        icon: 'success'
+      });
+    },
+
+    onTapResultItem(e) {
+      const {
+        name = "", code = ""
+      } = e.currentTarget.dataset;
+
+      wx.navigateTo({
+        url: `/packageA/pages/fundPage/fundItem/fundItem?code=${code}`
+      })
     },
   },
 });

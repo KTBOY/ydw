@@ -58,22 +58,27 @@
     </view>
 
     <view class="my-fund-list">
-      <view class="my-fund-item" wx:for="{{myFundRenderList}}" wx:key="code">
+      <view class="my-fund-item" bind:tap="onTapResultItem" data-code="{{item.code}}" wx:for="{{myFundRenderList}}"
+        wx:key="code">
 
         <t-swipe-cell>
-          <view class="my-fund-left">
-            <text class="my-fund-name">{{item.name}}</text>
-            <text class="my-fund-code">{{item.code}}</text>
-          </view>
-
-          <view class="my-fund-right">
-            <view class="my-fund-change-wrap">
-              <text class="my-fund-change {{item.trend}}">{{item.changeText}}</text>
-              <text class="my-fund-remove">x</text>
+          <view class="my-fund-content">
+            <view class="my-fund-left">
+              <text class="my-fund-name">{{item.name}}</text>
+              <text class="my-fund-code">{{item.code}}</text>
             </view>
-            <text class="my-fund-time">{{item.timeText}}</text>
+
+            <view class="my-fund-right">
+              <view class="my-fund-change-wrap">
+                <text class="my-fund-change {{item.trend}}">{{item.changeText}}</text>
+              </view>
+              <text class="my-fund-time">{{item.timeText}}</text>
+            </view>
           </view>
-          <view slot="right" class="btn delete-btn" bind:tap="onDelete">删除</view>
+          <view slot="right" class="btn delete-btn" catchtap="onDelete" data-code="{{item.code}}">
+            <view class="iconfont icon-iconclose"></view>
+            <t-icon name="delete-1" size="48rpx" data-name="delete-1" />
+          </view>
         </t-swipe-cell>
 
       </view>

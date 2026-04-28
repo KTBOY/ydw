@@ -21,8 +21,7 @@
      updateManagerMetods();
 
    },
-   onShow: function () {
-     // updateManager();
-   },
+  onShow: function () {
+  },
 
  });
