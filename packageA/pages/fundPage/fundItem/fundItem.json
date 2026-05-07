@@ -1,4 +1,5 @@
 {
+  "enablePullDownRefresh": true,
   "usingComponents": {
     "t-fab": "tdesign-miniprogram/fab/fab",
     "t-icon": "tdesign-miniprogram/icon/icon"

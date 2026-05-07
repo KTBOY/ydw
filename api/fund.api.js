@@ -21,7 +21,7 @@ export const baseRanking = (data) => {
 
 export const detail = (data) => {
   return http.get(`${base}/fund/${data}/detail`, data, {
-    isLoading: true,
+    isLoading: false,
     allUrl: true
   })
 }

@@ -1,20 +1,30 @@
 <!-- packageA/pages/fundSearch/fundSearch.wxml -->
 <view class="fund-search-page">
-  <view class="search-row">
-    <view class="search-input-wrap">
-      <icon class="input-icon" type="search" size="14" color="#9ea5b1" />
-      <input
-        class="search-input"
-        placeholder="输入基金名称或代码"
-        confirm-type="search"
-        value="{{searchValue}}"
-        bindinput="onSearchInput"
-        bindconfirm="onSearchConfirm"
-      />
-      <icon wx:if="{{searchValue}}" class="clear-icon" type="clear" size="16" color="#bcc2cb" bindtap="onClearInput" />
+  <!-- <view class="search-bar-shell">
+    <view class="search-row">
+      <view class="search-input-wrap">
+        <icon class="input-icon" type="search" size="14" color="#b5bac4" />
+        <input class="search-input" placeholder="搜索基金代码" placeholder-class="search-placeholder" confirm-type="search"
+          value="{{searchValue}}" bindinput="onSearchInput" bindconfirm="onSearchConfirm" />
+        <icon wx:if="{{searchValue}}" class="clear-icon" type="clear" size="16" color="#c5cad3"
+          bindtap="onClearInput" />
+      </view>
+      <view class="search-btn" bindtap="onSearchSubmit">搜索</view>
     </view>
-    <view class="search-btn" bindtap="onSearchSubmit">搜索</view>
+  </view> -->
+
+  <view class="fund-card favorite-card">
+    <view class="my-fund">
+      <view class="my-fund-header">
+        <view class="my-fund-title-wrap">
+          <input class="search-input" placeholder="搜索基金代码" placeholder-class="search-placeholder" confirm-type="search"
+            value="{{searchValue}}" bindinput="onSearchInput" bindconfirm="onSearchConfirm" />
+        </view>
+      </view>
+      <view class="search-btn" bindtap="onSearchSubmit">搜索</view>
+    </view>
   </view>
+
 
   <view class="result-list" wx:if="{{searchValue}}">
     <view class="state-text" wx:if="{{loading}}">基金列表加载中...</view>
@@ -37,7 +47,8 @@
       <text class="history-clear" bindtap="onClearHistory">清空</text>
     </view>
     <view class="history-list">
-      <view class="history-item" wx:for="{{searchHistory}}" wx:key="*this" bindtap="onTapHistoryWord" data-word="{{item}}">
+      <view class="history-item" wx:for="{{searchHistory}}" wx:key="*this" bindtap="onTapHistoryWord"
+        data-word="{{item}}">
         {{item}}
       </view>
     </view>
