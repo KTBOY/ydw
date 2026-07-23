@@ -1,0 +1,52 @@
+<!--nasa/pages/detail/detail.wxml-->
+<view class="page">
+  <view class="bg-stars"></view>
+  <view class="bg-glow bg-glow-a"></view>
+  <view class="bg-glow bg-glow-b"></view>
+
+  <scroll-view class="scroll" scroll-y>
+    <!-- 海报卡 -->
+    <view class="poster">
+      <image
+        class="poster-img"
+        src="{{displayUrl}}"
+        mode="widthFix"
+        show-menu-by-longpress
+        binderror="onImgError"
+      />
+      <view class="poster-frame"></view>
+      <view class="poster-overlay">
+        <view class="kicker">NASA · IMAGE LIBRARY</view>
+        <view class="poster-title">{{title}}</view>
+        <view class="poster-sub" wx:if="{{date || center}}">
+          <text wx:if="{{date}}">{{date}}</text>
+          <text wx:if="{{date && center}}"> · </text>
+          <text wx:if="{{center}}">{{center}}</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 描述 -->
+    <view class="section" wx:if="{{desc}}">
+      <view class="section-hd"><text class="section-bar"></text>关于这张影像</view>
+      <view class="desc">{{desc}}</view>
+    </view>
+
+    <!-- 元信息 -->
+    <view class="chips">
+      <view class="chip" wx:if="{{center}}">🛰 {{center}}</view>
+      <view class="chip" wx:if="{{date}}">📅 {{date}}</view>
+      <view class="chip" wx:if="{{id}}">ID · {{id}}</view>
+    </view>
+
+    <view class="bottom-pad"></view>
+  </scroll-view>
+
+  <!-- 固定底部下载 -->
+  <view class="dock">
+    <view class="dl-btn" hover-class="dl-btn--tap" bindtap="onDownload">
+      <view class="dl-main">下载高清原图</view>
+      <view class="dl-sub">观看视频广告后保存到相册</view>
+    </view>
+  </view>
+</view>

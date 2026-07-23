@@ -11,6 +11,8 @@
 
   <game-center wx:if="{{currIndex==1}}" />
 
+  <nasa-list wx:if="{{currIndex==2}}" />
+
 
 
   <!-- <ad unit-id="adunit-73225c369f75b51c" bindload="adLoad" binderror="adError"></ad> -->

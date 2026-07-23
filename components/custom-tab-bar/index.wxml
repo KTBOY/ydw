@@ -8,7 +8,7 @@
   </t-tab-bar-item>
 </t-tab-bar> -->
 
-<view class="tabbar-box">
+<view class="tabbar-box" style="--w: {{750 / list.length}}rpx; --color: {{list[currIndex].pageBg || '#f2f3f7'}}; --bg: {{list[currIndex].activeBg || 'rgb(3,3,3)'}};">
   <block wx:for="{{list}}" wx:for-item="item" wx:for-index="index" wx:key="text">
     <view class="menu-item {{currIndex==index && 'active'}}" catchtap="tabClick" data-params="{{ {item, index} }}">
       <view class="iconfont {{item.icon}}"></view>

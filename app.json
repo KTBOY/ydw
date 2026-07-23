@@ -50,6 +50,12 @@
         "pages/detail/index",
         "pages/arrowEscape/index"
       ]
+    },
+    {
+      "root": "nasa",
+      "pages": [
+        "pages/detail/detail"
+      ]
     }
   ],
   "preloadRule": {

@@ -1,0 +1,216 @@
+/* components/nasa-list/nasa-list.wxss */
+.nasa {
+  height: 100vh;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  background: #070b16;
+}
+
+/* 头部：头图 + 搜索 + 分类 */
+.nasa-hd {
+  padding: 16rpx 20rpx 10rpx;
+  background: linear-gradient(180deg, #0b1230, #070b16);
+}
+
+.nasa-hero {
+  position: relative;
+  border-radius: 20rpx;
+  overflow: hidden;
+}
+
+.nasa-hero-swiper {
+  display: block;
+}
+
+/* 无远程头图时的纯 CSS 太空风占位：红/蓝光圈「一逃一追」，蓝色会突然加速，辅以粒子 */
+.nasa-hero-css {
+  position: relative;
+  height: 300rpx;
+  overflow: hidden;
+  background: linear-gradient(135deg, #0b3d91 0%, #0a1f52 45%, #060a17 100%);
+}
+
+.orb {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  will-change: transform;
+}
+
+/* 红色光圈：逃 */
+.orb-red {
+  width: 240rpx;
+  height: 240rpx;
+  top: -30rpx;
+  left: -30rpx;
+  background: radial-gradient(circle, rgba(252, 61, 33, 0.55) 0%, rgba(252, 61, 33, 0.18) 40%, rgba(252, 61, 33, 0) 70%);
+  animation: nasa-flee 8s ease-in-out infinite;
+}
+
+/* 蓝色光圈：追，且中途突然加速冲刺 */
+.orb-blue {
+  width: 220rpx;
+  height: 220rpx;
+  top: 70rpx;
+  left: -60rpx;
+  background: radial-gradient(circle, rgba(59, 130, 246, 0.65) 0%, rgba(59, 130, 246, 0.22) 42%, rgba(59, 130, 246, 0) 70%);
+  animation: nasa-chase 8s linear infinite;
+}
+
+/* 小粒子 */
+.spark {
+  position: absolute;
+  width: 10rpx;
+  height: 10rpx;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.85);
+  box-shadow: 0 0 12rpx rgba(147, 197, 253, 0.9);
+  opacity: 0.5;
+  will-change: transform, opacity;
+}
+
+.spark-1 {
+  top: 60rpx;
+  left: 200rpx;
+  animation: nasa-drift 5s ease-in-out infinite;
+}
+
+.spark-2 {
+  top: 180rpx;
+  left: 380rpx;
+  animation: nasa-drift 7s ease-in-out infinite 1.2s;
+}
+
+.spark-3 {
+  top: 110rpx;
+  left: 560rpx;
+  animation: nasa-drift 6s ease-in-out infinite 0.6s;
+}
+
+/* 红球：平稳巡游（逃） */
+@keyframes nasa-flee {
+  0% { transform: translate3d(0, 0, 0) scale(1); }
+  20% { transform: translate3d(260rpx, 40rpx, 0) scale(1.05); }
+  40% { transform: translate3d(470rpx, 120rpx, 0) scale(1.08); }
+  60% { transform: translate3d(320rpx, 170rpx, 0) scale(0.96); }
+  80% { transform: translate3d(90rpx, 110rpx, 0) scale(1.02); }
+  100% { transform: translate3d(0, 0, 0) scale(1); }
+}
+
+/* 蓝球：蓄力→突然加速冲刺→减速（追） */
+@keyframes nasa-chase {
+  0% { transform: translate3d(0, 0, 0) scale(1); animation-timing-function: ease-in-out; }
+  22% { transform: translate3d(120rpx, 30rpx, 0) scale(0.94); animation-timing-function: cubic-bezier(0.7, 0, 0.84, 0); }
+  32% { transform: translate3d(470rpx, 95rpx, 0) scale(1.18); animation-timing-function: ease-out; }
+  55% { transform: translate3d(540rpx, 150rpx, 0) scale(1); animation-timing-function: ease-in-out; }
+  75% { transform: translate3d(300rpx, 185rpx, 0) scale(1.05); animation-timing-function: ease-in-out; }
+  100% { transform: translate3d(0, 0, 0) scale(1); animation-timing-function: ease-in-out; }
+}
+
+/* 粒子：轻微漂移 + 明灭 */
+@keyframes nasa-drift {
+  0% { transform: translate3d(0, 0, 0); opacity: 0.2; }
+  50% { transform: translate3d(-40rpx, -30rpx, 0); opacity: 0.9; }
+  100% { transform: translate3d(0, 0, 0); opacity: 0.2; }
+}
+
+.nasa-hero-mask {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 30rpx;
+  background: linear-gradient(90deg, rgba(0, 0, 0, 0.55), transparent 60%);
+  pointer-events: none;
+}
+
+.nasa-logo {
+  color: #fff;
+  font-size: 66rpx;
+  font-weight: 800;
+  letter-spacing: 10rpx;
+  text-shadow: 0 6rpx 24rpx rgba(252, 61, 33, 0.5);
+}
+
+.nasa-sub {
+  margin-top: 6rpx;
+  color: #cbd5e1;
+  font-size: 24rpx;
+}
+
+.nasa-search {
+  margin-top: 16rpx;
+}
+
+.nasa-chips {
+  margin-top: 14rpx;
+  white-space: nowrap;
+}
+
+.chip {
+  display: inline-block;
+  padding: 8rpx 26rpx;
+  margin-right: 14rpx;
+  font-size: 24rpx;
+  color: #cbd5e1;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1rpx solid rgba(255, 255, 255, 0.12);
+  border-radius: 999rpx;
+}
+
+.chip--on {
+  color: #fff;
+  background: #0b3d91;
+  border-color: #3b82f6;
+}
+
+/* 通用瀑布流组件：占满剩余空间 + 注入深色主题变量 */
+.nasa-flow {
+  flex: 1;
+  min-height: 0;
+  --wf-card-bg: #0f1526;
+  --wf-card-border: 1rpx solid rgba(255, 255, 255, 0.06);
+  --wf-skeleton-base: #121a2e;
+  --wf-skeleton-shine: rgba(255, 255, 255, 0.07);
+  --wf-skeleton-glow: rgba(59, 130, 246, 0.22);
+  --wf-title-color: #cbd5e1;
+  --wf-title-size: 22rpx;
+}
+
+/* 空 / 加载状态 */
+.state {
+  padding: 90rpx 40rpx;
+  text-align: center;
+}
+
+.state-img {
+  width: 60%;
+  margin: 0 auto 24rpx;
+  border-radius: 16rpx;
+}
+
+.state-emoji {
+  font-size: 90rpx;
+  margin-bottom: 16rpx;
+}
+
+.state-tip {
+  color: #94a3b8;
+  font-size: 26rpx;
+}
+
+.tip {
+  padding: 24rpx 0;
+  text-align: center;
+  color: #64748b;
+  font-size: 24rpx;
+}
+
+.safe-bottom {
+  height: calc(240rpx + env(safe-area-inset-bottom));
+}

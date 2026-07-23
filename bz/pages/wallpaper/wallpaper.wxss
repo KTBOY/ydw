@@ -1,37 +1,29 @@
+/* bz/pages/wallpaper/wallpaper.wxss */
 page {
   height: 100%;
 }
 
-.t-image-viewer {
-  top: 0;
-}
-
-.scroll-box {
-  height: calc(100% - 50rpx - constant(safe-area-inset-bottom));
-  height: calc(100% - 50rpx - env(safe-area-inset-bottom));
-  border: chartreuse;
-  overflow: hidden;
-}
-
-
-.waterfall {
+.wp {
+  height: 100vh;
   display: flex;
-  justify-content: space-between;
-  padding: 20rpx;
-  height: 100%;
+  flex-direction: column;
+  background: #f2f3f7;
 }
 
-.column {
-  width: 48%;
+/* 通用瀑布流组件：占满剩余空间；壁纸用浅色默认主题，仅调圆角 */
+.wp-flow {
+  flex: 1;
+  min-height: 0;
+  --wf-radius: 20rpx;
 }
 
-.wall-img {
-  width: 100%;
-  margin-bottom: 20rpx;
-  border-radius: 20rpx;
-}
-
-.loading {
+.wp-tip {
   text-align: center;
-  font-size: 21rpx;
+  color: #999999;
+  font-size: 22rpx;
+  padding: 20rpx 0;
+}
+
+.wp-safe {
+  height: calc(20rpx + env(safe-area-inset-bottom));
 }

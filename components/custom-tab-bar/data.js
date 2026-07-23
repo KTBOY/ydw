@@ -4,9 +4,17 @@ export default [{
     url: 'pages/home/home',
   },
   {
-    icon: 'icon-tubiao',
+    icon: 'icon-fighting-game',
     text: '游戏中心',
     url: '',
+  },
+  {
+    icon: 'icon-tubiao',
+    text: 'NASA',
+    url: 'pages/goods/category/index',
+    // 深色页：底部 tab 激活指示器随之适配（凹槽融合黑页、圆用 NASA 蓝、图标白）
+    pageBg: '#070b16',
+    activeBg: '#0b3d91',
   },
   // {
   //   icon: 'icon-tubiao',
