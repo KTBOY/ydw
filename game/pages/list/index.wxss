@@ -1,0 +1,51 @@
+/* game/pages/list/index.wxss */
+.scrollarea {
+  --font-color: #4c88ff;
+  --button-bg-color: #f2f3f7;
+  --button-shadow: -12rpx -12rpx 16rpx rgba(255, 255, 255, 0.9), 10rpx 10rpx 16rpx rgba(0, 0, 0, 0.07);
+  height: 100vh;
+  background-color: #f2f3f7;
+}
+
+.header {
+  background: linear-gradient(#fff, #f5f5f5);
+  padding: 20rpx;
+  position: fixed;
+  top: 0;
+  z-index: 1000;
+  width: calc(100% - 40rpx);
+}
+
+.container {
+  padding: 140rpx 20rpx 20rpx;
+}
+
+.module-list {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.button {
+  color: var(--font-color);
+  position: relative;
+  border-radius: 15px;
+  background: var(--button-bg-color);
+  box-shadow: var(--button-shadow);
+  padding: 24rpx 20rpx;
+  margin-bottom: 24rpx;
+}
+
+.module-name {
+  color: #222222;
+  font-weight: 700;
+  font-size: 28rpx;
+  line-height: 1.5;
+}
+
+.empty {
+  text-align: center;
+  color: #999;
+  padding-top: 80rpx;
+  font-size: 28rpx;
+}

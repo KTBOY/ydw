@@ -22,6 +22,16 @@ Component({
    */
   data: {
     list: [{
+        image: '/asserts/images/caid/steam.png',
+        name: '游戏库',
+        router: '/game/pages/list/index',
+        show: false,
+        style: {
+          width: '90rpx',
+          height: '86rpx'
+        }
+      },
+      {
         image: '/asserts/images/caid/logoko.png',
         name: '头像制作',
         router: '/pages/my_module/flag/index',

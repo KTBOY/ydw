@@ -1,0 +1,82 @@
+/* components/game-center/game-center.wxss */
+.gc {
+  height: 100vh;
+  box-sizing: border-box;
+  background: #f2f3f7;
+  padding: 24rpx 24rpx calc(240rpx + env(safe-area-inset-bottom));
+}
+
+.gc-head {
+  padding: 12rpx 8rpx 24rpx;
+}
+
+.gc-title {
+  font-size: 44rpx;
+  font-weight: 800;
+  color: #1b2740;
+}
+
+.gc-sub {
+  margin-top: 8rpx;
+  font-size: 26rpx;
+  color: #8a90a0;
+}
+
+.gc-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.gc-card {
+  background: #ffffff;
+  border-radius: 24rpx;
+  overflow: hidden;
+  box-shadow: 0 10rpx 24rpx rgba(0, 0, 0, 0.08);
+  margin-bottom: 24rpx;
+}
+
+.gc-card:active {
+  opacity: 0.92;
+}
+
+.gc-cover {
+  width: 100%;
+  height: 320rpx;
+  display: block;
+  background: #eef1f6;
+}
+
+.gc-body {
+  display: flex;
+  align-items: center;
+  padding: 24rpx;
+}
+
+.gc-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.gc-name {
+  font-size: 32rpx;
+  font-weight: 700;
+  color: #222;
+}
+
+.gc-desc {
+  margin-top: 8rpx;
+  font-size: 24rpx;
+  color: #8a90a0;
+  line-height: 1.5;
+}
+
+.gc-play {
+  flex-shrink: 0;
+  margin-left: 20rpx;
+  padding: 18rpx 36rpx;
+  background: #2f6df6;
+  color: #fff;
+  font-size: 28rpx;
+  font-weight: 600;
+  border-radius: 999rpx;
+}

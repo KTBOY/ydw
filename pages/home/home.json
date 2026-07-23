@@ -8,6 +8,7 @@
     "menu": "/components/menu/menu",
     "custom-tab-bar": "/components/custom-tab-bar/index",
     "url-copy": "/components/url-copy/url",
-    "fund": "/components/fund/fund"
+    "fund": "/components/fund/fund",
+    "game-center": "/components/game-center/game-center"
   }
 }

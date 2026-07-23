@@ -5,9 +5,19 @@ export default [{
   },
   {
     icon: 'icon-tubiao',
-    text: '基金',
-    url: 'pages/goods/category/index',
+    text: '游戏中心',
+    url: '',
   },
+  // {
+  //   icon: 'icon-tubiao',
+  //   text: '基金',
+  //   url: 'pages/goods/category/index',
+  // },
+  // {
+  //   icon: 'icon-fighting-game',
+  //   text: '游戏中心',
+  //   url: '',
+  // },
 
   // {
   //   icon: 'cart',

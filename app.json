@@ -42,8 +42,22 @@
         "pages/wallpaper/wallpaper",
         "pages/wallpaperDetail/wallpaperDetail"
       ]
+    },
+    {
+      "root": "game",
+      "pages": [
+        "pages/list/index",
+        "pages/detail/index",
+        "pages/arrowEscape/index"
+      ]
     }
   ],
+  "preloadRule": {
+    "pages/home/home": {
+      "network": "all",
+      "packages": ["game"]
+    }
+  },
   "requiredPrivateInfos": [
     "chooseAddress"
   ],

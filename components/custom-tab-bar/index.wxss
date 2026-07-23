@@ -74,7 +74,7 @@
    width: var(--c);
    height: var(--c);
    background: var(--bg);
-   --left-pad: calc(var(--t) - (2 * var(--w)));
+   --left-pad: 0rpx;
    left: calc((var(--left-pad) / 2) + (var(--w) / 2) - (var(--c) / 2));
    top: calc(-50% + constant(safe-area-inset-bottom) / 2);
    top: calc(-50% + env(safe-area-inset-bottom) / 2);

@@ -1,9 +1,9 @@
 @font-face {
   font-family: "iconfont";
   /* Project id 2229158 */
-  src: url('//at.alicdn.com/t/c/font_2229158_ot7c8r9k4ap.woff2?t=1739959470150') format('woff2'),
-    url('//at.alicdn.com/t/c/font_2229158_ot7c8r9k4ap.woff?t=1739959470150') format('woff'),
-    url('//at.alicdn.com/t/c/font_2229158_ot7c8r9k4ap.ttf?t=1739959470150') format('truetype');
+  src: url('//at.alicdn.com/t/c/font_2229158_2y5i2ydf3uc.woff2?t=1784698118373') format('woff2'),
+    url('//at.alicdn.com/t/c/font_2229158_2y5i2ydf3uc.woff?t=1784698118373') format('woff'),
+    url('//at.alicdn.com/t/c/font_2229158_2y5i2ydf3uc.ttf?t=1784698118373') format('truetype');
 }
 
 .iconfont {
@@ -12,6 +12,18 @@
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-fighting-game:before {
+  content: "\e690";
+}
+
+.icon-gonggao:before {
+  content: "\1022c";
+}
+
+.icon--family-man-woman:before {
+  content: "\e710";
 }
 
 .icon-xingzhuang-sanjiaoxing:before {

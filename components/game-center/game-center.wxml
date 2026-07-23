@@ -1,0 +1,20 @@
+<!--components/game-center/game-center.wxml-->
+<scroll-view class="gc" scroll-y>
+  <view class="gc-head">
+    <view class="gc-title">游戏中心</view>
+    <view class="gc-sub">精选小游戏，点开即玩</view>
+  </view>
+
+  <view class="gc-list">
+    <view class="gc-card" wx:for="{{games}}" wx:key="url" bindtap="onPlay" data-url="{{item.url}}">
+      <image class="gc-cover" src="{{item.cover}}" mode="aspectFill" />
+      <view class="gc-body">
+        <view class="gc-info">
+          <view class="gc-name">{{item.name}}</view>
+          <view class="gc-desc">{{item.desc}}</view>
+        </view>
+        <view class="gc-play">开始游戏</view>
+      </view>
+    </view>
+  </view>
+</scroll-view>

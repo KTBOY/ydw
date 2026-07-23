@@ -7,7 +7,9 @@
   <!-- <game-list wx:if="{{currIndex==1}}" list="{{list}}" /> -->
 
   <!-- <url-list wx:if="{{currIndex==1}}" /> -->
-  <fund wx:if="{{currIndex==1}}" />
+  <!-- <fund wx:if="{{currIndex==1}}" /> -->
+
+  <game-center wx:if="{{currIndex==1}}" />
 
 
 

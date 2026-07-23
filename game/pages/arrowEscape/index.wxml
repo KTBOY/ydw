@@ -1,0 +1,65 @@
+<!--game/pages/arrowEscape/index.wxml-->
+<view class="page">
+  <view class="topbar">
+
+    <view class="level">第 {{level}} / {{total}} 关</view>
+    <view class="mute" bindtap="onToggleMute">{{muted ? '🔇' : '🔊'}}</view>
+    <view class="hearts">
+      <text wx:for="{{hearts}}" wx:key="index" class="heart {{item ? 'on' : 'off'}}">♥</text>
+    </view>
+  </view>
+
+  <view class="tip">点击箭头让它沿所指方向滑出棋盘；若被其它箭头挡住则失败并扣一颗心。</view>
+
+  <view class="canvas-wrap">
+    <canvas type="2d" id="gameCanvas" class="canvas" hidden="{{status !== 'playing' || showRecords}}"
+      bindtouchstart="onTouch"></canvas>
+  </view>
+
+  <view class="controls">
+    <view class="ctrl-btn" bindtap="onHint">💡 提示</view>
+    <view class="ctrl-btn" bindtap="onRestart">↻ 重玩</view>
+    <view class="ctrl-btn" bindtap="onShowRecords">🏆 记录</view>
+  </view>
+
+  <view class="overlay" wx:if="{{status==='win'}}">
+    <view class="dialog">
+      <view class="dialog-title">🎉 过关！</view>
+      <view class="dialog-desc">{{isLastLevel ? '你已通关全部关卡！' : '即将自动进入下一关…'}}</view>
+      <view class="dialog-btns">
+        <view class="dlg-btn ghost" bindtap="onRestart">再玩一次</view>
+        <view class="dlg-btn primary" bindtap="onNextLevel">{{isLastLevel ? '重新挑战' : '下一关'}}</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="overlay" wx:if="{{status==='lose'}}">
+    <view class="dialog">
+      <view class="dialog-title">💔 生命耗尽</view>
+      <view class="dialog-desc">再想想箭头的先后顺序吧</view>
+      <view class="dialog-btns">
+        <view class="dlg-btn ghost" bindtap="onBack">返回</view>
+        <view class="dlg-btn primary" bindtap="onRestart">重玩本关</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="overlay" wx:if="{{showRecords}}" catchtap="onCloseRecords">
+    <view class="dialog" catchtap="noop">
+      <view class="dialog-title">🏆 游玩记录</view>
+      <view class="dialog-desc">最近 {{records.length}} 条记录（最多保留 10 条）</view>
+      <scroll-view wx:if="{{records.length}}" scroll-y class="rec-list">
+        <view class="rec-item" wx:for="{{records}}" wx:key="index">
+          <text class="rec-idx">{{index + 1}}</text>
+          <text class="rec-time">{{item.timeText}}</text>
+          <text class="rec-level">第 {{item.level}} 关</text>
+          <text class="rec-res {{item.result === 'win' ? 'win' : 'lose'}}">{{item.resultText}}</text>
+        </view>
+      </scroll-view>
+      <view wx:else class="rec-empty">还没有游玩记录，快去挑战吧！</view>
+      <view class="dialog-btns">
+        <view class="dlg-btn primary" bindtap="onCloseRecords">关闭</view>
+      </view>
+    </view>
+  </view>
+</view>
