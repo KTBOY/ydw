@@ -54,8 +54,8 @@ Component({
    */
   data: {
     gotype: 'page',
-    StatusBar: app.globalData.systemInfo.statusBarHeight,
-    CustomBar: app.globalData.systemInfo.navBarHeight,
+    StatusBar: app.globalData.systemInfo.statusBarHeight || 0,
+    CustomBar: app.globalData.systemInfo.navBarHeight || 0,
     Custom: app.globalData.systemInfo.capsulePosition
   },
 
@@ -66,8 +66,8 @@ Component({
       let gotype = !pages[pages.length - 2] ? 'home' : 'page'
       this.setData({
         gotype,
-        StatusBar: app.globalData.systemInfo.statusBarHeight,
-        CustomBar: app.globalData.systemInfo.navBarHeight,
+        StatusBar: app.globalData.systemInfo.statusBarHeight || 0,
+        CustomBar: app.globalData.systemInfo.navBarHeight || 0,
         Custom: app.globalData.systemInfo.capsulePosition
       })
     },
