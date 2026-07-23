@@ -180,7 +180,7 @@ Component({
         image: '/asserts/images/zd.png',
         name: '震动',
         router: '/packageA/pages/zhendong/index',
-        show: true,
+        show: false,
         style: {
           width: '70rpx',
           height: '70rpx'
@@ -192,7 +192,7 @@ Component({
         image: '/asserts/images/caid/steam.png',
         name: '网站收录',
         router: '',
-        show: true,
+        show: false,
         style: {
           width: '70rpx',
           height: '70rpx'

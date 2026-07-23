@@ -10,7 +10,13 @@
 .topbar {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   padding: 16rpx 24rpx;
+}
+
+.left-audio {
+  display: flex;
+  align-items: center;
 }
 
 .back {
@@ -24,7 +30,6 @@
 }
 
 .level {
-  flex: 1;
   text-align: center;
   font-size: 30rpx;
   font-weight: 700;
@@ -218,13 +223,25 @@
 
 /* 弹窗进场动画 */
 @keyframes ovIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }
 
 @keyframes dlgIn {
-  from { opacity: 0; transform: translateY(24rpx) scale(0.92); }
-  to { opacity: 1; transform: none; }
+  from {
+    opacity: 0;
+    transform: translateY(24rpx) scale(0.92);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
 }
 
 .overlay {

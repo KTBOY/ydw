@@ -2,18 +2,21 @@
 <view class="page">
   <view class="topbar">
 
-    <view class="level">第 {{level}} / {{total}} 关</view>
-    <view class="mute" bindtap="onToggleMute">{{muted ? '🔇' : '🔊'}}</view>
-    <view class="hearts">
-      <text wx:for="{{hearts}}" wx:key="index" class="heart {{item ? 'on' : 'off'}}">♥</text>
+    <view class="left-audio">
+      <view class="mute" bindtap="onToggleMute">{{muted ? '🔇' : '🔊'}}</view>
+      <view class="hearts">
+        <text wx:for="{{hearts}}" wx:key="index" class="heart {{item ? 'on' : 'off'}}">♥</text>
+      </view>
     </view>
+
+    <view class="level">第 {{level}} / {{total}} 关</view>
   </view>
 
-  <view class="tip">点击箭头让它沿所指方向滑出棋盘；若被其它箭头挡住则失败并扣一颗心。</view>
+
 
   <view class="canvas-wrap">
-    <canvas type="2d" id="gameCanvas" class="canvas" hidden="{{status !== 'playing' || showRecords}}"
-      bindtouchstart="onTouch"></canvas>
+
+    <canvas type="2d" id="gameCanvas" class="canvas" hidden="{{status !== 'playing' || showRecords}}" bindtouchstart="onTouch"></canvas>
   </view>
 
   <view class="controls">
