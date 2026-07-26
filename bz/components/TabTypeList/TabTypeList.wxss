@@ -1,80 +1,74 @@
+/* bz/components/TabTypeList/TabTypeList.wxss */
+
+/* enhanced + show-scrollbar 已隐藏滚动条，此处兜底旧基础库 */
 ::-webkit-scrollbar {
   width: 0;
   height: 0;
   color: transparent;
 }
 
-.tab-box {}
-
 .left-scroll {
   width: 750rpx;
-  /* 固定宽度 */
+  height: 88rpx;
   background-color: #ffffff;
-  height: 50px;
-
-
-
-
-
 }
 
-.two-clr {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  height: 100%;
-
-}
-
+/* inline-flex：宽度由内容撑开，超出 scroll-view 即可横向滚动 */
 .left-list {
-  display: flex;
-  /* justify-content: space-around; */
+  position: relative;
+  display: inline-flex;
   align-items: center;
-  padding: 5rpx 10rpx;
+  min-width: 100%;
+  height: 100%;
+  padding: 0 10rpx;
+  box-sizing: border-box;
 }
 
 .nav-item {
+  flex-shrink: 0;
   white-space: nowrap;
   margin: 0 10rpx;
-
-
+  padding: 10rpx 6rpx;
 }
 
 .active {
   font-weight: bold;
 }
 
+/* 指示器：只过渡 transform/width，走 GPU 合成 */
 .item-active {
-  width: 80rpx;
-  border-radius: 10rpx;
-  height: 5rpx;
+  position: absolute;
+  left: 0;
+  bottom: 8rpx;
+  width: 40rpx;
+  height: 6rpx;
+  border-radius: 6rpx;
   background-color: var(--td-brand-color);
-  color: #fff;
-  transition: all 0.5s;
-  margin-bottom: 15rpx;
+  transition:
+    transform 0.3s ease,
+    width 0.3s ease;
 }
 
-
 .grid-scroll {
+  width: 750rpx;
   background-color: #fff;
 }
 
 .grid-list {
-  display: flex;
-  background-color: #fff;
-  margin: 0 10rpx;
-  padding-bottom: 15rpx;
-  padding-top: 5rpx;
+  display: inline-flex;
+  min-width: 100%;
+  padding: 5rpx 10rpx 15rpx;
+  box-sizing: border-box;
 }
 
 .grid-item {
+  flex-shrink: 0;
   height: 50rpx;
   padding: 10rpx 26rpx;
   margin: 0 5rpx;
   white-space: nowrap;
   border-radius: 10rpx;
   text-align: center;
-
 }
 
 .grid-active {

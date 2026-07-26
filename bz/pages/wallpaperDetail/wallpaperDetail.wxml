@@ -1,7 +1,32 @@
 <!--bz/pages/wallpaperDetail/wallpaperDetail.wxml-->
 
 <view class="detail">
-  <t-image class="wall-img" src="{{img}}" mode="widthFix" />
+  <!-- 模糊背景：双层交叉渐变，随卡片切换平滑过渡 -->
+  <image class="bg {{showA ? 'bg-show' : ''}}" src="{{bgA}}" mode="aspectFill" />
+  <image class="bg {{!showA ? 'bg-show' : ''}}" src="{{bgB}}" mode="aspectFill" />
+  <view class="bg-mask"></view>
 
-  <view class="down-btn" bindtap="handleImage">下载壁纸 <text class="video-text">（观看视频后自动下载）</text></view>
+  <!-- 顶部信息区 -->
+  <view class="header">
+    <view class="title">精选壁纸</view>
+    <view class="subtitle">Explore awesome wallpapers</view>
+    <view class="meta">
+      <text class="meta-count">{{list.length}} Wallpapers</text>
+      <view class="meta-pill">{{current + 1}} / {{list.length}}</view>
+      <!-- 下载入口：对应 GIF 顶部的白色胶囊按钮，点击看视频后下载当前壁纸 -->
+      <view class="meta-pill down-pill" bindtap="handleImage">看视频下载</view>
+    </view>
+  </view>
+
+  <!-- 卡片轮播：两侧露边 + 当前卡片放大 -->
+  <swiper class="card-swiper" current="{{current}}" previous-margin="56rpx" next-margin="56rpx"
+    bindchange="onSwiperChange">
+    <swiper-item wx:for="{{list}}" wx:key="*this">
+      <view class="card {{current === index ? 'card-active' : ''}}">
+        <!-- 仅渲染当前卡片附近的图片，避免长列表一次性加载 -->
+        <image wx:if="{{index >= current - 2 && index <= current + 2}}" class="card-img" src="{{item}}"
+          mode="aspectFill" />
+      </view>
+    </swiper-item>
+  </swiper>
 </view>

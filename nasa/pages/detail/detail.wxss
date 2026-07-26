@@ -7,7 +7,6 @@ page {
   position: relative;
   min-height: 100vh;
   background: radial-gradient(120% 80% at 50% 0%, #10214b 0%, #0a1330 40%, #070b16 100%);
-  overflow: hidden;
 }
 
 /* 星点纹理（静态、廉价） */
@@ -50,10 +49,9 @@ page {
   background: radial-gradient(circle, rgba(252, 61, 33, 0.38), transparent 68%);
 }
 
-.scroll {
+/* 内容区：随页面自然滚动（底部预留 dock 高度） */
+.content {
   position: relative;
-  height: 100vh;
-  box-sizing: border-box;
   padding: 24rpx 28rpx calc(210rpx + env(safe-area-inset-bottom));
 }
 

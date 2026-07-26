@@ -4,7 +4,7 @@
   <view class="bg-glow bg-glow-a"></view>
   <view class="bg-glow bg-glow-b"></view>
 
-  <scroll-view class="scroll" scroll-y>
+  <view class="content">
     <!-- 海报卡 -->
     <view class="poster">
       <image
@@ -40,13 +40,13 @@
     </view>
 
     <view class="bottom-pad"></view>
-  </scroll-view>
+  </view>
 
   <!-- 固定底部下载 -->
   <view class="dock">
     <view class="dl-btn" hover-class="dl-btn--tap" bindtap="onDownload">
       <view class="dl-main">下载高清原图</view>
-      <view class="dl-sub">观看视频广告后保存到相册</view>
+      <view class="dl-sub" wx:if="{{!flash}}">观看视频广告后保存到相册</view>
     </view>
   </view>
 </view>
