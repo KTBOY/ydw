@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "二次元壁纸",
+  "usingComponents": {
+    "image-waterfall": "sk-image-waterfall/image-waterfall/image-waterfall"
+  }
+}

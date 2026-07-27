@@ -1,0 +1,60 @@
+/* acg/pages/wallpaper/wallpaper.wxss */
+page {
+  height: 100%;
+}
+
+.wp {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: #f2f3f7;
+}
+
+/* 单行横滑分类 tab */
+.tab-scroll {
+  flex-shrink: 0;
+  width: 100%;
+  background: #ffffff;
+}
+
+.tab-list {
+  display: flex;
+  flex-direction: row;
+  padding: 16rpx 20rpx;
+  white-space: nowrap;
+}
+
+.tab-item {
+  flex-shrink: 0;
+  padding: 10rpx 30rpx;
+  margin-right: 16rpx;
+  border-radius: 999rpx;
+  background: #f2f3f7;
+  color: #666666;
+  font-size: 26rpx;
+  transition: all 0.2s ease;
+}
+
+.tab-active {
+  background: #1a1a1e;
+  color: #ffffff;
+  font-weight: bold;
+}
+
+/* 通用瀑布流组件：占满剩余空间；壁纸用浅色默认主题，仅调圆角 */
+.wp-flow {
+  flex: 1;
+  min-height: 0;
+  --wf-radius: 20rpx;
+}
+
+.wp-tip {
+  text-align: center;
+  color: #999999;
+  font-size: 22rpx;
+  padding: 20rpx 0;
+}
+
+.wp-safe {
+  height: calc(20rpx + env(safe-area-inset-bottom));
+}

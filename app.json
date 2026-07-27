@@ -56,6 +56,13 @@
       "pages": [
         "pages/detail/detail"
       ]
+    },
+    {
+      "root": "acg",
+      "pages": [
+        "pages/wallpaper/wallpaper",
+        "pages/wallpaperDetail/wallpaperDetail"
+      ]
     }
   ],
   "preloadRule": {

@@ -177,6 +177,18 @@ Component({
       },
 
       {
+        image: '/asserts/images/screen.png',
+        name: '二次元壁纸',
+        router: '/acg/pages/wallpaper/wallpaper',
+        show: true,
+        style: {
+          width: '70rpx',
+          height: '70rpx'
+
+        }
+      },
+
+      {
         image: '/asserts/images/zd.png',
         name: '震动',
         router: '/packageA/pages/zhendong/index',

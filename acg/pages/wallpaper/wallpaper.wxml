@@ -1,0 +1,29 @@
+<!--acg/pages/wallpaper/wallpaper.wxml-->
+<view class="wp">
+  <!-- 单行横滑分类 tab -->
+  <scroll-view class="tab-scroll" scroll-x enhanced show-scrollbar="{{false}}" scroll-with-animation>
+    <view class="tab-list">
+      <view
+        wx:for="{{types}}"
+        wx:key="value"
+        data-index="{{index}}"
+        class="tab-item {{activeIndex === index ? 'tab-active' : ''}}"
+        bindtap="tabChange"
+      >
+        <text>{{item.label}}</text>
+      </view>
+    </view>
+  </scroll-view>
+
+  <image-waterfall
+    class="wp-flow"
+    list="{{wfList}}"
+    reset-token="{{wfToken}}"
+    show-title="{{false}}"
+    bind:itemtap="onItemTap"
+    bind:loadmore="onLoadMore"
+  >
+    <view class="wp-tip" wx:if="{{loading}}">加载中…</view>
+    <view class="wp-safe"></view>
+  </image-waterfall>
+</view>
