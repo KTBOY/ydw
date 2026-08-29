@@ -1,0 +1,106 @@
+@import '/tarot/styles/theme.wxss';
+
+.member-title {
+  display: block;
+  text-align: center;
+  font-size: 44rpx;
+  padding: 56rpx 0 40rpx;
+}
+
+.member-card {
+  width: 400rpx;
+  height: 640rpx;
+  margin: 0 auto;
+  border-radius: 24rpx;
+  border: 2rpx solid rgba(201, 168, 76, 0.6);
+  background: #101018;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 48rpx;
+  position: relative;
+}
+
+.member-card::before {
+  content: '';
+  position: absolute;
+  top: 16rpx;
+  right: 16rpx;
+  bottom: 16rpx;
+  left: 16rpx;
+  border: 1rpx solid rgba(201, 168, 76, 0.4);
+  border-radius: 16rpx;
+}
+
+.member-glyph {
+  font-size: 44rpx;
+  color: #c9a84c;
+  letter-spacing: 12rpx;
+}
+
+.member-card-text {
+  font-size: 32rpx;
+  color: var(--tarot-text);
+  text-align: center;
+  line-height: 1.8;
+  letter-spacing: 2rpx;
+}
+
+.member-benefits {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20rpx;
+  padding: 48rpx 0 8rpx;
+}
+
+.benefit {
+  font-size: 28rpx;
+  color: var(--tarot-text);
+  letter-spacing: 2rpx;
+}
+
+.member-price-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 48rpx;
+  padding: 40rpx 0 32rpx;
+}
+
+.price-box {
+  display: flex;
+  align-items: baseline;
+  gap: 8rpx;
+}
+
+.price {
+  font-size: 52rpx;
+  color: var(--tarot-gold-light);
+}
+
+.price-unit {
+  font-size: 24rpx;
+}
+
+.price-note {
+  font-size: 24rpx;
+  line-height: 1.7;
+}
+
+.member-try {
+  margin: 0 64rpx;
+}
+
+.member-badge {
+  width: 280rpx;
+  margin: 24rpx auto 0;
+  text-align: center;
+  font-size: 24rpx;
+  color: #0a0a0f;
+  background: linear-gradient(90deg, #c9a84c, #e8d48b);
+  border-radius: 32rpx;
+  padding: 10rpx 0;
+  letter-spacing: 2rpx;
+}

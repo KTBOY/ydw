@@ -31,37 +31,32 @@
     },
     {
       "root": "xingzuo",
-      "pages": [
-        "pages/xingzuo/index"
-      ]
+      "pages": ["pages/xingzuo/index"]
     },
     {
       "root": "bz",
-      "pages": [
-        "pages/bz/index",
-        "pages/wallpaper/wallpaper",
-        "pages/wallpaperDetail/wallpaperDetail"
-      ]
+      "pages": ["pages/bz/index", "pages/wallpaper/wallpaper", "pages/wallpaperDetail/wallpaperDetail"]
     },
     {
       "root": "game",
-      "pages": [
-        "pages/list/index",
-        "pages/detail/index",
-        "pages/arrowEscape/index"
-      ]
+      "pages": ["pages/list/index", "pages/detail/index", "pages/arrowEscape/index", "pages/sudoku/index"]
     },
     {
       "root": "nasa",
-      "pages": [
-        "pages/detail/detail"
-      ]
+      "pages": ["pages/detail/detail"]
     },
     {
       "root": "acg",
+      "pages": ["pages/wallpaper/wallpaper", "pages/wallpaperDetail/wallpaperDetail"]
+    },
+    {
+      "root": "tarot",
       "pages": [
-        "pages/wallpaper/wallpaper",
-        "pages/wallpaperDetail/wallpaperDetail"
+        "pages/home/index",
+        "pages/history/index",
+        "pages/saved/index",
+        "pages/profile/index",
+        "pages/member/index"
       ]
     }
   ],
@@ -71,9 +66,7 @@
       "packages": ["game"]
     }
   },
-  "requiredPrivateInfos": [
-    "chooseAddress"
-  ],
+  "requiredPrivateInfos": ["chooseAddress"],
   "lazyCodeLoading": "requiredComponents",
   "usingComponents": {},
   "window": {

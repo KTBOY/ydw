@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "收藏之牌",
+  "navigationBarBackgroundColor": "#0A0A0F",
+  "navigationBarTextStyle": "white",
+  "usingComponents": {
+    "card-detail": "/tarot/components/card-detail/card-detail"
+  }
+}

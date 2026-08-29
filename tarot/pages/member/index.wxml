@@ -1,0 +1,29 @@
+<view class="tarot-page">
+  <view class="page-glow"></view>
+  <view class="page-content">
+    <text class="member-title gold-title">Full Access</text>
+
+    <view class="member-card">
+      <text class="member-glyph top">☉ ✦ </text>
+      <text class="member-card-text">解锁完整解读\n与阅读历史</text>
+      <text class="member-glyph bottom">✦</text>
+    </view>
+
+    <view class="member-benefits">
+      <text class="benefit">✦ 每日深度牌义解读</text>
+      <text class="benefit">☾ 完整抽牌历史日历</text>
+      <text class="benefit">☉ 无限量收藏与回看</text>
+    </view>
+
+    <view class="member-price-row">
+      <view class="price-box">
+        <text class="price">¥68</text>
+        <text class="price-unit dim-text">每年</text>
+      </view>
+      <text class="price-note dim-text">随时取消\n今日无需付费</text>
+    </view>
+
+    <view class="gold-btn member-try" bindtap="onTry">免费试用</view>
+    <view class="member-badge">3 天免费试用</view>
+  </view>
+</view>

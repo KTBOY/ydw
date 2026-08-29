@@ -1,6 +1,5 @@
 // components/menu/menu.js
 
-const imageCdn = 'https://tdesign.gtimg.com/mobile/demos';
 const swiperList = [
   '/asserts/images/bz1.jpg',
   '/asserts/images/bz2.jpg',
@@ -9,33 +8,31 @@ const swiperList = [
 ];
 
 Component({
-
   /**
    * 组件的属性列表
    */
-  properties: {
-
-  },
+  properties: {},
 
   /**
    * 组件的初始数据
    */
   data: {
-    list: [{
+    list: [
+      {
         image: '/asserts/images/caid/steam.png',
         name: '游戏库',
         router: '/game/pages/list/index',
         show: false,
         style: {
           width: '90rpx',
-          height: '86rpx'
-        }
+          height: '86rpx',
+        },
       },
       {
         image: '/asserts/images/caid/logoko.png',
         name: '头像制作',
         router: '/pages/my_module/flag/index',
-        show: false
+        show: false,
       },
       {
         image: '/asserts/images/caid/logoko.png',
@@ -44,11 +41,11 @@ Component({
         show: false,
         style: {
           width: '70rpx',
-          height: '70rpx'
+          height: '70rpx',
         },
         blockStyle: {
-          width: '92%'
-        }
+          width: '92%',
+        },
       },
       {
         image: '/asserts/images/caid/logoko.png',
@@ -57,11 +54,11 @@ Component({
         show: true,
         style: {
           width: '70rpx',
-          height: '70rpx'
+          height: '70rpx',
         },
         blockStyle: {
-          width: '92%'
-        }
+          width: '92%',
+        },
       },
       {
         image: '/asserts/images/caid/fam.png',
@@ -70,17 +67,18 @@ Component({
         show: true,
         style: {
           width: '70rpx',
-          height: '70rpx'
-        }
-      }, {
+          height: '70rpx',
+        },
+      },
+      {
         image: '/asserts/images/caid/cg.png',
         name: '橙光资源',
         router: '/pages/goods/cgDetails/index',
         show: false,
         style: {
           width: '110rpx',
-          height: '76rpx'
-        }
+          height: '76rpx',
+        },
       },
       {
         image: '/asserts/images/caid/rj.png',
@@ -89,8 +87,8 @@ Component({
         show: false,
         style: {
           width: '70rpx',
-          height: '70rpx'
-        }
+          height: '70rpx',
+        },
       },
       {
         image: '/asserts/images/caid/az.png',
@@ -99,8 +97,8 @@ Component({
         show: false,
         style: {
           width: '70rpx',
-          height: '70rpx'
-        }
+          height: '70rpx',
+        },
       },
       {
         image: '/asserts/images/caid/steam.png',
@@ -109,8 +107,8 @@ Component({
         show: false,
         style: {
           width: '90rpx',
-          height: '86rpx'
-        }
+          height: '86rpx',
+        },
       },
 
       {
@@ -120,8 +118,8 @@ Component({
         show: true,
         style: {
           width: '70rpx',
-          height: '70rpx'
-        }
+          height: '70rpx',
+        },
       },
       {
         image: '/asserts/images/bz.png',
@@ -130,8 +128,8 @@ Component({
         show: false,
         style: {
           width: '70rpx',
-          height: '70rpx'
-        }
+          height: '70rpx',
+        },
       },
       {
         image: '/asserts/images/bcz.png',
@@ -140,8 +138,8 @@ Component({
         show: true,
         style: {
           width: '70rpx',
-          height: '70rpx'
-        }
+          height: '70rpx',
+        },
       },
 
       {
@@ -151,8 +149,8 @@ Component({
         show: false,
         style: {
           width: '70rpx',
-          height: '70rpx'
-        }
+          height: '70rpx',
+        },
       },
       {
         image: '/asserts/images/ewm.png',
@@ -161,8 +159,8 @@ Component({
         show: false,
         style: {
           width: '70rpx',
-          height: '70rpx'
-        }
+          height: '70rpx',
+        },
       },
       {
         image: '/asserts/images/screen.png',
@@ -171,9 +169,8 @@ Component({
         show: true,
         style: {
           width: '70rpx',
-          height: '70rpx'
-
-        }
+          height: '70rpx',
+        },
       },
 
       {
@@ -183,9 +180,8 @@ Component({
         show: true,
         style: {
           width: '70rpx',
-          height: '70rpx'
-
-        }
+          height: '70rpx',
+        },
       },
 
       {
@@ -195,9 +191,8 @@ Component({
         show: false,
         style: {
           width: '70rpx',
-          height: '70rpx'
-
-        }
+          height: '70rpx',
+        },
       },
 
       {
@@ -207,12 +202,20 @@ Component({
         show: false,
         style: {
           width: '70rpx',
-          height: '70rpx'
+          height: '70rpx',
         },
+      },
 
-      }
-
-
+      {
+        image: '/asserts/images/caid/tarot.png',
+        name: '塔罗占卜',
+        router: '/tarot/pages/home/index',
+        show: true,
+        style: {
+          width: '70rpx',
+          height: '70rpx',
+        },
+      },
     ],
     current: 1,
     autoplay: true,
@@ -225,31 +228,26 @@ Component({
    * 组件的方法列表
    */
   methods: {
-    handlerPageRouter(v) {
-      const {
-        item
-      } = v.currentTarget.dataset.params
+    handlerPageRouter(_v) {
+      const { item } = _v.currentTarget.dataset.params;
       if (item.router) {
         wx.navigateTo({
-          url: item.router
-        })
-        return
+          url: item.router,
+        });
+        return;
       }
 
-
       this.triggerEvent('change', {
-        item
-      })
+        item,
+      });
     },
 
-    handlerSwiper(v) {
-
+    handlerSwiper(_v) {
       // this.triggerEvent('change')
 
       wx.navigateTo({
-        url: '/bz/pages/wallpaper/wallpaper'
-      })
-
-    }
-  }
-})
+        url: '/bz/pages/wallpaper/wallpaper',
+      });
+    },
+  },
+});

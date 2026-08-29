@@ -1,0 +1,22 @@
+<view class="tabbar">
+  <view
+    wx:for="{{items}}"
+    wx:key="key"
+    class="tab {{item.key === active ? 'active' : ''}}"
+    data-key="{{item.key}}"
+    aria-role="tab"
+    aria-label="{{item.label}}"
+    hover-class="tab-press"
+    hover-stay-time="60"
+    bindtap="onTap"
+  >
+    <view class="coin-wrap">
+      <view class="rays"></view>
+      <view class="rays rays-2"></view>
+      <view class="burst"></view>
+      <view class="burst-ring"></view>
+      <image class="coin-img" src="{{item.key === active ? item.iconActive : item.icon}}" mode="aspectFill" />
+    </view>
+    <text class="tab-label">{{item.label}}</text>
+  </view>
+</view>

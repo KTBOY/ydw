@@ -1,0 +1,30 @@
+<view class="tarot-page">
+  <view class="page-glow"></view>
+  <view class="page-content">
+    <view class="profile-head">
+      <view class="medallion">✦</view>
+      <text class="gold-title profile-title">我的塔罗</text>
+    </view>
+
+    <view class="stats-row">
+      <view class="stat">
+        <text class="stat-num">{{stats.total}}</text>
+        <text class="stat-label dim-text">抽牌次数</text>
+      </view>
+      <view class="stat">
+        <text class="stat-num">{{stats.streak}}</text>
+        <text class="stat-label dim-text">连续天数</text>
+      </view>
+      <view class="stat">
+        <text class="stat-num">{{stats.savedCount}}</text>
+        <text class="stat-label dim-text">收藏牌数</text>
+      </view>
+    </view>
+
+    <view class="entry-list">
+      <view class="gold-btn entry" bindtap="goSaved">☾ 收藏之牌</view>
+      <view class="gold-btn entry" bindtap="goMember">✧ 会员中心</view>
+    </view>
+  </view>
+  <tabbar active="profile" />
+</view>

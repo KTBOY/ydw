@@ -1,0 +1,34 @@
+<view class="tarot-page">
+  <view class="page-glow"></view>
+  <view class="page-content">
+    <view class="hist-head">
+      <view class="hist-arrow" bindtap="prevMonth">←</view>
+      <text class="hist-month gold-title">{{monthLabel}}</text>
+      <view class="hist-arrow" bindtap="nextMonth">→</view>
+    </view>
+
+    <view class="hist-week">
+      <text wx:for="{{weekDays}}" wx:key="*this" class="week-cell dim-text">{{item}}</text>
+    </view>
+
+    <view class="hist-grid">
+      <block wx:for="{{grid}}" wx:key="key">
+        <view
+          wx:if="{{!item.empty}}"
+          class="day-cell {{item.hasRecord ? 'has' : ''}}"
+          data-cell="{{item}}"
+          bindtap="onDay"
+        >
+          <text class="day-num">{{item.day}}</text>
+          <text wx:if="{{item.hasRecord}}" class="day-dot">✦</text>
+        </view>
+        <view wx:else class="day-cell empty"></view>
+      </block>
+    </view>
+
+    <view class="hist-tip dim-text">点击带 ✦ 的日期回看当日之牌</view>
+  </view>
+
+  <card-detail show="{{showDetail}}" card="{{detailCard}}" isReversed="{{detailReversed}}" bindclose="closeDetail" />
+  <tabbar active="history" />
+</view>

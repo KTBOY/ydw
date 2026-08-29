@@ -1,0 +1,59 @@
+@import '/tarot/styles/theme.wxss';
+
+.saved-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 20rpx;
+  padding: 48rpx 0 32rpx;
+}
+
+.saved-title {
+  font-size: 40rpx;
+}
+
+.saved-count {
+  font-size: 24rpx;
+}
+
+.saved-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24rpx;
+  padding: 0 40rpx;
+}
+
+.saved-item {
+  width: calc((100% - 48rpx) / 3);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12rpx;
+}
+
+.saved-img {
+  width: 100%;
+  height: 320rpx;
+  border-radius: 12rpx;
+  border: 1rpx solid rgba(201, 168, 76, 0.45);
+}
+
+.saved-name {
+  font-size: 24rpx;
+  color: var(--tarot-text);
+  letter-spacing: 2rpx;
+}
+
+.saved-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16rpx;
+  padding-top: 160rpx;
+  font-size: 26rpx;
+}
+
+.saved-empty-glyph {
+  font-size: 80rpx;
+  color: var(--tarot-gold);
+}

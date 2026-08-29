@@ -1,0 +1,19 @@
+<view class="mask" wx:if="{{show}}" bindtap="onClose">
+  <view class="panel" catchtap="noop">
+    <view class="panel-head">
+      <text class="panel-title gold-title">{{card.nameCn}} · {{card.nameEn}}</text>
+      <text class="panel-state {{isReversed ? 'rev' : ''}}">{{isReversed ? '逆位' : '正位'}}</text>
+    </view>
+    <image class="panel-card {{isReversed ? 'rev-img' : ''}}" src="{{img}}" mode="aspectFill" />
+    <view class="panel-keywords">
+      <text wx:for="{{card.keywords}}" wx:key="*this" class="keyword">{{item}}</text>
+    </view>
+    <scroll-view scroll-y class="panel-meaning">
+      <text>{{isReversed ? card.reversed : card.upright}}</text>
+    </scroll-view>
+    <view class="panel-actions">
+      <view class="gold-btn action" wx:if="{{actionText}}" bindtap="onAction">{{actionText}}</view>
+      <view class="gold-btn action close" bindtap="onClose">关闭</view>
+    </view>
+  </view>
+</view>
