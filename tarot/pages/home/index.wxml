@@ -21,7 +21,6 @@
           >
         </scroll-view>
 
-        <image class="orn-fan" src="/tarot/images/decor/orn-fan.png" mode="aspectFill" />
         <view class="year-label">{{yearLabel}}</view>
 
         <view class="card-stage">

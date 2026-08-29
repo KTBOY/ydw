@@ -72,17 +72,10 @@
   text-shadow: 0 0 20rpx rgba(255, 255, 255, 0.4);
 }
 
-/* ===== 首页：金羽扇纹饰（设计切图）与年份 ===== */
-
-.orn-fan {
-  display: block;
-  width: 750rpx;
-  height: 91rpx;
-  margin: 18rpx auto 0;
-}
+/* ===== 首页：年份 ===== */
 
 .year-label {
-  margin-top: 6rpx;
+  margin-top: 30rpx;
   text-align: center;
   font-size: 31rpx;
   color: var(--tarot-gold);
