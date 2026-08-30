@@ -8,10 +8,11 @@ import {
   getHistoryByMonth,
   buildMonthGrid,
   getStats,
+  isRedrawUsed,
+  redrawDaily,
 } from '../../utils/tarot';
 import { getCardById, cardImage } from '../../data/cards';
 
-const MONTH_CN = ['一', '二', '三', '四', '五', '六', '七', '八', '九', '十', '十一', '十二'];
 const WEEK_CN = ['日', '一', '二', '三', '四', '五', '六'];
 const ROMAN = [
   '0',
@@ -45,19 +46,15 @@ Page({
     tab: 'home',
     panels: { home: 'on', history: 'off-r', profile: 'off-r' },
 
-    months: [],
-    yearLabel: '',
-    viewMonth: 0,
-    isCurrentMonth: true,
-    monthScrollLeft: 0,
-
     card: null,
     img: '',
     numeral: '0',
     isRevealed: false,
     animating: false,
     cardAnim: true,
+    slideDir: 'enter',
     saved: false,
+    redrawUsed: false,
     dateLine: '',
     timeLine: '',
 
@@ -70,21 +67,13 @@ Page({
     showDetail: false,
     detailCard: null,
     detailReversed: false,
-    detailAction: '',
+    detailSaved: false,
 
     stats: { total: 0, savedCount: 0, streak: 0 },
   },
 
   onLoad() {
-    const now = new Date();
-    const viewMonth = now.getMonth() + 1;
-    this.setData({
-      months: MONTH_CN.map((name, index) => ({ name: `${name}月`, index: index + 1 })),
-      yearLabel: `${now.getFullYear()}年`,
-      viewMonth,
-      stats: getStats(),
-    });
-    this.loadMonthCard(viewMonth);
+    this.loadTodayCard();
     this.startClock();
   },
 
@@ -129,62 +118,56 @@ Page({
     }
   },
 
-  /* ===== 首页面板 ===== */
+  /* ===== 首页面板：每天仅一张牌 ===== */
 
-  loadMonthCard(month) {
-    const now = new Date();
-    const isCurrentMonth = month === now.getMonth() + 1;
-    if (isCurrentMonth) {
-      const dateStr = todayStr();
-      const drawn = getDraw(dateStr);
-      const card = drawn ? { ...drawn.card, isReversed: drawn.reversed } : getDailyCard(dateStr);
-      this.setData({
-        isCurrentMonth: true,
-        card,
-        img: cardImage(card),
-        numeral: ROMAN[card.id] || String(card.id),
-        isRevealed: !!drawn,
-        saved: isSaved(card.id),
-        viewMonth: month,
-        monthScrollLeft: this.calcScrollLeft(month - 1),
-      });
-      this.updateClock();
-    } else {
-      const seedDate = `${now.getFullYear()}-${String(month).padStart(2, '0')}-01`;
-      const card = getDailyCard(seedDate);
-      this.setData({
-        isCurrentMonth: false,
-        card,
-        img: cardImage(card),
-        numeral: ROMAN[card.id] || String(card.id),
-        isRevealed: true,
-        dateLine: `${now.getFullYear()}年${month}月`,
-        timeLine: '本月指引',
-        viewMonth: month,
-        monthScrollLeft: this.calcScrollLeft(month - 1),
-      });
-    }
+  loadTodayCard() {
+    const dateStr = todayStr();
+    const drawn = getDraw(dateStr);
+    const card = drawn ? { ...drawn.card, isReversed: drawn.reversed } : getDailyCard(dateStr);
+    this.setData({
+      card,
+      img: cardImage(card),
+      numeral: ROMAN[card.id] || String(card.id),
+      isRevealed: !!drawn,
+      saved: isSaved(card.id),
+      redrawUsed: isRedrawUsed(dateStr),
+      slideDir: 'enter',
+    });
+    this.updateClock();
     this.setData({ cardAnim: false });
     if (this._dealTimer) clearTimeout(this._dealTimer);
     this._dealTimer = setTimeout(() => this.setData({ cardAnim: true }), 60);
   },
 
-  calcScrollLeft(index) {
-    const win = wx.getWindowInfo();
-    const itemPx = (180 * win.windowWidth) / 750;
-    return Math.max(0, Math.round(index * itemPx + itemPx / 2 - win.windowWidth / 2));
-  },
-
-  onPickMonth(e) {
-    const month = Number(e.currentTarget.dataset.m);
-    if (month === this.data.viewMonth) return;
-    this.loadMonthCard(month);
+  onRedraw() {
+    if (this.data.redrawUsed || this.data.animating) return;
+    wx.showModal({
+      title: '重新抽牌',
+      content: '今日重抽机会仅一次，使用后不可恢复，确定？',
+      success: (res) => {
+        if (!res.confirm) return;
+        const card = redrawDaily(todayStr());
+        this.setData({
+          card,
+          img: cardImage(card),
+          numeral: ROMAN[card.id] || String(card.id),
+          isRevealed: false,
+          saved: isSaved(card.id),
+          redrawUsed: true,
+          cardAnim: false,
+          slideDir: 'enter',
+        });
+        if (this._dealTimer) clearTimeout(this._dealTimer);
+        this._dealTimer = setTimeout(() => this.setData({ cardAnim: true }), 60);
+        wx.showToast({ title: '新牌已就位，轻触揭示', icon: 'none' });
+      },
+    });
   },
 
   onCardTap() {
-    const { isCurrentMonth, isRevealed, animating, card } = this.data;
+    const { isRevealed, animating, card } = this.data;
     if (animating) return;
-    if (isCurrentMonth && !isRevealed) {
+    if (!isRevealed) {
       this.setData({ animating: true });
       setTimeout(() => {
         recordDraw(todayStr(), { cardId: card.id, reversed: card.isReversed });
@@ -201,7 +184,7 @@ Page({
       showDetail: true,
       detailCard: getCardById(card.id),
       detailReversed: card.isReversed,
-      detailAction: isSaved(card.id) ? '已收藏' : '收藏此牌',
+      detailSaved: isSaved(card.id),
     });
   },
 
@@ -211,10 +194,14 @@ Page({
     const saved = toggleSave(detailCard.id);
     this.setData({
       saved,
-      detailAction: saved ? '已收藏' : '收藏此牌',
+      detailSaved: saved,
       stats: getStats(),
     });
     wx.showToast({ title: saved ? '已收藏' : '已取消收藏', icon: 'none' });
+  },
+
+  goSpread() {
+    wx.navigateTo({ url: '/tarot/pages/spread/index' });
   },
 
   startClock() {
@@ -231,7 +218,6 @@ Page({
   },
 
   updateClock() {
-    if (!this.data.isCurrentMonth) return;
     const now = new Date();
     const time = `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
     this.setData({
@@ -280,7 +266,7 @@ Page({
       showDetail: true,
       detailCard: getCardById(cell.cardId),
       detailReversed: cell.reversed,
-      detailAction: isSaved(cell.cardId) ? '已收藏' : '收藏此牌',
+      detailSaved: isSaved(cell.cardId),
     });
   },
 
@@ -292,9 +278,5 @@ Page({
 
   goSaved() {
     wx.navigateTo({ url: '/tarot/pages/saved/index' });
-  },
-
-  goMember() {
-    wx.navigateTo({ url: '/tarot/pages/member/index' });
   },
 });

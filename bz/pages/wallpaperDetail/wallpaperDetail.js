@@ -14,6 +14,8 @@ Page({
     bgA: '', // 模糊背景双缓冲层 A
     bgB: '', // 模糊背景双缓冲层 B
     showA: true, // 当前显示的背景层
+    previewShow: false, // 全屏预览层是否挂载
+    previewOut: false, // 预览层淡出中
   },
 
   // 滑动切换卡片：更新索引并交叉渐变背景
@@ -32,6 +34,22 @@ Page({
     } else {
       this.setData({ bgA: img, showA: true });
     }
+  },
+
+  // 打开全屏预览：放大查看当前卡片对应的壁纸
+  openPreview() {
+    if (!this.data.list[this.data.current]) return;
+    this.setData({ previewShow: true, previewOut: false });
+  },
+
+  // 关闭预览：先播淡出动画再卸载节点，重挂载即复位缩放
+  closePreview() {
+    if (!this.data.previewShow || this.data.previewOut) return;
+    this.setData({ previewOut: true });
+    this.previewTimer = setTimeout(() => {
+      this.previewTimer = null;
+      this.setData({ previewShow: false, previewOut: false });
+    }, 220);
   },
 
   handleImage() {
@@ -96,6 +114,7 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload() {
+    if (this.previewTimer) clearTimeout(this.previewTimer);
     videoAd = null;
   },
 

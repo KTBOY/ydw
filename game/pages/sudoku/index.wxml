@@ -1,0 +1,259 @@
+<!--game/pages/sudoku/index.wxml-->
+<view class="page {{theme === 'dark' ? 'dark' : ''}}">
+  <!-- 顶栏 -->
+  <view class="topbar">
+    <view class="tb-btn" bindtap="onBack">←</view>
+    <view class="tb-title" bindtap="onOpenLevels">
+      <view class="tb-main">{{mode === 'daily' ? '每日挑战 · ' + dateText : '第 ' + level + ' 关'}}</view>
+      <view class="tb-sub">{{diffName}} · 点此选关</view>
+    </view>
+    <view class="tb-btn" bindtap="onPause">⏸</view>
+    <view class="tb-btn" bindtap="onOpenSettings">⚙</view>
+  </view>
+
+  <!-- 状态栏 -->
+  <view class="statusbar">
+    <view class="hearts">
+      <text wx:for="{{hearts}}" wx:key="index" class="heart {{item ? 'on' : 'off'}}">♥</text>
+    </view>
+    <view class="best">{{bestText}}</view>
+    <view class="timer">{{timeText}}</view>
+  </view>
+
+  <!-- 棋盘 -->
+  <view class="board-wrap">
+    <view class="board">
+      <view wx:for="{{cells}}" wx:key="index" class="{{item.cls}}" data-i="{{index}}" bindtap="onCellTap">
+        <text wx:if="{{item.txt}}" class="num">{{item.txt}}</text>
+        <view wx:elif="{{item.nc}}" class="notes">
+          <text wx:for="{{item.nc}}" wx:for-item="nt" wx:key="i" class="nt {{nt.t ? 'on' : ''}}">{{nt.t}}</text>
+        </view>
+      </view>
+    </view>
+    <!-- 暂停/结算时遮住盘面，防偷看也防原生层遮挡误触 -->
+    <view wx:if="{{paused || status !== 'playing'}}" class="board-cover">
+      <view class="cover-icon">{{status === 'win' ? '✓' : status === 'lose' ? '♥' : '⏸'}}</view>
+      <view class="cover-text">{{status === 'win' ? '大功告成' : status === 'lose' ? '再接再厉' : '休息一下'}}</view>
+    </view>
+  </view>
+
+  <!-- 工具栏 -->
+  <view class="tools">
+    <view class="tool" bindtap="onErase">
+      <text class="tool-icon">⌫</text>
+      <text class="tool-label">擦除</text>
+    </view>
+    <view class="tool {{canUndo ? '' : 'dim'}}" bindtap="onUndo">
+      <text class="tool-icon">↺</text>
+      <text class="tool-label">撤回</text>
+    </view>
+    <view class="tool" bindtap="onAutoNotes">
+      <text class="tool-icon">✍</text>
+      <text class="tool-label">一键笔记</text>
+    </view>
+    <view class="tool {{noteMode ? 'on' : ''}}" bindtap="onToggleNotes">
+      <text class="tool-icon">✎</text>
+      <text class="tool-label">笔记</text>
+    </view>
+    <view class="tool {{hintsLeft === 0 ? 'dim' : ''}}" bindtap="onHint">
+      <text class="tool-icon">💡</text>
+      <text class="tool-label">提示 ×{{hintsLeft}}</text>
+    </view>
+  </view>
+
+  <!-- 数字键盘 -->
+  <view class="numpad {{noteMode ? 'note-on' : ''}}">
+    <view
+      wx:for="{{padCounts}}"
+      wx:key="index"
+      class="pad {{item === 0 ? 'done' : ''}} {{padActive === index + 1 ? 'active' : ''}}"
+      data-v="{{index + 1}}"
+      bindtap="onPadTap"
+    >
+      <text class="pad-num">{{index + 1}}</text>
+      <text class="pad-count">{{item}}</text>
+    </view>
+  </view>
+
+  <!-- 暂停 -->
+  <view class="overlay" wx:if="{{paused && status === 'playing'}}">
+    <view class="dialog" catchtap="noop">
+      <view class="dialog-title">休息一下</view>
+      <view class="dialog-desc">计时已暂停，随时回来继续</view>
+      <view class="pause-grid">
+        <view class="dlg-btn primary" bindtap="onResume">继续挑战</view>
+        <view class="dlg-btn ghost" bindtap="onRestart">重玩本关</view>
+        <view class="dlg-btn ghost" bindtap="onOpenLevelsFromPause">选择关卡</view>
+        <view class="dlg-btn ghost" bindtap="onOpenStatsFromPause">我的战绩</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 胜利 -->
+  <view class="overlay" wx:if="{{status === 'win' && !winClosed}}">
+    <view class="confetti-wrap">
+      <view
+        wx:for="{{confetti}}"
+        wx:key="index"
+        class="cf"
+        style="left:{{item.left}}%; animation-delay:{{item.delay}}s; animation-duration:{{item.dur}}s; background:{{item.color}};"
+      ></view>
+    </view>
+    <view class="dialog" catchtap="noop">
+      <view class="dialog-title">{{mode === 'daily' ? '每日挑战完成' : '关卡完成'}}</view>
+      <view class="stars">
+        <text
+          wx:for="{{winStars}}"
+          wx:key="index"
+          class="star {{item ? 'on' : 'off'}}"
+          style="animation-delay:{{index * 0.28 + 0.15}}s"
+          >★</text
+        >
+      </view>
+      <view class="win-meta">
+        <view class="win-time">用时 {{winTimeText}}</view>
+        <view wx:if="{{isNewBest}}" class="win-best">新纪录！</view>
+        <view wx:elif="{{winBestText}}" class="win-best">{{winBestText}}</view>
+      </view>
+      <view class="dialog-desc"
+        >{{winCheat ? '修改器模式 · 本局战绩不计入' : (mode === 'daily' ? '明日再来，坚持连击' :
+        '错误越少、提示越少，星标越高')}}</view
+      >
+      <view class="dialog-btns">
+        <button class="dlg-btn ghost share-btn" open-type="share">分享</button>
+        <view class="dlg-btn ghost" bindtap="onOpenStatsFromPause">战绩</view>
+        <view wx:if="{{mode === 'level'}}" class="dlg-btn primary" bindtap="onNextLevel">下一关</view>
+        <view wx:else class="dlg-btn primary" bindtap="onCloseWin">收下星光</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 失败 -->
+  <view class="overlay" wx:if="{{status === 'lose'}}">
+    <view class="dialog" catchtap="noop">
+      <view class="dialog-title">心力耗尽</view>
+      <view class="dialog-desc">错误已达 3 次。善用笔记与候选数，稳扎稳打</view>
+      <view class="dialog-btns">
+        <view class="dlg-btn ghost" bindtap="onOpenLevelsFromPause">选择关卡</view>
+        <view class="dlg-btn primary" bindtap="onRestart">重试本关</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 选关 -->
+  <view class="overlay" wx:if="{{showLevels}}" catchtap="onCloseLevels">
+    <view class="dialog dialog-wide" catchtap="noop">
+      <view class="dialog-title">选择关卡</view>
+      <view class="daily-card" bindtap="onPlayDaily">
+        <view class="daily-info">
+          <view class="daily-name">每日挑战</view>
+          <view class="daily-sub">今日已连击 {{dailyStreak}} 天{{dailyDone ? ' · 已完成' : ''}}</view>
+        </view>
+        <view class="daily-go">{{dailyDone ? '再战' : '开始'}}</view>
+      </view>
+      <scroll-view scroll-y class="level-scroll">
+        <view class="level-grid">
+          <view
+            wx:for="{{levelItems}}"
+            wx:key="n"
+            class="lv {{item.locked ? 'locked' : ''}} {{item.cur ? 'cur' : ''}}"
+            data-n="{{item.n}}"
+            bindtap="onSelectLevel"
+          >
+            <view class="lv-n">{{item.locked ? '🔒' : item.n}}</view>
+            <view class="lv-stars">
+              <text class="lv-s {{item.stars >= 1 ? 'on' : ''}}">★</text>
+              <text class="lv-s {{item.stars >= 2 ? 'on' : ''}}">★</text>
+              <text class="lv-s {{item.stars >= 3 ? 'on' : ''}}">★</text>
+            </view>
+          </view>
+        </view>
+      </scroll-view>
+      <view class="pager">
+        <view class="pg-btn {{levelPage <= 0 ? 'dim' : ''}}" bindtap="onLevelPagePrev">‹</view>
+        <view class="pg-text">{{levelPage + 1}} / {{levelPageCount}} 页</view>
+        <view class="pg-btn {{levelPage >= levelPageCount - 1 ? 'dim' : ''}}" bindtap="onLevelPageNext">›</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 设置（内嵌修改器：解锁后显示） -->
+  <view class="overlay" wx:if="{{showSettings}}" catchtap="onCloseSettings">
+    <view class="dialog dialog-settings" catchtap="noop">
+      <view class="dialog-title">设置</view>
+      <view class="set-row" bindtap="onToggleMute">
+        <text class="set-label">音效</text>
+        <view class="toggle {{settings.muted ? '' : 'on'}}"><view class="toggle-dot"></view></view>
+      </view>
+      <view class="set-row" bindtap="onToggleVibrate">
+        <text class="set-label">震动反馈</text>
+        <view class="toggle {{settings.vibrate ? 'on' : ''}}"><view class="toggle-dot"></view></view>
+      </view>
+      <view class="set-row" bindtap="onToggleHighlight">
+        <text class="set-label">行列宫高亮</text>
+        <view class="toggle {{settings.highlight ? 'on' : ''}}"><view class="toggle-dot"></view></view>
+      </view>
+      <view class="set-row" bindtap="onToggleTheme">
+        <text class="set-label">玄墨模式</text>
+        <view class="toggle {{theme === 'dark' ? 'on' : ''}}"><view class="toggle-dot"></view></view>
+      </view>
+      <view class="set-row" bindtap="onToggleMod">
+        <text class="set-label">修改器</text>
+        <view class="toggle {{settings.modOn ? 'on' : ''}}"><view class="toggle-dot"></view></view>
+      </view>
+      <block wx:if="{{settings.modOn}}">
+        <view class="set-divider">修改器 · 雅集模式（战绩不计入）</view>
+        <view class="set-row" bindtap="onModGod">
+          <text class="set-label">不判错</text>
+          <view class="toggle {{mod.god ? 'on' : ''}}"><view class="toggle-dot"></view></view>
+        </view>
+        <view class="set-row" bindtap="onModHints">
+          <text class="set-label">无限提示</text>
+          <view class="toggle {{mod.hints ? 'on' : ''}}"><view class="toggle-dot"></view></view>
+        </view>
+        <view class="set-row" bindtap="onModGhost">
+          <text class="set-label">透视答案</text>
+          <view class="toggle {{mod.ghost ? 'on' : ''}}"><view class="toggle-dot"></view></view>
+        </view>
+        <view class="set-row" bindtap="onModTime">
+          <text class="set-label">时间静止</text>
+          <view class="toggle {{mod.timeStop ? 'on' : ''}}"><view class="toggle-dot"></view></view>
+        </view>
+        <view class="pause-grid mod-grid">
+          <view class="dlg-btn ghost" bindtap="onModFill">一键完成</view>
+          <view class="dlg-btn ghost" bindtap="onModHeal">回满爱心</view>
+          <view class="dlg-btn ghost" bindtap="onModJump">跳转关卡</view>
+          <view class="dlg-btn ghost" bindtap="onModTimeReset">时间清零</view>
+        </view>
+      </block>
+      <view class="set-row danger" bindtap="onResetProgress">
+        <text class="set-label">重置全部进度</text>
+        <text class="set-arrow">›</text>
+      </view>
+      <view class="set-about">数独 · 雅集 v1.0 · 关卡无限</view>
+    </view>
+  </view>
+
+  <!-- 战绩 -->
+  <view class="overlay" wx:if="{{showStats}}" catchtap="onCloseStats">
+    <view class="dialog dialog-wide" catchtap="noop">
+      <view class="dialog-title">我的战绩</view>
+      <view class="stat-grid">
+        <view class="stat"><view class="stat-n">{{stats.stars}}</view><view class="stat-l">总星标</view></view>
+        <view class="stat"><view class="stat-n">{{stats.won}}</view><view class="stat-l">通关数</view></view>
+        <view class="stat"><view class="stat-n">{{stats.winRate}}</view><view class="stat-l">胜率</view></view>
+        <view class="stat"><view class="stat-n">{{stats.streak}}</view><view class="stat-l">每日连击</view></view>
+      </view>
+      <view class="rec-title">最近对局</view>
+      <scroll-view wx:if="{{records.length}}" scroll-y class="rec-list">
+        <view class="rec-item" wx:for="{{records}}" wx:key="index">
+          <text class="rec-label">{{item.label}}</text>
+          <text class="rec-time">{{item.timeText}}</text>
+          <text class="rec-date">{{item.dateText}}</text>
+          <text class="rec-res {{item.result}}">{{item.result === 'win' ? '胜' : '负'}}</text>
+        </view>
+      </scroll-view>
+      <view wx:else class="rec-empty">还没有对局记录，来一局吧</view>
+    </view>
+  </view>
+</view>

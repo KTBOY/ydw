@@ -5,7 +5,8 @@ Component({
     show: { type: Boolean, value: false },
     card: { type: Object, value: null },
     isReversed: { type: Boolean, value: false },
-    actionText: { type: String, value: '' },
+    showSave: { type: Boolean, value: false },
+    saved: { type: Boolean, value: false },
   },
   data: {
     img: '',

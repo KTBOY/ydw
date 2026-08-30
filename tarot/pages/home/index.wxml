@@ -3,37 +3,22 @@
     <!-- 首页：今日之牌 -->
     <scroll-view scroll-y class="panel {{panels.home}}">
       <view class="panel-pad home-wrap">
-        <scroll-view
-          class="month-strip"
-          scroll-x
-          enhanced="{{true}}"
-          show-scrollbar="{{false}}"
-          scroll-with-animation
-          scroll-left="{{monthScrollLeft}}"
-        >
-          <view
-            wx:for="{{months}}"
-            wx:key="index"
-            class="month-item {{item.index === viewMonth ? 'on' : ''}}"
-            data-m="{{item.index}}"
-            bindtap="onPickMonth"
-            >{{item.name}}</view
-          >
-        </scroll-view>
-
-        <view class="year-label">{{yearLabel}}</view>
-
+        <view class="redraw-row">
+          <view class="redraw-btn {{redrawUsed ? 'used' : ''}}" bindtap="onRedraw">
+            {{redrawUsed ? '重抽已用' : '↻ 重抽一次'}}
+          </view>
+        </view>
         <view class="card-stage">
-          <image class="peek left" src="/tarot/images/decor/card-side-l.png" mode="aspectFill" />
-          <image class="peek right" src="/tarot/images/decor/card-side-r.png" mode="aspectFill" />
-
-          <view class="card3d {{cardAnim ? 'enter' : ''}}">
-            <view class="card-inner {{isRevealed || !isCurrentMonth ? 'flipped' : ''}}" bindtap="onCardTap">
+          <view class="card3d {{cardAnim ? slideDir : ''}}">
+            <view class="card-inner {{isRevealed ? 'flipped' : ''}}" bindtap="onCardTap">
               <view class="card-face card-back-face">
-                <view class="back-art">
-                  <text class="back-glyph g1">✦</text>
-                  <text class="back-glyph g2">❂</text>
-                  <text class="back-glyph g3">☾</text>
+                <image class="back-bg" src="/tarot/images/decor/card-back.png" mode="aspectFill" />
+                <view class="back-cover">
+                  <text class="back-ornament">✦</text>
+                  <text class="back-title">今日</text>
+                  <text class="back-title">指引</text>
+                  <view class="back-divider"></view>
+                  <text class="back-sub">轻触揭示</text>
                 </view>
               </view>
               <view class="card-face card-front-face">
@@ -42,7 +27,7 @@
                   <image class="rosette tr" src="/tarot/images/decor/rosette.png" mode="aspectFill" />
                   <image class="rosette bl" src="/tarot/images/decor/rosette.png" mode="aspectFill" />
                   <image class="rosette br" src="/tarot/images/decor/rosette.png" mode="aspectFill" />
-                  <view class="card-topband">{{card.nameCn}}</view>
+                  <view class="card-topband">{{card.keywords[0]}} · {{card.keywords[1]}} · {{card.keywords[2]}}</view>
                   <view class="card-window">
                     <image class="card-img {{card.isReversed ? 'rev' : ''}}" src="{{img}}" mode="aspectFill" />
                     <view class="card-shade"></view>
@@ -55,10 +40,10 @@
           </view>
         </view>
 
-        <view class="date-line">{{dateLine}}</view>
-        <view class="time-line">{{timeLine}}</view>
-        <view class="reveal-hint" wx:if="{{isCurrentMonth && !isRevealed}}">轻触卡片 · 揭示今日指引</view>
-        <view class="browse-hint" wx:else>轻触卡片查看牌意解读</view>
+        <view class="date-line">{{dateLine}}-{{timeLine}}</view>
+        <view class="spread-entry">
+          <view class="gold-btn" bindtap="goSpread">✦ 问卜 · 三牌阵</view>
+        </view>
       </view>
     </scroll-view>
 
@@ -119,7 +104,6 @@
 
         <view class="entry-list">
           <view class="gold-btn entry" bindtap="goSaved">☾ 收藏之牌</view>
-          <view class="gold-btn entry" bindtap="goMember">✧ 会员中心</view>
         </view>
       </view>
     </scroll-view>
@@ -129,7 +113,8 @@
     show="{{showDetail}}"
     card="{{detailCard}}"
     isReversed="{{detailReversed}}"
-    actionText="{{detailAction}}"
+    showSave="{{true}}"
+    saved="{{detailSaved}}"
     bindclose="closeDetail"
     bindaction="onDetailAction"
   />

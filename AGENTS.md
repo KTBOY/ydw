@@ -46,8 +46,9 @@ packageA/ xingzuo/ bz/ game/     功能分包
 - `bz/`：壁纸。
 - `game/`：游戏中心分包
   - `pages/list`：游戏下载库（数据源 `asserts/json/gemes.json`），`pages/detail`：网盘链接展示（复用 `/components/url-copy/url`）。
-  - `pages/arrowEscape`：可玩小游戏「箭头逃脱」（Canvas 2D）。`levels.js`=100 关（逆向构造生成、全部可解）；`audio.js`=音效管理（音频池+静音开关）；`index.*`=主逻辑/渲染/动画。
-  - `game/images/`、`game/audio/arrow/`：该游戏的图片与音效（**已从主包移入分包以控制主包体积**）。
+  - `pages/arrowEscape`：可玩小游戏「箭头逃脱」（Canvas 2D）。`levels.js`=100 关（逆向构造生成、全部可解）；`audio.js`=音效管理（音频池+静音开关）；`index.*`=主逻辑/渲染/动画（QQ 农场风格：静态场景走 OffscreenCanvas 离屏缓存，糖果质感箭头/星级/关卡选择，美术规格见 `pages/arrowEscape/DESIGN.md`）。
+  - `pages/sudoku`：可玩小游戏「数独 · 雅集」（WXML 网格，**非 Canvas**，无原生层遮挡问题）。`core.js`=种子化确定性关卡生成器 + 位运算求解器（纯函数、可在 Node 单测唯一解/确定性）；`audio.js`=音效管理；进度/战绩/设置存 `wx.storage`（`sudokuSave`/`sudokuProgress`/`sudokuRecords`/`sudokuSettings`）；美术设计文档见 `pages/sudoku/DESIGN.md`；内置修改器在设置弹框内用 switch 开关直接启停（关闭主开关会复位作弊状态；用修改器赢的局不计战绩）。
+  - `game/images/`、`game/audio/arrow/`、`game/audio/sudoku/`：游戏图片与音效（**放在分包以控制主包体积**）。
 - 首页底部 `custom-tab-bar` 是**内容切换器**（非真实分包跳转）：`currIndex` 0=首页(`menu`)、1=基金(`fund`)、2=游戏中心(`game-center` 组件)。
 
 ## 代码规范

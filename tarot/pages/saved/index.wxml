@@ -7,7 +7,14 @@
     </view>
 
     <view class="saved-grid" wx:if="{{list.length > 0}}">
-      <view wx:for="{{list}}" wx:key="id" class="saved-item" data-id="{{item.id}}" bindtap="onCard">
+      <view
+        wx:for="{{list}}"
+        wx:key="id"
+        class="saved-item"
+        data-id="{{item.id}}"
+        bindtap="onCard"
+        bindlongpress="onLongUnsave"
+      >
         <image class="saved-img" src="{{item.img}}" mode="aspectFill" />
         <text class="saved-name">{{item.nameCn}}</text>
       </view>
@@ -23,7 +30,8 @@
   <card-detail
     show="{{showDetail}}"
     card="{{detailCard}}"
-    actionText="取消收藏"
+    showSave="{{true}}"
+    saved="{{true}}"
     bindclose="closeDetail"
     bindaction="onUnsave"
   />

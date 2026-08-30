@@ -45,6 +45,7 @@
 /* ===== 首页：顶部月份条 ===== */
 
 .home-wrap {
+  position: relative;
   padding-top: 16rpx;
 }
 
@@ -88,27 +89,44 @@
 .card-stage {
   position: relative;
   height: 836rpx;
-  margin-top: 48rpx;
   display: flex;
   align-items: center;
   justify-content: center;
+  margin: 35rpx 0;
 }
 
+/* 两侧露出的上/下月真实卡牌（白框，部分探出屏幕外） */
 .peek {
   position: absolute;
   top: 50%;
-  width: 142rpx;
-  height: 812rpx;
-  transform: translateY(-50%);
   z-index: 1;
+  width: 190rpx;
+  height: 306rpx;
+  transform: translateY(-50%);
+  box-sizing: border-box;
+  padding: 8rpx;
+  border-radius: 12rpx;
+  background: linear-gradient(180deg, #ffffff 0%, #f8f4e9 70%, #efe9d8 100%);
+  box-shadow: 0 16rpx 40rpx rgba(0, 0, 0, 0.6);
 }
 
 .peek.left {
-  left: 0;
+  left: -66rpx;
 }
 
 .peek.right {
-  right: 0;
+  right: -66rpx;
+}
+
+.peek-img {
+  width: 100%;
+  height: 100%;
+  border-radius: 6rpx;
+  display: block;
+}
+
+.peek-img.rev {
+  transform: rotate(180deg);
 }
 
 /* ===== 中央大卡：3D 翻牌 ===== */
@@ -125,14 +143,47 @@
   animation: dealIn 0.5s cubic-bezier(0.22, 0.61, 0.36, 1) both;
 }
 
+.card3d.enter-r {
+  animation: dealInR 0.45s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+}
+
+.card3d.enter-l {
+  animation: dealInL 0.45s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+}
+
 @keyframes dealIn {
   0% {
     opacity: 0;
     transform: translateY(-36rpx) scale(0.95);
   }
+
   100% {
     opacity: 1;
     transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes dealInR {
+  0% {
+    opacity: 0;
+    transform: translateX(90rpx) scale(0.96);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+@keyframes dealInL {
+  0% {
+    opacity: 0;
+    transform: translateX(-90rpx) scale(0.96);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateX(0) scale(1);
   }
 }
 
@@ -158,57 +209,83 @@
   -webkit-backface-visibility: hidden;
 }
 
-/* 牌背：奶白外框 + 暗色描金纹 */
+/* 牌背：暗纹全出血（设计切图）+ 中央中文文案 */
 .card-back-face {
-  box-sizing: border-box;
-  padding: 12rpx;
   border-radius: 14rpx;
-  background: linear-gradient(180deg, #ffffff, #f3eede);
+  overflow: hidden;
+  background: #0b0806;
   box-shadow: 0 24rpx 60rpx rgba(0, 0, 0, 0.6);
 }
 
-.back-art {
-  position: relative;
+.back-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
-  border-radius: 8rpx;
+}
+
+.back-cover {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 34rpx;
-  background:
-    radial-gradient(circle at 50% 50%, rgba(201, 168, 76, 0.3) 0%, transparent 45%),
-    repeating-radial-gradient(circle at 50% 50%, rgba(201, 168, 76, 0.16) 0 8rpx, transparent 8rpx 20rpx),
-    linear-gradient(180deg, #131019 0%, #0a0810 100%);
 }
 
-.back-art::before {
+.back-cover::before {
   content: '';
   position: absolute;
-  top: 14rpx;
-  left: 14rpx;
-  right: 14rpx;
-  bottom: 14rpx;
-  border: 1rpx solid rgba(201, 168, 76, 0.55);
-  border-radius: 6rpx;
+  top: 50%;
+  left: 50%;
+  width: 430rpx;
+  height: 430rpx;
+  margin: -215rpx 0 0 -215rpx;
+  border-radius: 50%;
+  border: 1rpx solid rgba(201, 168, 76, 0.22);
+  box-shadow:
+    0 0 0 36rpx rgba(201, 168, 76, 0.06),
+    0 0 0 72rpx rgba(201, 168, 76, 0.04),
+    inset 0 0 80rpx rgba(201, 168, 76, 0.1);
 }
 
-.back-glyph {
-  color: #d9b968;
-}
-
-.back-glyph.g1 {
+.back-ornament {
+  position: relative;
   font-size: 44rpx;
+  color: #c9a84c;
+  margin-bottom: 28rpx;
+  text-shadow: 0 0 24rpx rgba(201, 168, 76, 0.8);
 }
 
-.back-glyph.g2 {
-  font-size: 92rpx;
-  text-shadow: 0 0 28rpx rgba(217, 185, 104, 0.7);
+.back-title {
+  position: relative;
+  font-size: 56rpx;
+  line-height: 1.7;
+  color: #f3efe4;
+  letter-spacing: 14rpx;
+  text-indent: 14rpx;
+  text-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.8);
 }
 
-.back-glyph.g3 {
-  font-size: 44rpx;
+.back-divider {
+  position: relative;
+  width: 180rpx;
+  height: 2rpx;
+  margin: 28rpx 0 24rpx;
+  background: linear-gradient(90deg, transparent, #c9a84c, transparent);
+}
+
+.back-sub {
+  position: relative;
+  margin-top: 0;
+  font-size: 22rpx;
+  color: rgba(201, 168, 76, 0.85);
+  letter-spacing: 6rpx;
+  text-indent: 6rpx;
 }
 
 /* 牌面：白框 + 顶部卡名带 + 四角雕花 + 底部铭牌（尺寸取自设计图） */
@@ -224,7 +301,23 @@
   padding: 19rpx 32rpx 20rpx;
   border-radius: 14rpx;
   background: linear-gradient(180deg, #ffffff 0%, #f8f4e9 70%, #efe9d8 100%);
-  box-shadow: 0 24rpx 60rpx rgba(0, 0, 0, 0.65);
+  border: 1rpx solid rgba(202, 164, 90, 0.6);
+  box-shadow:
+    0 24rpx 60rpx rgba(0, 0, 0, 0.65),
+    inset 0 0 26rpx rgba(112, 84, 32, 0.16);
+}
+
+/* 内圈金线：呼应底部铭牌的双线描边 */
+.card-frame::before {
+  content: '';
+  position: absolute;
+  top: 6rpx;
+  left: 6rpx;
+  right: 6rpx;
+  bottom: 6rpx;
+  border: 1rpx solid rgba(202, 164, 90, 0.4);
+  border-radius: 8rpx;
+  pointer-events: none;
 }
 
 .card-topband {
@@ -332,7 +425,7 @@
 /* ===== 首页：日期与时间 ===== */
 
 .date-line {
-  margin-top: 91rpx;
+  margin-top: 5rpx;
   text-align: center;
   font-size: 30rpx;
   color: #b9c1cd;
@@ -365,10 +458,12 @@
 }
 
 @keyframes hintPulse {
+
   0%,
   100% {
     opacity: 0.45;
   }
+
   50% {
     opacity: 1;
   }
@@ -520,4 +615,44 @@
   flex-direction: column;
   gap: 24rpx;
   padding: 0 64rpx;
+}
+
+.spread-entry {
+  padding: 40rpx 64rpx 0;
+}
+
+.home-head {
+  display: flex;
+  justify-content: center;
+  padding: 48rpx 0 8rpx;
+}
+
+.home-title {
+  font-size: 44rpx;
+  letter-spacing: 6rpx;
+}
+
+.redraw-row {
+  position: absolute;
+  top: 24rpx;
+  right: 24rpx;
+  z-index: 5;
+}
+
+.redraw-btn {
+  font-size: 24rpx;
+  color: var(--tarot-gold);
+  border: 1rpx solid var(--tarot-line);
+  border-radius: 32rpx;
+  padding: 10rpx 36rpx;
+  letter-spacing: 2rpx;
+}
+
+.redraw-btn:active {
+  opacity: 0.7;
+}
+
+.redraw-btn.used {
+  color: var(--tarot-dim);
+  border-color: rgba(138, 133, 119, 0.35);
 }

@@ -2,7 +2,9 @@ import { CARDS, getCardById } from '../data/cards';
 
 const HISTORY_KEY = 'tarot_history';
 const SAVED_KEY = 'tarot_saved';
+const SPREAD_KEY = 'tarot_spreads';
 const SALT = 'ydw-tarot';
+const POSITIONS = ['过去', '现在', '未来'];
 
 function hash(str) {
   let h = 5381;
@@ -106,7 +108,7 @@ export function toggleSave(cardId) {
 export function getStats() {
   const history = readHistory();
   const dates = Object.keys(history).sort();
-  const total = dates.length;
+  const total = dates.length + getSpreads().length * 3;
   const savedCount = getSavedIds().length;
 
   let streak = 0;
@@ -121,4 +123,81 @@ export function getStats() {
     cursor.setDate(cursor.getDate() - 1);
   }
   return { total, savedCount, streak };
+}
+
+export function drawThreeSpread(question = '') {
+  const pool = [...CARDS];
+  const draws = POSITIONS.map((position) => {
+    const idx = Math.floor(Math.random() * pool.length);
+    const card = pool.splice(idx, 1)[0];
+    return { card, isReversed: Math.random() < 0.5, position };
+  });
+  const now = new Date();
+  const hh = `${now.getHours()}`.padStart(2, '0');
+  const mm = `${now.getMinutes()}`.padStart(2, '0');
+  return { ts: now.getTime(), dateStr: todayStr(), time: `${hh}:${mm}`, question, draws };
+}
+
+export function getSpreads() {
+  return wx.getStorageSync(SPREAD_KEY) || [];
+}
+
+export function recordSpread(spread) {
+  const list = getSpreads();
+  list.unshift(spread);
+  wx.setStorageSync(SPREAD_KEY, list.slice(0, 50));
+}
+
+export function getMonthRecords(year, month) {
+  const prefix = `${year}-${`${month}`.padStart(2, '0')}`;
+  const records = [];
+  const history = readHistory();
+  Object.keys(history)
+    .filter((date) => date.startsWith(prefix))
+    .forEach((date) => {
+      const rec = history[date];
+      records.push({
+        type: 'daily',
+        date,
+        time: '00:00',
+        cardId: rec.cardId,
+        reversed: !!rec.reversed,
+        label: '每日之牌',
+      });
+    });
+  getSpreads().forEach((sp) => {
+    if (!sp.dateStr || !sp.dateStr.startsWith(prefix)) return;
+    (sp.draws || []).forEach((dr) => {
+      records.push({
+        type: 'spread',
+        date: sp.dateStr,
+        time: sp.time || '00:00',
+        cardId: dr.card.id,
+        reversed: !!dr.isReversed,
+        position: dr.position,
+        label: `${dr.position} · 问卜`,
+      });
+    });
+  });
+  records.sort((a, b) => `${b.date}${b.time}`.localeCompare(`${a.date}${a.time}`));
+  return records;
+}
+
+const REDRAW_KEY = 'tarot_redraw';
+
+export function isRedrawUsed(dateStr) {
+  const map = wx.getStorageSync(REDRAW_KEY) || {};
+  return !!map[dateStr];
+}
+
+export function redrawDaily(dateStr) {
+  const map = wx.getStorageSync(REDRAW_KEY) || {};
+  map[dateStr] = true;
+  wx.setStorageSync(REDRAW_KEY, map);
+  const card = CARDS[Math.floor(Math.random() * CARDS.length)];
+  const isReversed = Math.random() < 0.5;
+  const history = readHistory();
+  history[dateStr] = { cardId: card.id, reversed: isReversed };
+  writeHistory(history);
+  return { ...card, isReversed };
 }

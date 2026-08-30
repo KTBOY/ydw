@@ -135,7 +135,7 @@ Component({
         image: '/asserts/images/bcz.png',
         name: '量尺子',
         router: '/packageA/pages/ruler/ruler',
-        show: true,
+        show: false,
         style: {
           width: '70rpx',
           height: '70rpx',
@@ -166,17 +166,6 @@ Component({
         image: '/asserts/images/screen.png',
         name: '壁纸',
         router: '/bz/pages/wallpaper/wallpaper',
-        show: true,
-        style: {
-          width: '70rpx',
-          height: '70rpx',
-        },
-      },
-
-      {
-        image: '/asserts/images/screen.png',
-        name: '二次元壁纸',
-        router: '/acg/pages/wallpaper/wallpaper',
         show: true,
         style: {
           width: '70rpx',

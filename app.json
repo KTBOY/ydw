@@ -46,17 +46,13 @@
       "pages": ["pages/detail/detail"]
     },
     {
-      "root": "acg",
-      "pages": ["pages/wallpaper/wallpaper", "pages/wallpaperDetail/wallpaperDetail"]
-    },
-    {
       "root": "tarot",
       "pages": [
         "pages/home/index",
         "pages/history/index",
         "pages/saved/index",
         "pages/profile/index",
-        "pages/member/index"
+        "pages/spread/index"
       ]
     }
   ],

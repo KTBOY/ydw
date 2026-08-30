@@ -16,17 +16,51 @@
       <!-- 下载入口：对应 GIF 顶部的白色胶囊按钮，点击看视频后下载当前壁纸 -->
       <view class="meta-pill down-pill" bindtap="handleImage">看视频下载</view>
     </view>
+    <!-- 预览入口：右上角眼睛按钮，点击进入全屏放大预览 -->
+    <view class="preview-btn" hover-class="preview-btn-hover" bindtap="openPreview">
+      <view class="preview-icon"></view>
+    </view>
   </view>
 
   <!-- 卡片轮播：两侧露边 + 当前卡片放大 -->
-  <swiper class="card-swiper" current="{{current}}" previous-margin="56rpx" next-margin="56rpx"
-    bindchange="onSwiperChange">
+  <swiper
+    class="card-swiper"
+    current="{{current}}"
+    previous-margin="56rpx"
+    next-margin="56rpx"
+    bindchange="onSwiperChange"
+  >
     <swiper-item wx:for="{{list}}" wx:key="*this">
       <view class="card {{current === index ? 'card-active' : ''}}">
         <!-- 仅渲染当前卡片附近的图片，避免长列表一次性加载 -->
-        <image wx:if="{{index >= current - 2 && index <= current + 2}}" class="card-img" src="{{item}}"
-          mode="aspectFill" />
+        <image
+          wx:if="{{index >= current - 2 && index <= current + 2}}"
+          class="card-img"
+          src="{{item}}"
+          mode="aspectFill"
+        />
       </view>
     </swiper-item>
   </swiper>
+
+  <!-- 全屏预览：双指缩放查看细节，点击任意处关闭 -->
+  <view wx:if="{{previewShow}}" class="preview {{previewOut ? 'preview-out' : ''}}" catchtap="closePreview">
+    <movable-area class="preview-stage">
+      <movable-view
+        class="preview-mover"
+        direction="all"
+        scale="{{true}}"
+        scale-min="1"
+        scale-max="3"
+        inertia="{{true}}"
+      >
+        <image class="preview-img" src="{{list[current]}}" mode="aspectFit" />
+      </movable-view>
+    </movable-area>
+    <view class="preview-index">{{current + 1}} / {{list.length}}</view>
+    <view class="preview-close" catchtap="closePreview">
+      <view class="preview-close-icon"></view>
+    </view>
+    <view class="preview-hint">双指缩放查看细节</view>
+  </view>
 </view>

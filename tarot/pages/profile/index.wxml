@@ -23,7 +23,6 @@
 
     <view class="entry-list">
       <view class="gold-btn entry" bindtap="goSaved">☾ 收藏之牌</view>
-      <view class="gold-btn entry" bindtap="goMember">✧ 会员中心</view>
     </view>
   </view>
   <tabbar active="profile" />

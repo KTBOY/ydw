@@ -1,33 +1,59 @@
 <!--game/pages/arrowEscape/index.wxml-->
 <view class="page">
   <view class="topbar">
-
-    <view class="left-audio">
-      <view class="mute" bindtap="onToggleMute">{{muted ? '🔇' : '🔊'}}</view>
-      <view class="hearts">
-        <text wx:for="{{hearts}}" wx:key="index" class="heart {{item ? 'on' : 'off'}}">♥</text>
-      </view>
+    <view class="round-btn" bindtap="onToggleMute" aria-label="声音开关">
+      <text class="round-btn-icon">{{muted ? '🔇' : '🔊'}}</text>
     </view>
 
-    <view class="level">第 {{level}} / {{total}} 关</view>
+    <view class="level-pill">
+      <text class="pill-icon">🌾</text>
+      <text class="pill-text">第 {{level}} / {{total}} 关</text>
+    </view>
+
+    <view class="lives-pill">
+      <text class="lp-heart">❤</text>
+      <text class="lp-num">× {{lives}}</text>
+    </view>
   </view>
 
-
-
   <view class="canvas-wrap">
-
-    <canvas type="2d" id="gameCanvas" class="canvas" hidden="{{status !== 'playing' || showRecords}}" bindtouchstart="onTouch"></canvas>
+    <canvas
+      type="2d"
+      id="gameCanvas"
+      class="canvas"
+      hidden="{{status !== 'playing' || showRecords || showLevels}}"
+      bindtouchstart="onTouch"
+    ></canvas>
   </view>
 
   <view class="controls">
-    <view class="ctrl-btn" bindtap="onHint">💡 提示</view>
-    <view class="ctrl-btn" bindtap="onRestart">↻ 重玩</view>
-    <view class="ctrl-btn" bindtap="onShowRecords">🏆 记录</view>
+    <view class="farm-btn" bindtap="onHint">
+      <view class="fb-icon">💡</view>
+      <view class="fb-label">提示</view>
+    </view>
+    <view class="farm-btn" bindtap="onRestart">
+      <view class="fb-icon">↻</view>
+      <view class="fb-label">重玩</view>
+    </view>
+    <view class="farm-btn" bindtap="onShowLevels">
+      <view class="fb-icon">🏡</view>
+      <view class="fb-label">关卡</view>
+    </view>
+    <view class="farm-btn" bindtap="onShowRecords">
+      <view class="fb-icon">🏆</view>
+      <view class="fb-label">记录</view>
+    </view>
   </view>
 
+  <!-- 过关 -->
   <view class="overlay" wx:if="{{status==='win'}}">
     <view class="dialog">
-      <view class="dialog-title">🎉 过关！</view>
+      <view class="dialog-title">🎉 过关啦！</view>
+      <view class="stars">
+        <text class="star {{starCount > 0 ? 'lit d1' : ''}}">★</text>
+        <text class="star big {{starCount > 1 ? 'lit d2' : ''}}">★</text>
+        <text class="star {{starCount > 2 ? 'lit d3' : ''}}">★</text>
+      </view>
       <view class="dialog-desc">{{isLastLevel ? '你已通关全部关卡！' : '即将自动进入下一关…'}}</view>
       <view class="dialog-btns">
         <view class="dlg-btn ghost" bindtap="onRestart">再玩一次</view>
@@ -36,10 +62,11 @@
     </view>
   </view>
 
+  <!-- 失败 -->
   <view class="overlay" wx:if="{{status==='lose'}}">
     <view class="dialog">
       <view class="dialog-title">💔 生命耗尽</view>
-      <view class="dialog-desc">再想想箭头的先后顺序吧</view>
+      <view class="dialog-desc">挡路的小箭头点不得，再想想先后顺序吧</view>
       <view class="dialog-btns">
         <view class="dlg-btn ghost" bindtap="onBack">返回</view>
         <view class="dlg-btn primary" bindtap="onRestart">重玩本关</view>
@@ -47,6 +74,32 @@
     </view>
   </view>
 
+  <!-- 关卡选择 -->
+  <view class="overlay" wx:if="{{showLevels}}" catchtap="onCloseLevels">
+    <view class="dialog lv-dialog" catchtap="noop">
+      <view class="dialog-title">🌱 选择关卡</view>
+      <view class="lv-summary">已收集 ⭐ × {{totalStars}} / 300</view>
+      <scroll-view scroll-y class="lv-scroll" scroll-into-view="lv{{scrollToN}}" scroll-with-animation>
+        <view class="lv-grid">
+          <view class="lv-cell" wx:for="{{levelList}}" wx:key="n" id="lv{{item.n}}">
+            <view
+              class="lv-node {{item.unlocked ? 'unlocked' : 'locked'}} {{item.current ? 'current' : ''}}"
+              data-idx="{{item.idx}}"
+              bindtap="onPickLevel"
+            >
+              <text class="lv-num">{{item.unlocked ? item.n : '🔒'}}</text>
+              <text class="lv-stars">{{item.starText}}</text>
+            </view>
+          </view>
+        </view>
+      </scroll-view>
+      <view class="dialog-btns">
+        <view class="dlg-btn primary" bindtap="onCloseLevels">关 闭</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 游玩记录 -->
   <view class="overlay" wx:if="{{showRecords}}" catchtap="onCloseRecords">
     <view class="dialog" catchtap="noop">
       <view class="dialog-title">🏆 游玩记录</view>

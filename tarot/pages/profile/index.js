@@ -12,8 +12,4 @@ Page({
   goSaved() {
     wx.navigateTo({ url: '/tarot/pages/saved/index' });
   },
-
-  goMember() {
-    wx.navigateTo({ url: '/tarot/pages/member/index' });
-  },
 });
