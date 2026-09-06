@@ -1,34 +1,36 @@
-## 模拟与数据
+1. 抖音git 参考
+https://github.com/5ime/Video_spider
 
-model 用于放置模拟后端数据返回的逻辑；假若接入真实后端接口，则本文件夹可改造为数据层适配。
-services 用于请求逻辑，根据 config.useMock 配置可控制返回 mock 数据或是真实接口数据
+2.星座运势
 
-### 1 模拟策略
+3.油耗查询
 
-1）只依靠 ID 规律进行关联
-大部分情况下推荐使用本方案，ID 为`1`的商品固定会关联 ID 为`1`的优惠券或者[ID 对 10 的模运算结果为 1](https://www.runoob.com/try/try.php?filename=tryjs_oper_mod)的优惠券（看需要 1 个还是多个了）。
 
-> 为保持关系稳定，模运算统一使用`10`为除数，`ID`为被除数；即`1%10`、`2%10`。
+壁纸网
+https://github.com/mengkunsoft/wallpaper/blob/master/css/wallpaper.css
+https://qgpzjg3jr9.coze.site/
+小程序目前使用：
+//https: //blog.csdn.net/weixin_51635312/article/details/144133666
+//https://img.moehu.org/pic.php?return=json&id=img1&num=5
 
-2）建立额外关联关系查询
-在无法使用简单数学关系维持关系的情况下，可以采用单独提供关系数据的方式进行关联（目前也没想到什么场景是数学关系稳定不了的了，先假定有，定下规范做法）。如数据 A 与数据 B 之间需要一个关联 AB，则需要提供`A数据mock`、`B数据mock`、以及`A查B与B反查A`共 4 个 mock 源。
 
-### 2 使用数据
+2 单词乐园
+https://93w35krfxn.coze.site/
 
-使用数据源时应该在 services 文件夹中按照业务新建自己 fetch 函数导出，fetch 函数以 Promise 形式返回组合调用 model 逻辑得到的数据。
+https://93w35krfxn.coze.site/
 
-> 不允许直接在业务中调用、使用 model 数据。
+任务执行
+1.小程序
+抖音git 参考
+星座运势
+油耗查询
+增加壁纸
+2.网站
+升级功能
+增加抖音
+增加壁纸
 
-## 接入真实 API 后
+3.其他
 
-接入真实 API 后 model 文件夹逻辑可以反转层级，作为数据适配层继续为项目服务。举例说明:
 
-1. 在没有接入 API 时（useMock 为 true）
-   1.1 业务调用 services 进行 fetch
-   1.2 fetch 逻辑调用 model 文件夹中对应的数据源，构造、返回业务需要的结构
 
-2. 在接入 API 后（useMock 为 false）
-   2.1 业务调用 services 进行 fetch
-   2.2 fetch 逻辑调用接口得到真实后端数据
-   2.3 比对 model 文件夹中数据 mock 数据结构 export 一个数据结构转换函数，输入真实后端数据，输出与 mock 数据结构一致的新数据，返回给 fetch
-   2.4 fetch 函数 返回 转换后的 数据结构，业务层无需进行更改

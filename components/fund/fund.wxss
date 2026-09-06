@@ -1,0 +1,283 @@
+@import "../../asserts/wxss/iconFont.wxss"
+
+.fund-card {
+  margin: 20rpx 24rpx 0;
+  padding: 22rpx;
+  border-radius: 28rpx;
+  background: #eceef3;
+  border: 1rpx solid #e2e5ec;
+  box-shadow:
+    12rpx 12rpx 24rpx #d7dbe3,
+    -10rpx -10rpx 22rpx #ffffff;
+  box-sizing: border-box;
+}
+
+.search-card {
+  padding: 20rpx;
+}
+
+.market-card,
+.favorite-card {
+  padding: 24rpx;
+}
+
+.example-search {
+  width: 100%;
+}
+
+.search-info {
+  width: 100%;
+  height: 72rpx;
+  line-height: 72rpx;
+  padding: 0 20rpx;
+  border-radius: 14rpx;
+  box-sizing: border-box;
+  font-size: 28rpx;
+  color: #8d93a2;
+  background: #f3f4f8;
+  border: 1rpx solid #dde1e9;
+  box-shadow:
+    inset 3rpx 3rpx 8rpx #d8dce5,
+    inset -3rpx -3rpx 8rpx #ffffff;
+}
+
+.fund-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 18rpx;
+}
+
+.title-wrap {
+  display: flex;
+  align-items: center;
+}
+
+.title-icon {
+  width: 34rpx;
+  height: 34rpx;
+  border-radius: 10rpx;
+  background: linear-gradient(145deg, #ff9ec9 0%, #ffb667 100%);
+  box-shadow: 0 4rpx 8rpx rgba(255, 142, 172, 0.35);
+}
+
+.title-text {
+  margin-left: 10rpx;
+  color: #4d5567;
+  font-size: 34rpx;
+  font-weight: 700;
+}
+
+.live-tag {
+  height: 44rpx;
+  border-radius: 22rpx;
+  padding: 0 14rpx;
+  background: #eef1f7;
+  border: 1rpx solid #dfe3eb;
+  display: flex;
+  align-items: center;
+  box-shadow:
+    inset 2rpx 2rpx 6rpx #d5d9e2,
+    inset -2rpx -2rpx 6rpx #ffffff;
+}
+
+.live-dot {
+  width: 10rpx;
+  height: 10rpx;
+  border-radius: 50%;
+  background: #35ca8f;
+  margin-right: 8rpx;
+}
+
+.live-text {
+  color: #5f6678;
+  font-size: 22rpx;
+  font-weight: 600;
+}
+
+.fund-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.fund-item {
+  width: calc(50% - 10rpx);
+  padding: 18rpx 16rpx 14rpx;
+  margin-bottom: 16rpx;
+  border-radius: 24rpx;
+  background: #ebedf2;
+  border: 1rpx solid #dde1e8;
+  box-shadow:
+    8rpx 8rpx 16rpx #d5d9e1,
+    -8rpx -8rpx 16rpx #ffffff;
+  box-sizing: border-box;
+}
+
+.fund-name {
+  display: block;
+  color: #4f5769;
+  font-size: 24rpx;
+  font-weight: 600;
+  line-height: 1.35;
+  text-align: center;
+}
+
+.fund-code {
+  display: block;
+  color: #8b93a3;
+  font-size: 20rpx;
+  margin-top: 4rpx;
+  text-align: center;
+}
+
+.fund-current {
+  display: block;
+  color: #3e4658;
+  font-size: 40rpx;
+  font-weight: 700;
+  margin-top: 10rpx;
+  text-align: center;
+}
+
+.fund-change-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 8rpx;
+}
+
+.fund-change-row .change {
+  margin-right: 10rpx;
+}
+
+.change,
+.rate {
+  font-size: 22rpx;
+  font-weight: 600;
+}
+
+.up {
+  color: #ff6f91;
+}
+
+.down {
+  color: #23be86;
+}
+
+.flat {
+  color: #7c8599;
+}
+
+.my-fund {
+  border-radius: 24rpx;
+  overflow: hidden;
+  border: 1rpx solid #dde1e9;
+  background: #eceef3;
+  box-shadow:
+    inset 3rpx 3rpx 10rpx #d8dce5,
+    inset -3rpx -3rpx 10rpx #ffffff;
+}
+
+.my-fund-header {
+  min-height: 72rpx;
+  padding: 0 18rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1rpx solid #dfe3eb;
+}
+
+.my-fund-title-wrap {
+  display: flex;
+  align-items: center;
+}
+
+.my-fund-star {
+  color: #ffbc4a;
+  font-size: 26rpx;
+  margin-right: 10rpx;
+}
+
+.my-fund-title {
+  color: #4e5668;
+  font-size: 34rpx;
+  font-weight: 700;
+}
+
+.my-fund-count {
+  color: #8f96a6;
+  font-size: 24rpx;
+}
+
+.my-fund-item {
+  padding: 18rpx;
+}
+
+.my-fund-item+.my-fund-item {
+  border-top: 1rpx solid #dfe3eb;
+}
+
+.my-fund-left {
+  min-width: 0;
+  padding-right: 20rpx;
+}
+
+.my-fund-name {
+  display: block;
+  color: #444d60;
+  font-size: 34rpx;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.my-fund-code {
+  display: block;
+  color: #d8a631;
+  font-size: 30rpx;
+  margin-top: 8rpx;
+}
+
+.my-fund-right {
+  display: flex;
+  align-items: flex-end;
+  flex-direction: column;
+}
+
+.my-fund-change-wrap {
+  display: flex;
+  align-items: center;
+}
+
+.my-fund-change {
+  font-size: 42rpx;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.my-fund-remove {
+  color: #9ca3b3;
+  font-size: 32rpx;
+  margin-left: 14rpx;
+  line-height: 1;
+}
+
+.my-fund-time {
+  color: #9199aa;
+  font-size: 24rpx;
+  margin-top: 10rpx;
+}
+
+.btn.delete-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 90rpx;
+  font-size: 24rpx;
+  height: 100%;
+}
+
+.iconfont {
+  color: #000;
+  font-size: 35rpx;
+}

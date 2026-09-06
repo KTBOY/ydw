@@ -1,0 +1,8 @@
+{
+  "component": true,
+  "usingComponents": {
+    "t-search": "tdesign-miniprogram/search/search",
+    "t-swiper": "tdesign-miniprogram/swiper/swiper",
+    "image-waterfall": "sk-image-waterfall/image-waterfall/image-waterfall"
+  }
+}

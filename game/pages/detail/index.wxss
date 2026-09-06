@@ -1,0 +1,28 @@
+/* game/pages/detail/index.wxss */
+.details {
+  padding: 20rpx;
+}
+
+.title {
+  font-weight: bold;
+  font-size: 30rpx;
+  line-height: 1.5;
+  margin-bottom: 20rpx;
+}
+
+.url {
+  margin-bottom: 20rpx;
+}
+
+.url-name {
+  font-size: 28rpx;
+  font-weight: 600;
+  margin-bottom: 10rpx;
+}
+
+.empty {
+  text-align: center;
+  color: #999;
+  padding-top: 80rpx;
+  font-size: 28rpx;
+}

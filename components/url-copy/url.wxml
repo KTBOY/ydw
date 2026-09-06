@@ -1,0 +1,15 @@
+<!--components/urlCopy/url.wxml-->
+<view class="url-box">
+  <view class="url">
+    <view class="url-one">
+      <text selectable="{{true}}">{{url}}</text>
+    </view>
+    <view wx:if="{{code}}">
+      提取码： <text selectable='{{true}}'> {{code}}</text>
+    </view>
+    <view wx:if="{{passWord}}">解压密码/安装码：
+      <text selectable='{{true}}'>{{passWord}}</text>
+    </view>
+  </view>
+  <view class="copy" bind:tap="handCopyBD" data-url="{{url}}">复制</view>
+</view>

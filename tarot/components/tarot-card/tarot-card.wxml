@@ -1,0 +1,12 @@
+<view class="tcard">
+  <view class="tcard-frame">
+    <image class="tcard-img {{isReversed ? 'rev' : ''}}" src="{{image}}" mode="aspectFill" />
+    <image class="corner c-tl" src="/tarot/images/corner.png" />
+    <image class="corner c-tr" src="/tarot/images/corner.png" />
+    <image class="corner c-br" src="/tarot/images/corner.png" />
+    <image class="corner c-bl" src="/tarot/images/corner.png" />
+  </view>
+  <view class="tcard-plate" wx:if="{{plate}}">
+    <text>{{nameEn}}</text>
+  </view>
+</view>

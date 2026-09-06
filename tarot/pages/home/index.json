@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "每日塔罗",
+  "navigationBarBackgroundColor": "#0A0A0F",
+  "navigationBarTextStyle": "white",
+  "usingComponents": {
+    "tabbar": "/tarot/components/tabbar/tabbar",
+    "card-detail": "/tarot/components/card-detail/card-detail"
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "游戏详情",
+  "usingComponents": {
+    "url-copy": "/components/url-copy/url"
+  }
+}

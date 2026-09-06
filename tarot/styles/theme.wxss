@@ -1,0 +1,75 @@
+page {
+  --tarot-bg: #0a0a0f;
+  --tarot-gold: #c9a84c;
+  --tarot-gold-light: #e8d48b;
+  --tarot-text: #e0dcd0;
+  --tarot-dim: #8a8577;
+  --tarot-line: rgba(201, 168, 76, 0.35);
+  --tarot-serif: 'Noto Serif SC', 'Source Han Serif CN', 'Songti SC', 'SimSun', serif;
+}
+
+.tarot-page {
+  position: relative;
+  min-height: 100vh;
+  background:
+    radial-gradient(ellipse 95% 30% at 50% 76%, rgba(30, 62, 118, 0.55), transparent 75%),
+    radial-gradient(ellipse 60% 22% at 72% 72%, rgba(52, 96, 160, 0.5), transparent 70%),
+    linear-gradient(180deg, #0c0b0a 0%, #070706 40%, #060607 62%, #071124 82%, #04060e 100%);
+  color: var(--tarot-text);
+  font-family: var(--tarot-serif);
+  padding-bottom: 140rpx;
+  box-sizing: border-box;
+}
+
+.page-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+  opacity: 0.5;
+}
+
+.page-glow {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+  background:
+    radial-gradient(ellipse 80% 45% at 50% -5%, rgba(201, 168, 76, 0.22), transparent 70%),
+    radial-gradient(ellipse 90% 50% at 50% 108%, rgba(24, 38, 76, 0.5), transparent 70%);
+}
+
+.page-content {
+  position: relative;
+  z-index: 1;
+}
+
+.gold-title {
+  color: var(--tarot-gold-light);
+  letter-spacing: 4rpx;
+}
+
+.dim-text {
+  color: var(--tarot-dim);
+}
+
+.gold-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 88rpx;
+  border-radius: 44rpx;
+  border: 1rpx solid var(--tarot-line);
+  background: linear-gradient(180deg, rgba(201, 168, 76, 0.28), rgba(201, 168, 76, 0.12));
+  color: var(--tarot-gold-light);
+  font-size: 30rpx;
+  letter-spacing: 4rpx;
+}
+
+.gold-btn:active {
+  opacity: 0.7;
+}

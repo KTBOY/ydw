@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "tab-type-list": "/bz/components/TabTypeList/TabTypeList",
+    "image-waterfall": "sk-image-waterfall/image-waterfall/image-waterfall"
+  }
+}

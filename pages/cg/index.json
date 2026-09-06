@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "橙光游戏",
+  "usingComponents": {
+    "game-list": "/components/game-list/game-list"
+  }
+}

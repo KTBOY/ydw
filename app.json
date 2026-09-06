@@ -1,36 +1,74 @@
 {
   "pages": [
-    "pages/goods/category/index",
     "pages/home/home",
+    "pages/rj/index",
+    "pages/phone/index",
+    "pages/cg/index",
     "pages/goods/search/index",
-    "pages/goods/details/index"
+    "pages/goods/details/index",
+    "pages/goods/cgDetails/index",
+    "pages/order/baidu/index",
+    "pages/my_module/flag/index",
+    "pages/my_module/yueyu/index",
+    "pages/my_module/calc_relative/index"
   ],
-  "tabBar": {
-    "custom": true,
-    "color": "#666666",
-    "selectedColor": "#FF5F15",
-    "backgroundColor": "#ffffff",
-    "borderStyle": "black",
-    "list": [
-      {
-        "pagePath": "pages/home/home",
-        "text": "首页"
-      },
-      {
-        "pagePath": "pages/goods/category/index",
-        "text": "分类"
-      }
-    ]
+  "subPackages": [
+    {
+      "root": "packageA",
+      "pages": [
+        "pages/bind/bind",
+        "pages/danmu/danmu",
+        "pages/screenshotConnect/screenshotConnect",
+        "pages/screenshotConnect/showImage",
+        "pages/danmu/show_danmu",
+        "pages/ruler/ruler",
+        "pages/createQrcode/createQrcode",
+        "pages/videoDow/video",
+        "pages/zhendong/index",
+        "pages/fundPage/fundSearch/fundSearch",
+        "pages/fundPage/fundItem/fundItem"
+      ]
+    },
+    {
+      "root": "xingzuo",
+      "pages": ["pages/xingzuo/index"]
+    },
+    {
+      "root": "bz",
+      "pages": ["pages/bz/index", "pages/wallpaper/wallpaper", "pages/wallpaperDetail/wallpaperDetail"]
+    },
+    {
+      "root": "game",
+      "pages": ["pages/list/index", "pages/detail/index", "pages/arrowEscape/index", "pages/sudoku/index"]
+    },
+    {
+      "root": "nasa",
+      "pages": ["pages/detail/detail"]
+    },
+    {
+      "root": "tarot",
+      "pages": [
+        "pages/home/index",
+        "pages/history/index",
+        "pages/saved/index",
+        "pages/profile/index",
+        "pages/spread/index"
+      ]
+    }
+  ],
+  "preloadRule": {
+    "pages/home/home": {
+      "network": "all",
+      "packages": ["game"]
+    }
   },
-  "requiredPrivateInfos": [
-    "chooseAddress"
-  ],
+  "requiredPrivateInfos": ["chooseAddress"],
   "lazyCodeLoading": "requiredComponents",
   "usingComponents": {},
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "粤电玩",
+    "navigationBarTitleText": "珊瑚",
     "navigationBarTextStyle": "black"
   },
   "sitemapLocation": "sitemap.json",

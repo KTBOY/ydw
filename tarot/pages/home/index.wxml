@@ -1,0 +1,122 @@
+<view class="tarot-page page-shell">
+  <view class="panels">
+    <!-- 首页：今日之牌 -->
+    <scroll-view scroll-y class="panel {{panels.home}}">
+      <view class="panel-pad home-wrap">
+        <view class="redraw-row">
+          <view class="redraw-btn {{redrawUsed ? 'used' : ''}}" bindtap="onRedraw">
+            {{redrawUsed ? '重抽已用' : '↻ 重抽一次'}}
+          </view>
+        </view>
+        <view class="card-stage">
+          <view class="card3d {{cardAnim ? slideDir : ''}}">
+            <view class="card-inner {{isRevealed ? 'flipped' : ''}}" bindtap="onCardTap">
+              <view class="card-face card-back-face">
+                <image class="back-bg" src="/tarot/images/decor/card-back.png" mode="aspectFill" />
+                <view class="back-cover">
+                  <text class="back-ornament">✦</text>
+                  <text class="back-title">今日</text>
+                  <text class="back-title">指引</text>
+                  <view class="back-divider"></view>
+                  <text class="back-sub">轻触揭示</text>
+                </view>
+              </view>
+              <view class="card-face card-front-face">
+                <view class="card-frame">
+                  <image class="rosette tl" src="/tarot/images/decor/rosette.png" mode="aspectFill" />
+                  <image class="rosette tr" src="/tarot/images/decor/rosette.png" mode="aspectFill" />
+                  <image class="rosette bl" src="/tarot/images/decor/rosette.png" mode="aspectFill" />
+                  <image class="rosette br" src="/tarot/images/decor/rosette.png" mode="aspectFill" />
+                  <view class="card-topband">{{card.keywords[0]}} · {{card.keywords[1]}} · {{card.keywords[2]}}</view>
+                  <view class="card-window">
+                    <image class="card-img {{card.isReversed ? 'rev' : ''}}" src="{{img}}" mode="aspectFill" />
+                    <view class="card-shade"></view>
+                    <view class="card-numeral">{{numeral}}</view>
+                  </view>
+                  <view class="card-plaque">{{card.nameCn}}</view>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+
+        <view class="date-line">{{dateLine}}-{{timeLine}}</view>
+        <view class="spread-entry">
+          <view class="gold-btn" bindtap="goSpread">✦ 问卜 · 三牌阵</view>
+        </view>
+      </view>
+    </scroll-view>
+
+    <!-- 历史 -->
+    <scroll-view scroll-y class="panel {{panels.history}}">
+      <view class="panel-pad">
+        <view class="hist-head">
+          <view class="hist-arrow" bindtap="prevMonth">←</view>
+          <text class="hist-month gold-title">{{monthLabel}}</text>
+          <view class="hist-arrow" bindtap="nextMonth">→</view>
+        </view>
+
+        <view class="hist-week">
+          <text wx:for="{{weekDays}}" wx:key="*this" class="week-cell dim-text">{{item}}</text>
+        </view>
+
+        <view class="hist-grid">
+          <block wx:for="{{grid}}" wx:key="key">
+            <view
+              wx:if="{{!item.empty}}"
+              class="day-cell {{item.hasRecord ? 'has' : ''}}"
+              data-cell="{{item}}"
+              bindtap="onDay"
+            >
+              <text class="day-num">{{item.day}}</text>
+              <text wx:if="{{item.hasRecord}}" class="day-dot">✦</text>
+            </view>
+            <view wx:else class="day-cell empty"></view>
+          </block>
+        </view>
+
+        <view class="hist-tip dim-text">点击带 ✦ 的日期回看当日之牌</view>
+      </view>
+    </scroll-view>
+
+    <!-- 我的 -->
+    <scroll-view scroll-y class="panel {{panels.profile}}">
+      <view class="panel-pad">
+        <view class="profile-head">
+          <view class="medallion">✦</view>
+          <text class="gold-title profile-title">我的塔罗</text>
+        </view>
+
+        <view class="stats-row">
+          <view class="stat">
+            <text class="stat-num">{{stats.total}}</text>
+            <text class="stat-label dim-text">抽牌次数</text>
+          </view>
+          <view class="stat">
+            <text class="stat-num">{{stats.streak}}</text>
+            <text class="stat-label dim-text">连续天数</text>
+          </view>
+          <view class="stat">
+            <text class="stat-num">{{stats.savedCount}}</text>
+            <text class="stat-label dim-text">收藏牌数</text>
+          </view>
+        </view>
+
+        <view class="entry-list">
+          <view class="gold-btn entry" bindtap="goSaved">☾ 收藏之牌</view>
+        </view>
+      </view>
+    </scroll-view>
+  </view>
+
+  <card-detail
+    show="{{showDetail}}"
+    card="{{detailCard}}"
+    isReversed="{{detailReversed}}"
+    showSave="{{true}}"
+    saved="{{detailSaved}}"
+    bindclose="closeDetail"
+    bindaction="onDetailAction"
+  />
+  <tabbar active="{{tab}}" use-event bindchange="onTabChange" />
+</view>

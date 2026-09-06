@@ -25,8 +25,11 @@
   },
   "dependencies": {
     "dayjs": "^1.9.3",
-    "tdesign-miniprogram": "^1.10.1",
-    "tslib": "^1.11.1"
+    "node-xlsx": "^0.24.0",
+    "sk-image-waterfall": "^1.0.0",
+    "tdesign-miniprogram": "^1.0.0",
+    "tslib": "^1.11.1",
+    "weapp-qrcode": "^1.0.0"
   },
   "devDependencies": {
     "@commitlint/cli": "^17.4.2",

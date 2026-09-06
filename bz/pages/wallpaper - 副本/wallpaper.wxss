@@ -1,0 +1,37 @@
+page {
+  height: 100%;
+}
+
+.t-image-viewer {
+  top: 0;
+}
+
+.scroll-box {
+  height: calc(100% - 50rpx - constant(safe-area-inset-bottom));
+  height: calc(100% - 50rpx - env(safe-area-inset-bottom));
+  border: chartreuse;
+  overflow: hidden;
+}
+
+
+.waterfall {
+  display: flex;
+  justify-content: space-between;
+  padding: 20rpx;
+  height: 100%;
+}
+
+.column {
+  width: 48%;
+}
+
+.wall-img {
+  width: 100%;
+  margin-bottom: 20rpx;
+  border-radius: 20rpx;
+}
+
+.loading {
+  text-align: center;
+  font-size: 21rpx;
+}

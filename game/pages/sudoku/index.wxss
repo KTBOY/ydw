@@ -1,0 +1,980 @@
+/* game/pages/sudoku/index.wxss
+ * 设计主题「雅集」：宣纸为底、青瓷作墨、朱砂点错、鎏金记功。
+ * 双主题通过 CSS 变量切换：默认「雅纸」，.dark 为「玄墨」。
+ */
+.page {
+  /* —— 雅纸主题 —— */
+  --paper: #f7f3ea;
+  /* 宣纸底 */
+  --card: #fffdf8;
+  /* 纸面卡片 */
+  --ink: #2b2620;
+  /* 浓墨 */
+  --ink-2: #6b6357;
+  /* 淡墨 */
+  --ink-3: #a79e8f;
+  /* 灰墨 */
+  --line: rgba(43, 38, 32, 0.14);
+  --line-strong: rgba(43, 38, 32, 0.72);
+  --celadon: #3e7c6f;
+  /* 青瓷（玩家作答） */
+  --celadon-soft: rgba(62, 124, 111, 0.12);
+  --gold: #c9a063;
+  /* 鎏金（选中/星标） */
+  --gold-soft: rgba(201, 160, 99, 0.2);
+  --vermilion: #c3392b;
+  /* 朱砂（错误） */
+  --vermilion-soft: rgba(195, 57, 43, 0.12);
+  --shadow: rgba(74, 62, 44, 0.14);
+
+  min-height: 100vh;
+  box-sizing: border-box;
+  background: var(--paper);
+  color: var(--ink);
+  padding-bottom: calc(28rpx + env(safe-area-inset-bottom));
+  transition: background-color 0.25s ease;
+}
+
+.page.dark {
+  /* —— 玄墨主题 —— */
+  --paper: #211d18;
+  --card: #2c2721;
+  --ink: #ede4d3;
+  --ink-2: #b7ac99;
+  --ink-3: #877e6e;
+  --line: rgba(237, 228, 211, 0.16);
+  --line-strong: rgba(237, 228, 211, 0.6);
+  --celadon: #5fa393;
+  --celadon-soft: rgba(95, 163, 147, 0.16);
+  --gold: #d4af7a;
+  --gold-soft: rgba(212, 175, 122, 0.24);
+  --vermilion: #e06a5a;
+  --vermilion-soft: rgba(224, 106, 90, 0.16);
+  --shadow: rgba(0, 0, 0, 0.4);
+}
+
+/* ---------- 顶栏 ---------- */
+.topbar {
+  display: flex;
+  align-items: center;
+  padding: 20rpx 24rpx 8rpx;
+}
+
+.tb-btn {
+  width: 72rpx;
+  height: 72rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 38rpx;
+  color: var(--ink);
+  background: var(--card);
+  border-radius: 50%;
+  box-shadow: 0 4rpx 14rpx var(--shadow);
+}
+
+.tb-btn:active {
+  transform: scale(0.92);
+}
+
+/* 顶栏右侧「暂停」「设置」两个圆钮相邻，加间距避免贴在一起（返回键后面是标题，不受影响） */
+.tb-btn+.tb-btn {
+  margin-left: 16rpx;
+}
+
+.right-flex {
+  display: flex;
+}
+
+.tb-title {
+  flex: 1;
+  min-width: 0;
+  text-align: center;
+  padding: 0 8rpx;
+}
+
+.tb-main {
+  font-size: 34rpx;
+  font-weight: 700;
+  color: var(--ink);
+  letter-spacing: 2rpx;
+}
+
+.tb-sub {
+  margin-top: 2rpx;
+  font-size: 22rpx;
+  color: var(--ink-3);
+}
+
+/* ---------- 状态栏 ---------- */
+.statusbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14rpx 36rpx 10rpx;
+}
+
+.hearts {
+  min-width: 140rpx;
+}
+
+.heart {
+  display: inline-flex;
+  align-items: center;
+  vertical-align: middle;
+  font-size: 34rpx;
+  margin-right: 8rpx;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.heart.on {
+  color: var(--vermilion);
+}
+
+.heart.off {
+  color: var(--line);
+  transform: scale(0.86);
+}
+
+.best {
+  font-size: 24rpx;
+  color: var(--ink-3);
+}
+
+.timer {
+  min-width: 140rpx;
+  text-align: right;
+  font-size: 32rpx;
+  font-weight: 600;
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------- 棋盘 ---------- */
+.board-wrap {
+  position: relative;
+  width: 702rpx;
+  height: 702rpx;
+  margin: 8rpx auto 0;
+}
+
+.board {
+  display: flex;
+  flex-wrap: wrap;
+  width: 702rpx;
+  height: 702rpx;
+  box-sizing: border-box;
+  border: 4rpx solid var(--line-strong);
+  border-radius: 8rpx;
+  background: var(--card);
+  box-shadow: 0 12rpx 32rpx var(--shadow);
+  overflow: hidden;
+}
+
+.cell {
+  /* 9 列网格：board 内容区 = 702rpx - 2×4rpx 边框 = 694rpx。
+     用 11.11%（合计 99.99%）而非固定 78rpx，避免第 9 格被 flex-wrap 挤到下一行。 */
+  flex: 0 0 11.11%;
+  height: 11.11%;
+  box-sizing: border-box;
+  border-right: 1rpx solid var(--line);
+  border-bottom: 1rpx solid var(--line);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.12s ease;
+}
+
+.cell.er {
+  border-right: none;
+}
+
+.cell.eb {
+  border-bottom: none;
+}
+
+.cell.br {
+  border-right: 3rpx solid var(--line-strong);
+}
+
+.cell.bb {
+  border-bottom: 3rpx solid var(--line-strong);
+}
+
+.cell.br.er {
+  border-right: none;
+}
+
+.num {
+  font-size: 44rpx;
+  font-weight: 500;
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+}
+
+.cell.user .num {
+  color: var(--celadon);
+  font-weight: 600;
+}
+
+.cell.err .num,
+.cell.conf .num {
+  color: var(--vermilion);
+}
+
+.cell.conf {
+  background: var(--vermilion-soft);
+}
+
+.cell.peer {
+  background: var(--celadon-soft);
+}
+
+.cell.same {
+  background: var(--gold-soft);
+}
+
+.cell.same .num {
+  font-weight: 700;
+}
+
+.cell.sel {
+  background: var(--gold-soft);
+  box-shadow: inset 0 0 0 4rpx var(--gold);
+  border-radius: 4rpx;
+}
+
+/* 错误抖动 */
+.cell.flash {
+  animation: shake 0.4s ease;
+  background: var(--vermilion-soft);
+}
+
+@keyframes shake {
+  0% {
+    transform: translateX(0);
+  }
+
+  25% {
+    transform: translateX(-6rpx);
+  }
+
+  50% {
+    transform: translateX(6rpx);
+  }
+
+  75% {
+    transform: translateX(-4rpx);
+  }
+
+  100% {
+    transform: translateX(0);
+  }
+}
+
+/* 候选数笔记 */
+.notes {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  height: 100%;
+  padding: 4rpx;
+  box-sizing: border-box;
+}
+
+.nt {
+  width: 33.33%;
+  height: 33.33%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20rpx;
+  line-height: 1;
+  color: transparent;
+  font-variant-numeric: tabular-nums;
+}
+
+.nt.on {
+  color: var(--ink-2);
+}
+
+/* 盘面遮罩（暂停/结算） */
+.board-cover {
+  position: absolute;
+  inset: 0;
+  background: var(--paper);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8rpx;
+}
+
+.cover-icon {
+  width: 128rpx;
+  height: 128rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 60rpx;
+  color: var(--celadon);
+  background: var(--card);
+  border-radius: 50%;
+  box-shadow: 0 10rpx 30rpx var(--shadow);
+}
+
+.cover-text {
+  margin-top: 20rpx;
+  font-size: 26rpx;
+  letter-spacing: 6rpx;
+  color: var(--ink-3);
+}
+
+/* ---------- 工具栏 ---------- */
+.tools {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  padding: 18rpx 44rpx 6rpx;
+}
+
+.tool {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 96rpx;
+  padding: 10rpx 8rpx;
+  border-radius: 16rpx;
+  transition: opacity 0.15s ease, background-color 0.15s ease;
+}
+
+.tool:active {
+  background: var(--celadon-soft);
+}
+
+.tool-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 40rpx;
+  line-height: 1;
+  color: var(--ink-2);
+}
+
+.tool-label {
+  margin-top: 4rpx;
+  font-size: 24rpx;
+  color: var(--ink-3);
+  white-space: nowrap;
+}
+
+.tool.on {
+  background: var(--celadon-soft);
+}
+
+.tool.on .tool-icon,
+.tool.on .tool-label {
+  color: var(--celadon);
+}
+
+.tool.dim {
+  opacity: 0.35;
+}
+
+/* ---------- 数字键盘 ---------- */
+.numpad {
+  display: flex;
+  padding: 10rpx 20rpx 0;
+}
+
+.pad {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 12rpx 0 8rpx;
+  margin: 0 5rpx;
+  background: var(--card);
+  border-radius: 14rpx;
+  box-shadow: 0 4rpx 12rpx var(--shadow);
+  transition: opacity 0.15s ease, transform 0.1s ease;
+}
+
+.pad:active {
+  transform: scale(0.94);
+}
+
+.pad-num {
+  font-size: 42rpx;
+  font-weight: 600;
+  line-height: 1.2;
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+}
+
+.pad-count {
+  font-size: 22rpx;
+  color: var(--ink-3);
+  line-height: 1.4;
+}
+
+.pad.done {
+  opacity: 0.28;
+}
+
+.pad.active {
+  box-shadow: inset 0 0 0 3rpx var(--gold), 0 4rpx 12rpx var(--shadow);
+}
+
+.pad.active .pad-num {
+  color: var(--gold);
+}
+
+/* 笔记模式下数字键变小，提示当前在记笔记 */
+.numpad.note-on .pad-num {
+  font-size: 26rpx;
+  color: var(--ink-2);
+  padding: 8rpx 0;
+}
+
+/* ---------- 弹层通用 ---------- */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(24, 20, 14, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  animation: ovIn 0.18s ease-out;
+}
+
+.dialog {
+  width: 580rpx;
+  max-height: 82vh;
+  background: var(--card);
+  border-radius: 28rpx;
+  padding: 44rpx 36rpx 32rpx;
+  text-align: center;
+  box-shadow: 0 24rpx 70rpx rgba(0, 0, 0, 0.28);
+  animation: dlgIn 0.26s cubic-bezier(0.2, 0.8, 0.3, 1.12);
+}
+
+.dialog-wide {
+  width: 640rpx;
+}
+
+.dialog-title {
+  font-size: 38rpx;
+  font-weight: 800;
+  color: var(--ink);
+  letter-spacing: 2rpx;
+}
+
+.dialog-desc {
+  margin-top: 14rpx;
+  font-size: 26rpx;
+  color: var(--ink-3);
+  line-height: 1.6;
+}
+
+.dialog-btns {
+  display: flex;
+  gap: 16rpx;
+  margin-top: 36rpx;
+}
+
+.dlg-btn {
+  flex: 1;
+  min-width: 0;
+  padding: 20rpx 0;
+  border-radius: 999rpx;
+  font-size: 27rpx;
+  font-weight: 600;
+  text-align: center;
+}
+
+.dlg-btn.ghost {
+  background: var(--celadon-soft);
+  color: var(--celadon);
+}
+
+.dlg-btn.primary {
+  background: var(--celadon);
+  color: #fffdf8;
+}
+
+.dlg-btn:active {
+  opacity: 0.85;
+}
+
+/* button 复位为弹层按钮样式 */
+.share-btn {
+  margin: 0;
+  line-height: inherit;
+}
+
+.share-btn::after {
+  border: none;
+}
+
+@keyframes ovIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes dlgIn {
+  from {
+    opacity: 0;
+    transform: translateY(24rpx) scale(0.94);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ---------- 暂停 ---------- */
+.pause-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16rpx;
+  margin-top: 36rpx;
+}
+
+.pause-grid .dlg-btn {
+  flex: 0 0 calc(50% - 8rpx);
+  box-sizing: border-box;
+}
+
+/* ---------- 胜利 ---------- */
+.confetti-wrap {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.cf {
+  position: absolute;
+  top: -40rpx;
+  width: 14rpx;
+  height: 24rpx;
+  border-radius: 4rpx;
+  opacity: 0.9;
+  animation-name: cfFall;
+  animation-timing-function: linear;
+  animation-fill-mode: both;
+  animation-iteration-count: 2;
+}
+
+@keyframes cfFall {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 0;
+  }
+
+  8% {
+    opacity: 0.9;
+  }
+
+  100% {
+    transform: translateY(105vh) rotate(720deg);
+    opacity: 0.2;
+  }
+}
+
+.stars {
+  margin-top: 20rpx;
+}
+
+.star {
+  font-size: 76rpx;
+  margin: 0 10rpx;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  color: var(--line);
+}
+
+.star.on {
+  color: var(--gold);
+  animation: starPop 0.5s cubic-bezier(0.2, 0.8, 0.3, 1.4) both;
+  text-shadow: 0 4rpx 18rpx rgba(201, 160, 99, 0.45);
+}
+
+@keyframes starPop {
+  0% {
+    transform: scale(0) rotate(-30deg);
+    opacity: 0;
+  }
+
+  70% {
+    transform: scale(1.25) rotate(6deg);
+    opacity: 1;
+  }
+
+  100% {
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+.win-meta {
+  margin-top: 16rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16rpx;
+}
+
+.win-time {
+  font-size: 30rpx;
+  font-weight: 700;
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+}
+
+.win-best {
+  font-size: 22rpx;
+  color: var(--gold);
+  font-weight: 700;
+}
+
+/* ---------- 失败 ---------- */
+/* 复用 dialog 样式 */
+
+/* ---------- 选关 ---------- */
+.daily-card {
+  display: flex;
+  align-items: center;
+  margin-top: 24rpx;
+  padding: 22rpx 26rpx;
+  border-radius: 20rpx;
+  background: linear-gradient(135deg, var(--celadon), #2f5f55);
+  color: #f5f1e8;
+}
+
+.daily-info {
+  flex: 1;
+  text-align: left;
+}
+
+.daily-name {
+  font-size: 30rpx;
+  font-weight: 700;
+}
+
+.daily-sub {
+  margin-top: 4rpx;
+  font-size: 22rpx;
+  opacity: 0.85;
+}
+
+.daily-go {
+  padding: 12rpx 30rpx;
+  background: rgba(255, 253, 248, 0.92);
+  color: var(--celadon);
+  font-size: 26rpx;
+  font-weight: 700;
+  border-radius: 999rpx;
+}
+
+.level-scroll {
+  margin-top: 20rpx;
+  max-height: 520rpx;
+  text-align: left;
+}
+
+.level-grid {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.lv {
+  width: 16.66%;
+  box-sizing: border-box;
+  padding: 12rpx 4rpx;
+  text-align: center;
+  border-radius: 14rpx;
+}
+
+.lv-n {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 30rpx;
+  font-weight: 600;
+  color: var(--ink);
+  line-height: 1.4;
+}
+
+.lv-stars {
+  margin-top: 2rpx;
+}
+
+.lv-s {
+  display: inline-flex;
+  align-items: center;
+  vertical-align: middle;
+  font-size: 20rpx;
+  color: var(--line);
+  margin: 0 1rpx;
+}
+
+.lv-s.on {
+  color: var(--gold);
+}
+
+.lv.locked {
+  opacity: 0.35;
+}
+
+.lv.locked .lv-n {
+  font-size: 24rpx;
+}
+
+.lv.cur {
+  background: var(--celadon-soft);
+  box-shadow: inset 0 0 0 2rpx var(--celadon);
+}
+
+.lv:active {
+  background: var(--celadon-soft);
+}
+
+.pager {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 28rpx;
+  margin-top: 18rpx;
+}
+
+.pg-btn {
+  width: 64rpx;
+  height: 64rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 40rpx;
+  color: var(--ink);
+  background: var(--celadon-soft);
+  border-radius: 50%;
+}
+
+.pg-btn.dim {
+  opacity: 0.3;
+}
+
+.pg-text {
+  font-size: 24rpx;
+  color: var(--ink-3);
+}
+
+/* ---------- 设置 ---------- */
+.set-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 26rpx 8rpx;
+  border-bottom: 1rpx solid var(--line);
+}
+
+.set-label {
+  font-size: 28rpx;
+  color: var(--ink);
+}
+
+.set-arrow {
+  display: flex;
+  align-items: center;
+  font-size: 32rpx;
+  color: var(--ink-3);
+}
+
+.set-row.danger .set-label {
+  color: var(--vermilion);
+}
+
+.toggle {
+  width: 88rpx;
+  height: 48rpx;
+  border-radius: 999rpx;
+  background: var(--line);
+  padding: 4rpx;
+  box-sizing: border-box;
+  transition: background-color 0.2s ease;
+}
+
+.toggle-dot {
+  width: 40rpx;
+  height: 40rpx;
+  border-radius: 50%;
+  background: #fffdf8;
+  box-shadow: 0 2rpx 6rpx rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s ease;
+}
+
+.toggle.on {
+  background: var(--celadon);
+}
+
+.toggle.on .toggle-dot {
+  transform: translateX(40rpx);
+}
+
+.set-about {
+  margin-top: 24rpx;
+  font-size: 22rpx;
+  color: var(--ink-3);
+}
+
+/* 设置弹框：头部（标题）固定，下方内容用 scroll-view 滚动 */
+.dialog-settings {
+  display: flex;
+  flex-direction: column;
+  /* 固定高度：开关「修改器」新增的行在 .set-scroll 内滚动，弹框本身高度不再变化。
+     840rpx ≈ 修改器关闭时的自然高度（标题 + 5 行 + 重置行 + 版本号），关闭时无明显空白。 */
+  height: 840rpx;
+  max-height: 86vh;
+  overflow: hidden;
+}
+
+.dialog-settings .dialog-title {
+  flex-shrink: 0;
+  padding-bottom: 22rpx;
+  border-bottom: 1rpx solid var(--line);
+}
+
+.set-scroll {
+  flex: 1;
+  min-height: 0;
+  margin-top: 10rpx;
+}
+
+/* 修改器分区标题（内嵌于设置弹框） */
+.set-divider {
+  margin-top: 26rpx;
+  padding: 12rpx 8rpx 2rpx;
+  text-align: left;
+  font-size: 22rpx;
+  font-weight: 700;
+  letter-spacing: 2rpx;
+  color: var(--gold);
+  border-bottom: 1rpx solid var(--line);
+}
+
+.mod-grid {
+  margin-top: 16rpx;
+}
+
+.mod-grid .dlg-btn {
+  padding: 16rpx 0;
+  font-size: 24rpx;
+}
+
+/* 透视答案：空格淡显正解 */
+.cell.ghost .num {
+  font-size: 34rpx;
+  font-weight: 400;
+  color: var(--ink-3);
+  opacity: 0.55;
+}
+
+/* ---------- 战绩 ---------- */
+.stat-grid {
+  display: flex;
+  margin-top: 26rpx;
+}
+
+.stat {
+  flex: 1;
+  text-align: center;
+}
+
+.stat-n {
+  font-size: 36rpx;
+  font-weight: 800;
+  color: var(--celadon);
+  font-variant-numeric: tabular-nums;
+}
+
+.stat-l {
+  margin-top: 4rpx;
+  font-size: 24rpx;
+  color: var(--ink-3);
+}
+
+.rec-title {
+  margin-top: 30rpx;
+  text-align: left;
+  font-size: 26rpx;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.rec-list {
+  max-height: 420rpx;
+  margin-top: 8rpx;
+  text-align: left;
+}
+
+.rec-item {
+  display: flex;
+  align-items: center;
+  padding: 18rpx 4rpx;
+  border-bottom: 1rpx solid var(--line);
+  font-size: 24rpx;
+}
+
+.rec-label {
+  width: 150rpx;
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.rec-time {
+  width: 100rpx;
+  color: var(--ink-2);
+  font-variant-numeric: tabular-nums;
+}
+
+.rec-date {
+  flex: 1;
+  text-align: right;
+  color: var(--ink-3);
+  font-size: 22rpx;
+}
+
+.rec-res {
+  width: 56rpx;
+  margin-left: 12rpx;
+  text-align: center;
+  border-radius: 8rpx;
+  padding: 4rpx 0;
+  font-size: 22rpx;
+}
+
+.rec-res.win {
+  color: var(--celadon);
+  background: var(--celadon-soft);
+}
+
+.rec-res.lose {
+  color: var(--vermilion);
+  background: var(--vermilion-soft);
+}
+
+.rec-empty {
+  text-align: center;
+  color: var(--ink-3);
+  padding: 48rpx 0 12rpx;
+  font-size: 24rpx;
+}

@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "手机",
+  "usingComponents": {
+    "game-list": "/components/game-list/game-list"
+  }
+}

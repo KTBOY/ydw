@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "t-textarea": "tdesign-miniprogram/textarea/textarea",
+    "t-image": "tdesign-miniprogram/image/image"
+  }
+}

@@ -1,0 +1,29 @@
+/* bz/pages/wallpaper/wallpaper.wxss */
+page {
+  height: 100%;
+}
+
+.wp {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: #f2f3f7;
+}
+
+/* 通用瀑布流组件：占满剩余空间；壁纸用浅色默认主题，仅调圆角 */
+.wp-flow {
+  flex: 1;
+  min-height: 0;
+  --wf-radius: 20rpx;
+}
+
+.wp-tip {
+  text-align: center;
+  color: #999999;
+  font-size: 22rpx;
+  padding: 20rpx 0;
+}
+
+.wp-safe {
+  height: calc(20rpx + env(safe-area-inset-bottom));
+}

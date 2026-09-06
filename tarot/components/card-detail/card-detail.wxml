@@ -1,0 +1,32 @@
+<view class="mask" wx:if="{{show}}" bindtap="onClose">
+  <view class="panel" catchtap="noop">
+    <view class="save-fab" wx:if="{{showSave}}" catchtap="onAction">{{saved ? '★' : '☆'}}</view>
+    <view class="panel-head">
+      <text class="panel-title gold-title">{{card.nameCn}} · {{card.nameEn}}</text>
+      <text class="panel-state {{isReversed ? 'rev' : ''}}">{{isReversed ? '逆位' : '正位'}}</text>
+    </view>
+    <image class="panel-card {{isReversed ? 'rev-img' : ''}}" src="{{img}}" mode="aspectFill" />
+    <view class="panel-keywords">
+      <text wx:for="{{card.keywords}}" wx:key="*this" class="keyword">{{item}}</text>
+    </view>
+    <scroll-view scroll-y class="panel-meaning">
+      <view class="meaning-inner">
+        <text class="sec-title">牌义 · {{isReversed ? '逆位' : '正位'}}</text>
+        <text class="sec-body">{{isReversed ? card.reversed : card.upright}}</text>
+        <text class="sec-title" wx:if="{{isReversed}}">逆位提示</text>
+        <text class="sec-body" wx:if="{{isReversed}}">逆位时先参照正位领域含义，再留意以上提醒。</text>
+        <text class="sec-title">感情</text>
+        <text class="sec-body">{{card.reading.love}}</text>
+        <text class="sec-title">事业</text>
+        <text class="sec-body">{{card.reading.career}}</text>
+        <text class="sec-title">财运</text>
+        <text class="sec-body">{{card.reading.wealth}}</text>
+        <text class="sec-title">今日指引</text>
+        <text class="sec-body guidance">{{card.guidance}}</text>
+      </view>
+    </scroll-view>
+    <view class="panel-actions">
+      <view class="gold-btn action close" bindtap="onClose">关闭</view>
+    </view>
+  </view>
+</view>

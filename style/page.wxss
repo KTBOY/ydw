@@ -1,4 +1,0 @@
-page {
-  box-sizing: border-box;
-  --td-brand-color: #1d1d1d;
-}

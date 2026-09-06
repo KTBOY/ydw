@@ -2,18 +2,14 @@
   "navigationBarTitleText": "首页",
   "onReachBottomDistance": 10,
   "backgroundTextStyle": "light",
-  "enablePullDownRefresh": true,
+  "enablePullDownRefresh": false,
   "usingComponents": {
-    "t-search": "tdesign-miniprogram/search/search",
-    "t-loading": "tdesign-miniprogram/loading/loading",
-    "t-swiper": "tdesign-miniprogram/swiper/swiper",
-    "t-swiper-nav": "tdesign-miniprogram/swiper-nav/swiper-nav",
-    "t-image": "/components/webp-image/index",
-    "t-icon": "tdesign-miniprogram/icon/icon",
-    "t-toast": "tdesign-miniprogram/toast/toast",
-    "t-tabs": "tdesign-miniprogram/tabs/tabs",
-    "t-tab-panel": "tdesign-miniprogram/tab-panel/tab-panel",
-    "goods-list": "/components/goods-list/index",
-    "load-more": "/components/load-more/index"
+    "url-list": "/components/url-list/url-list",
+    "menu": "/components/menu/menu",
+    "custom-tab-bar": "/components/custom-tab-bar/index",
+    "url-copy": "/components/url-copy/url",
+    "fund": "/components/fund/fund",
+    "game-center": "/components/game-center/game-center",
+    "nasa-list": "/components/nasa-list/nasa-list"
   }
 }

@@ -1,0 +1,25 @@
+<tab-type-list bind:change="tabChange" />
+
+
+<scroll-view scroll-y class="scroll-box" bindscrolltolower="bindscrolltolower">
+  <view class="waterfall">
+    <view class="column">
+      <view wx:for="{{leftList}}" wx:key="url" style="height: {{item.height}};" bindtap="handleImage" data-img="{{item.img}}">
+        <t-image class="wall-img" src="{{item.img}}" mode="widthFix" />
+      </view>
+    </view>
+    <view class="column">
+      <view wx:for="{{rightList}}" wx:key="url" bindtap="handleImage" data-img="{{item.img}}">
+        <t-image class="wall-img" src="{{item.img}}" mode="widthFix" />
+      </view>
+    </view>
+  </view>
+  <view class="loading" wx:if="{{loading}}">加载中...</view>
+</scroll-view>
+
+<t-action-sheet id="t-action-sheet" />
+
+<t-image-viewer usingCustomNavbar closeBtn="{{closeBtn}}" showIndex="{{showIndex}}" visible="{{visible}}" images="{{images}}" bind:change="onChange" bind:delete="onDelete" bind:close="onClose">
+  <view slot="delete-btn">下载</view>
+
+</t-image-viewer>

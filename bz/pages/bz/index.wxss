@@ -1,0 +1,86 @@
+/* index.wxss */
+.container {
+  display: flex;
+  height: 100vh;
+  /* 确保占满整个屏幕高度 */
+  background-color: #f8f8f8;
+}
+
+/* --- 左侧导航样式 --- */
+.left-nav {
+  width: 100px;
+  /* 固定宽度 */
+  background-color: #ffffff;
+  height: 100%;
+  border-right: 1px solid #eeeeee;
+}
+
+.nav-item {
+  height: 50px;
+  line-height: 50px;
+  text-align: center;
+  font-size: 14px;
+  color: #333;
+  position: relative;
+}
+
+.nav-item.active {
+  color: #ff5588;
+  /* 选中颜色：可替换为你品牌的主题色 */
+  font-weight: bold;
+  background-color: #f8f8f8;
+}
+
+.nav-item.active::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 10px;
+  bottom: 10px;
+  width: 4px;
+  background-color: #ff5588;
+  /* 选中指示条颜色 */
+  border-radius: 0 4px 4px 0;
+}
+
+/* --- 右侧内容样式 --- */
+.right-content {
+  flex: 1;
+  /* 占据剩余空间 */
+  padding: 15px;
+  box-sizing: border-box;
+  height: 100%;
+}
+
+.tag-title {
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+.tag-area {
+  display: flex;
+  flex-wrap: wrap;
+  /* 允许标签换行 */
+  gap: 10px;
+  /* 标签之间的间距 */
+}
+
+.tag-item {
+  padding: 8px 12px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  font-size: 13px;
+  color: #666;
+  text-align: center;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.tag-item:active {
+  /* 模拟点击反馈 */
+  background-color: #ffedf2;
+  border-color: #ff5588;
+  color: #ff5588;
+}

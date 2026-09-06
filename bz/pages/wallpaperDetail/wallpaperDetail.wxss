@@ -1,0 +1,259 @@
+/* bz/pages/wallpaperDetail/wallpaperDetail.wxss */
+
+page {
+  height: 100%;
+  background-color: #1a1a1e;
+}
+
+.detail {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+}
+
+/* 背景：当前壁纸模糊放大铺底，双层交叉渐变 */
+.bg {
+  position: absolute;
+  left: -10%;
+  top: -10%;
+  width: 120%;
+  height: 120%;
+  filter: blur(40px);
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+
+.bg-show {
+  opacity: 1;
+}
+
+.bg-mask {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.45);
+}
+
+/* 顶部信息区 */
+.header {
+  position: relative;
+  padding: 32rpx 0 8rpx;
+  text-align: center;
+}
+
+.title {
+  color: #ffffff;
+  font-size: 40rpx;
+  font-weight: bold;
+}
+
+.subtitle {
+  margin-top: 8rpx;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 24rpx;
+}
+
+.meta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20rpx;
+}
+
+.meta-count {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 22rpx;
+  margin-right: 20rpx;
+}
+
+.meta-pill {
+  padding: 4rpx 24rpx;
+  border-radius: 999rpx;
+  background: rgba(255, 255, 255, 0.25);
+  color: #ffffff;
+  font-size: 22rpx;
+}
+
+/* 下载胶囊：仿 GIF 顶部白色实心按钮 */
+.down-pill {
+  margin-left: 20rpx;
+  padding: 6rpx 28rpx;
+  background: #ffffff;
+  color: #333333;
+  font-weight: bold;
+}
+
+/* 预览入口：右上角眼睛按钮，与胶囊同色系半透明底 */
+.preview-btn {
+  position: absolute;
+  right: 28rpx;
+  top: 24rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 68rpx;
+  height: 68rpx;
+  border-radius: 999rpx;
+  background: rgba(255, 255, 255, 0.25);
+  transition: transform 0.3s ease;
+}
+
+.preview-btn-hover {
+  transform: scale(0.88);
+  background: rgba(255, 255, 255, 0.35);
+}
+
+.preview-icon {
+  width: 38rpx;
+  height: 38rpx;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100% 100%;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z'/%3E%3Ccircle cx='12' cy='12' r='3'/%3E%3C/svg%3E");
+}
+
+/* 卡片轮播：底部无按钮，直接延伸到安全区 */
+.card-swiper {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  margin: 24rpx 0 calc(32rpx + env(safe-area-inset-bottom));
+}
+
+.card {
+  height: 100%;
+  margin: 0 16rpx;
+  border-radius: 40rpx;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 20rpx 60rpx rgba(0, 0, 0, 0.35);
+  transform: scale(0.92);
+  transition: transform 0.3s ease;
+}
+
+.card-active {
+  transform: scale(1);
+}
+
+.card-img {
+  width: 100%;
+  height: 100%;
+}
+
+/* 全屏预览：盖在页面之上，深色遮罩 + 图片放大入场 */
+.preview {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  background: rgba(12, 12, 14, 0.92);
+  animation: preview-fade 0.26s ease;
+}
+
+.preview-out {
+  animation: preview-fade-out 0.22s ease forwards;
+}
+
+/* 缩放画布：movable-view 开启 scale 后支持双指放大与拖动 */
+.preview-stage {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.preview-mover {
+  width: 100%;
+  height: 100%;
+}
+
+.preview-img {
+  width: 100%;
+  height: 100%;
+  animation: preview-zoom 0.3s ease;
+}
+
+.preview-index {
+  position: absolute;
+  left: 32rpx;
+  top: 40rpx;
+  padding: 6rpx 24rpx;
+  border-radius: 999rpx;
+  background: rgba(0, 0, 0, 0.5);
+  color: #ffffff;
+  font-size: 22rpx;
+}
+
+.preview-close {
+  position: absolute;
+  right: 28rpx;
+  top: 24rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 68rpx;
+  height: 68rpx;
+  border-radius: 999rpx;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.preview-close-icon {
+  width: 34rpx;
+  height: 34rpx;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100% 100%;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-width='2' stroke-linecap='round'%3E%3Cpath d='M6 6l12 12M18 6L6 18'/%3E%3C/svg%3E");
+}
+
+.preview-hint {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: calc(40rpx + env(safe-area-inset-bottom));
+  padding: 6rpx 24rpx;
+  border-radius: 999rpx;
+  background: rgba(0, 0, 0, 0.5);
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 22rpx;
+  white-space: nowrap;
+}
+
+@keyframes preview-fade {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes preview-fade-out {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes preview-zoom {
+  from {
+    transform: scale(0.86);
+    opacity: 0.4;
+  }
+
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}

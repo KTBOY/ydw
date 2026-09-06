@@ -1,0 +1,15 @@
+<!--game/pages/list/index.wxml-->
+<scroll-view class="scrollarea" scroll-y type="list">
+  <view class="header">
+    <t-search value="{{keyword}}" bind:change="onSearch" bind:clear="onClear" placeholder="搜索游戏名称" leftIcon="" />
+  </view>
+
+  <view class="container">
+    <view wx:if="{{list.length}}" class="module-list">
+      <view wx:for="{{list}}" wx:key="index" class="button" bindtap="navToDetail" data-item="{{item}}">
+        <view class="module-name">{{item.name}}</view>
+      </view>
+    </view>
+    <view wx:else class="empty">暂无相关游戏</view>
+  </view>
+</scroll-view>

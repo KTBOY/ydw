@@ -1,0 +1,68 @@
+<view class="page">
+  <!-- 顶部卡片 -->
+  <view class="glass-card header">
+    <view class="title-row">
+      <text class="name">{{detail.name}}</text>
+      <text class="code">{{detail.code}}</text>
+    </view>
+
+
+    <view class="rate {{!hasEstimate || isRise ? 'up' : 'down'}}">
+      {{hasEstimate && isRise ? '+' : ''}}{{estimateChange}}<text wx:if="{{hasEstimate}}">%</text>
+    </view>
+
+    <view class="meta-row">
+      <view class="time">{{estimateTime || '--'}} 估值</view>
+      <view class="refresh-btn {{isRefreshing ? 'is-refreshing' : ''}}" bindtap="handleRefresh">
+        <view class="{{isRefreshing ? 'refresh-spinner' : 'refresh-mark'}}"></view>
+        <text class="refresh-text">{{isRefreshing ? '刷新中' : '刷新'}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 基金信息 -->
+  <view class="glass-card info-card">
+    <view class="section-title">基金信息</view>
+
+    <view class="info-grid">
+      <view class="info-item">
+        <text class="label">单位净值</text>
+        <text class="value">{{netValue||'--'}}</text>
+      </view>
+
+      <view class="info-item">
+        <text class="label">基金规模</text>
+        <text class="value">{{detail.scale}}</text>
+      </view>
+
+      <view class="info-item">
+        <text class="label">基金公司</text>
+        <text class="value">{{detail.company}}</text>
+      </view>
+
+      <view class="info-item">
+        <text class="label">基金经理</text>
+        <text class="value">{{detail.manager}}</text>
+      </view>
+
+      <view class="info-item">
+        <text class="label">成立日期</text>
+        <text class="value">{{detail.establishDate}}</text>
+      </view>
+
+      <view class="info-item">
+        <text class="label">管理费率</text>
+        <text class="value">{{detail.manageFee}}</text>
+      </view>
+    </view>
+  </view>
+
+  <t-fab icon="add" style="background:'#eef1f6'" color="#646e84" button-props="{{fabButton}}" bind:click="handleClick"
+    text="添加自选" />
+
+  <!-- <t-fab icon="gesture-press" bind:click="handleClick" bind:dragstart="handleDragStart" bind:dragend="handleDragEnd">
+    <view>xxx</view>
+    <view>xxx</view>
+  </t-fab> -->
+
+</view>

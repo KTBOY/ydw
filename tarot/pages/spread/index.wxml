@@ -1,0 +1,52 @@
+<view class="tarot-page">
+  <view class="page-glow"></view>
+  <view class="page-content">
+    <text class="spread-title gold-title">问卜</text>
+    <text class="spread-sub dim-text">心中默念所问之事，抽三牌观过去、现在、未来</text>
+
+    <input
+      class="spread-input"
+      placeholder="写下你的问题（可选）"
+      placeholder-class="spread-ph"
+      value="{{question}}"
+      bindinput="onQuestion"
+    />
+    <view class="gold-btn draw-btn" wx:if="{{!spread}}" bindtap="onDraw">抽 牌</view>
+
+    <view class="spread-row" wx:if="{{spread}}">
+      <view wx:for="{{spread.draws}}" wx:key="position" class="spread-item" data-idx="{{index}}" bindtap="onCard">
+        <view class="spread-flip {{revealedCount > index ? 'on' : ''}}">
+          <image class="spread-back" src="/tarot/images/decor/card-back.png" mode="aspectFill" />
+          <view class="spread-front">
+            <tarot-card
+              image="{{item.img}}"
+              nameEn="{{item.card.nameEn}}"
+              isReversed="{{item.isReversed}}"
+              plate="{{true}}"
+            />
+          </view>
+        </view>
+        <text class="spread-pos">{{item.position}}</text>
+      </view>
+    </view>
+
+    <view class="comb" wx:if="{{done}}">
+      <text class="comb-title gold-title">组合解读</text>
+      <view wx:for="{{spread.draws}}" wx:key="position" class="comb-item">
+        <text class="comb-pos">{{item.position}} · {{item.card.nameCn}}（{{item.isReversed ? '逆位' : '正位'}}）</text>
+        <text class="comb-body">{{item.card.guidance}}</text>
+      </view>
+      <view class="gold-btn again-btn" bindtap="onAgain">再问一次</view>
+    </view>
+  </view>
+
+  <card-detail
+    show="{{showDetail}}"
+    card="{{detailCard}}"
+    isReversed="{{detailReversed}}"
+    showSave="{{true}}"
+    saved="{{detailSaved}}"
+    bindclose="closeDetail"
+    bindaction="onDetailAction"
+  />
+</view>

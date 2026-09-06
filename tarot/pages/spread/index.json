@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "问卜",
+  "navigationBarBackgroundColor": "#0A0A0F",
+  "navigationBarTextStyle": "white",
+  "usingComponents": {
+    "tarot-card": "/tarot/components/tarot-card/tarot-card",
+    "card-detail": "/tarot/components/card-detail/card-detail"
+  }
+}

@@ -1,0 +1,2 @@
+<!--pages/rj/index.wxml-->
+<game-list  list="{{list}}" />

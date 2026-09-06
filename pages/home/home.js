@@ -1,122 +1,89 @@
 import {
-  fetchHome
-} from '../../services/home/home';
-import Toast from 'tdesign-miniprogram/toast/index';
+  getGameList
+} from "../../utils/gameList/games"
+import {
+  fuzzySearch
+} from "../../utils/gameUtils"
+let interstitialAd = null
+
+const imageCdn = 'https://tdesign.gtimg.com/mobile/demos';
+const swiperList = [
+  `${imageCdn}/swiper1.png`,
+  `${imageCdn}/swiper2.png`,
+  `${imageCdn}/swiper1.png`,
+  `${imageCdn}/swiper2.png`,
+  `${imageCdn}/swiper1.png`,
+];
 
 Page({
   data: {
-    imgSrcs: [],
-    tabList: [],
-    goodsList: [],
-    goodsListLoadStatus: 0,
-    pageLoading: false,
-    current: 1,
-    autoplay: true,
-    duration: '500',
-    interval: 5000,
-    navigation: {
-      type: 'dots'
-    },
-    swiperImageProps: {
-      mode: 'scaleToFill'
-    },
+    currIndex: 0,
+    swiperList,
+    list: [],
+    userId: 'u_123456', // 假设从缓存获取用户ID
+    h5Url: '' // 动态拼接H5地址
+  },
+  onH5Load() {
+    const webView = this.selectComponent('#test'); // 获取web-view组件实例（可选）
+    console.log(webView);
+    wx.postMessage({
+      data: {
+        foo: 'bar'
+      }
+    })
   },
 
-  goodListPagination: {
-    index: 0,
-    num: 20,
-  },
+  onH5Message(e) {
+    const h5Message = e.detail.data[0]; // 消息存储在detail.data数组中
+    console.log('收到H5消息：', h5Message);
 
-  privateData: {
-    tabIndex: 0,
   },
+  tabClick(v) {
+    this.setData({
+      currIndex: v.detail.index
+    })
 
-  onShow() {
-    this.getTabBar().init();
   },
-
-  onLoad() {
-    this.init();
+  onChangeMenu(e) {
+    this.setData({
+      currIndex: 1
+    })
+    // wx.navigateTo({
+    //   url: '/bz/pages/wallpaper/wallpaper'
+    // })
   },
+  load(v) {
 
-  onReachBottom() {
-    if (this.data.goodsListLoadStatus === 0) {
-      this.loadGoodsList();
+
+    wx.miniProgram.postMessage({
+      data: {
+        foo: 'bar'
+      }
+    })
+  },
+  onH5Message(e) {
+    const message = e.detail.data[0];
+    if (message.type === 'requestPay') {
+      this.handlePay(message.orderId); // 调用支付逻辑
     }
   },
 
-  onPullDownRefresh() {
-    this.init();
-  },
+  async onLoad(options) {
 
-  init() {
-    this.loadHomePage();
-  },
-
-  loadHomePage() {
-    wx.stopPullDownRefresh();
-
+    const res = await getGameList()
+    res.reverse()
     this.setData({
-      pageLoading: true,
-    });
-    fetchHome().then(({
-      swiper,
-      tabList
-    }) => {
-      this.setData({
-        tabList,
-        imgSrcs: swiper,
-        pageLoading: false,
-      });
-      this.loadGoodsList(true);
-    });
-  },
+      list: res
+    })
 
-  tabChangeHandle(e) {
-    this.privateData.tabIndex = e.detail;
-    this.loadGoodsList(true);
-  },
 
-  onReTry() {
-    this.loadGoodsList();
+
+
+
+
+
+
   },
 
 
-
-  goodListClickHandle(e) {
-    const {
-      index
-    } = e.detail;
-    const {
-      spuId
-    } = this.data.goodsList[index];
-    wx.navigateTo({
-      url: `/pages/goods/details/index?spuId=${spuId}`,
-    });
-  },
-
-  goodListAddCartHandle() {
-    Toast({
-      context: this,
-      selector: '#t-toast',
-      message: '点击加入购物车',
-    });
-  },
-
-  navToSearchPage() {
-    wx.navigateTo({
-      url: '/pages/goods/search/index'
-    });
-  },
-
-  navToActivityDetail({
-    detail
-  }) {
-    const {
-      index: promotionID = 0
-    } = detail || {};
-    wx.navigateTo({
-      url: `/pages/promotion-detail/index?promotion_id=${promotionID}`,
-    });
-  },
-});
+})

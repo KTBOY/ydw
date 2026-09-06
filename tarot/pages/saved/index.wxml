@@ -1,0 +1,38 @@
+<view class="tarot-page">
+  <view class="page-glow"></view>
+  <view class="page-content">
+    <view class="saved-head">
+      <text class="gold-title saved-title">收藏之牌</text>
+      <text class="dim-text saved-count">共 {{list.length}} 张</text>
+    </view>
+
+    <view class="saved-grid" wx:if="{{list.length > 0}}">
+      <view
+        wx:for="{{list}}"
+        wx:key="id"
+        class="saved-item"
+        data-id="{{item.id}}"
+        bindtap="onCard"
+        bindlongpress="onLongUnsave"
+      >
+        <image class="saved-img" src="{{item.img}}" mode="aspectFill" />
+        <text class="saved-name">{{item.nameCn}}</text>
+      </view>
+    </view>
+
+    <view class="saved-empty dim-text" wx:else>
+      <text class="saved-empty-glyph">☾</text>
+      <text>还没有收藏的牌</text>
+      <text>在每日抽牌中点击「收藏此牌」</text>
+    </view>
+  </view>
+
+  <card-detail
+    show="{{showDetail}}"
+    card="{{detailCard}}"
+    showSave="{{true}}"
+    saved="{{true}}"
+    bindclose="closeDetail"
+    bindaction="onUnsave"
+  />
+</view>

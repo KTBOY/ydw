@@ -1,0 +1,16 @@
+<!--bz/pages/wallpaper/wallpaper.wxml-->
+<view class="wp">
+  <tab-type-list bind:change="tabChange" />
+
+  <image-waterfall
+    class="wp-flow"
+    list="{{wfList}}"
+    reset-token="{{wfToken}}"
+    show-title="{{false}}"
+    bind:itemtap="onItemTap"
+    bind:loadmore="onLoadMore"
+  >
+    <view class="wp-tip" wx:if="{{loading}}">加载中…</view>
+    <view class="wp-safe"></view>
+  </image-waterfall>
+</view>

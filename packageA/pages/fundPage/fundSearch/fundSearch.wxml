@@ -1,0 +1,56 @@
+<!-- packageA/pages/fundSearch/fundSearch.wxml -->
+<view class="fund-search-page">
+  <!-- <view class="search-bar-shell">
+    <view class="search-row">
+      <view class="search-input-wrap">
+        <icon class="input-icon" type="search" size="14" color="#b5bac4" />
+        <input class="search-input" placeholder="搜索基金代码" placeholder-class="search-placeholder" confirm-type="search"
+          value="{{searchValue}}" bindinput="onSearchInput" bindconfirm="onSearchConfirm" />
+        <icon wx:if="{{searchValue}}" class="clear-icon" type="clear" size="16" color="#c5cad3"
+          bindtap="onClearInput" />
+      </view>
+      <view class="search-btn" bindtap="onSearchSubmit">搜索</view>
+    </view>
+  </view> -->
+
+  <view class="fund-card favorite-card">
+    <view class="my-fund">
+      <view class="my-fund-header">
+        <view class="my-fund-title-wrap">
+          <input class="search-input" placeholder="搜索基金代码" placeholder-class="search-placeholder" confirm-type="search"
+            value="{{searchValue}}" bindinput="onSearchInput" bindconfirm="onSearchConfirm" />
+        </view>
+      </view>
+      <view class="search-btn" bindtap="onSearchSubmit">搜索</view>
+    </view>
+  </view>
+
+
+  <view class="result-list" wx:if="{{searchValue}}">
+    <view class="state-text" wx:if="{{loading}}">基金列表加载中...</view>
+
+    <block wx:for="{{renderList}}" wx:key="code">
+      <view class="result-item" bindtap="onTapResultItem" data-name="{{item.name}}" data-code="{{item.code}}">
+        <icon class="result-icon" type="search" size="13" color="#c2c8d1" />
+        <text class="result-name">{{item.name}}</text>
+        <text class="result-code">{{item.code}}</text>
+      </view>
+    </block>
+
+    <view class="state-text" wx:if="{{!loading && !renderList.length}}">暂无匹配基金</view>
+    <view class="state-text state-warn" wx:if="{{errorMsg}}">{{errorMsg}}</view>
+  </view>
+
+  <view class="history-card" wx:if="{{!searchValue && searchHistory.length}}">
+    <view class="history-header">
+      <text class="history-title">搜索历史</text>
+      <text class="history-clear" bindtap="onClearHistory">清空</text>
+    </view>
+    <view class="history-list">
+      <view class="history-item" wx:for="{{searchHistory}}" wx:key="*this" bindtap="onTapHistoryWord"
+        data-word="{{item}}">
+        {{item}}
+      </view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,29 @@
+version: 1
+
+scope:
+  include: []
+  exclude:
+    - "node_modules/**"
+    - "miniprogram_npm/**"
+    - "@babel/**"
+    - "HANDOFF.md"
+    - "bz/pages/wallpaper - 副本/**"
+    - "bz/pages/wallpaper2/**"
+
+repowiki:
+  template: architecture
+  notes:
+    - text: "本项目是基于 tdesign-miniprogram 的多功能微信小程序（导航标题「珊瑚」），采用「主包 + 4 个分包」架构：主包 pages/ 承载首页与电商（goods/order/my_module），分包 packageA（弹幕/截图连接/尺子/二维码/视频下载/震动/基金等工具集）、xingzuo（星座）、bz（壁纸）、game（小游戏）。分析请按「主包核心 + 各功能分包」组织。"
+    - text: "架构约定：页面在 app.json 的 pages 与 subPackages 注册；services/ 封装业务网络请求，api/ 为独立接口（fund/video/xingzuo/bi），model/ 提供 mock 数据，components/ 为跨页复用组件，utils/ 为通用工具，style/ 为公共样式与 iconfont。请重点梳理分包划分、预加载 preloadRule、自定义 tabBar 与数据流向。"
+    - text: "HANDOFF.md 是一份与本项目无关的「世界杯历史静态页」交接文档，切勿据其内容描述本小程序的功能或架构。"
+    - text: "miniprogram_npm 为第三方 tdesign 组件的构建产物，仅作为依赖看待，不要当作项目自身源码逐一分析；bz/pages 下的「wallpaper - 副本」与 wallpaper2 为历史冗余目录，不代表当前功能。"
+
+  documents: []
+
+knowledgecard:
+  notes:
+    - text: "知识卡需覆盖四层可复用资产：components/ 公共组件、services/ 与 api/ 接口与请求封装、utils/ 工具函数、model/ mock 数据结构；并尊重主包与 packageA/xingzuo/bz/game 各分包的功能边界。"
+    - text: "组件卡要点：说明每个组件的用途、对外属性/事件、以及被哪些页面复用（如 custom-tab-bar、game-list、game-center、webp-image、menu、url-list、url-copy、fund、loading-content）。"
+    - text: "服务与接口卡要点：归纳请求封装约定（utils/wxReques）、services 各业务域（order/good/cart/coupon/usercenter/home/activity/promotion 等）与 api/（fund、video、xingzuo、bi）的职责边界与调用方式。"
+    - text: "工具卡要点：沉淀 downLoadVideo、getPermission、gameUtils、addressParse、common_utils、util 等工具的输入输出、依赖与典型使用场景。"
+    - text: "数据模型卡要点：梳理 model/ 下 activities、activity、cart、goods、good、coupon、category、comments、promotion、search、usercenter、swiper 等的结构与用途，并明确标注其为 mock 数据而非真实后端返回。"

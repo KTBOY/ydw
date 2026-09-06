@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "游戏库",
+  "usingComponents": {
+    "t-search": "tdesign-miniprogram/search/search"
+  }
+}

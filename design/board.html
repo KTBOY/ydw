@@ -1,0 +1,1186 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <title>塔罗占卜 · 完整设计稿</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        background: #17181c;
+        font-family: 'Noto Serif SC', 'Source Han Serif CN', 'Songti SC', 'SimSun', serif;
+        color: #d8d4c8;
+      }
+      .board {
+        position: relative;
+        width: 2960px;
+        padding: 40px 0 60px;
+      }
+
+      .board-title {
+        position: absolute;
+        left: 48px;
+        top: 34px;
+        font-size: 26px;
+        color: #e8d48b;
+        letter-spacing: 6px;
+      }
+      .board-sub {
+        position: absolute;
+        left: 48px;
+        top: 72px;
+        font-size: 13px;
+        color: #7d7869;
+        letter-spacing: 2px;
+      }
+      .board-ver {
+        position: absolute;
+        right: 48px;
+        top: 44px;
+        font-size: 12px;
+        color: #7d7869;
+      }
+
+      .screen-label {
+        position: absolute;
+        font-size: 15px;
+        color: #c9a84c;
+        letter-spacing: 3px;
+      }
+      .screen-note {
+        position: absolute;
+        font-size: 11px;
+        color: #6e6a5e;
+        letter-spacing: 1px;
+      }
+
+      .phone {
+        position: absolute;
+        top: 130px;
+        width: 375px;
+        height: 812px;
+        overflow: hidden;
+        outline: 1px solid #2c2d33;
+        background: radial-gradient(ellipse 95% 30% at 50% 76%, rgba(30, 62, 118, 0.55), transparent 75%),
+          radial-gradient(ellipse 60% 22% at 72% 72%, rgba(52, 96, 160, 0.5), transparent 70%),
+          linear-gradient(180deg, #0c0b0a 0%, #070706 40%, #060607 62%, #071124 82%, #04060e 100%);
+        color: #e0dcd0;
+      }
+
+      .deco-glow {
+        position: absolute;
+        left: 50%;
+        top: 46%;
+        width: 340px;
+        height: 300px;
+        transform: translate(-50%, -50%);
+        background: radial-gradient(ellipse 50% 40% at 50% 50%, rgba(120, 95, 40, 0.35), transparent 70%);
+        pointer-events: none;
+      }
+
+      /* ===== 共用：首页 ===== */
+      .home-top {
+        padding-top: 8px;
+      }
+      .month-strip {
+        height: 48px;
+        display: flex;
+        justify-content: center;
+        gap: 0;
+        white-space: nowrap;
+      }
+      .month-item {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 90px;
+        height: 48px;
+        font-size: 16px;
+        color: #c9a84c;
+      }
+      .month-item.on {
+        color: #fff;
+        font-size: 19px;
+        font-weight: 600;
+        text-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
+      }
+      .year-label {
+        margin-top: 18px;
+        text-align: center;
+        font-size: 16px;
+        color: #c9a84c;
+        letter-spacing: 5px;
+        text-indent: 5px;
+      }
+      .card-stage {
+        position: relative;
+        height: 418px;
+        margin-top: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .peek {
+        position: absolute;
+        top: 50%;
+        width: 95px;
+        height: 153px;
+        transform: translateY(-50%);
+        box-sizing: border-box;
+        padding: 4px;
+        border-radius: 6px;
+        background: linear-gradient(180deg, #ffffff 0%, #f8f4e9 70%, #efe9d8 100%);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
+      }
+      .peek.left {
+        left: -33px;
+      }
+      .peek.right {
+        right: -33px;
+      }
+      .peek-img {
+        width: 100%;
+        height: 100%;
+        border-radius: 3px;
+        object-fit: cover;
+        display: block;
+      }
+      .card3d {
+        position: relative;
+        width: 238px;
+        height: 384px;
+      }
+      .card-frame {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        padding: 9px 16px 10px;
+        border-radius: 7px;
+        background: linear-gradient(180deg, #ffffff 0%, #f8f4e9 70%, #efe9d8 100%);
+        border: 0.5px solid rgba(202, 164, 90, 0.6);
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.65), inset 0 0 13px rgba(112, 84, 32, 0.16);
+      }
+      .card-frame::before {
+        content: '';
+        position: absolute;
+        top: 3px;
+        left: 3px;
+        right: 3px;
+        bottom: 3px;
+        border: 0.5px solid rgba(202, 164, 90, 0.4);
+        border-radius: 4px;
+        pointer-events: none;
+      }
+      .card-topband {
+        height: 28px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 13px;
+        letter-spacing: 5px;
+        text-indent: 5px;
+        color: #463a22;
+        white-space: nowrap;
+        overflow: hidden;
+      }
+      .card-window {
+        position: relative;
+        width: 100%;
+        height: calc(100% - 28px);
+        border-radius: 3px;
+        overflow: hidden;
+        background: #0e0c14;
+      }
+      .card-img {
+        width: 100%;
+        height: 100%;
+        display: block;
+        object-fit: cover;
+        filter: sepia(0.22) saturate(1.12) contrast(1.02);
+      }
+      .card-shade {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 110px;
+        background: linear-gradient(180deg, rgba(6, 5, 12, 0.45), rgba(6, 5, 12, 0.12) 55%, transparent);
+      }
+      .card-numeral {
+        position: absolute;
+        top: 53px;
+        left: 0;
+        right: 0;
+        text-align: center;
+        color: rgba(255, 255, 255, 0.95);
+        font-size: 21px;
+        text-shadow: 0 1px 5px rgba(0, 0, 0, 0.85);
+      }
+      .rosette {
+        position: absolute;
+        width: 29px;
+        height: 29px;
+      }
+      .rosette.tl {
+        top: 1px;
+        left: 1px;
+      }
+      .rosette.tr {
+        top: 1px;
+        right: 1px;
+      }
+      .rosette.bl {
+        bottom: 1px;
+        left: 1px;
+      }
+      .rosette.br {
+        bottom: 1px;
+        right: 1px;
+      }
+      .card-plaque {
+        position: absolute;
+        left: 50%;
+        bottom: -23px;
+        transform: translateX(-50%);
+        width: 56%;
+        padding: 4px 6px;
+        background: #07070a;
+        border: 1px solid #caa45a;
+        box-shadow: 0 6px 14px rgba(0, 0, 0, 0.55), inset 0 0 0 2px #07070a, inset 0 0 0 2.5px rgba(202, 164, 90, 0.7);
+        text-align: center;
+        color: #f3efe4;
+        font-size: 13.5px;
+        line-height: 1.3;
+      }
+      .date-line {
+        margin-top: 46px;
+        text-align: center;
+        font-size: 15px;
+        color: #b9c1cd;
+        letter-spacing: 1.5px;
+      }
+      .time-line {
+        margin-top: 17px;
+        text-align: center;
+        font-size: 13.5px;
+        color: #cdbd8a;
+        letter-spacing: 3px;
+      }
+      .hint {
+        margin-top: 11px;
+        text-align: center;
+        font-size: 10px;
+        color: rgba(141, 137, 125, 0.75);
+        letter-spacing: 2px;
+      }
+
+      /* 牌背 */
+      /* 牌背：整图素材 + 中央文案 */
+      .back-face {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        border-radius: 7px;
+        overflow: hidden;
+        background: #0b0806;
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.65);
+      }
+      .back-bg {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .back-cover {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+      .back-title {
+        font-size: 22px;
+        line-height: 1.7;
+        color: #f3efe4;
+        letter-spacing: 7px;
+        text-indent: 7px;
+        text-shadow: 0 1px 5px rgba(0, 0, 0, 0.8);
+      }
+      .back-sub {
+        margin-top: 10px;
+        font-size: 11px;
+        color: rgba(201, 168, 76, 0.85);
+        letter-spacing: 3px;
+        text-indent: 3px;
+      }
+
+      /* ===== 历史页 ===== */
+      .hist-wrap {
+        padding-top: 40px;
+      }
+      .hist-head {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 24px;
+        padding: 12px 0 12px;
+      }
+      .hist-arrow {
+        width: 32px;
+        height: 32px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid rgba(201, 168, 76, 0.35);
+        border-radius: 50%;
+        color: #c9a84c;
+        font-size: 16px;
+      }
+      .hist-month {
+        font-size: 18px;
+        color: #e8d48b;
+        letter-spacing: 2px;
+        min-width: 130px;
+        text-align: center;
+      }
+      .hist-week {
+        display: flex;
+        padding: 0 16px;
+        margin-top: 8px;
+      }
+      .week-cell {
+        flex: 1;
+        text-align: center;
+        font-size: 12px;
+        color: #8a8577;
+        padding: 6px 0;
+      }
+      .hist-grid {
+        display: flex;
+        flex-wrap: wrap;
+        padding: 0 16px;
+      }
+      .day-cell {
+        width: calc(100% / 7);
+        height: 48px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 2px;
+      }
+      .day-num {
+        font-size: 14px;
+        color: #8a8577;
+      }
+      .day-cell.has .day-num {
+        color: #e0dcd0;
+      }
+      .day-cell.has {
+        background: rgba(201, 168, 76, 0.08);
+        border-radius: 6px;
+      }
+      .day-cell.today {
+        outline: 1px solid rgba(201, 168, 76, 0.5);
+        background: rgba(201, 168, 76, 0.12);
+        border-radius: 6px;
+      }
+      .day-dot {
+        font-size: 10px;
+        color: #c9a84c;
+        line-height: 12px;
+      }
+      .hist-tip {
+        text-align: center;
+        font-size: 12px;
+        color: #8a8577;
+        padding-top: 24px;
+        letter-spacing: 1px;
+      }
+
+      /* ===== 我的页 ===== */
+      .profile-head {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+        padding: 56px 0 20px;
+      }
+      .medallion {
+        width: 70px;
+        height: 70px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 28px;
+        color: #4a3610;
+        background: radial-gradient(circle at 50% 30%, #fbefc5 0%, #eed795 28%, #d4af5a 52%, #8a681f 80%, #55400f 100%);
+        border: 1px solid #a8863a;
+        box-shadow: 0 0 14px rgba(232, 205, 120, 0.35), inset 0 3px 5px rgba(255, 248, 215, 0.75),
+          inset 0 -4px 8px rgba(90, 62, 8, 0.55);
+      }
+      .profile-title {
+        font-size: 20px;
+        color: #e8d48b;
+        letter-spacing: 3px;
+      }
+      .stats-row {
+        display: flex;
+        padding: 12px 32px 24px;
+      }
+      .stat {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 4px;
+      }
+      .stat-num {
+        font-size: 28px;
+        color: #e8d48b;
+      }
+      .stat-label {
+        font-size: 12px;
+        color: #8a8577;
+        letter-spacing: 1px;
+      }
+      .entry-list {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        padding: 0 32px;
+      }
+      .gold-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 44px;
+        border-radius: 22px;
+        border: 1px solid rgba(201, 168, 76, 0.35);
+        background: linear-gradient(180deg, rgba(201, 168, 76, 0.28), rgba(201, 168, 76, 0.12));
+        color: #e8d48b;
+        font-size: 15px;
+        letter-spacing: 2px;
+      }
+
+      /* ===== 收藏页 ===== */
+      .saved-head {
+        display: flex;
+        align-items: baseline;
+        justify-content: center;
+        gap: 10px;
+        padding: 30px 0 16px;
+      }
+      .saved-title {
+        font-size: 20px;
+        color: #e8d48b;
+        letter-spacing: 3px;
+      }
+      .saved-count {
+        font-size: 12px;
+        color: #8a8577;
+      }
+      .saved-grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        padding: 0 20px;
+      }
+      .saved-item {
+        width: calc((100% - 24px) / 3);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 6px;
+      }
+      .saved-img {
+        width: 100%;
+        height: 160px;
+        border-radius: 6px;
+        border: 1px solid rgba(201, 168, 76, 0.45);
+        object-fit: cover;
+        filter: sepia(0.22) saturate(1.12);
+        display: block;
+      }
+      .saved-name {
+        font-size: 12px;
+        color: #e0dcd0;
+        letter-spacing: 1px;
+      }
+
+      /* ===== tabbar（页面内） ===== */
+      .tabbar {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        display: flex;
+        justify-content: center;
+        gap: 27px;
+        padding: 8px 0 13px;
+        background: linear-gradient(180deg, rgba(3, 4, 10, 0) 0%, rgba(3, 4, 10, 0.55) 46%);
+      }
+      .tab {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .coin-wrap {
+        position: relative;
+        width: 63px;
+        height: 63px;
+      }
+      .coin-img {
+        position: relative;
+        z-index: 2;
+        width: 63px;
+        height: 63px;
+        border-radius: 50%;
+        display: block;
+      }
+      .tab.active .coin-img {
+        transform: scale(1.06);
+      }
+      .rays,
+      .burst,
+      .burst-ring {
+        position: absolute;
+        pointer-events: none;
+      }
+      .rays {
+        inset: -18px;
+        border-radius: 50%;
+        background: repeating-conic-gradient(rgba(246, 216, 132, 0.85) 0deg 2.2deg, transparent 2.2deg 13.5deg);
+        -webkit-mask: radial-gradient(circle, transparent 60%, #000 64%, #000 84%, transparent 92%);
+        mask: radial-gradient(circle, transparent 60%, #000 64%, #000 84%, transparent 92%);
+        opacity: 0;
+      }
+      .rays-2 {
+        background: repeating-conic-gradient(rgba(246, 216, 132, 0.4) 0deg 1.6deg, transparent 1.6deg 22.5deg);
+      }
+      .tab.active .rays {
+        opacity: 1;
+      }
+      .tab.active .rays-2 {
+        opacity: 0.6;
+      }
+      .burst {
+        inset: -18px;
+        border-radius: 50%;
+        background: repeating-conic-gradient(rgba(250, 226, 150, 0.95) 0deg 3deg, transparent 3deg 15deg);
+        -webkit-mask: radial-gradient(circle, transparent 58%, #000 62%, #000 88%, transparent 95%);
+        mask: radial-gradient(circle, transparent 58%, #000 62%, #000 88%, transparent 95%);
+        opacity: 0;
+      }
+      .burst.play {
+        opacity: 0.9;
+        transform: scale(1.25) rotate(14deg);
+      }
+      .burst-ring {
+        inset: 3px;
+        border-radius: 50%;
+        border: 1px solid rgba(246, 216, 132, 0.85);
+        opacity: 0;
+      }
+      .burst-ring.play {
+        opacity: 0.7;
+        transform: scale(1.4);
+      }
+      .tab-label {
+        margin-top: 5px;
+        font-size: 11px;
+        color: #8d897d;
+        letter-spacing: 1px;
+      }
+      .tab.active .tab-label {
+        color: #f5f1e6;
+      }
+
+      /* ===== 组件状态板（第 7 列） ===== */
+      .comp-col {
+        position: absolute;
+        top: 130px;
+        left: 2530px;
+        width: 380px;
+      }
+      .comp-block {
+        margin-bottom: 26px;
+      }
+      .comp-title {
+        font-size: 14px;
+        color: #c9a84c;
+        letter-spacing: 3px;
+        margin-bottom: 14px;
+        border-bottom: 1px solid #2e2f35;
+        padding-bottom: 8px;
+      }
+      .coin-demo-row {
+        display: flex;
+        gap: 34px;
+        align-items: flex-end;
+      }
+      .coin-demo {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+      }
+      .coin-demo .cap {
+        font-size: 11px;
+        color: #8d897d;
+      }
+      .coin-big {
+        position: relative;
+        width: 126px;
+        height: 126px;
+        margin: 0 auto;
+      }
+      .anim-row {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 10px;
+      }
+      .anim-name {
+        width: 150px;
+        font-size: 11px;
+        color: #b3b0a8;
+        letter-spacing: 1px;
+      }
+      .anim-bar {
+        position: relative;
+        height: 8px;
+        border-radius: 4px;
+        background: #26272d;
+        flex: 1;
+        overflow: hidden;
+      }
+      .anim-fill {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        border-radius: 4px;
+        background: linear-gradient(90deg, #8a681f, #e8d48b);
+      }
+      .anim-dur {
+        width: 120px;
+        font-size: 10px;
+        color: #6e6a5e;
+      }
+
+      /* ===== 规范板（第二行） ===== */
+      .spec-row {
+        position: absolute;
+        top: 1030px;
+        left: 48px;
+        right: 48px;
+        display: flex;
+        gap: 24px;
+      }
+      .spec-panel {
+        background: #1d1e23;
+        border: 1px solid #2c2d33;
+        border-radius: 10px;
+        padding: 20px 24px;
+      }
+      .spec-title {
+        font-size: 14px;
+        color: #e8d48b;
+        letter-spacing: 3px;
+        margin-bottom: 14px;
+      }
+      .swatch-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 118px);
+        gap: 12px 18px;
+      }
+      .swatch {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .sw-chip {
+        width: 26px;
+        height: 26px;
+        border-radius: 6px;
+        border: 1px solid #3a3b41;
+      }
+      .sw-meta {
+        font-size: 10px;
+        color: #9b968a;
+        line-height: 1.5;
+      }
+      .sw-meta b {
+        display: block;
+        font-size: 11px;
+        color: #d8d4c8;
+        font-weight: 600;
+      }
+      .type-table {
+        font-size: 11.5px;
+        color: #b3b0a8;
+        border-collapse: collapse;
+      }
+      .type-table td,
+      .type-table th {
+        padding: 5px 14px 5px 0;
+        text-align: left;
+        border-bottom: 1px solid #2a2b30;
+        font-weight: 400;
+      }
+      .type-table th {
+        color: #7d7869;
+      }
+      .size-table {
+        font-size: 11.5px;
+        color: #b3b0a8;
+        border-collapse: collapse;
+      }
+      .size-table td {
+        padding: 4px 18px 4px 0;
+        border-bottom: 1px solid #2a2b30;
+      }
+      .flow {
+        font-size: 11.5px;
+        color: #b3b0a8;
+        line-height: 2;
+      }
+      .flow b {
+        color: #e8d48b;
+        font-weight: 600;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="board" id="board">
+      <div class="board-title">塔罗占卜 · 完整设计稿</div>
+      <div class="board-sub">微信小程序分包 tarot / 设计基准 375×812（rpx = px×2）/ 字体 Noto Serif SC · 宋体</div>
+      <div class="board-ver">v2.1 · 2026-08</div>
+
+      <!-- S1 首页·未揭示 -->
+      <div class="screen-label" style="left: 48px; top: 100px">01 首页 · 未揭示</div>
+      <div class="screen-note" style="left: 48px; top: 956px">牌背奶白框 + 暗纹描金 · 轻触翻牌</div>
+      <div class="phone" style="left: 48px">
+        <div class="home-top">
+          <div class="month-strip"
+            ><span class="month-item">一月</span><span class="month-item">二月</span
+            ><span class="month-item on">三月</span><span class="month-item">四月</span></div
+          >
+          <div class="year-label">2026年</div>
+          <div class="card-stage">
+            <div class="peek left"><img class="peek-img" src="/tarot/images/18-moon.jpg" /></div>
+            <div class="peek right"><img class="peek-img" src="/tarot/images/13-death.jpg" /></div>
+            <div class="card3d">
+              <div class="back-face">
+                <img class="back-bg" src="/tarot/images/decor/card-back.png" />
+                <div class="back-cover"
+                  ><span class="back-title">今日</span><span class="back-title">指引</span
+                  ><span class="back-sub">轻触揭示</span></div
+                >
+              </div>
+            </div>
+          </div>
+          <div class="date-line">3月29日 星期日</div>
+          <div class="time-line">10:43</div>
+          <div class="hint">轻触卡片 · 揭示今日指引</div>
+        </div>
+        <div class="tabbar">
+          <div class="tab active"
+            ><div class="coin-wrap"
+              ><div class="rays"></div><div class="rays rays-2"></div
+              ><img class="coin-img" src="/tarot/images/decor/coin-home-gold.png" /></div
+            ><span class="tab-label">首页</span></div
+          >
+          <div class="tab"
+            ><div class="coin-wrap"><img class="coin-img" src="/tarot/images/decor/coin-history-dark.png" /></div
+            ><span class="tab-label">历史</span></div
+          >
+          <div class="tab"
+            ><div class="coin-wrap"><img class="coin-img" src="/tarot/images/decor/coin-profile.png" /></div
+            ><span class="tab-label">我的</span></div
+          >
+        </div>
+      </div>
+
+      <!-- S2 首页·已揭示 -->
+      <div class="screen-label" style="left: 463px; top: 100px">02 首页 · 已揭示</div>
+      <div class="screen-note" style="left: 463px; top: 956px">翻牌后展示牌面 · 点卡弹牌意详情</div>
+      <div class="phone" style="left: 463px">
+        <div class="home-top">
+          <div class="month-strip"
+            ><span class="month-item">一月</span><span class="month-item on">二月</span
+            ><span class="month-item">三月</span><span class="month-item">四月</span></div
+          >
+          <div class="year-label">2026年</div>
+          <div class="card-stage">
+            <div class="peek left"><img class="peek-img" src="/tarot/images/19-sun.jpg" /></div>
+            <div class="peek right"><img class="peek-img" src="/tarot/images/09-hermit.jpg" /></div>
+            <div class="card3d">
+              <div class="card-frame">
+                <img class="rosette tl" src="/tarot/images/decor/rosette.png" /><img
+                  class="rosette tr"
+                  src="/tarot/images/decor/rosette.png"
+                />
+                <img class="rosette bl" src="/tarot/images/decor/rosette.png" /><img
+                  class="rosette br"
+                  src="/tarot/images/decor/rosette.png"
+                />
+                <div class="card-topband">女祭司</div>
+                <div class="card-window">
+                  <img class="card-img" src="/tarot/images/02-high-priestess.jpg" />
+                  <div class="card-shade"></div>
+                  <div class="card-numeral">II</div>
+                </div>
+                <div class="card-plaque">女祭司</div>
+              </div>
+            </div>
+          </div>
+          <div class="date-line">2月25日 星期二</div>
+          <div class="time-line">10:43</div>
+          <div class="hint">轻触卡片查看牌意解读</div>
+        </div>
+        <div class="tabbar">
+          <div class="tab"
+            ><div class="coin-wrap"><img class="coin-img" src="/tarot/images/decor/coin-home.png" /></div
+            ><span class="tab-label">首页</span></div
+          >
+          <div class="tab active"
+            ><div class="coin-wrap"
+              ><div class="rays"></div><div class="rays rays-2"></div
+              ><img class="coin-img" src="/tarot/images/decor/coin-history.png" /></div
+            ><span class="tab-label">历史</span></div
+          >
+          <div class="tab"
+            ><div class="coin-wrap"><img class="coin-img" src="/tarot/images/decor/coin-profile.png" /></div
+            ><span class="tab-label">我的</span></div
+          >
+        </div>
+      </div>
+
+      <!-- S3 历史 -->
+      <div class="screen-label" style="left: 878px; top: 100px">03 历史 · 抽牌日历</div>
+      <div class="screen-note" style="left: 878px; top: 956px">✦ 标记已抽牌日期 · 点击回看当日牌面</div>
+      <div class="phone" style="left: 878px">
+        <div class="hist-wrap">
+          <div class="hist-head">
+            <div class="hist-arrow">←</div>
+            <div class="hist-month">2026年2月</div>
+            <div class="hist-arrow">→</div>
+          </div>
+          <div class="hist-week"
+            ><span class="week-cell">日</span><span class="week-cell">一</span><span class="week-cell">二</span
+            ><span class="week-cell">三</span><span class="week-cell">四</span><span class="week-cell">五</span
+            ><span class="week-cell">六</span></div
+          >
+          <div class="hist-grid">
+            <div class="day-cell" style="visibility: hidden"></div
+            ><div class="day-cell" style="visibility: hidden"></div
+            ><div class="day-cell" style="visibility: hidden"></div
+            ><div class="day-cell" style="visibility: hidden"></div>
+            <div class="day-cell"><span class="day-num">1</span></div
+            ><div class="day-cell"><span class="day-num">2</span></div
+            ><div class="day-cell"><span class="day-num">3</span></div>
+            <div class="day-cell"><span class="day-num">4</span></div
+            ><div class="day-cell has"><span class="day-num">5</span><span class="day-dot">✦</span></div
+            ><div class="day-cell"><span class="day-num">6</span></div
+            ><div class="day-cell"><span class="day-num">7</span></div>
+            <div class="day-cell"><span class="day-num">8</span></div
+            ><div class="day-cell"><span class="day-num">9</span></div
+            ><div class="day-cell has"><span class="day-num">10</span><span class="day-dot">✦</span></div
+            ><div class="day-cell"><span class="day-num">11</span></div>
+            <div class="day-cell"><span class="day-num">12</span></div
+            ><div class="day-cell"><span class="day-num">13</span></div
+            ><div class="day-cell"><span class="day-num">14</span></div
+            ><div class="day-cell has"><span class="day-num">15</span><span class="day-dot">✦</span></div>
+            <div class="day-cell"><span class="day-num">16</span></div
+            ><div class="day-cell"><span class="day-num">17</span></div
+            ><div class="day-cell"><span class="day-num">18</span></div
+            ><div class="day-cell"><span class="day-num">19</span></div>
+            <div class="day-cell"><span class="day-num">20</span></div
+            ><div class="day-cell has"><span class="day-num">21</span><span class="day-dot">✦</span></div
+            ><div class="day-cell"><span class="day-num">22</span></div
+            ><div class="day-cell"><span class="day-num">23</span></div>
+            <div class="day-cell"><span class="day-num">24</span></div
+            ><div class="day-cell has today"><span class="day-num">25</span><span class="day-dot">✦</span></div
+            ><div class="day-cell"><span class="day-num">26</span></div
+            ><div class="day-cell"><span class="day-num">27</span></div>
+            <div class="day-cell"><span class="day-num">28</span></div>
+          </div>
+          <div class="hist-tip">点击带 ✦ 的日期回看当日之牌</div>
+        </div>
+        <div class="tabbar">
+          <div class="tab"
+            ><div class="coin-wrap"><img class="coin-img" src="/tarot/images/decor/coin-home.png" /></div
+            ><span class="tab-label">首页</span></div
+          >
+          <div class="tab active"
+            ><div class="coin-wrap"
+              ><div class="rays"></div><div class="rays rays-2"></div
+              ><img class="coin-img" src="/tarot/images/decor/coin-history.png" /></div
+            ><span class="tab-label">历史</span></div
+          >
+          <div class="tab"
+            ><div class="coin-wrap"><img class="coin-img" src="/tarot/images/decor/coin-profile.png" /></div
+            ><span class="tab-label">我的</span></div
+          >
+        </div>
+      </div>
+
+      <!-- S4 我的 -->
+      <div class="screen-label" style="left: 1293px; top: 100px">04 我的</div>
+      <div class="screen-note" style="left: 1293px; top: 956px">数据统计 + 收藏入口</div>
+      <div class="phone" style="left: 1293px">
+        <div class="profile-head">
+          <div class="medallion">✦</div>
+          <div class="profile-title">我的塔罗</div>
+        </div>
+        <div class="stats-row">
+          <div class="stat"><span class="stat-num">18</span><span class="stat-label">抽牌次数</span></div>
+          <div class="stat"><span class="stat-num">4</span><span class="stat-label">连续天数</span></div>
+          <div class="stat"><span class="stat-num">6</span><span class="stat-label">收藏牌数</span></div>
+        </div>
+        <div class="entry-list">
+          <div class="gold-btn">☾ 收藏之牌</div>
+        </div>
+        <div class="tabbar">
+          <div class="tab"
+            ><div class="coin-wrap"><img class="coin-img" src="/tarot/images/decor/coin-home.png" /></div
+            ><span class="tab-label">首页</span></div
+          >
+          <div class="tab"
+            ><div class="coin-wrap"><img class="coin-img" src="/tarot/images/decor/coin-history-dark.png" /></div
+            ><span class="tab-label">历史</span></div
+          >
+          <div class="tab active"
+            ><div class="coin-wrap"
+              ><div class="rays"></div><div class="rays rays-2"></div
+              ><img class="coin-img" src="/tarot/images/decor/coin-profile-gold.png" /></div
+            ><span class="tab-label">我的</span></div
+          >
+        </div>
+      </div>
+
+      <!-- S5 收藏 -->
+      <div class="screen-label" style="left: 1708px; top: 100px">05 收藏之牌</div>
+      <div class="screen-note" style="left: 1708px; top: 956px">三列网格 · 点击查看牌意 / 取消收藏</div>
+      <div class="phone" style="left: 1708px">
+        <div class="saved-head"><span class="saved-title">收藏之牌</span><span class="saved-count">共 3 张</span></div>
+        <div class="saved-grid">
+          <div class="saved-item"
+            ><img class="saved-img" src="/tarot/images/17-star.jpg" /><span class="saved-name">星星</span></div
+          >
+          <div class="saved-item"
+            ><img class="saved-img" src="/tarot/images/19-sun.jpg" /><span class="saved-name">太阳</span></div
+          >
+          <div class="saved-item"
+            ><img class="saved-img" src="/tarot/images/00-fool.jpg" /><span class="saved-name">愚者</span></div
+          >
+        </div>
+      </div>
+
+      <!-- S7 组件状态板 -->
+      <div class="comp-col">
+        <div class="screen-label" style="left: 0; top: -30px">07 底部按钮 · 状态与动画</div>
+        <div class="comp-block">
+          <div class="comp-title">三态（金币 126rpx / 间距 55rpx）</div>
+          <div class="coin-demo-row">
+            <div class="coin-demo">
+              <div class="coin-wrap"><img class="coin-img" src="/tarot/images/decor/coin-history-dark.png" /></div>
+              <span class="cap">默认 · 暗银</span>
+            </div>
+            <div class="coin-demo">
+              <div class="coin-wrap"
+                ><div class="rays"></div><div class="rays rays-2"></div
+                ><img class="coin-img" src="/tarot/images/decor/coin-history.png" style="transform: scale(1.06)"
+              /></div>
+              <span class="cap">选中 · 金 + 光线转动</span>
+            </div>
+            <div class="coin-demo">
+              <div class="coin-wrap"
+                ><img class="coin-img" src="/tarot/images/decor/coin-home.png" style="transform: scale(0.92)"
+              /></div>
+              <span class="cap">按下 · scale(0.92)</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="comp-block">
+          <div class="comp-title">切换爆发帧（0.9s 光芒扩散 + 0.75s 金环扩散）</div>
+          <div style="display: flex; justify-content: center; padding: 6px 0 2px">
+            <div class="coin-big">
+              <div class="rays" style="opacity: 1"></div>
+              <div class="burst play"></div>
+              <div class="burst-ring play"></div>
+              <img
+                class="coin-img"
+                src="/tarot/images/decor/coin-profile-gold.png"
+                style="width: 126px; height: 126px; transform: scale(1.06)"
+              />
+            </div>
+          </div>
+        </div>
+
+        <div class="comp-block">
+          <div class="comp-title">动画时间轴</div>
+          <div class="anim-row"
+            ><span class="anim-name">光线旋转 rays-spin</span
+            ><div class="anim-bar"><div class="anim-fill" style="left: 0; right: 0; opacity: 0.55"></div></div
+            ><span class="anim-dur">22s · 循环</span></div
+          >
+          <div class="anim-row"
+            ><span class="anim-name">反向光线 rays-spin-rev</span
+            ><div class="anim-bar"><div class="anim-fill" style="left: 0; right: 0; opacity: 0.35"></div></div
+            ><span class="anim-dur">34s · 循环</span></div
+          >
+          <div class="anim-row"
+            ><span class="anim-name">光线呼吸 rays-pulse</span
+            ><div class="anim-bar"><div class="anim-fill" style="left: 0; width: 100%; opacity: 0.5"></div></div
+            ><span class="anim-dur">3.2s · 往复</span></div
+          >
+          <div class="anim-row"
+            ><span class="anim-name">光芒扩散 rays-burst</span
+            ><div class="anim-bar"><div class="anim-fill" style="left: 0; width: 45%"></div></div
+            ><span class="anim-dur">0.9s · 单次</span></div
+          >
+          <div class="anim-row"
+            ><span class="anim-name">金环扩散 ring-burst</span
+            ><div class="anim-bar"><div class="anim-fill" style="left: 0; width: 38%"></div></div
+            ><span class="anim-dur">0.75s · 单次</span></div
+          >
+          <div class="anim-row"
+            ><span class="anim-name">翻牌 flip</span
+            ><div class="anim-bar"><div class="anim-fill" style="left: 0; width: 60%"></div></div
+            ><span class="anim-dur">0.6s</span></div
+          >
+          <div class="anim-row"
+            ><span class="anim-name">页面切换 panel</span
+            ><div class="anim-bar"><div class="anim-fill" style="left: 0; width: 32%"></div></div
+            ><span class="anim-dur">0.32s</span></div
+          >
+        </div>
+
+        <div class="comp-block">
+          <div class="comp-title">切图资源（tarot/images/decor/）</div>
+          <div style="display: flex; gap: 14px; align-items: center; flex-wrap: wrap">
+            <img src="/tarot/images/decor/card-back.png" style="width: 34px" />
+            <img src="/tarot/images/decor/rosette.png" style="width: 36px" />
+            <img src="/tarot/images/decor/rosette.png" style="width: 36px" />
+            <img src="/tarot/images/decor/coin-home.png" style="width: 44px" />
+            <img src="/tarot/images/decor/coin-home-gold.png" style="width: 44px" />
+            <img src="/tarot/images/decor/coin-history.png" style="width: 44px" />
+            <img src="/tarot/images/decor/coin-history-dark.png" style="width: 44px" />
+            <img src="/tarot/images/decor/coin-profile.png" style="width: 44px" />
+            <img src="/tarot/images/decor/coin-profile-gold.png" style="width: 44px" />
+          </div>
+          <div style="font-size: 10px; color: #6e6a5e; margin-top: 8px"
+            >card-back 牌背整图 / rosette 四角雕花 / coin-* 金币金·暗两态 / 侧卡为相邻月真实牌面（非切图）</div
+          >
+        </div>
+      </div>
+
+      <!-- 规范板 -->
+      <div class="spec-row">
+        <div class="spec-panel" style="width: 640px">
+          <div class="spec-title">色彩 Color</div>
+          <div class="swatch-grid">
+            <div class="swatch"
+              ><span class="sw-chip" style="background: #0c0b0a"></span
+              ><span class="sw-meta"><b>#0C0B0A</b>背景·顶</span></div
+            >
+            <div class="swatch"
+              ><span class="sw-chip" style="background: #070706"></span
+              ><span class="sw-meta"><b>#070706</b>背景·中</span></div
+            >
+            <div class="swatch"
+              ><span class="sw-chip" style="background: #071124"></span
+              ><span class="sw-meta"><b>#071124</b>背景·深蓝</span></div
+            >
+            <div class="swatch"
+              ><span class="sw-chip" style="background: rgba(30, 62, 118, 0.9)"></span
+              ><span class="sw-meta"><b>rgba(30,62,118)</b>蓝光晕</span></div
+            >
+            <div class="swatch"
+              ><span class="sw-chip" style="background: #c9a84c"></span
+              ><span class="sw-meta"><b>#C9A84C</b>主金</span></div
+            >
+            <div class="swatch"
+              ><span class="sw-chip" style="background: #e8d48b"></span
+              ><span class="sw-meta"><b>#E8D48B</b>亮金</span></div
+            >
+            <div class="swatch"
+              ><span class="sw-chip" style="background: #f6d884"></span
+              ><span class="sw-meta"><b>#F6D884</b>光线金</span></div
+            >
+            <div class="swatch"
+              ><span class="sw-chip" style="background: #caa45a"></span
+              ><span class="sw-meta"><b>#CAA45A</b>描金边</span></div
+            >
+            <div class="swatch"
+              ><span class="sw-chip" style="background: #e0dcd0"></span
+              ><span class="sw-meta"><b>#E0DCD0</b>正文</span></div
+            >
+            <div class="swatch"
+              ><span class="sw-chip" style="background: #8a8577"></span
+              ><span class="sw-meta"><b>#8A8577</b>次级文字</span></div
+            >
+            <div class="swatch"
+              ><span class="sw-chip" style="background: #b9c1cd"></span
+              ><span class="sw-meta"><b>#B9C1CD</b>日期</span></div
+            >
+            <div class="swatch"
+              ><span class="sw-chip" style="background: #cdbd8a"></span
+              ><span class="sw-meta"><b>#CDBD8A</b>时间</span></div
+            >
+          </div>
+        </div>
+
+        <div class="spec-panel" style="width: 520px">
+          <div class="spec-title">字体 Typography（rpx）</div>
+          <table class="type-table">
+            <tr><th>场景</th><th>字号</th><th>字色</th><th>字距</th></tr>
+            <tr><td>月份·选中</td><td>38 / 600</td><td>#FFFFFF</td><td>—</td></tr>
+            <tr><td>月份·默认</td><td>32</td><td>#C9A84C</td><td>—</td></tr>
+            <tr><td>年份</td><td>31</td><td>#C9A84C</td><td>10</td></tr>
+            <tr><td>卡名带 / 铭牌</td><td>26 / 27</td><td>#463A22 / #F3EFE4</td><td>10</td></tr>
+            <tr><td>罗马数字</td><td>42</td><td>rgba(255,255,255,.95)</td><td>—</td></tr>
+            <tr><td>日期 / 时间</td><td>30 / 27</td><td>#B9C1CD / #CDBD8A</td><td>3 / 6</td></tr>
+            <tr><td>底部标签</td><td>22</td><td>#8D897D / #F5F1E6</td><td>2</td></tr>
+          </table>
+        </div>
+
+        <div class="spec-panel" style="width: 420px">
+          <div class="spec-title">关键尺寸 Size（rpx）</div>
+          <table class="size-table">
+            <tr><td>今日大卡</td><td>477 × 767</td></tr>
+            <tr><td>卡边框（上/侧/下）</td><td>19 / 32 / 20</td></tr>
+            <tr><td>顶部卡名带高</td><td>56</td></tr>
+            <tr><td>四角雕花</td><td>58 × 58</td></tr>
+            <tr><td>底部铭牌</td><td>56% 宽 · 下探 46</td></tr>
+            <tr><td>两侧露卡</td><td>142 × 812</td></tr>
+            <tr><td>金币 / 间距</td><td>126 / 55</td></tr>
+            <tr><td>光线外扩</td><td>36（inset -36）</td></tr>
+          </table>
+        </div>
+
+        <div class="spec-panel" style="flex: 1">
+          <div class="spec-title">结构与交互 Flow</div>
+          <div class="flow">
+            <b>首页</b>：月份条（点选切月→月运牌）→ 年份 → 大卡（两侧露卡）→ 日期/时间<br />
+            未揭示点卡 → 翻牌 0.6s → 记录当日；已揭示点卡 → 牌意弹窗（收藏/关闭）<br />
+            <b>历史</b>：月历 ✦ 标记抽牌日 → 点日回看牌面详情；左右箭头切月<br />
+            <b>我的</b>：统计（次数/连续/收藏）→ 收藏之牌<br />
+            <b>底部按钮</b>：点选瞬间光芒向外扩散（0.9s）+ 金环扩散（0.75s），之后光线持续转动（22s/34s 反向）+
+            呼吸（3.2s）<br />
+            <b>页面切换</b>：同页三面板 opacity + translateX(70rpx) 0.32s，无跳转白屏
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

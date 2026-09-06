@@ -1,0 +1,26 @@
+.url-box {
+  font-size: 27rpx;
+  border: 1rpx solid rgb(194, 194, 194);
+  text-align: left;
+  border-radius: 10rpx;
+
+}
+
+.url {
+  padding: 15rpx;
+}
+
+.url-one {
+  margin-bottom: 5rpx;
+}
+
+.copy {
+  width: 100%;
+  background: var(--td-brand-color);
+  color: #fff;
+  height: 30px;
+  text-align: center;
+  line-height: 30px;
+  border-bottom-left-radius: 10rpx;
+  border-bottom-right-radius: 10rpx;
+}

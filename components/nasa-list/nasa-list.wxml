@@ -1,0 +1,48 @@
+<!--components/nasa-list/nasa-list.wxml-->
+<view class="nasa">
+  <view class="nasa-hd">
+    <view class="nasa-hero">
+      <t-swiper wx:if="{{heroImages.length}}" class="nasa-hero-swiper" list="{{heroImages}}" height="160" autoplay
+        interval="4000" duration="500" navigation="{{ { type: 'dots-bar' } }}" />
+      <view wx:else class="nasa-hero-css">
+        <view class="orb orb-red"></view>
+        <view class="orb orb-blue"></view>
+        <view class="spark spark-1"></view>
+        <view class="spark spark-2"></view>
+        <view class="spark spark-3"></view>
+      </view>
+      <view class="nasa-hero-mask">
+        <view class="nasa-logo">NASA</view>
+        <view class="nasa-sub">图像库 · Image and Video Library</view>
+      </view>
+    </view>
+
+    <!-- <view class="nasa-search">
+      <t-search
+        value="{{keyword}}"
+        placeholder="搜索 NASA 图片（建议英文关键词）"
+        bind:change="onSearchChange"
+        bind:submit="onSearchSubmit"
+        bind:clear="onSearchClear"
+      />
+    </view> -->
+
+    <scroll-view class="nasa-chips" scroll-x enable-flex>
+      <view wx:for="{{presets}}" wx:key="q" class="chip {{activeQ === item.q ? 'chip--on' : ''}}" data-q="{{item.q}}"
+        bindtap="onPresetTap">{{item.label}}</view>
+    </scroll-view>
+  </view>
+
+  <image-waterfall class="nasa-flow" list="{{wfList}}" reset-token="{{wfToken}}" image-key="img" fallback-key="thumb"
+    title-key="title" lower-threshold="150" bind:itemtap="onItemTap" bind:loadmore="onScrollLower">
+    <view class="state" wx:if="{{inited && !loading && !wfList.length}}">
+      <image wx:if="{{emptyImg}}" class="state-img" src="{{emptyImg}}" mode="widthFix" />
+      <view wx:else class="state-emoji">🛰️</view>
+      <view class="state-tip">没有找到相关图片，换个关键词试试</view>
+    </view>
+
+    <view class="tip" wx:if="{{loading}}">加载中…</view>
+    <view class="tip" wx:if="{{!hasMore && wfList.length}}">— 到底啦 —</view>
+    <view class="safe-bottom"></view>
+  </image-waterfall>
+</view>

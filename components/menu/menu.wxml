@@ -1,0 +1,30 @@
+<!--
+ * @Author: zlc
+ * @Date: 2022-09-06 16:39:43
+ * @LastEditTime: 2022-09-07 16:51:23
+ * @LastEditors: zlc
+ * @Description: 
+ * @FilePath: \project-template-ui-plus\src\pages\index\index.vue
+-->
+
+<view class="content">
+  <view class="head">
+    <t-swiper bindclick="handlerSwiper" current="{{current}}" autoplay="{{autoplay}}" duration="{{duration}}" interval="{{interval}}" list="{{swiperList}}" navigation="{{ { type: 'dots-bar' } }}" />
+  
+    <!-- <view class="cover">
+      <image class="logo" src="https://p2.music.126.net/rNQH185Dp2lcG2yII_Aiwg==/18159534045164927.jpg"></image>
+    </view>
+    <view class="name"> Welcome to shuke lab</view> -->
+  </view>
+  <view class="bz-box">壁纸</view>
+  <view class="body">
+    <view class="module-list">
+      <block wx:for="{{list}}" wx:for-item="item" wx:for-index="index" wx:key="{{index}}">
+        <div wx:if="{{item.show}}" style="width: {{item.blockStyle.width}}" class="button" bind:tap="handlerPageRouter" data-params="{{ {item, index} }}">
+          <image class="icon-menu" src="{{item.image}}" style="width: {{item.style.width}};height: {{item.style.height}}"></image>
+          <view class="module-name">{{item.name}}</view>
+        </div>
+      </block>
+    </view>
+  </view>
+</view>

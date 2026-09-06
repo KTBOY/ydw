@@ -1,0 +1,31 @@
+<!--pages/order/baidu/index.wxml-->
+<view class="baidu">
+  <view class="title">
+    必须下载的环境
+  </view>
+  <url-copy url="https://pan.baidu.com/s/1xa8wlwOf_XrwN2sbC81Q4Q" code="6426"></url-copy>
+  <view class="title">
+    常用的解压软件
+    <text selectable="{{true}}">https://yasuo.360.cn/</text>
+
+  </view>
+  <image src="https://mmbiz.qpic.cn/mmbiz_png/zvTxpeWZ6jBzSRWOibvlOeyNsvuySHicvhTpgZwaTdAyLTxyTtQHiaZTDtK3URIZ0vhgRoZZk7oJo1yyEr8cDYFqQ/640?wx_fmt=png&from=appmsg&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1"></image>
+  <view class="title">
+    鼠标右键解压游戏
+  </view>
+
+  <image mode="heightFix" src="https://mmbiz.qpic.cn/mmbiz_png/zvTxpeWZ6jBzSRWOibvlOeyNsvuySHicvh9HmqcMJeibrWicPPym0AyPJIzbcetgsgmqlcAnxTTkypRPSwmFyK7jtw/640?wx_fmt=png&from=appmsg&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1"></image>
+
+  <view class="title">
+    启动游戏方式
+    <view>一般我都是直接游戏程序启动，可以找找这几个特征（除非游戏里面已经写了特殊的启动方式</view>
+  </view>
+
+  <image mode="heightFix" src="https://mmbiz.qpic.cn/mmbiz_png/zvTxpeWZ6jBzSRWOibvlOeyNsvuySHicvhUwsgHeGQKL2wVCSfrYicYuez5XRZrqD7zOSQS99z3RL6WL0Jd1w5Hww/640?wx_fmt=png&from=appmsg&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1"></image>
+
+  <view class="title">
+    游戏的路径不能有中文
+  </view>
+
+  <image mode="heightFix" src="https://mmbiz.qpic.cn/mmbiz_png/zvTxpeWZ6jBzSRWOibvlOeyNsvuySHicvhpPKx4CZhZuPpxdALzWTWCrqptS1takcKmHDFFBKtkqK9B045kkibZsw/640?wx_fmt=png&from=appmsg&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1"></image>
+</view>

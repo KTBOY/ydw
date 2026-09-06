@@ -1,0 +1,156 @@
+.tabbar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 20;
+  display: flex;
+  justify-content: center;
+  gap: 55rpx;
+  padding: 16rpx 0 calc(26rpx + env(safe-area-inset-bottom));
+  background: linear-gradient(180deg, rgba(3, 4, 10, 0) 0%, rgba(3, 4, 10, 0.55) 46%);
+}
+
+.tab {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.coin-wrap {
+  position: relative;
+  width: 126rpx;
+  height: 126rpx;
+}
+
+.coin-img {
+  position: relative;
+  z-index: 2;
+  width: 126rpx;
+  height: 126rpx;
+  border-radius: 50%;
+  display: block;
+  transition: transform 0.28s ease;
+}
+
+.tab.active .coin-img {
+  transform: scale(1.06);
+}
+
+.tab-press .coin-img {
+  transform: scale(0.92);
+}
+
+/* ===== 放射光线：常亮层（缓慢转动 + 呼吸），线条持续在动 ===== */
+
+.rays,
+.burst,
+.burst-ring {
+  position: absolute;
+  pointer-events: none;
+}
+
+.rays {
+  inset: -36rpx;
+  border-radius: 50%;
+  background: repeating-conic-gradient(rgba(246, 216, 132, 0.85) 0deg 2.2deg, transparent 2.2deg 13.5deg);
+  -webkit-mask: radial-gradient(circle, transparent 60%, #000 64%, #000 84%, transparent 92%);
+  mask: radial-gradient(circle, transparent 60%, #000 64%, #000 84%, transparent 92%);
+  opacity: 0;
+}
+
+.rays-2 {
+  background: repeating-conic-gradient(rgba(246, 216, 132, 0.4) 0deg 1.6deg, transparent 1.6deg 22.5deg);
+}
+
+.tab.active .rays {
+  opacity: 1;
+  animation: rays-spin 22s linear infinite, rays-pulse 3.2s ease-in-out infinite alternate;
+}
+
+.tab.active .rays-2 {
+  opacity: 0.6;
+  animation: rays-spin-rev 34s linear infinite;
+}
+
+@keyframes rays-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes rays-spin-rev {
+  to {
+    transform: rotate(-360deg);
+  }
+}
+
+@keyframes rays-pulse {
+  from {
+    opacity: 0.45;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* ===== 切换动画：光芒向外扩散 + 金环扩散 ===== */
+
+.burst {
+  inset: -36rpx;
+  border-radius: 50%;
+  background: repeating-conic-gradient(rgba(250, 226, 150, 0.95) 0deg 3deg, transparent 3deg 15deg);
+  -webkit-mask: radial-gradient(circle, transparent 58%, #000 62%, #000 88%, transparent 95%);
+  mask: radial-gradient(circle, transparent 58%, #000 62%, #000 88%, transparent 95%);
+  opacity: 0;
+}
+
+.tab.active .burst {
+  animation: rays-burst 0.9s cubic-bezier(0.16, 0.84, 0.44, 1) 0.05s both;
+}
+
+@keyframes rays-burst {
+  0% {
+    transform: scale(0.5) rotate(0deg);
+    opacity: 0.95;
+  }
+  100% {
+    transform: scale(1.6) rotate(26deg);
+    opacity: 0;
+  }
+}
+
+.burst-ring {
+  inset: 6rpx;
+  border-radius: 50%;
+  border: 2rpx solid rgba(246, 216, 132, 0.85);
+  opacity: 0;
+}
+
+.tab.active .burst-ring {
+  animation: ring-burst 0.75s ease-out 0.05s both;
+}
+
+@keyframes ring-burst {
+  0% {
+    transform: scale(0.6);
+    opacity: 0.9;
+  }
+  100% {
+    transform: scale(1.75);
+    opacity: 0;
+  }
+}
+
+/* ===== 标签 ===== */
+
+.tab-label {
+  margin-top: 10rpx;
+  font-size: 22rpx;
+  color: #8d897d;
+  letter-spacing: 2rpx;
+}
+
+.tab.active .tab-label {
+  color: #f5f1e6;
+}

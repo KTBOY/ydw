@@ -1,0 +1,205 @@
+/* nasa/pages/detail/detail.wxss */
+page {
+  background: #070b16;
+}
+
+.page {
+  position: relative;
+  min-height: 100vh;
+  background: radial-gradient(120% 80% at 50% 0%, #10214b 0%, #0a1330 40%, #070b16 100%);
+}
+
+/* 星点纹理（静态、廉价） */
+.bg-stars {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background-image:
+    radial-gradient(1.5rpx 1.5rpx at 20% 15%, rgba(255, 255, 255, 0.9), transparent),
+    radial-gradient(1.5rpx 1.5rpx at 70% 22%, rgba(255, 255, 255, 0.7), transparent),
+    radial-gradient(2rpx 2rpx at 42% 40%, rgba(255, 255, 255, 0.6), transparent),
+    radial-gradient(1.5rpx 1.5rpx at 85% 58%, rgba(255, 255, 255, 0.8), transparent),
+    radial-gradient(1.5rpx 1.5rpx at 12% 72%, rgba(255, 255, 255, 0.6), transparent),
+    radial-gradient(2rpx 2rpx at 62% 86%, rgba(255, 255, 255, 0.7), transparent);
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+/* 星云辉光（radial-gradient 自带柔边，无需 blur） */
+.bg-glow {
+  position: fixed;
+  width: 520rpx;
+  height: 520rpx;
+  border-radius: 50%;
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+.bg-glow-a {
+  top: -140rpx;
+  right: -160rpx;
+  background: radial-gradient(circle, rgba(59, 130, 246, 0.5), transparent 68%);
+}
+
+.bg-glow-b {
+  bottom: 140rpx;
+  left: -180rpx;
+  background: radial-gradient(circle, rgba(252, 61, 33, 0.38), transparent 68%);
+}
+
+/* 内容区：随页面自然滚动（底部预留 dock 高度） */
+.content {
+  position: relative;
+  padding: 24rpx 28rpx calc(210rpx + env(safe-area-inset-bottom));
+}
+
+/* 海报卡 */
+.poster {
+  position: relative;
+  border-radius: 24rpx;
+  overflow: hidden;
+  box-shadow: 0 20rpx 60rpx rgba(0, 0, 0, 0.55);
+}
+
+.poster-img {
+  width: 100%;
+  display: block;
+  min-height: 300rpx;
+  background: #0f1526;
+}
+
+.poster-frame {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  border: 1rpx solid rgba(255, 255, 255, 0.12);
+  border-radius: 24rpx;
+  pointer-events: none;
+}
+
+.poster-overlay {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 96rpx 32rpx 34rpx;
+  background: linear-gradient(to top, rgba(6, 10, 23, 0.96) 0%, rgba(6, 10, 23, 0.68) 45%, rgba(6, 10, 23, 0) 100%);
+}
+
+.kicker {
+  font-size: 22rpx;
+  letter-spacing: 6rpx;
+  color: #7fb0ff;
+  margin-bottom: 12rpx;
+}
+
+.poster-title {
+  font-size: 56rpx;
+  line-height: 1.1;
+  font-weight: 800;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 2rpx;
+  /* 色差辉光，呼应 NASA 海报标题 */
+  text-shadow: 2rpx 0 rgba(252, 61, 33, 0.55), -2rpx 0 rgba(59, 130, 246, 0.55), 0 6rpx 30rpx rgba(0, 0, 0, 0.6);
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+}
+
+.poster-sub {
+  margin-top: 14rpx;
+  font-size: 24rpx;
+  color: #b9c4da;
+  letter-spacing: 1rpx;
+}
+
+/* 描述 */
+.section {
+  margin-top: 40rpx;
+}
+
+.section-hd {
+  display: flex;
+  align-items: center;
+  font-size: 30rpx;
+  font-weight: 700;
+  color: #eaf0ff;
+  margin-bottom: 16rpx;
+}
+
+.section-bar {
+  width: 8rpx;
+  height: 30rpx;
+  border-radius: 4rpx;
+  background: linear-gradient(#fc3d21, #0b3d91);
+  margin-right: 14rpx;
+}
+
+.desc {
+  font-size: 26rpx;
+  line-height: 1.75;
+  color: #aab6cf;
+}
+
+/* 元信息 chips */
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 30rpx;
+}
+
+.chip {
+  font-size: 22rpx;
+  color: #c8d3ea;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1rpx solid rgba(255, 255, 255, 0.12);
+  border-radius: 999rpx;
+  padding: 8rpx 22rpx;
+  margin: 0 14rpx 14rpx 0;
+}
+
+.bottom-pad {
+  height: 20rpx;
+}
+
+/* 固定底部下载 */
+.dock {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 20rpx 28rpx calc(24rpx + env(safe-area-inset-bottom));
+  background: linear-gradient(to top, #070b16 55%, rgba(7, 11, 22, 0));
+}
+
+.dl-btn {
+  border-radius: 20rpx;
+  padding: 20rpx 0;
+  text-align: center;
+  background: linear-gradient(135deg, #1f6bff 0%, #0b3d91 55%, #3b1e8f 100%);
+  box-shadow: 0 12rpx 30rpx rgba(31, 107, 255, 0.4), inset 0 1rpx 0 rgba(255, 255, 255, 0.25);
+}
+
+.dl-btn--tap {
+  opacity: 0.9;
+  transform: translateY(1rpx);
+}
+
+.dl-main {
+  font-size: 32rpx;
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: 2rpx;
+}
+
+.dl-sub {
+  margin-top: 4rpx;
+  font-size: 20rpx;
+  color: rgba(255, 255, 255, 0.75);
+}
