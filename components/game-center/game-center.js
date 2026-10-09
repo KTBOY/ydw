@@ -14,6 +14,12 @@ Component({
         cover: '/game/images/arrow-escape.png',
         url: '/game/pages/arrowEscape/index',
       },
+      {
+        name: '菇菇合成机',
+        desc: '娃娃机夹爪投放蘑菇玩偶，同级相碰不断合成升级，别堆过安全线',
+        cover: '/mushies/images/cover.png',
+        url: '/mushies/pages/index/index',
+      },
     ],
   },
 
