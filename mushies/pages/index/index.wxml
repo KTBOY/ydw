@@ -1,0 +1,84 @@
+<!--mushies/pages/index/index.wxml-->
+<view class="page">
+  <view class="topbar">
+    <view class="stat">
+      <view class="stat-label">得分</view>
+      <view class="stat-value">{{score}}</view>
+    </view>
+    <view class="stat center">
+      <view class="stat-label">剩余时间</view>
+      <view class="stat-value time">{{timeText}}</view>
+    </view>
+    <view class="stat right">
+      <view class="stat-label">目标</view>
+      <view class="stat-value goal">{{goalText}}</view>
+    </view>
+  </view>
+
+  <view class="subbar">
+    <view class="chip">
+      <text class="chip-label">手里</text>
+      <text class="chip-value">{{heldName}}</text>
+    </view>
+    <view class="chip">
+      <text class="chip-label">下一个</text>
+      <image wx:if="{{nextKey}}" class="chip-img" src="/mushies/images/{{nextKey}}.png" mode="aspectFit" />
+      <text class="chip-value">{{nextName}}</text>
+    </view>
+    <view class="chip">
+      <text class="chip-label">已收集</text>
+      <text class="chip-value">{{discovered}} / 11</text>
+    </view>
+  </view>
+
+  <view class="canvas-wrap">
+    <canvas
+      type="2d"
+      id="gameCanvas"
+      class="canvas"
+      hidden="{{status !== 'playing' || showRecords}}"
+      bindtouchstart="onTouch"
+      bindtouchmove="onTouch"
+      bindtouchend="onTouch"
+      bindtouchcancel="onTouchCancel"
+    ></canvas>
+    <view class="hint">{{hint}}</view>
+  </view>
+
+  <view class="controls">
+    <view class="ctrl-btn" bindtap="onToggleMute">{{muted ? '🔇' : '🔊'}}</view>
+    <view class="ctrl-btn grow" bindtap="onRestart">↻ 重开</view>
+    <view class="ctrl-btn grow" bindtap="onShowRecords">🏆 记录</view>
+  </view>
+
+  <view class="overlay" wx:if="{{status==='lose'}}">
+    <view class="dialog">
+      <view class="dialog-title">游戏结束</view>
+      <view class="dialog-desc">{{reasonText}}</view>
+      <view class="dialog-score">{{score}}</view>
+      <view class="dialog-desc">{{summary}}</view>
+      <view class="dialog-btns">
+        <view class="dlg-btn ghost" bindtap="onShowRecords">看记录</view>
+        <view class="dlg-btn primary" bindtap="onRestart">再来一局</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="overlay" wx:if="{{showRecords}}" catchtap="onCloseRecords">
+    <view class="dialog" catchtap="noop">
+      <view class="dialog-title">🏆 最高分</view>
+      <scroll-view wx:if="{{records.length}}" scroll-y class="rec-list">
+        <view class="rec-item" wx:for="{{records}}" wx:key="runId">
+          <text class="rec-idx">{{index + 1}}</text>
+          <text class="rec-score">{{item.score}}</text>
+          <text class="rec-meta">合成 {{item.merges}} 次 · {{item.duration}}s</text>
+          <text class="rec-time">{{item.timeText}}</text>
+        </view>
+      </scroll-view>
+      <view wx:else class="rec-empty">还没有成绩，先玩一局吧</view>
+      <view class="dialog-btns">
+        <view class="dlg-btn primary" bindtap="onCloseRecords">关闭</view>
+      </view>
+    </view>
+  </view>
+</view>

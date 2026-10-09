@@ -1,22 +1,28 @@
 // components/game-center/game-center.js 游戏中心（可玩小游戏）
 Component({
   data: {
-    games: [{
-      name: '箭头逃脱',
-      desc: '经典箭头解谜：规划顺序，让每个箭头滑出棋盘',
-      cover: '/game/images/arrow-escape.png',
-      url: '/game/pages/arrowEscape/index',
-    }],
+    games: [
+      {
+        name: '箭头逃脱',
+        desc: '经典箭头解谜：规划顺序，让每个箭头滑出棋盘',
+        cover: '/game/images/arrow-escape.png',
+        url: '/game/pages/arrowEscape/index',
+      },
+      {
+        name: '菇菇合成机',
+        desc: '娃娃机夹爪投放蘑菇玩偶，同级相碰不断合成升级，别堆过安全线',
+        cover: '/mushies/images/cover.png',
+        url: '/mushies/pages/index/index',
+      },
+    ],
   },
 
   methods: {
     onPlay(e) {
-      const {
-        url
-      } = e.currentTarget.dataset;
+      const { url } = e.currentTarget.dataset;
       if (!url) return;
       wx.navigateTo({
-        url
+        url,
       });
     },
   },

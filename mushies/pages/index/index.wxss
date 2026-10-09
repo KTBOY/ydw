@@ -1,0 +1,236 @@
+/* mushies/pages/index/index.wxss */
+.page {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  box-sizing: border-box;
+  background: #f6ece6;
+}
+
+.topbar {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  padding: 16rpx 24rpx 8rpx;
+}
+
+.stat {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.stat.center {
+  align-items: center;
+}
+
+.stat.right {
+  align-items: flex-end;
+}
+
+.stat-label {
+  font-size: 22rpx;
+  color: #a08b96;
+}
+
+.stat-value {
+  font-size: 40rpx;
+  font-weight: 700;
+  color: #4a3550;
+  line-height: 1.2;
+}
+
+.stat-value.time {
+  color: #b0577a;
+}
+
+.stat-value.goal {
+  font-size: 30rpx;
+}
+
+.subbar {
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+  padding: 0 24rpx 12rpx;
+}
+
+.chip {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+  background: #fff;
+  border-radius: 14rpx;
+  padding: 10rpx 14rpx;
+  box-shadow: 0 2rpx 8rpx rgba(120, 90, 130, 0.08);
+}
+
+.chip-label {
+  font-size: 22rpx;
+  color: #a08b96;
+}
+
+.chip-value {
+  font-size: 26rpx;
+  font-weight: 600;
+  color: #4a3550;
+}
+
+.chip-img {
+  width: 40rpx;
+  height: 40rpx;
+}
+
+.canvas-wrap {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  margin: 0 16rpx;
+}
+
+.canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.hint {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 10rpx;
+  text-align: center;
+  font-size: 24rpx;
+  color: #b39fac;
+}
+
+.controls {
+  display: flex;
+  gap: 16rpx;
+  padding: 16rpx 24rpx calc(16rpx + env(safe-area-inset-bottom));
+}
+
+.ctrl-btn {
+  min-width: 96rpx;
+  height: 76rpx;
+  line-height: 76rpx;
+  text-align: center;
+  border-radius: 18rpx;
+  background: #fff;
+  color: #4a3550;
+  font-size: 28rpx;
+  box-shadow: 0 2rpx 10rpx rgba(120, 90, 130, 0.12);
+}
+
+.ctrl-btn.grow {
+  flex: 1;
+}
+
+.overlay {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background: rgba(60, 40, 70, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+}
+
+.dialog {
+  width: 600rpx;
+  background: #fffaf6;
+  border-radius: 24rpx;
+  padding: 36rpx 32rpx 28rpx;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+.dialog-title {
+  font-size: 36rpx;
+  font-weight: 700;
+  color: #4a3550;
+}
+
+.dialog-desc {
+  margin-top: 12rpx;
+  font-size: 26rpx;
+  color: #97808f;
+}
+
+.dialog-score {
+  margin-top: 16rpx;
+  font-size: 72rpx;
+  font-weight: 800;
+  color: #b0577a;
+  line-height: 1.1;
+}
+
+.dialog-btns {
+  margin-top: 28rpx;
+  display: flex;
+  gap: 16rpx;
+}
+
+.dlg-btn {
+  flex: 1;
+  height: 80rpx;
+  line-height: 80rpx;
+  border-radius: 18rpx;
+  font-size: 28rpx;
+}
+
+.dlg-btn.ghost {
+  background: #f0e4ea;
+  color: #6b5566;
+}
+
+.dlg-btn.primary {
+  background: #b06fc9;
+  color: #fff;
+}
+
+.rec-list {
+  max-height: 520rpx;
+  margin-top: 20rpx;
+}
+
+.rec-item {
+  display: flex;
+  align-items: center;
+  padding: 16rpx 8rpx;
+  border-bottom: 2rpx solid #f1e5ea;
+  font-size: 26rpx;
+  color: #4a3550;
+}
+
+.rec-idx {
+  width: 48rpx;
+  color: #b39fac;
+}
+
+.rec-score {
+  flex: 0 0 130rpx;
+  text-align: left;
+  font-weight: 700;
+}
+
+.rec-meta {
+  flex: 1;
+  font-size: 22rpx;
+  color: #97808f;
+}
+
+.rec-time {
+  font-size: 22rpx;
+  color: #b39fac;
+}
+
+.rec-empty {
+  margin-top: 24rpx;
+  font-size: 26rpx;
+  color: #b39fac;
+}

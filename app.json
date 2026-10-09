@@ -63,12 +63,18 @@
         "pages/wallpaper/wallpaper",
         "pages/wallpaperDetail/wallpaperDetail"
       ]
+    },
+    {
+      "root": "mushies",
+      "pages": [
+        "pages/index/index"
+      ]
     }
   ],
   "preloadRule": {
     "pages/home/home": {
       "network": "all",
-      "packages": ["game"]
+      "packages": ["game", "mushies"]
     }
   },
   "requiredPrivateInfos": [

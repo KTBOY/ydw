@@ -64,6 +64,12 @@
           "scene": null
         },
         {
+          "name": "菇菇合成机",
+          "pathName": "mushies/pages/index/index",
+          "query": "",
+          "scene": null
+        },
+        {
           "name": "示例页-商品分类",
           "pathName": "pages/goods/category/index",
           "query": "",
