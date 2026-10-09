@@ -3,80 +3,219 @@
   height: 100vh;
   box-sizing: border-box;
   background: #f2f3f7;
-  padding: 24rpx 24rpx calc(240rpx + env(safe-area-inset-bottom));
+  padding: 24rpx 24rpx calc(220rpx + env(safe-area-inset-bottom));
 }
 
+/* 头部 */
 .gc-head {
-  padding: 12rpx 8rpx 24rpx;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  padding: 12rpx 8rpx 28rpx;
 }
 
 .gc-title {
   font-size: 44rpx;
   font-weight: 800;
   color: #1b2740;
+  letter-spacing: 1rpx;
 }
 
 .gc-sub {
   margin-top: 8rpx;
-  font-size: 26rpx;
+  font-size: 24rpx;
   color: #8a90a0;
 }
 
-.gc-list {
+.gc-count {
+  flex-shrink: 0;
+  margin-left: 16rpx;
+  padding: 8rpx 20rpx;
+  background: #fff;
+  border-radius: 999rpx;
+  font-size: 22rpx;
+  color: #6b7488;
+  box-shadow: 0 4rpx 12rpx rgba(27, 39, 64, 0.06);
+}
+
+/* 推荐位 */
+.gc-hero {
+  position: relative;
+  border-radius: 28rpx;
+  overflow: hidden;
+  background: #eef1f6;
+  box-shadow: 0 16rpx 36rpx rgba(27, 39, 64, 0.14);
+}
+
+.gc-hero:active {
+  opacity: 0.94;
+}
+
+.gc-hero-cover {
+  display: block;
+  width: 100%;
+  height: 400rpx;
+}
+
+.gc-hero-scrim {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background: linear-gradient(180deg, rgba(20, 16, 32, 0) 32%, rgba(20, 16, 32, 0.52) 70%, rgba(20, 16, 32, 0.84) 100%);
+}
+
+.gc-hero-tag {
+  position: absolute;
+  left: 24rpx;
+  top: 24rpx;
+  padding: 6rpx 18rpx;
+  background: rgba(255, 255, 255, 0.92);
+  border-radius: 999rpx;
+  font-size: 22rpx;
+  font-weight: 600;
+}
+
+.gc-hero-info {
+  position: absolute;
+  left: 28rpx;
+  right: 28rpx;
+  bottom: 28rpx;
+}
+
+.gc-hero-name {
+  font-size: 38rpx;
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: 1rpx;
+}
+
+.gc-hero-desc {
+  margin-top: 8rpx;
+  font-size: 24rpx;
+  line-height: 1.45;
+  color: rgba(255, 255, 255, 0.82);
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+
+.gc-hero-play {
+  display: inline-flex;
+  align-items: center;
+  margin-top: 20rpx;
+  height: 62rpx;
+  padding: 0 28rpx;
+  border-radius: 999rpx;
+  font-size: 26rpx;
+  font-weight: 600;
+  color: #fff;
+}
+
+.gc-hero-play::before {
+  content: '';
+  margin-right: 12rpx;
+  width: 0;
+  height: 0;
+  border-left: 15rpx solid #fff;
+  border-top: 9rpx solid transparent;
+  border-bottom: 9rpx solid transparent;
+}
+
+/* 分区标题 */
+.gc-section {
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  padding: 32rpx 8rpx 20rpx;
+}
+
+.gc-section-bar {
+  width: 8rpx;
+  height: 28rpx;
+  margin-right: 12rpx;
+  border-radius: 4rpx;
+  background: linear-gradient(180deg, #4c88ff, #2f6df6);
+}
+
+.gc-section-text {
+  font-size: 28rpx;
+  font-weight: 700;
+  color: #1b2740;
+}
+
+/* 双列磁贴 */
+.gc-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
 
 .gc-card {
-  background: #ffffff;
+  width: calc((100% - 18rpx) / 2);
+  margin-bottom: 20rpx;
+  background: #fff;
   border-radius: 24rpx;
   overflow: hidden;
-  box-shadow: 0 10rpx 24rpx rgba(0, 0, 0, 0.08);
-  margin-bottom: 24rpx;
+  box-shadow: 0 10rpx 24rpx rgba(27, 39, 64, 0.07);
 }
 
 .gc-card:active {
   opacity: 0.92;
 }
 
-.gc-cover {
-  width: 100%;
-  height: 320rpx;
-  display: block;
-  background: #eef1f6;
-}
-
-.gc-body {
+.gc-thumb {
   display: flex;
   align-items: center;
-  padding: 24rpx;
+  justify-content: center;
+  height: 220rpx;
 }
 
-.gc-info {
-  flex: 1;
-  min-width: 0;
+.gc-thumb-img {
+  width: 100%;
+  height: 100%;
+}
+
+.gc-card-body {
+  padding: 20rpx 20rpx 24rpx;
+}
+
+.gc-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .gc-name {
-  font-size: 32rpx;
+  flex: 1;
+  min-width: 0;
+  font-size: 28rpx;
   font-weight: 700;
-  color: #222;
+  color: #1b2740;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.gc-badge {
+  flex-shrink: 0;
+  margin-left: 10rpx;
+  padding: 2rpx 12rpx;
+  background: #f2f4f8;
+  border-radius: 999rpx;
+  font-size: 20rpx;
+  font-weight: 600;
 }
 
 .gc-desc {
-  margin-top: 8rpx;
-  font-size: 24rpx;
+  margin-top: 10rpx;
+  height: 64rpx;
+  font-size: 22rpx;
+  line-height: 1.45;
   color: #8a90a0;
-  line-height: 1.5;
-}
-
-.gc-play {
-  flex-shrink: 0;
-  margin-left: 20rpx;
-  padding: 18rpx 36rpx;
-  background: #2f6df6;
-  color: #fff;
-  font-size: 28rpx;
-  font-weight: 600;
-  border-radius: 999rpx;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
 }

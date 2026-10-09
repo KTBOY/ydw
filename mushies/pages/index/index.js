@@ -25,6 +25,24 @@ const MAX_RECORDS = 10;
 const FIXED_DT = 1 / 60;
 const CHAIN_WINDOW = 1.2; // game_audio.gd:13
 
+// 机柜玻璃内的静态背景装饰（逻辑坐标），低透明度不抢玩偶
+const BG_DECOR = [
+  { x: 455, y: 240, r: 10, k: 'star', c: 'rgba(196,164,222,0.30)' },
+  { x: 980, y: 215, r: 8, k: 'star', c: 'rgba(255,205,120,0.32)' },
+  { x: 720, y: 300, r: 7, k: 'star', c: 'rgba(242,169,196,0.30)' },
+  { x: 520, y: 470, r: 8, k: 'star', c: 'rgba(196,164,222,0.26)' },
+  { x: 930, y: 430, r: 9, k: 'star', c: 'rgba(255,255,255,0.5)' },
+  { x: 620, y: 220, r: 9, k: 'flower', c: 'rgba(242,169,196,0.28)' },
+  { x: 860, y: 300, r: 8, k: 'flower', c: 'rgba(196,164,222,0.28)' },
+  { x: 470, y: 360, r: 7, k: 'flower', c: 'rgba(255,205,120,0.28)' },
+  { x: 990, y: 540, r: 8, k: 'flower', c: 'rgba(242,169,196,0.24)' },
+  { x: 560, y: 300, r: 4, k: 'dot', c: 'rgba(255,255,255,0.55)' },
+  { x: 760, y: 240, r: 4, k: 'dot', c: 'rgba(196,164,222,0.30)' },
+  { x: 900, y: 480, r: 4, k: 'dot', c: 'rgba(255,205,120,0.32)' },
+  { x: 640, y: 520, r: 4, k: 'dot', c: 'rgba(255,255,255,0.5)' },
+  { x: 430, y: 540, r: 4, k: 'dot', c: 'rgba(242,169,196,0.28)' },
+];
+
 const REASON_TEXT = {
   overflow: 'Mushies 堆超出安全线',
   timeout: '时间已用完',
@@ -52,15 +70,17 @@ Page({
     nextKey: '',
     nextName: '',
     heldName: '',
+    heldKey: '',
     drops: 0,
     discovered: 0,
     hint: '可以投放',
-    status: 'playing',
+    status: 'title',
     reasonText: '',
     summary: '',
     merges: 0,
     records: [],
     showRecords: false,
+    showHelp: false,
     muted: false,
     bestScore: 0,
   },
@@ -97,7 +117,8 @@ Page({
   },
 
   onReady() {
-    this.setupCanvas(0);
+    // 首页时画布 hidden（尺寸为 0），延迟到点「开始合成」再初始化
+    if (this.data.status === 'playing') this.setupCanvas(0);
   },
 
   onShow() {
@@ -656,7 +677,10 @@ Page({
       patch.nextKey = nextTier === BOMB_TIER ? '' : TIERS[nextTier].key;
     }
     const heldName = this.held ? tierLabel(this.held.tier) : '装填中';
-    if (force || this._lastHeld !== heldName) patch.heldName = heldName;
+    if (force || this._lastHeld !== heldName) {
+      patch.heldName = heldName;
+      patch.heldKey = this.held && this.held.tier !== BOMB_TIER ? TIERS[this.held.tier].key : '';
+    }
     const hint =
       this.clawState === 'holding' ? (this.toys.length >= PHYS.maxToys ? '等待玩偶落稳…' : '可以投放') : '夹爪装填中…';
     if (force || this._lastHint !== hint) patch.hint = hint;
@@ -698,20 +722,108 @@ Page({
     ctx.stroke();
     const glassX = this.toPxX(BOARD.left);
     const glassY = this.toPxY(BOARD.top);
-    const glassW = (BOARD.right - BOARD.left) * f;
-    const glassH = (BOARD.floor - BOARD.top) * f;
+    const glassW = BOARD.right - BOARD.left;
+    const gw = glassW * f;
+    const gh = (BOARD.floor - BOARD.top) * f;
     ctx.beginPath();
-    ctx.rect(glassX, glassY, glassW, glassH);
+    ctx.rect(glassX, glassY, gw, gh);
     ctx.clip();
-    const grad = ctx.createLinearGradient(glassX, glassY, glassX, glassY + glassH);
+
+    // 底色：奶油 → 暖桃
+    const grad = ctx.createLinearGradient(glassX, glassY, glassX, glassY + gh);
     grad.addColorStop(0, '#fffaf5');
-    grad.addColorStop(1, '#f7e3d6');
+    grad.addColorStop(0.55, '#fbe9dd');
+    grad.addColorStop(1, '#f6ddcb');
     ctx.fillStyle = grad;
-    ctx.fillRect(glassX, glassY, glassW, glassH);
+    ctx.fillRect(glassX, glassY, gw, gh);
+
+    // 顶部暖光（娃娃机灯）
+    const glow = ctx.createRadialGradient(glassX + gw / 2, glassY, 8 * f, glassX + gw / 2, glassY, gw * 0.75);
+    glow.addColorStop(0, 'rgba(255,238,204,0.55)');
+    glow.addColorStop(1, 'rgba(255,238,204,0)');
+    ctx.fillStyle = glow;
+    ctx.fillRect(glassX, glassY, gw, gh);
+
+    // 顶部扇贝帷幔 + 背景小装饰
+    this.drawValance(ctx, f, glassX, glassY, gw);
+    this.drawBackdropDecor(ctx, f);
+
+    // 两侧柔和暗角，增加纵深
+    const vw = 46 * f;
+    const vl = ctx.createLinearGradient(glassX, 0, glassX + vw, 0);
+    vl.addColorStop(0, 'rgba(176,132,160,0.12)');
+    vl.addColorStop(1, 'rgba(176,132,160,0)');
+    ctx.fillStyle = vl;
+    ctx.fillRect(glassX, glassY, vw, gh);
+    const vr = ctx.createLinearGradient(glassX + gw, 0, glassX + gw - vw, 0);
+    vr.addColorStop(0, 'rgba(176,132,160,0.12)');
+    vr.addColorStop(1, 'rgba(176,132,160,0)');
+    ctx.fillStyle = vr;
+    ctx.fillRect(glassX + gw - vw, glassY, vw, gh);
     ctx.restore();
-    // 地板
+
+    // 地面：圆角绒垫 + 高光 + 上缘投影
+    const floorY = this.toPxY(BOARD.floor);
+    ctx.fillStyle = 'rgba(180,140,120,0.16)';
+    ctx.fillRect(glassX, floorY - 3 * f, gw, 3 * f);
     ctx.fillStyle = '#e7c9b6';
-    ctx.fillRect(glassX, this.toPxY(BOARD.floor), glassW, 6 * f);
+    this.roundRect(ctx, glassX, floorY - 1 * f, gw, 10 * f, 5 * f);
+    ctx.fill();
+    ctx.fillStyle = 'rgba(255,255,255,0.35)';
+    this.roundRect(ctx, glassX + 4 * f, floorY + 1 * f, gw - 8 * f, 2.5 * f, 1.2 * f);
+    ctx.fill();
+  },
+
+  // 顶部扇贝帷幔：一条粉色横带 + 下缘半圆波浪
+  drawValance(ctx, f, gx, gy, gw) {
+    const bandH = 14 * f;
+    ctx.fillStyle = 'rgba(244,203,224,0.55)';
+    ctx.fillRect(gx, gy, gw, bandH);
+    const n = 8;
+    const r = gw / (n * 2);
+    ctx.beginPath();
+    for (let i = 0; i < n; i++) {
+      const cx = gx + r + i * 2 * r;
+      ctx.moveTo(cx + r, gy + bandH);
+      ctx.arc(cx, gy + bandH, r, 0, Math.PI);
+    }
+    ctx.fill();
+  },
+
+  // 背景静态装饰：星芒 / 小花 / 圆点（低透明度）
+  drawBackdropDecor(ctx, f) {
+    for (let i = 0; i < BG_DECOR.length; i++) {
+      const d = BG_DECOR[i];
+      const px = this.toPxX(d.x);
+      const py = this.toPxY(d.y);
+      const r = d.r * f;
+      ctx.fillStyle = d.c;
+      if (d.k === 'star') {
+        ctx.beginPath();
+        ctx.moveTo(px, py - r);
+        ctx.quadraticCurveTo(px + r * 0.18, py - r * 0.18, px + r, py);
+        ctx.quadraticCurveTo(px + r * 0.18, py + r * 0.18, px, py + r);
+        ctx.quadraticCurveTo(px - r * 0.18, py + r * 0.18, px - r, py);
+        ctx.quadraticCurveTo(px - r * 0.18, py - r * 0.18, px, py - r);
+        ctx.closePath();
+        ctx.fill();
+      } else if (d.k === 'flower') {
+        for (let p = 0; p < 5; p++) {
+          const a = (Math.PI * 2 * p) / 5 - Math.PI / 2;
+          ctx.beginPath();
+          ctx.arc(px + Math.cos(a) * r * 0.62, py + Math.sin(a) * r * 0.62, r * 0.42, 0, Math.PI * 2);
+          ctx.fill();
+        }
+        ctx.fillStyle = 'rgba(255,255,255,0.55)';
+        ctx.beginPath();
+        ctx.arc(px, py, r * 0.34, 0, Math.PI * 2);
+        ctx.fill();
+      } else {
+        ctx.beginPath();
+        ctx.arc(px, py, r, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    }
   },
 
   drawDangerLine(ctx, f) {
@@ -799,43 +911,83 @@ Page({
     }
   },
 
-  // 夹爪：横轨 + 吊杆 + 两指，开合度 openness 驱动（vfx/board_ink.gd:8-26）
+  // 夹爪：圆角轨道 + 滑车 + 吊索 + 菇盖爪毂 + 圆弧抓臂，开合度 openness 驱动
   drawClaw(ctx, f) {
     const spread = this.openness;
     const { aimX } = this;
-    const span = this.held ? this.held.span : spanOf(this.session.next(0));
-    const hw = (span * aspectOf(this.held ? this.held.tier : this.session.next(0))) / 2;
+    const tier = this.held ? this.held.tier : this.session.next(0);
+    const span = this.held ? this.held.span : spanOf(tier);
+    const hw = (span * aspectOf(tier)) / 2;
     const heldY = CLAW.heldY(span);
+    const px = this.toPxX(aimX);
+    const railY = this.toPxY(193);
+    const railL = this.toPxX(BOARD.left);
+    const railR = this.toPxX(BOARD.right);
     ctx.save();
-    ctx.strokeStyle = '#8f7ba8';
     ctx.lineCap = 'round';
-    ctx.lineWidth = 4 * f;
+    ctx.lineJoin = 'round';
+
+    // 顶部圆角轨道
+    ctx.fillStyle = '#e6d3f2';
+    this.roundRect(ctx, railL, railY - 4 * f, railR - railL, 8 * f, 4 * f);
+    ctx.fill();
+    ctx.fillStyle = 'rgba(255,255,255,0.55)';
+    this.roundRect(ctx, railL + 3 * f, railY - 2.6 * f, railR - railL - 6 * f, 2.4 * f, 1.2 * f);
+    ctx.fill();
+
+    // 随瞄准滑动的滑车
+    const trolW = 26 * f;
+    const trolH = 16 * f;
+    ctx.fillStyle = '#c9a7dd';
+    this.roundRect(ctx, px - trolW / 2, railY - trolH / 2, trolW, trolH, 6 * f);
+    ctx.fill();
+    ctx.fillStyle = 'rgba(255,255,255,0.5)';
+    this.roundRect(ctx, px - trolW / 2 + 4 * f, railY - trolH / 2 + 3 * f, trolW - 8 * f, 3 * f, 1.5 * f);
+    ctx.fill();
+
+    // 吊索
+    const hubY = this.toPxY(heldY - span * 0.3);
+    ctx.strokeStyle = '#b493cf';
+    ctx.lineWidth = 3 * f;
     ctx.beginPath();
-    ctx.moveTo(this.toPxX(BOARD.left), this.toPxY(193));
-    ctx.lineTo(this.toPxX(BOARD.right), this.toPxY(193));
+    ctx.moveTo(px, railY + trolH / 2 - 2 * f);
+    ctx.lineTo(px, hubY);
     ctx.stroke();
-    ctx.lineWidth = 3.5 * f;
-    ctx.beginPath();
-    ctx.moveTo(this.toPxX(aimX), this.toPxY(236));
-    ctx.lineTo(this.toPxX(aimX), this.toPxY(heldY - span * 0.35));
-    ctx.stroke();
-    const joints = [
-      [aimX - (hw + 9 + spread * 25), 254 + span * 0.16],
-      [aimX + (hw + 9 + spread * 25), 254 + span * 0.16],
-    ];
-    const tips = [
-      [aimX - (hw * 0.66 + spread * 54), heldY + span * 0.25 - spread * 17],
-      [aimX + (hw * 0.66 + spread * 54), heldY + span * 0.25 - spread * 17],
-    ];
-    ctx.lineWidth = 4.5 * f;
-    ctx.strokeStyle = '#7a6494';
-    for (let i = 0; i < 2; i++) {
+
+    // 两只圆弧抓臂（粗圆头 + 糖果高光），开合沿用原锚点数学
+    const jointY = this.toPxY(254 + span * 0.16);
+    const tipY = this.toPxY(heldY + span * 0.25 - spread * 17);
+    const armOut = hw + 9 + spread * 25;
+    const tipOut = hw * 0.66 + spread * 54;
+    const arm = (s) => {
       ctx.beginPath();
-      ctx.moveTo(this.toPxX(aimX), this.toPxY(heldY - span * 0.3));
-      ctx.lineTo(this.toPxX(joints[i][0]), this.toPxY(joints[i][1]));
-      ctx.lineTo(this.toPxX(tips[i][0]), this.toPxY(tips[i][1]));
+      ctx.moveTo(px, hubY);
+      ctx.quadraticCurveTo(this.toPxX(aimX + s * armOut), jointY, this.toPxX(aimX + s * tipOut), tipY);
       ctx.stroke();
-    }
+    };
+    ctx.strokeStyle = '#a97fc4';
+    ctx.lineWidth = 7 * f;
+    arm(-1);
+    arm(1);
+    ctx.strokeStyle = 'rgba(255,255,255,0.35)';
+    ctx.lineWidth = 2.5 * f;
+    arm(-1);
+    arm(1);
+
+    // 菇盖状爪毂，盖住吊索与抓臂交点
+    const hubR = 10 * f;
+    const grad = ctx.createLinearGradient(px, hubY - hubR, px, hubY + hubR);
+    grad.addColorStop(0, '#e3b7d8');
+    grad.addColorStop(1, '#c98fc0');
+    ctx.fillStyle = grad;
+    ctx.beginPath();
+    ctx.arc(px, hubY, hubR, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.fillStyle = 'rgba(255,255,255,0.6)';
+    ctx.beginPath();
+    ctx.arc(px - hubR * 0.3, hubY - hubR * 0.35, hubR * 0.3, 0, Math.PI * 2);
+    ctx.fill();
+
     ctx.restore();
   },
 
@@ -892,6 +1044,32 @@ Page({
   },
 
   // ---------- 界面按钮 ----------
+  onStart() {
+    audio.play('open');
+    if (this.canvas) {
+      this.startRun();
+    } else {
+      // 首页时画布 hidden 未初始化：先显示画布再 setupCanvas（贴图加载完会自动 startRun）
+      this.setData({ status: 'playing', showHelp: false }, () => this.setupCanvas(0));
+    }
+  },
+
+  onGoHome() {
+    audio.play('click');
+    this.stopLoop();
+    audio.loopStop('carriage');
+    this.setData({ status: 'title', showRecords: false, showHelp: false });
+  },
+
+  onShowHelp() {
+    audio.play('open');
+    this.setData({ showHelp: true });
+  },
+
+  onCloseHelp() {
+    this.setData({ showHelp: false });
+  },
+
   onRestart() {
     audio.play('restart');
     this.startRun();

@@ -1,19 +1,42 @@
 <!--components/game-center/game-center.wxml-->
 <scroll-view class="gc" scroll-y>
   <view class="gc-head">
-    <view class="gc-title">游戏中心</view>
-    <view class="gc-sub">精选小游戏，点开即玩</view>
+    <view class="gc-head-text">
+      <view class="gc-title">游戏中心</view>
+      <view class="gc-sub">精选小游戏，点开即玩</view>
+    </view>
+    <view class="gc-count">{{total}} 款可玩</view>
   </view>
 
-  <view class="gc-list">
+  <!-- 推荐位：大图沉浸式，标题压在遮罩上 -->
+  <view class="gc-hero" bindtap="onPlay" data-url="{{hero.url}}">
+    <image class="gc-hero-cover" src="{{hero.cover}}" mode="aspectFill" />
+    <view class="gc-hero-scrim"></view>
+    <view class="gc-hero-tag" style="color:{{hero.accent}}">{{hero.tag}}</view>
+    <view class="gc-hero-info">
+      <view class="gc-hero-name">{{hero.name}}</view>
+      <view class="gc-hero-desc">{{hero.desc}}</view>
+      <view class="gc-hero-play" style="background:{{hero.accent}}">开始游戏</view>
+    </view>
+  </view>
+
+  <view class="gc-section">
+    <view class="gc-section-bar"></view>
+    <view class="gc-section-text">全部游戏</view>
+  </view>
+
+  <!-- 其余游戏：双列磁贴，一屏收口 -->
+  <view class="gc-grid">
     <view class="gc-card" wx:for="{{games}}" wx:key="url" bindtap="onPlay" data-url="{{item.url}}">
-      <image class="gc-cover" src="{{item.cover}}" mode="aspectFill" />
-      <view class="gc-body">
-        <view class="gc-info">
+      <view class="gc-thumb" style="background:{{item.bed}}">
+        <image class="gc-thumb-img" src="{{item.cover}}" mode="aspectFit" />
+      </view>
+      <view class="gc-card-body">
+        <view class="gc-card-top">
           <view class="gc-name">{{item.name}}</view>
-          <view class="gc-desc">{{item.desc}}</view>
+          <view class="gc-badge" style="color:{{item.accent}}">{{item.tag}}</view>
         </view>
-        <view class="gc-play">开始游戏</view>
+        <view class="gc-desc">{{item.desc}}</view>
       </view>
     </view>
   </view>

@@ -9,23 +9,26 @@
 
 .topbar {
   display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
+  gap: 12rpx;
   padding: 16rpx 24rpx 8rpx;
 }
 
-.stat {
+.stat-card {
   flex: 1;
-  display: flex;
-  flex-direction: column;
+  min-width: 0;
+  background: #fff;
+  border-radius: 18rpx;
+  padding: 12rpx 8rpx;
+  text-align: center;
+  box-shadow: 0 2rpx 10rpx rgba(120, 90, 130, 0.1);
 }
 
-.stat.center {
-  align-items: center;
+.stat-card.time {
+  background: #fdeef6;
 }
 
-.stat.right {
-  align-items: flex-end;
+.stat-card.goal {
+  background: #f3ecfa;
 }
 
 .stat-label {
@@ -34,36 +37,64 @@
 }
 
 .stat-value {
+  margin-top: 2rpx;
   font-size: 40rpx;
   font-weight: 700;
   color: #4a3550;
   line-height: 1.2;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
-.stat-value.time {
+.stat-card.time .stat-value {
   color: #b0577a;
 }
 
-.stat-value.goal {
+.stat-card.goal .stat-value {
   font-size: 30rpx;
+  line-height: 1.6;
+  color: #7a5c96;
 }
 
 .subbar {
   display: flex;
-  align-items: center;
   gap: 12rpx;
-  padding: 0 24rpx 12rpx;
+  padding: 4rpx 24rpx 12rpx;
 }
 
 .chip {
   flex: 1;
+  min-width: 0;
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 8rpx;
   background: #fff;
   border-radius: 14rpx;
-  padding: 10rpx 14rpx;
+  padding: 10rpx 12rpx;
   box-shadow: 0 2rpx 8rpx rgba(120, 90, 130, 0.08);
+}
+
+.chip::before {
+  content: '';
+  flex: 0 0 10rpx;
+  width: 10rpx;
+  height: 10rpx;
+  border-radius: 50%;
+  background: #cbb6c6;
+}
+
+.chip.held::before {
+  background: #b06fc9;
+}
+
+.chip.next::before {
+  background: #b0577a;
+}
+
+.chip.found::before {
+  background: #e0a95f;
 }
 
 .chip-label {
@@ -72,9 +103,13 @@
 }
 
 .chip-value {
+  min-width: 0;
   font-size: 26rpx;
   font-weight: 600;
   color: #4a3550;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .chip-img {
@@ -233,4 +268,125 @@
   margin-top: 24rpx;
   font-size: 26rpx;
   color: #b39fac;
+}
+
+/* ---------- 首页（title） ---------- */
+.home {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40rpx 56rpx calc(40rpx + env(safe-area-inset-bottom));
+  box-sizing: border-box;
+  background: linear-gradient(180deg, #fdf3ee 0%, #f7e4ec 55%, #efd9e6 100%);
+}
+
+.home-mute {
+  position: absolute;
+  top: calc(24rpx + env(safe-area-inset-top));
+  right: 24rpx;
+  width: 72rpx;
+  height: 72rpx;
+  line-height: 72rpx;
+  text-align: center;
+  font-size: 32rpx;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 2rpx 10rpx rgba(120, 90, 130, 0.15);
+}
+
+.home-poster {
+  width: 100%;
+  height: 340rpx;
+  border-radius: 28rpx;
+  box-shadow: 0 12rpx 32rpx rgba(120, 90, 130, 0.25);
+}
+
+.home-title {
+  margin-top: 34rpx;
+  font-size: 72rpx;
+  font-weight: 800;
+  letter-spacing: 4rpx;
+  color: #4a3550;
+  line-height: 1.1;
+}
+
+.home-title-cn {
+  margin-top: 6rpx;
+  font-size: 30rpx;
+  font-weight: 600;
+  letter-spacing: 10rpx;
+  color: #b0577a;
+}
+
+.home-sub {
+  margin-top: 16rpx;
+  font-size: 24rpx;
+  color: #97808f;
+  text-align: center;
+}
+
+.home-best {
+  margin-top: 20rpx;
+  padding: 8rpx 30rpx;
+  border-radius: 999rpx;
+  background: #fff;
+  color: #b0577a;
+  font-size: 24rpx;
+  font-weight: 700;
+  box-shadow: 0 2rpx 10rpx rgba(120, 90, 130, 0.12);
+}
+
+.home-start {
+  margin-top: 34rpx;
+  width: 100%;
+  height: 96rpx;
+  line-height: 96rpx;
+  text-align: center;
+  border-radius: 999rpx;
+  background: #b06fc9;
+  color: #fff;
+  font-size: 34rpx;
+  font-weight: 700;
+  letter-spacing: 6rpx;
+  box-shadow: 0 10rpx 26rpx rgba(176, 111, 201, 0.4);
+}
+
+.home-row {
+  margin-top: 20rpx;
+  display: flex;
+  gap: 20rpx;
+  width: 100%;
+}
+
+.home-ghost {
+  flex: 1;
+  height: 80rpx;
+  line-height: 80rpx;
+  text-align: center;
+  border-radius: 999rpx;
+  background: #fff;
+  color: #6b5566;
+  font-size: 28rpx;
+  font-weight: 600;
+  box-shadow: 0 2rpx 10rpx rgba(120, 90, 130, 0.12);
+}
+
+/* ---------- 玩法说明 ---------- */
+.help-body {
+  margin-top: 20rpx;
+  text-align: left;
+}
+
+.help-p {
+  margin-top: 12rpx;
+  font-size: 26rpx;
+  line-height: 1.6;
+  color: #6b5566;
 }

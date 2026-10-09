@@ -1,31 +1,32 @@
 <!--mushies/pages/index/index.wxml-->
 <view class="page">
   <view class="topbar">
-    <view class="stat">
+    <view class="stat-card">
       <view class="stat-label">得分</view>
       <view class="stat-value">{{score}}</view>
     </view>
-    <view class="stat center">
+    <view class="stat-card time">
       <view class="stat-label">剩余时间</view>
-      <view class="stat-value time">{{timeText}}</view>
+      <view class="stat-value">{{timeText}}</view>
     </view>
-    <view class="stat right">
+    <view class="stat-card goal">
       <view class="stat-label">目标</view>
-      <view class="stat-value goal">{{goalText}}</view>
+      <view class="stat-value">{{goalText}}</view>
     </view>
   </view>
 
   <view class="subbar">
-    <view class="chip">
+    <view class="chip held">
       <text class="chip-label">手里</text>
+      <image wx:if="{{heldKey}}" class="chip-img" src="/mushies/images/{{heldKey}}.png" mode="aspectFit" />
       <text class="chip-value">{{heldName}}</text>
     </view>
-    <view class="chip">
+    <view class="chip next">
       <text class="chip-label">下一个</text>
       <image wx:if="{{nextKey}}" class="chip-img" src="/mushies/images/{{nextKey}}.png" mode="aspectFit" />
       <text class="chip-value">{{nextName}}</text>
     </view>
-    <view class="chip">
+    <view class="chip found">
       <text class="chip-label">已收集</text>
       <text class="chip-value">{{discovered}} / 11</text>
     </view>
@@ -46,6 +47,7 @@
   </view>
 
   <view class="controls">
+    <view class="ctrl-btn" bindtap="onGoHome">首页</view>
     <view class="ctrl-btn" bindtap="onToggleMute">{{muted ? '🔇' : '🔊'}}</view>
     <view class="ctrl-btn grow" bindtap="onRestart">↻ 重开</view>
     <view class="ctrl-btn grow" bindtap="onShowRecords">🏆 记录</view>
@@ -78,6 +80,38 @@
       <view wx:else class="rec-empty">还没有成绩，先玩一局吧</view>
       <view class="dialog-btns">
         <view class="dlg-btn primary" bindtap="onCloseRecords">关闭</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 首页（对应原版 route=title）：入口后的主菜单 -->
+  <view class="home" wx:if="{{status === 'title'}}">
+    <view class="home-mute" bindtap="onToggleMute">{{muted ? '🔇' : '🔊'}}</view>
+    <image class="home-poster" src="/mushies/images/cover.png" mode="aspectFill" />
+    <view class="home-title">Mushies</view>
+    <view class="home-title-cn">菇菇合成机</view>
+    <view class="home-sub">在棋盘填满前，达成不断成长的目标</view>
+    <view class="home-best" wx:if="{{bestScore > 0}}">最高分 {{bestScore}}</view>
+    <view class="home-start" bindtap="onStart">开始合成</view>
+    <view class="home-row">
+      <view class="home-ghost" bindtap="onShowRecords">排行榜</view>
+      <view class="home-ghost" bindtap="onShowHelp">玩法说明</view>
+    </view>
+  </view>
+
+  <!-- 玩法说明 -->
+  <view class="overlay" wx:if="{{showHelp}}" catchtap="onCloseHelp">
+    <view class="dialog" catchtap="noop">
+      <view class="dialog-title">玩法说明</view>
+      <view class="help-body">
+        <view class="help-p">1. 在柜面上拖动瞄准，松手投放 Mushies。</view>
+        <view class="help-p">2. 两个相同 Mushies 相碰，合成为更大的蘑菇伙伴。</view>
+        <view class="help-p">3. 达成每个目标，下一目标更大，并增加 1 分钟。</view>
+        <view class="help-p">4. 让 Mushies 堆保持在安全线下；开局 3 分钟，超时或溢出本局结束。</view>
+        <view class="help-p">清场孢子：堆接近安全线时每局一次，投放 5 秒后爆开清除附近 Mushies。</view>
+      </view>
+      <view class="dialog-btns">
+        <view class="dlg-btn primary" bindtap="onCloseHelp">知道了</view>
       </view>
     </view>
   </view>
