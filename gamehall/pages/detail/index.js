@@ -1,4 +1,4 @@
-// game/pages/detail/index.js 游戏详情
+// gamehall/pages/detail/index.js 游戏详情
 import {
   extractLinkInfo
 } from '../../../utils/gameUtils';

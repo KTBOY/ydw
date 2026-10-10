@@ -1,4 +1,4 @@
-// game/utils/games.js
+// gamehall/utils/games.js
 // 游戏数据加载：统一使用 asserts/json/gemes.json 作为数据源，避免重复维护
 let cache = null;
 

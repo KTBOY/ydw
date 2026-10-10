@@ -1,4 +1,4 @@
-// game/pages/list/index.js 游戏列表
+// gamehall/pages/list/index.js 游戏列表
 import {
   getGameList
 } from '../../utils/games';
@@ -40,7 +40,7 @@ Page({
     } = e.currentTarget.dataset;
     wx.setStorageSync('currentGame', JSON.stringify(item));
     wx.navigateTo({
-      url: '/game/pages/detail/index'
+      url: '/gamehall/pages/detail/index'
     });
   },
 });

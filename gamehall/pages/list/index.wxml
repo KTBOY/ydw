@@ -1,4 +1,4 @@
-<!--game/pages/list/index.wxml-->
+<!--gamehall/pages/list/index.wxml-->
 <scroll-view class="scrollarea" scroll-y type="list">
   <view class="header">
     <t-search value="{{keyword}}" bind:change="onSearch" bind:clear="onClear" placeholder="搜索游戏名称" leftIcon="" />

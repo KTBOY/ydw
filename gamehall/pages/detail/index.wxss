@@ -1,4 +1,4 @@
-/* game/pages/detail/index.wxss */
+/* gamehall/pages/detail/index.wxss */
 .details {
   padding: 20rpx;
 }

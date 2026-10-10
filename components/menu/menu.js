@@ -21,7 +21,7 @@ Component({
       {
         image: '/asserts/images/caid/steam.png',
         name: '游戏库',
-        router: '/game/pages/list/index',
+        router: '/gamehall/pages/list/index',
         show: false,
         style: {
           width: '90rpx',

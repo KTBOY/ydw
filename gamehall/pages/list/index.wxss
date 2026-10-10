@@ -1,4 +1,4 @@
-/* game/pages/list/index.wxss */
+/* gamehall/pages/list/index.wxss */
 .scrollarea {
   --font-color: #4c88ff;
   --button-bg-color: #f2f3f7;

@@ -39,7 +39,11 @@
     },
     {
       "root": "game",
-      "pages": ["pages/list/index", "pages/detail/index", "pages/arrowEscape/index", "pages/sudoku/index"]
+      "pages": ["pages/arrowEscape/index", "pages/sudoku/index"]
+    },
+    {
+      "root": "gamehall",
+      "pages": ["pages/list/index", "pages/detail/index"]
     },
     {
       "root": "nasa",
@@ -65,7 +69,7 @@
   "preloadRule": {
     "pages/home/home": {
       "network": "all",
-      "packages": ["game", "mushies"]
+      "packages": ["gamehall"]
     }
   },
   "requiredPrivateInfos": ["chooseAddress"],

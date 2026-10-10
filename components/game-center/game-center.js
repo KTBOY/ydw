@@ -4,7 +4,7 @@ const GAMES = [
   {
     name: '菇菇合成机',
     desc: '娃娃机夹爪投放蘑菇玩偶，同级相碰不断合成升级，别堆过安全线',
-    cover: '/mushies/images/cover.png',
+    cover: '/gamehall/images/mushies.png',
     url: '/mushies/pages/index/index',
     tag: '合成',
     accent: '#e0559b',
@@ -14,7 +14,7 @@ const GAMES = [
   {
     name: '数独 · 雅集',
     desc: '新中式文人风数独：无限关卡、每日挑战、笔记提示与战绩统计',
-    cover: '/game/images/sudoku.png',
+    cover: '/gamehall/images/sudoku.png',
     url: '/game/pages/sudoku/index',
     tag: '益智',
     accent: '#b0402f',
@@ -23,7 +23,7 @@ const GAMES = [
   {
     name: '箭头逃脱',
     desc: '经典箭头解谜：规划顺序，让每个箭头滑出棋盘',
-    cover: '/game/images/arrow-escape.png',
+    cover: '/gamehall/images/arrow-escape.png',
     url: '/game/pages/arrowEscape/index',
     tag: '解谜',
     accent: '#2f5da8',

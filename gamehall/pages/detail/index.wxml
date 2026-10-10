@@ -1,4 +1,4 @@
-<!--game/pages/detail/index.wxml-->
+<!--gamehall/pages/detail/index.wxml-->
 <view class="details">
   <block wx:if="{{detailsData.name}}">
     <view class="title">{{detailsData.name}}</view>
