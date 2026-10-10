@@ -24,21 +24,25 @@ const TIERS = [
 const TOP_TIER = TIERS.length - 1; // 10 = 极光菇，不再向上合成
 const BOMB_TIER = 11; // data/actors/bomb.gd:3
 const BOMB_SPAN = 148; // data/actors/bomb.gd:9
+// 炸弹贴图按 alpha 包围盒（424×503）裁剪导出，宽高比与 TIERS[].aspect 同一口径
+const BOMB_ASPECT = 0.843;
 
 // 圆体半径系数：原工程用贴图 alpha 轮廓做凸分解，等效半径约 0.44~0.49×span；
 // 但可见菌盖宽仅 0.69×span，取 0.40 让「看起来贴上」和「堆得稳」平衡。调这一处即可。
 const RADIUS_FACTOR = 0.4;
 
-// 棋盘（逻辑像素，y 向下）——plushie_main.gd:21-25, :242, :730-747
+// 棋盘（逻辑像素，y 向下）——plushie_main.gd:21-25, :231-242, :730-747
 const BOARD = {
   cabinetX: 364,
   cabinetY: 128,
-  cabinetW: 712,
-  cabinetH: 777,
+  cabinetW: 712, // CABINET_WIDTH
+  cabinetH: 777, // TANK.end.y + EXTRA_PILE_DEPTH + FLOOR_TRIM - CABINET_TOP，投影的最小高度
   left: 400,
   right: 1040,
   top: 176,
-  floor: 852,
+  floorMin: 852, // 默认底板位置（原版 TANK.end.y + EXTRA_PILE_DEPTH）
+  floor: 852, // 运行期由 computeLayout 按可用高度下推，等价原版 _resize_tank
+  floorTrim: 53, // FLOOR_TRIM
   dangerY: 354, // environment.danger.line，catalog.generated.json:438
 };
 
@@ -235,6 +239,7 @@ export {
   TOP_TIER,
   BOMB_TIER,
   BOMB_SPAN,
+  BOMB_ASPECT,
   BOARD,
   PHYS,
   CLAW,

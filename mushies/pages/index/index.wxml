@@ -1,34 +1,31 @@
 <!--mushies/pages/index/index.wxml-->
 <view class="page">
-  <view class="topbar">
-    <view class="stat-card">
-      <view class="stat-label">得分</view>
-      <view class="stat-value">{{score}}</view>
+  <!-- 原版竖屏 HUD：紫绒 header band 内两行浮动小卡，右上角 44×52 图标暂停键 -->
+  <view class="hud">
+    <view class="hud-row">
+      <view class="card">
+        <view class="cap">得分</view>
+        <view class="val">{{score}}</view>
+      </view>
+      <view class="card time">
+        <view class="val big">{{timeText}}</view>
+      </view>
+      <view class="pause" hover-class="pause-press" bindtap="onPause">
+        <view class="pb"></view>
+        <view class="pb"></view>
+      </view>
     </view>
-    <view class="stat-card time">
-      <view class="stat-label">剩余时间</view>
-      <view class="stat-value">{{timeText}}</view>
-    </view>
-    <view class="stat-card goal">
-      <view class="stat-label">目标</view>
-      <view class="stat-value">{{goalText}}</view>
-    </view>
-  </view>
-
-  <view class="subbar">
-    <view class="chip held">
-      <text class="chip-label">手里</text>
-      <image wx:if="{{heldKey}}" class="chip-img" src="/mushies/images/{{heldKey}}.png" mode="aspectFit" />
-      <text class="chip-value">{{heldName}}</text>
-    </view>
-    <view class="chip next">
-      <text class="chip-label">下一个</text>
-      <image wx:if="{{nextKey}}" class="chip-img" src="/mushies/images/{{nextKey}}.png" mode="aspectFit" />
-      <text class="chip-value">{{nextName}}</text>
-    </view>
-    <view class="chip found">
-      <text class="chip-label">已收集</text>
-      <text class="chip-value">{{discovered}} / 11</text>
+    <view class="hud-row">
+      <view class="card named">
+        <image class="ico" src="/mushies/images/{{goalKey}}.png" mode="aspectFit" />
+        <text class="cap">目标</text>
+        <text class="val">{{goalText}}</text>
+      </view>
+      <view class="card named">
+        <image class="ico" src="/mushies/images/{{nextKey}}.png" mode="aspectFit" />
+        <text class="cap">下一个</text>
+        <text class="val">{{nextName}}</text>
+      </view>
     </view>
   </view>
 
@@ -37,7 +34,7 @@
       type="2d"
       id="gameCanvas"
       class="canvas"
-      hidden="{{status !== 'playing' || showRecords}}"
+      hidden="{{status !== 'playing' || showRecords || showPause || showHelp || showSettings}}"
       bindtouchstart="onTouch"
       bindtouchmove="onTouch"
       bindtouchend="onTouch"
@@ -46,12 +43,7 @@
     <view class="hint">{{hint}}</view>
   </view>
 
-  <view class="controls">
-    <view class="ctrl-btn" bindtap="onGoHome">首页</view>
-    <view class="ctrl-btn" bindtap="onToggleMute">{{muted ? '🔇' : '🔊'}}</view>
-    <view class="ctrl-btn grow" bindtap="onRestart">↻ 重开</view>
-    <view class="ctrl-btn grow" bindtap="onShowRecords">🏆 记录</view>
-  </view>
+  <view class="foot"></view>
 
   <view class="overlay" wx:if="{{status==='lose'}}">
     <view class="dialog">
@@ -61,6 +53,7 @@
       <view class="dialog-desc">{{summary}}</view>
       <view class="dialog-btns">
         <view class="dlg-btn ghost" bindtap="onShowRecords">看记录</view>
+        <button class="dlg-btn ghost share-btn" open-type="share">分享</button>
         <view class="dlg-btn primary" bindtap="onRestart">再来一局</view>
       </view>
     </view>
@@ -84,19 +77,58 @@
     </view>
   </view>
 
-  <!-- 首页（对应原版 route=title）：入口后的主菜单 -->
-  <view class="home" wx:if="{{status === 'title'}}">
-    <view class="home-mute" bindtap="onToggleMute">{{muted ? '🔇' : '🔊'}}</view>
-    <image class="home-poster" src="/mushies/images/cover.png" mode="aspectFill" />
-    <view class="home-title">Mushies</view>
-    <view class="home-title-cn">菇菇合成机</view>
-    <view class="home-sub">在棋盘填满前，达成不断成长的目标</view>
-    <view class="home-best" wx:if="{{bestScore > 0}}">最高分 {{bestScore}}</view>
-    <view class="home-start" bindtap="onStart">开始合成</view>
-    <view class="home-row">
-      <view class="home-ghost" bindtap="onShowRecords">排行榜</view>
-      <view class="home-ghost" bindtap="onShowHelp">玩法说明</view>
+  <!-- 首页（对应原版 route=title 的竖屏/mobile 分支）：整屏 key art + 灯牌 + 缎带 + 底部糖果菜单 -->
+  <view class="home {{reducedMotion ? 'rm' : ''}}" wx:if="{{status === 'title'}}">
+    <image class="hm-art" src="/mushies/images/title.jpg" mode="aspectFill" />
+
+    <view class="hm-hearts">
+      <view
+        class="hm-rise"
+        wx:for="{{hearts}}"
+        wx:key="index"
+        style="left:{{item.left}}%;animation-duration:{{item.riseDur}}s;animation-delay:-{{item.riseDelay}}s"
+      >
+        <view
+          class="hm-heart"
+          style="color:{{item.color}};font-size:{{item.size}}rpx;animation-duration:{{item.swayDur}}s;animation-delay:-{{item.swayDelay}}s"
+          >♥</view
+        >
+      </view>
     </view>
+
+    <view class="hm-scrim"></view>
+
+    <view class="hm-marquee">
+      <view
+        class="hm-bulb"
+        wx:for="{{bulbs}}"
+        wx:key="index"
+        style="left:{{item.x}}rpx;top:{{item.y}}rpx;animation-delay:-{{item.delay}}s"
+      ></view>
+      <view class="hm-logo-wrap">
+        <view class="hm-logo">Mushies</view>
+        <view class="hm-shine"></view>
+      </view>
+    </view>
+
+    <view class="hm-ribbon">
+      <view class="hm-tail hm-tail-l"></view>
+      <view class="hm-tail hm-tail-r"></view>
+      <view class="hm-body">
+        <view class="hm-tagline">相同 Mushies，合成更大惊喜。</view>
+      </view>
+    </view>
+
+    <view class="hm-menu">
+      <view class="hm-btn hm-primary" hover-class="hm-press" hover-stay-time="80" bindtap="onStart">开始合成</view>
+      <view class="hm-btn hm-secondary" hover-class="hm-press" hover-stay-time="80" bindtap="onShowRecords"
+        >排行榜</view
+      >
+      <view class="hm-btn hm-secondary" hover-class="hm-press" hover-stay-time="80" bindtap="onShowHelp">玩法说明</view>
+      <view class="hm-btn hm-secondary" hover-class="hm-press" hover-stay-time="80" bindtap="onShowSettings">设置</view>
+    </view>
+
+    <view class="hm-curtain"></view>
   </view>
 
   <!-- 玩法说明 -->
@@ -112,6 +144,42 @@
       </view>
       <view class="dialog-btns">
         <view class="dlg-btn primary" bindtap="onCloseHelp">知道了</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 设置（原版 Settings 弹框的移动端子集：音频静音 + 减少动效） -->
+  <view class="overlay" wx:if="{{showSettings}}" catchtap="onCloseSettings">
+    <view class="dialog" catchtap="noop">
+      <view class="dialog-title">设置</view>
+      <view class="set-row">
+        <view class="set-label">音效静音</view>
+        <switch checked="{{muted}}" color="#f596b0" bindchange="onToggleMute" />
+      </view>
+      <view class="set-row">
+        <view class="set-label">减少动效</view>
+        <switch checked="{{reducedMotion}}" color="#f596b0" bindchange="onToggleReducedMotion" />
+      </view>
+      <view class="set-note">减少动效会停掉灯牌跑马灯、飘升爱心与入场动画。</view>
+      <view class="dialog-btns">
+        <view class="dlg-btn primary" bindtap="onCloseSettings">关闭</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 暂停：原版移动端是底部 MobileSheet（奶白底 + 紫绒标题带 + 返回键 + 竖排按钮） -->
+  <view class="sheet-mask" wx:if="{{showPause}}" catchtap="onResume">
+    <view class="sheet" catchtap="noop">
+      <view class="sheet-head">
+        <view class="sheet-title">已暂停</view>
+        <view class="sheet-back" hover-class="sheet-back-press" bindtap="onResume">返回</view>
+      </view>
+      <view class="sheet-desc">Mushies 堆等你回来。</view>
+      <view class="sheet-body">
+        <view class="hm-btn hm-primary" hover-class="hm-press" bindtap="onResume">继续合成</view>
+        <view class="hm-btn hm-secondary" hover-class="hm-press" bindtap="onRestart">重新开始</view>
+        <view class="hm-btn hm-secondary" hover-class="hm-press" bindtap="onShowSettings">设置</view>
+        <view class="hm-btn hm-secondary" hover-class="hm-press" bindtap="onGoHome">返回主菜单</view>
       </view>
     </view>
   </view>

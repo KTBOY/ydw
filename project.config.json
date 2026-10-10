@@ -5,6 +5,10 @@
       {
         "type": "folder",
         "value": "design"
+      },
+      {
+        "type": "folder",
+        "value": "vibe_images"
       }
     ],
     "include": []

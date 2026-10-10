@@ -6,6 +6,7 @@ import {
   TIERS,
   TOP_TIER,
   BOMB_TIER,
+  BOMB_ASPECT,
   BOARD,
   PHYS,
   CLAW,
@@ -25,29 +26,104 @@ const MAX_RECORDS = 10;
 const FIXED_DT = 1 / 60;
 const CHAIN_WINDOW = 1.2; // game_audio.gd:13
 
-// 机柜玻璃内的静态背景装饰（逻辑坐标），低透明度不抢玩偶
-const BG_DECOR = [
-  { x: 455, y: 240, r: 10, k: 'star', c: 'rgba(196,164,222,0.30)' },
-  { x: 980, y: 215, r: 8, k: 'star', c: 'rgba(255,205,120,0.32)' },
-  { x: 720, y: 300, r: 7, k: 'star', c: 'rgba(242,169,196,0.30)' },
-  { x: 520, y: 470, r: 8, k: 'star', c: 'rgba(196,164,222,0.26)' },
-  { x: 930, y: 430, r: 9, k: 'star', c: 'rgba(255,255,255,0.5)' },
-  { x: 620, y: 220, r: 9, k: 'flower', c: 'rgba(242,169,196,0.28)' },
-  { x: 860, y: 300, r: 8, k: 'flower', c: 'rgba(196,164,222,0.28)' },
-  { x: 470, y: 360, r: 7, k: 'flower', c: 'rgba(255,205,120,0.28)' },
-  { x: 990, y: 540, r: 8, k: 'flower', c: 'rgba(242,169,196,0.24)' },
-  { x: 560, y: 300, r: 4, k: 'dot', c: 'rgba(255,255,255,0.55)' },
-  { x: 760, y: 240, r: 4, k: 'dot', c: 'rgba(196,164,222,0.30)' },
-  { x: 900, y: 480, r: 4, k: 'dot', c: 'rgba(255,205,120,0.32)' },
-  { x: 640, y: 520, r: 4, k: 'dot', c: 'rgba(255,255,255,0.5)' },
-  { x: 430, y: 540, r: 4, k: 'dot', c: 'rgba(242,169,196,0.28)' },
-];
-
 const REASON_TEXT = {
   overflow: 'Mushies 堆超出安全线',
   timeout: '时间已用完',
   drops: '可投放的 Mushies 已用完',
 };
+
+const RM_KEY = 'mushiesReducedMotion';
+
+// ---------- 主菜单装饰（原版 title_fx.gd / title_marquee.gd 的确定性参数） ----------
+const HEART_COLORS = ['#f59ab4', '#d7bdf0', '#fff4f7', '#ffc9a6', '#f7b8cc'];
+const TAU = Math.PI * 2;
+
+// Godot 侧用 seed=1811 的 PCG32，这里用同样确定性的 mulberry32 复现「同参数区间、可复现」
+function rng(seed) {
+  let s = seed >>> 0;
+  return () => {
+    s = (s + 0x6d2b79f5) >>> 0;
+    let t = s;
+    t = Math.imul(t ^ (t >>> 15), t | 1);
+    t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
+
+// 9 颗上升爱心：rise = fmod(y + t*speed*0.035, 1)，x 摆动 = sin(t*sway + phase)
+// 取数顺序与 title_fx.gd 一致（x,y,size,speed,phase,sway），区间同 randf_range
+function buildHearts() {
+  const rand = rng(1811);
+  const list = [];
+  for (let i = 0; i < 9; i++) {
+    const x = rand();
+    const y = rand();
+    const size = 0.6 + rand() * 0.65;
+    const speed = 0.8 + rand() * 1.1;
+    const phase = rand() * TAU;
+    const sway = 0.6 + rand() * 0.8;
+    const riseDur = 1 / (0.035 * speed);
+    list.push({
+      left: `${(x * 100).toFixed(1)}%`,
+      color: HEART_COLORS[i % HEART_COLORS.length],
+      size: Math.round(34 * size),
+      riseDur: riseDur.toFixed(1),
+      riseDelay: (y * riseDur).toFixed(1),
+      swayDur: (TAU / sway).toFixed(2),
+      swayDelay: (phase / sway).toFixed(2),
+    });
+  }
+  return list;
+}
+
+// 灯牌灯泡：沿圆角矩形轮廓等距排布，(i + t*6) % 3 == 0 时熄灭，形成 6 步/秒的追逐
+function buildBulbs() {
+  const x = 25;
+  const y = 25;
+  const w = 638;
+  const h = 188;
+  const r = 33;
+  const arc = (Math.PI / 2) * r;
+  const segs = [
+    { kind: 'line', from: [x + r, y], to: [x + w - r, y], len: w - 2 * r },
+    { kind: 'arc', c: [x + w - r, y + r], a0: -Math.PI / 2, len: arc },
+    { kind: 'line', from: [x + w, y + r], to: [x + w, y + h - r], len: h - 2 * r },
+    { kind: 'arc', c: [x + w - r, y + h - r], a0: 0, len: arc },
+    { kind: 'line', from: [x + w - r, y + h], to: [x + r, y + h], len: w - 2 * r },
+    { kind: 'arc', c: [x + r, y + h - r], a0: Math.PI / 2, len: arc },
+    { kind: 'line', from: [x, y + h - r], to: [x, y + r], len: h - 2 * r },
+    { kind: 'arc', c: [x + r, y + r], a0: Math.PI, len: arc },
+  ];
+  const perimeter = segs.reduce((sum, s) => sum + s.len, 0);
+  const count = Math.min(200, Math.max(12, Math.floor(perimeter / 58)));
+  const spacing = perimeter / count;
+  const at = (d) => {
+    let walked = d % perimeter;
+    for (const s of segs) {
+      if (walked > s.len) {
+        walked -= s.len;
+        continue;
+      }
+      const t = s.len === 0 ? 0 : walked / s.len;
+      if (s.kind === 'line') {
+        return [s.from[0] + (s.to[0] - s.from[0]) * t, s.from[1] + (s.to[1] - s.from[1]) * t];
+      }
+      const a = s.a0 + t * (Math.PI / 2);
+      return [s.c[0] + Math.cos(a) * r, s.c[1] + Math.sin(a) * r];
+    }
+    return [x, y];
+  };
+  const list = [];
+  for (let i = 0; i < count; i++) {
+    const p = at(spacing * 0.5 + i * spacing);
+    list.push({
+      x: p[0].toFixed(1),
+      y: p[1].toFixed(1),
+      delay: ((i * 0.5) / 3).toFixed(3),
+    });
+  }
+  return list;
+}
 
 const pad2 = (n) => (n < 10 ? `0${n}` : `${n}`);
 const formatClock = (seconds) => {
@@ -60,19 +136,27 @@ const formatTime = (ts) => {
 };
 const tierLabel = (tier) => (tier === BOMB_TIER ? '清场孢子' : TIERS[tier].name);
 // 炸弹没有独立贴图，用一个中性宽高比画占位圆
-const aspectOf = (tier) => (tier === BOMB_TIER ? 0.85 : TIERS[tier].aspect);
+const aspectOf = (tier) => (tier === BOMB_TIER ? BOMB_ASPECT : TIERS[tier].aspect);
+
+// 玩偶之外的场景贴图：[this.textures 键名, 文件名]
+const EXTRA_TEXTURES = [
+  ['bomb', 'puff-bomb.png'],
+  ['trim', 'cabinet-trim.png'],
+  ['arcade', 'arcade.jpg'],
+  ['clawRail', 'claw-rail.png'],
+  ['clawRope', 'claw-rope.png'],
+  ['clawHub', 'claw-hub.png'],
+  ['clawArm', 'claw-arm.png'],
+];
 
 Page({
   data: {
     score: 0,
     timeText: '3:00',
     goalText: '',
+    goalKey: '',
     nextKey: '',
     nextName: '',
-    heldName: '',
-    heldKey: '',
-    drops: 0,
-    discovered: 0,
     hint: '可以投放',
     status: 'title',
     reasonText: '',
@@ -80,9 +164,14 @@ Page({
     merges: 0,
     records: [],
     showRecords: false,
+    showPause: false,
     showHelp: false,
     muted: false,
     bestScore: 0,
+    showSettings: false,
+    reducedMotion: false,
+    hearts: buildHearts(),
+    bulbs: buildBulbs(),
   },
 
   onLoad() {
@@ -113,7 +202,13 @@ Page({
     this.runId = `r${Date.now().toString(36)}${Math.floor(Math.random() * 1e4).toString(36)}`;
     this.loadRecords();
     audio.init();
-    this.setData({ muted: audio.isMuted(), bestScore: this.bestScore });
+    let reducedMotion = false;
+    try {
+      reducedMotion = !!wx.getStorageSync(RM_KEY);
+    } catch (e) {
+      reducedMotion = false;
+    }
+    this.setData({ muted: audio.isMuted(), bestScore: this.bestScore, reducedMotion });
   },
 
   onReady() {
@@ -176,12 +271,16 @@ Page({
   },
 
   // 柜体 712x777 等比映射到画布（对应 project_board 的 factor 计算）
+  // 原版 project_board（plushie_main.gd:231-239）：factor 取宽/高双约束的较小值，
+  // 再用 _resize_tank 把底板下推，让机柜正好吃满画布高度 ——
+  // 竖屏多出来的高度于是变成堆叠深度而不是上下留白。高宽比足够大时 floor 恰好回到 floorMin。
   computeLayout() {
-    const f = Math.min((this.cssW - 16) / BOARD.cabinetW, (this.cssH - 16) / BOARD.cabinetH);
+    const f = Math.min(this.cssW / BOARD.cabinetW, this.cssH / BOARD.cabinetH);
+    BOARD.floor = BOARD.cabinetY + this.cssH / f - BOARD.floorTrim;
     this.layout = {
       f,
       ox: (this.cssW - BOARD.cabinetW * f) / 2,
-      oy: (this.cssH - BOARD.cabinetH * f) / 2,
+      oy: 0,
     };
   },
 
@@ -198,17 +297,19 @@ Page({
   },
 
   loadTextures(done) {
-    let pending = TIERS.length;
+    // 玩偶 + 场景件：炸弹贴图、机柜唇边、照片底图、夹爪机构四件
+    const jobs = TIERS.map((t) => [t.key, `${t.key}.png`]).concat(EXTRA_TEXTURES);
+    let pending = jobs.length;
     const finish = () => {
       pending -= 1;
       if (pending <= 0) done();
     };
-    TIERS.forEach((tier) => {
+    jobs.forEach(([name, file]) => {
       const img = this.canvas.createImage();
       img.onload = finish;
       img.onerror = finish;
-      img.src = `/mushies/images/${tier.key}.png`;
-      this.textures[tier.key] = img;
+      img.src = `/mushies/images/${file}`;
+      this.textures[name] = img;
     });
   },
 
@@ -667,163 +768,122 @@ Page({
     if (force || this._lastScore !== s.score) patch.score = s.score;
     const clock = formatClock(s.remaining());
     if (force || this._lastClock !== clock) patch.timeText = clock;
-    if (force || this._lastDrops !== s.drops) patch.drops = s.drops;
-    const found = s.discoveredCount();
-    if (force || this._lastFound !== found) patch.discovered = found;
     const goal = `${tierLabel(s.goalTier)}${s.goalTier === TOP_TIER ? ` ×${s.dragons + 1}` : ''}`;
-    if (force || this._lastGoal !== goal) patch.goalText = goal;
+    if (force || this._lastGoal !== goal) {
+      patch.goalText = goal;
+      patch.goalKey = TIERS[s.goalTier].key;
+    }
     if (force || this._lastNext !== nextTier) {
       patch.nextName = tierLabel(nextTier);
-      patch.nextKey = nextTier === BOMB_TIER ? '' : TIERS[nextTier].key;
-    }
-    const heldName = this.held ? tierLabel(this.held.tier) : '装填中';
-    if (force || this._lastHeld !== heldName) {
-      patch.heldName = heldName;
-      patch.heldKey = this.held && this.held.tier !== BOMB_TIER ? TIERS[this.held.tier].key : '';
+      patch.nextKey = nextTier === BOMB_TIER ? 'puff-bomb' : TIERS[nextTier].key;
     }
     const hint =
       this.clawState === 'holding' ? (this.toys.length >= PHYS.maxToys ? '等待玩偶落稳…' : '可以投放') : '夹爪装填中…';
     if (force || this._lastHint !== hint) patch.hint = hint;
     if (patch.score !== undefined) this._lastScore = s.score;
     if (patch.timeText !== undefined) this._lastClock = clock;
-    if (patch.drops !== undefined) this._lastDrops = s.drops;
-    if (patch.discovered !== undefined) this._lastFound = found;
     if (patch.goalText !== undefined) this._lastGoal = goal;
     if (patch.nextName !== undefined) this._lastNext = nextTier;
-    if (patch.heldName !== undefined) this._lastHeld = heldName;
     if (patch.hint !== undefined) this._lastHint = hint;
     if (Object.keys(patch).length) this.setData(patch);
   },
 
   // ---------- 绘制 ----------
+  // 层序照原版：底图 → 机柜 → 导轨吊索 → 危险线 → 后臂 → 玩偶 → 唇边（原版 z7 在玩偶之上）
+  // → 粒子 → 爪毂 → 前臂 → 暖色滤镜。拆成后臂/前臂两次绘制才能把手里那个玩偶夹住。
   draw() {
     const { ctx } = this;
     if (!ctx || !this.layout) return;
     const { f } = this.layout;
     ctx.clearRect(0, 0, this.cssW, this.cssH);
+    this.drawBackground(ctx);
     this.drawCabinet(ctx, f);
+    this.drawRig(ctx, f);
     this.drawDangerLine(ctx, f);
+    const g = this.clawGeom();
+    this.drawClawArm(ctx, f, g, -1);
     for (let i = 0; i < this.toys.length; i++) this.drawToy(ctx, this.toys[i], f);
+    this.drawHeld(ctx, f);
+    this.drawTrim(ctx, f);
     this.drawParticles(ctx, f);
-    this.drawClaw(ctx, f);
+    this.drawClawHub(ctx, f, g);
+    this.drawClawArm(ctx, f, g, 1);
+    this.drawFilter(ctx);
   },
 
-  drawCabinet(ctx, f) {
-    const x = this.toPxX(BOARD.cabinetX);
-    const y = this.toPxY(BOARD.cabinetY);
-    const w = BOARD.cabinetW * f;
-    const h = BOARD.cabinetH * f;
+  // 原版背景三层：照片底图（cover 铺满）+ 奶白罩色 + 紫红椭圆暗角
+  drawBackground(ctx) {
+    const w = this.cssW;
+    const h = this.cssH;
+    const img = this.textures.arcade;
+    if (img && img.width) {
+      const k = Math.max(w / img.width, h / img.height);
+      const dw = img.width * k;
+      const dh = img.height * k;
+      ctx.drawImage(img, (w - dw) / 2, (h - dh) / 2, dw, dh);
+    }
+    ctx.fillStyle = 'rgba(250,240,230,0.68)';
+    ctx.fillRect(0, 0, w, h);
     ctx.save();
-    this.roundRect(ctx, x, y, w, h, 26 * f);
-    ctx.fillStyle = '#fdece2';
-    ctx.fill();
-    ctx.lineWidth = 10 * f;
-    ctx.strokeStyle = '#c9a7dd';
-    ctx.stroke();
-    const glassX = this.toPxX(BOARD.left);
-    const glassY = this.toPxY(BOARD.top);
-    const glassW = BOARD.right - BOARD.left;
-    const gw = glassW * f;
-    const gh = (BOARD.floor - BOARD.top) * f;
-    ctx.beginPath();
-    ctx.rect(glassX, glassY, gw, gh);
-    ctx.clip();
-
-    // 底色：奶油 → 暖桃
-    const grad = ctx.createLinearGradient(glassX, glassY, glassX, glassY + gh);
-    grad.addColorStop(0, '#fffaf5');
-    grad.addColorStop(0.55, '#fbe9dd');
-    grad.addColorStop(1, '#f6ddcb');
-    ctx.fillStyle = grad;
-    ctx.fillRect(glassX, glassY, gw, gh);
-
-    // 顶部暖光（娃娃机灯）
-    const glow = ctx.createRadialGradient(glassX + gw / 2, glassY, 8 * f, glassX + gw / 2, glassY, gw * 0.75);
-    glow.addColorStop(0, 'rgba(255,238,204,0.55)');
-    glow.addColorStop(1, 'rgba(255,238,204,0)');
-    ctx.fillStyle = glow;
-    ctx.fillRect(glassX, glassY, gw, gh);
-
-    // 顶部扇贝帷幔 + 背景小装饰
-    this.drawValance(ctx, f, glassX, glassY, gw);
-    this.drawBackdropDecor(ctx, f);
-
-    // 两侧柔和暗角，增加纵深
-    const vw = 46 * f;
-    const vl = ctx.createLinearGradient(glassX, 0, glassX + vw, 0);
-    vl.addColorStop(0, 'rgba(176,132,160,0.12)');
-    vl.addColorStop(1, 'rgba(176,132,160,0)');
-    ctx.fillStyle = vl;
-    ctx.fillRect(glassX, glassY, vw, gh);
-    const vr = ctx.createLinearGradient(glassX + gw, 0, glassX + gw - vw, 0);
-    vr.addColorStop(0, 'rgba(176,132,160,0.12)');
-    vr.addColorStop(1, 'rgba(176,132,160,0)');
-    ctx.fillStyle = vr;
-    ctx.fillRect(glassX + gw - vw, glassY, vw, gh);
+    ctx.translate(w / 2, h / 2);
+    ctx.scale(1, h / w);
+    const g = ctx.createRadialGradient(0, 0, 0, 0, 0, w * 0.58);
+    g.addColorStop(0, 'rgba(74,42,63,0)');
+    g.addColorStop(0.62, 'rgba(74,42,63,0)');
+    g.addColorStop(1, 'rgba(74,42,63,0.34)');
+    ctx.fillStyle = g;
+    ctx.fillRect(-w, -w, w * 2, w * 2);
     ctx.restore();
-
-    // 地面：圆角绒垫 + 高光 + 上缘投影
-    const floorY = this.toPxY(BOARD.floor);
-    ctx.fillStyle = 'rgba(180,140,120,0.16)';
-    ctx.fillRect(glassX, floorY - 3 * f, gw, 3 * f);
-    ctx.fillStyle = '#e7c9b6';
-    this.roundRect(ctx, glassX, floorY - 1 * f, gw, 10 * f, 5 * f);
-    ctx.fill();
-    ctx.fillStyle = 'rgba(255,255,255,0.35)';
-    this.roundRect(ctx, glassX + 4 * f, floorY + 1 * f, gw - 8 * f, 2.5 * f, 1.2 * f);
-    ctx.fill();
   },
 
-  // 顶部扇贝帷幔：一条粉色横带 + 下缘半圆波浪
-  drawValance(ctx, f, gx, gy, gw) {
-    const bandH = 14 * f;
-    ctx.fillStyle = 'rgba(244,203,224,0.55)';
-    ctx.fillRect(gx, gy, gw, bandH);
-    const n = 8;
-    const r = gw / (n * 2);
-    ctx.beginPath();
-    for (let i = 0; i < n; i++) {
-      const cx = gx + r + i * 2 * r;
-      ctx.moveTo(cx + r, gy + bandH);
-      ctx.arc(cx, gy + bandH, r, 0, Math.PI);
-    }
-    ctx.fill();
+  // 机柜：原版是 4 层嵌套圆角矩形（外壳→奶白软包→深紫内壁→玻璃），全部代码绘制、无贴图
+  drawCabinet(ctx, f) {
+    const ext = BOARD.floor - BOARD.floorMin; // 原版 tank_rect 的纵向延伸量，默认 80
+    const box = (x, y, w, h, r, fill, border, bw) => {
+      this.roundRect(ctx, this.toPxX(x), this.toPxY(y), w * f, h * f, r * f);
+      ctx.fillStyle = fill;
+      ctx.fill();
+      ctx.lineWidth = bw * f;
+      ctx.strokeStyle = border;
+      ctx.stroke();
+    };
+    box(365, 128, 710, 760 + ext, 40, '#cbb1db', '#aa8fb9', 3);
+    box(378, 140, 684, 730 + ext, 32, '#eee1f0', '#f8f0f7', 3);
+    box(390, 162, 660, 700 + ext, 24, '#9e7c96', '#b095a5', 3);
+    box(400, 176, 640, 676 + ext, 16, '#f9ecdf', '#d9b8a9', 2);
+
+    // 玻璃只有两条竖反光：没有渐变、灯晕、帷幔与小装饰，也没有两侧暗角
+    const vline = (x, y1, y2, color, w) => {
+      ctx.strokeStyle = color;
+      ctx.lineWidth = w * f;
+      ctx.beginPath();
+      ctx.moveTo(this.toPxX(x), this.toPxY(y1));
+      ctx.lineTo(this.toPxX(x), this.toPxY(y2));
+      ctx.stroke();
+    };
+    vline(411, 216, 730 + ext, 'rgba(255,255,255,0.62)', 4);
+    vline(1028, 246, 729 + ext, 'rgba(255,255,255,0.45)', 2);
   },
 
-  // 背景静态装饰：星芒 / 小花 / 圆点（低透明度）
-  drawBackdropDecor(ctx, f) {
-    for (let i = 0; i < BG_DECOR.length; i++) {
-      const d = BG_DECOR[i];
-      const px = this.toPxX(d.x);
-      const py = this.toPxY(d.y);
-      const r = d.r * f;
-      ctx.fillStyle = d.c;
-      if (d.k === 'star') {
-        ctx.beginPath();
-        ctx.moveTo(px, py - r);
-        ctx.quadraticCurveTo(px + r * 0.18, py - r * 0.18, px + r, py);
-        ctx.quadraticCurveTo(px + r * 0.18, py + r * 0.18, px, py + r);
-        ctx.quadraticCurveTo(px - r * 0.18, py + r * 0.18, px - r, py);
-        ctx.quadraticCurveTo(px - r * 0.18, py - r * 0.18, px, py - r);
-        ctx.closePath();
-        ctx.fill();
-      } else if (d.k === 'flower') {
-        for (let p = 0; p < 5; p++) {
-          const a = (Math.PI * 2 * p) / 5 - Math.PI / 2;
-          ctx.beginPath();
-          ctx.arc(px + Math.cos(a) * r * 0.62, py + Math.sin(a) * r * 0.62, r * 0.42, 0, Math.PI * 2);
-          ctx.fill();
-        }
-        ctx.fillStyle = 'rgba(255,255,255,0.55)';
-        ctx.beginPath();
-        ctx.arc(px, py, r * 0.34, 0, Math.PI * 2);
-        ctx.fill();
-      } else {
-        ctx.beginPath();
-        ctx.arc(px, py, r, 0, Math.PI * 2);
-        ctx.fill();
-      }
-    }
+  // 底部唇边：336×70 贴图三段拼接（两端原样、中段横向拉伸），画在玩偶之上才压得住堆底
+  drawTrim(ctx, f) {
+    const img = this.textures.trim;
+    if (!img || !img.width) return;
+    const y = this.toPxY(BOARD.floor - 17);
+    const parts = [
+      [364, 84, 0],
+      [448, 544, 84],
+      [992, 84, 252],
+    ];
+    parts.forEach((p) => {
+      ctx.drawImage(img, p[2], 0, 84, 70, this.toPxX(p[0]), y, p[1] * f, 70 * f);
+    });
+  },
+
+  // 暖色滤镜：原版是 HUD 之上的全屏 ColorRect，intensity 0.18 ⇒ alpha 0.0216
+  drawFilter(ctx) {
+    ctx.fillStyle = 'rgba(224,140,87,0.0216)';
+    ctx.fillRect(0, 0, this.cssW, this.cssH);
   },
 
   drawDangerLine(ctx, f) {
@@ -844,8 +904,7 @@ Page({
 
   drawToy(ctx, toy, f) {
     const bomb = toy.tier === BOMB_TIER;
-    const tier = bomb ? null : TIERS[toy.tier];
-    const img = bomb ? null : this.textures[tier.key];
+    const img = this.textures[bomb ? 'bomb' : TIERS[toy.tier].key];
     const b = toy.body;
     const span = spanOf(toy.tier);
     const w = span * aspectOf(toy.tier) * f;
@@ -872,7 +931,26 @@ Page({
       ctx.fill();
     }
     ctx.restore();
-    if (toy.tier === BOMB_TIER) this.drawFuse(ctx, toy, f);
+    // 引信徽章只在松手后出现：原版 held_toy 不计时、不显示倒计时
+    if (toy.tier === BOMB_TIER && toy.armed) this.drawFuse(ctx, toy, f);
+  },
+
+  // 手里那个玩偶：原版是真实节点 held_toy（plushie_main.gd:361、:273），每帧钉在
+  // (aim_x, held_y()) 并 freeze，所以要画在夹爪之下、跟着瞄准一起移动
+  drawHeld(ctx, f) {
+    if (!this.held) return;
+    const { tier, span } = this.held;
+    this.drawToy(
+      ctx,
+      {
+        tier,
+        body: { x: this.aimX, y: CLAW.heldY(span), angle: 0, r: radiusOf(tier) },
+        squish: SQUISH.heldValue,
+        halo: 0,
+        armed: false,
+      },
+      f,
+    );
   },
 
   drawFuse(ctx, toy, f) {
@@ -911,84 +989,92 @@ Page({
     }
   },
 
-  // 夹爪：圆角轨道 + 滑车 + 吊索 + 菇盖爪毂 + 圆弧抓臂，开合度 openness 驱动
-  drawClaw(ctx, f) {
+  // ---------- 夹爪机构 ----------
+  // 抓臂几何只用「距瞄准中心的横向偏移」表达，左臂由 scale(-1,1) 镜像得到，两臂严格对称。
+  // 各件位置沿用原版灰色金属件的坐标，只换材质，投放手感（aimX / heldY）不受影响。
+  clawGeom() {
     const spread = this.openness;
-    const { aimX } = this;
     const tier = this.held ? this.held.tier : this.session.next(0);
     const span = this.held ? this.held.span : spanOf(tier);
-    const hw = (span * aspectOf(tier)) / 2;
-    const heldY = CLAW.heldY(span);
-    const px = this.toPxX(aimX);
-    const railY = this.toPxY(193);
-    const railL = this.toPxX(BOARD.left);
-    const railR = this.toPxX(BOARD.right);
-    ctx.save();
-    ctx.lineCap = 'round';
-    ctx.lineJoin = 'round';
-
-    // 顶部圆角轨道
-    ctx.fillStyle = '#e6d3f2';
-    this.roundRect(ctx, railL, railY - 4 * f, railR - railL, 8 * f, 4 * f);
-    ctx.fill();
-    ctx.fillStyle = 'rgba(255,255,255,0.55)';
-    this.roundRect(ctx, railL + 3 * f, railY - 2.6 * f, railR - railL - 6 * f, 2.4 * f, 1.2 * f);
-    ctx.fill();
-
-    // 随瞄准滑动的滑车
-    const trolW = 26 * f;
-    const trolH = 16 * f;
-    ctx.fillStyle = '#c9a7dd';
-    this.roundRect(ctx, px - trolW / 2, railY - trolH / 2, trolW, trolH, 6 * f);
-    ctx.fill();
-    ctx.fillStyle = 'rgba(255,255,255,0.5)';
-    this.roundRect(ctx, px - trolW / 2 + 4 * f, railY - trolH / 2 + 3 * f, trolW - 8 * f, 3 * f, 1.5 * f);
-    ctx.fill();
-
-    // 吊索
-    const hubY = this.toPxY(heldY - span * 0.3);
-    ctx.strokeStyle = '#b493cf';
-    ctx.lineWidth = 3 * f;
-    ctx.beginPath();
-    ctx.moveTo(px, railY + trolH / 2 - 2 * f);
-    ctx.lineTo(px, hubY);
-    ctx.stroke();
-
-    // 两只圆弧抓臂（粗圆头 + 糖果高光），开合沿用原锚点数学
-    const jointY = this.toPxY(254 + span * 0.16);
-    const tipY = this.toPxY(heldY + span * 0.25 - spread * 17);
-    const armOut = hw + 9 + spread * 25;
-    const tipOut = hw * 0.66 + spread * 54;
-    const arm = (s) => {
-      ctx.beginPath();
-      ctx.moveTo(px, hubY);
-      ctx.quadraticCurveTo(this.toPxX(aimX + s * armOut), jointY, this.toPxX(aimX + s * tipOut), tipY);
-      ctx.stroke();
+    const halfW = (span * aspectOf(tier)) / 2;
+    return {
+      aimX: this.aimX,
+      rootX: 15,
+      rootY: 246,
+      // 指尖收进玩偶轮廓内侧才像夹住，张开时摆到外缘
+      tipX: halfW * (0.8 + spread * 0.62),
+      tipY: CLAW.heldY(span) + span * 0.22,
+      // 粗细跟着玩偶走，大菇配粗爪
+      thick: span * 0.26,
     };
-    ctx.strokeStyle = '#a97fc4';
-    ctx.lineWidth = 7 * f;
-    arm(-1);
-    arm(1);
-    ctx.strokeStyle = 'rgba(255,255,255,0.35)';
-    ctx.lineWidth = 2.5 * f;
-    arm(-1);
-    arm(1);
+  },
 
-    // 菇盖状爪毂，盖住吊索与抓臂交点
-    const hubR = 10 * f;
-    const grad = ctx.createLinearGradient(px, hubY - hubR, px, hubY + hubR);
-    grad.addColorStop(0, '#e3b7d8');
-    grad.addColorStop(1, '#c98fc0');
-    ctx.fillStyle = grad;
-    ctx.beginPath();
-    ctx.arc(px, hubY, hubR, 0, Math.PI * 2);
-    ctx.fill();
-    ctx.fillStyle = 'rgba(255,255,255,0.6)';
-    ctx.beginPath();
-    ctx.arc(px - hubR * 0.3, hubY - hubR * 0.35, hubR * 0.3, 0, Math.PI * 2);
-    ctx.fill();
+  // 吊索 + 导轨，画在玩偶之下。奶白编绳压在奶白内衬上对比不足，先垫一条深紫芯当描边。
+  drawRig(ctx, f) {
+    const { aimX } = this;
+    const rope = this.textures.clawRope;
+    if (rope && rope.width) {
+      const y1 = this.toPxY(195);
+      const y2 = this.toPxY(248);
+      const rw = 14 * f;
+      ctx.save();
+      ctx.lineCap = 'round';
+      ctx.strokeStyle = '#8a6f8a';
+      ctx.lineWidth = rw + 2.5 * f;
+      ctx.beginPath();
+      ctx.moveTo(this.toPxX(aimX), y1);
+      ctx.lineTo(this.toPxX(aimX), y2);
+      ctx.stroke();
+      ctx.drawImage(rope, this.toPxX(aimX) - rw / 2, y1, rw, y2 - y1);
+      ctx.restore();
+    }
+    const rail = this.textures.clawRail;
+    if (rail && rail.width) {
+      // 导轨贴图是「奶白滚边 + 绗缝」的横截面带，按自身宽高比铺满轨长不拉伸，
+      // 再用胶囊形圆角裁掉两端的硬切边
+      const w = 610 * f;
+      const h = (w * rail.height) / rail.width;
+      const x = this.toPxX(415);
+      const y = this.toPxY(186) - h / 2;
+      ctx.save();
+      this.roundRect(ctx, x, y, w, h, h / 2);
+      ctx.clip();
+      ctx.drawImage(rail, x, y, w, h);
+      ctx.restore();
+    }
+  },
 
+  // 一根抓臂 = 一次贴图：关节盘落在爪毂下缘，圆头落在指尖，弧度由贴图自带
+  drawClawArm(ctx, f, g, side) {
+    const img = this.textures.clawArm;
+    if (!img || !img.width) return;
+    const cx = this.toPxX(g.aimX);
+    ctx.save();
+    ctx.translate(cx, 0);
+    ctx.scale(side, 1);
+    ctx.translate(-cx, 0);
+    const x1 = this.toPxX(g.aimX + g.rootX);
+    const y1 = this.toPxY(g.rootY);
+    const dx = this.toPxX(g.aimX + g.tipX) - x1;
+    const dy = this.toPxY(g.tipY) - y1;
+    const len = Math.hypot(dx, dy);
+    if (len < 1) {
+      ctx.restore();
+      return;
+    }
+    const th = g.thick * f;
+    ctx.translate(x1, y1);
+    ctx.rotate(Math.atan2(dy, dx));
+    ctx.drawImage(img, 0, -th / 2, len, th);
     ctx.restore();
+  },
+
+  drawClawHub(ctx, f, g) {
+    const img = this.textures.clawHub;
+    if (!img || !img.width) return;
+    const w = 48 * f;
+    const h = (w * img.height) / img.width;
+    ctx.drawImage(img, this.toPxX(g.aimX) - w / 2, this.toPxY(244) - h / 2, w, h);
   },
 
   roundRect(ctx, x, y, w, h, r) {
@@ -1044,6 +1130,14 @@ Page({
   },
 
   // ---------- 界面按钮 ----------
+  // 弹层关闭后决定是否恢复渲染循环：只有「对局中且没有任何弹层」才跑，否则补一帧静态绘制
+  afterModal() {
+    const d = this.data;
+    const blocked = d.showRecords || d.showPause || d.showHelp || d.showSettings;
+    if (d.status === 'playing' && !blocked) this.startLoop();
+    else this.draw();
+  },
+
   onStart() {
     audio.play('open');
     if (this.canvas) {
@@ -1058,7 +1152,26 @@ Page({
     audio.play('click');
     this.stopLoop();
     audio.loopStop('carriage');
-    this.setData({ status: 'title', showRecords: false, showHelp: false });
+    this.setData({
+      status: 'title',
+      showRecords: false,
+      showHelp: false,
+      showSettings: false,
+      showPause: false,
+    });
+  },
+
+  // 原版对局中没有底部按钮条，暂停键在 HUD 右上角；停循环即冻结物理、计时与引信
+  onPause() {
+    if (this.data.status !== 'playing') return;
+    audio.play('open');
+    this.stopLoop();
+    audio.loopStop('carriage');
+    this.setData({ showPause: true });
+  },
+
+  onResume() {
+    this.setData({ showPause: false }, () => this.afterModal());
   },
 
   onShowHelp() {
@@ -1067,16 +1180,38 @@ Page({
   },
 
   onCloseHelp() {
-    this.setData({ showHelp: false });
+    this.setData({ showHelp: false }, () => this.afterModal());
+  },
+
+  onShowSettings() {
+    audio.play('open');
+    this.setData({ showSettings: true, showPause: false });
+  },
+
+  onCloseSettings() {
+    this.setData({ showSettings: false }, () => this.afterModal());
+  },
+
+  onToggleReducedMotion(e) {
+    const next = !!(e.detail && e.detail.value);
+    this.setData({ reducedMotion: next });
+    try {
+      wx.setStorageSync(RM_KEY, next ? 1 : 0);
+    } catch (err) {
+      /* 存储失败只影响下次进入 */
+    }
   },
 
   onRestart() {
     audio.play('restart');
+    this.setData({ showPause: false });
     this.startRun();
   },
 
-  onToggleMute() {
-    const next = !this.data.muted;
+  onToggleMute(e) {
+    // 图标/按钮是 tap（取反），设置弹框里是 switch 的 change（用事件值）
+    const fromSwitch = !!(e && e.detail && typeof e.detail.value === 'boolean');
+    const next = fromSwitch ? e.detail.value : !this.data.muted;
     audio.setMuted(next);
     this.setData({ muted: next });
   },
@@ -1090,9 +1225,26 @@ Page({
   },
 
   onCloseRecords() {
-    this.setData({ showRecords: false });
-    if (this.data.status === 'playing') this.startLoop();
-    else this.draw();
+    this.setData({ showRecords: false }, () => this.afterModal());
+  },
+
+  // ---------- 分享（转发好友 / 朋友圈）：优先报本局战绩，无本局则报历史最佳 ----------
+  shareTitle() {
+    const s = this.session;
+    if (s && s.score > 0) {
+      const top = s.highest >= 0 ? `，合成了${tierLabel(s.highest)}` : '';
+      return `我在菇菇合成机拿下 ${s.score} 分${top}，来比比？`;
+    }
+    if (this.bestScore) return `我在菇菇合成机最高 ${this.bestScore} 分，来比比？`;
+    return '菇菇合成机：夹一只 Mushies，两只相同就能合成更大的！';
+  },
+
+  onShareAppMessage() {
+    return { title: this.shareTitle(), path: '/mushies/pages/index/index' };
+  },
+
+  onShareTimeline() {
+    return { title: this.shareTitle(), query: '' };
   },
 
   noop() {},
