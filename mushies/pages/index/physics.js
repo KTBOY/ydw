@@ -31,6 +31,11 @@ class Body {
     this.static = !!o.static;
     this.mass = this.static ? Infinity : o.mass || 1;
     this.invMass = this.static ? 0 : 1 / this.mass;
+    // 渲染插值快照：绘制层在 rx/ry 与当前位置间按累加器余量插值，
+    // 固定 60Hz 步长与 90/120Hz 刷新率不同步时下落才不显卡
+    this.rx = x;
+    this.ry = y;
+    this.ra = this.angle;
     this.still = 0;
     this.sleeping = false;
     this.tag = o.tag || null;
@@ -109,11 +114,52 @@ class World {
     }
   }
 
+  // 传送式生成（合成结果、满堆投放）会带着深重叠入场：若留给 step 解算，
+  // 一次推开的位移会被第 3 步反推成上千 px/s 的发射速度（深重叠/h）。
+  // 这里只做位置分离：step 的第 1 步每子步重新快照 px/py，场外位移不会进入速度。
+  depenetrate(body, passes) {
+    const n = passes || 4;
+    for (let p = 0; p < n; p++) {
+      let moved = false;
+      for (let i = 0; i < this.bodies.length; i++) {
+        const other = this.bodies[i];
+        if (other === body || other.removed || other.static) continue;
+        const dx = other.x - body.x;
+        const dy = other.y - body.y;
+        const sum = body.r + other.r;
+        if (dx * dx + dy * dy >= sum * sum) continue;
+        if (other.sleeping) other.wake();
+        this.solvePair(body, other);
+        body.tp = true;
+        other.tp = true;
+        moved = true;
+      }
+      if (this.bounds) this.applyBounds(this.bodies, null);
+      if (!moved) break;
+    }
+    // 瞬移过的体同步插值快照，绘制层不要把它补成一帧滑行
+    for (let i = 0; i < this.bodies.length; i++) {
+      const b = this.bodies[i];
+      if (!b.tp) continue;
+      b.tp = false;
+      b.rx = b.x;
+      b.ry = b.y;
+      b.ra = b.angle;
+    }
+  }
+
   step(dt) {
     const h = dt / this.substeps;
     const list = this.bodies;
     this.impacts = [];
     this.wallImpacts = [];
+    for (let i = 0; i < list.length; i++) {
+      const b = list[i];
+      if (b.static || b.removed) continue;
+      b.rx = b.x;
+      b.ry = b.y;
+      b.ra = b.angle;
+    }
     for (let s = 0; s < this.substeps; s++) {
       // 1) 积分
       for (let i = 0; i < list.length; i++) {
@@ -177,11 +223,16 @@ class World {
         const hit = hits[k];
         if (hit.approach > RESTITUTION_MIN) {
           const e = Math.max(hit.a.restitution, hit.b.restitution);
-          const push = (hit.approach * e) / 2;
-          hit.a.vx -= hit.nx * push;
-          hit.a.vy -= hit.ny * push;
-          hit.b.vx += hit.nx * push;
-          hit.b.vy += hit.ny * push;
+          // 回弹分离速度按逆质量分配：对半分会在质量不等时注入净动量，
+          // 重菇压轻菇时双方都弹得比应有值高
+          const invSum = hit.a.invMass + hit.b.invMass;
+          if (invSum > 0) {
+            const j = hit.approach * e;
+            hit.a.vx -= hit.nx * j * (hit.a.invMass / invSum);
+            hit.a.vy -= hit.ny * j * (hit.a.invMass / invSum);
+            hit.b.vx += hit.nx * j * (hit.b.invMass / invSum);
+            hit.b.vy += hit.ny * j * (hit.b.invMass / invSum);
+          }
           this.impacts.push({ a: hit.a, b: hit.b, impulse: hit.approach });
         }
         this.applyFriction(hit.a, hit.b, hit.nx, hit.ny);

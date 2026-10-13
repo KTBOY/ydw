@@ -196,6 +196,10 @@ Page({
     this.rafId = null;
     this.lastTs = 0;
     this.accumulator = 0;
+    this.renderAlpha = 1;
+    this.bgCanvas = null;
+    this.bgKey = '';
+    this.dpr = 2;
     this.pageShown = false;
     this.textures = {};
     this.layout = null;
@@ -233,6 +237,7 @@ Page({
   onUnload() {
     this.pageShown = false;
     this.stopLoop();
+    this.bgCanvas = null;
     audio.destroy();
   },
 
@@ -257,6 +262,7 @@ Page({
         } catch (e) {
           dpr = 2;
         }
+        this.dpr = dpr;
         canvas.width = info.width * dpr;
         canvas.height = info.height * dpr;
         ctx.scale(dpr, dpr);
@@ -266,7 +272,10 @@ Page({
         this.cssH = info.height;
         this.canvasRect = { left: info.left, top: info.top };
         this.computeLayout();
-        this.loadTextures(() => this.startRun());
+        this.loadTextures(() => {
+          this.ensureBackground();
+          this.startRun();
+        });
       });
   },
 
@@ -311,6 +320,34 @@ Page({
       img.src = `/mushies/images/${file}`;
       this.textures[name] = img;
     });
+  },
+
+  // 静态底（照片 cover + 罩色 + 暗角 + 机柜）离屏缓存，仅尺寸变化时重建：
+  // 大图 cover 与全屏径向渐变每帧重算是低端机掉帧的主因
+  ensureBackground() {
+    const key = `${this.cssW}x${this.cssH}:${BOARD.floor}`;
+    if (this.bgKey === key && this.bgCanvas) return;
+    this.bgKey = key;
+    this.bgCanvas = null;
+    try {
+      const off = wx.createOffscreenCanvas({
+        type: '2d',
+        width: Math.round(this.cssW * this.dpr),
+        height: Math.round(this.cssH * this.dpr),
+      });
+      const octx = off.getContext('2d');
+      octx.scale(this.dpr, this.dpr);
+      this.paintStatic(octx);
+      if (off.width && off.height) this.bgCanvas = off;
+    } catch (e) {
+      // 低版本基础库不支持离屏画布时，退化为每帧直接绘制
+      this.bgCanvas = null;
+    }
+  },
+
+  paintStatic(ctx) {
+    this.drawBackground(ctx);
+    this.drawCabinet(ctx, this.layout.f);
   },
 
   // ---------- 一局流程 ----------
@@ -386,6 +423,7 @@ Page({
     const toy = this.makeToy(held.tier, body);
     toy.age = 0;
     this.world.add(body);
+    this.world.depenetrate(body);
     this.toys.push(toy);
     if (held.tier === BOMB_TIER) toy.armed = true;
     audio.play('release');
@@ -527,6 +565,7 @@ Page({
       this.dropToy(a);
       this.dropToy(b);
       this.world.add(body);
+      this.world.depenetrate(body);
       this.toys.push(toy);
       this.onMerged(tier, x, y);
     }
@@ -729,6 +768,8 @@ Page({
       this.updateClaw(FIXED_DT);
       this.stepWorld(FIXED_DT);
     }
+    // 固定步长与刷新率不同步：用累加器余量在上一物理态与当前态之间插值绘制
+    this.renderAlpha = clamp(this.accumulator / FIXED_DT, 0, 1);
     this.impactCooldown = Math.max(0, this.impactCooldown - frame);
     this.updateSquish(frame);
     this.updateParticles(frame);
@@ -789,6 +830,13 @@ Page({
   },
 
   // ---------- 绘制 ----------
+  // 物理固定 60Hz、屏幕可能 90/120Hz：绘制位姿取插值，下落才平滑
+  renderPose(b) {
+    if (b.rx === undefined) return [b.x, b.y, b.angle];
+    const t = this.renderAlpha;
+    return [b.rx + (b.x - b.rx) * t, b.ry + (b.y - b.ry) * t, b.ra + (b.angle - b.ra) * t];
+  },
+
   // 层序照原版：底图 → 机柜 → 导轨吊索 → 危险线 → 后臂 → 玩偶 → 唇边（原版 z7 在玩偶之上）
   // → 粒子 → 爪毂 → 前臂 → 暖色滤镜。拆成后臂/前臂两次绘制才能把手里那个玩偶夹住。
   draw() {
@@ -796,8 +844,16 @@ Page({
     if (!ctx || !this.layout) return;
     const { f } = this.layout;
     ctx.clearRect(0, 0, this.cssW, this.cssH);
-    this.drawBackground(ctx);
-    this.drawCabinet(ctx, f);
+    if (this.bgCanvas) {
+      try {
+        ctx.drawImage(this.bgCanvas, 0, 0, this.cssW, this.cssH);
+      } catch (e) {
+        this.bgCanvas = null;
+        this.paintStatic(ctx);
+      }
+    } else {
+      this.paintStatic(ctx);
+    }
     this.drawRig(ctx, f);
     this.drawDangerLine(ctx, f);
     const g = this.clawGeom();
@@ -910,9 +966,10 @@ Page({
     const w = span * aspectOf(toy.tier) * f;
     const h = span * f;
     const visual = 1 + toy.squish * SQUISH.amount;
+    const [ix, iy, ia] = this.renderPose(b);
     ctx.save();
-    ctx.translate(this.toPxX(b.x), this.toPxY(b.y));
-    ctx.rotate(b.angle);
+    ctx.translate(this.toPxX(ix), this.toPxY(iy));
+    ctx.rotate(ia);
     ctx.scale(visual, 1 / visual);
     if (toy.halo > 0) {
       ctx.globalAlpha = clamp(toy.halo, 0, 1) * 0.5;
@@ -955,8 +1012,9 @@ Page({
 
   drawFuse(ctx, toy, f) {
     const b = toy.body;
-    const cx = this.toPxX(b.x);
-    const cy = this.toPxY(b.y - b.r) - 14 * f;
+    const [ix, iy] = this.renderPose(b);
+    const cx = this.toPxX(ix);
+    const cy = this.toPxY(iy - b.r) - 14 * f;
     const ratio = clamp(toy.fuse / RULES.fuse, 0, 1);
     ctx.save();
     ctx.beginPath();
