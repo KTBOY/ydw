@@ -1138,6 +1138,20 @@ Page({
     else this.draw();
   },
 
+  // PC 端/模拟器会把一次鼠标点击合成两次 tap，第二次落在刚挂载的遮罩上，
+  // 弹框刚开就被关掉、循环刚停就复活 —— 表现为「点暂停没反应、计时没停」。
+  // 所以遮罩只认落在自己身上的 touchstart：打开弹层时解除武装，收到 touchstart 才允许关闭一次。
+  onMaskTouchStart() {
+    this._maskArmed = true;
+  },
+
+  // 消费一次武装：未武装说明是同一次点击的重复 tap，忽略
+  maskCloseArmed() {
+    const ok = !!this._maskArmed;
+    this._maskArmed = false;
+    return ok;
+  },
+
   onStart() {
     audio.play('open');
     if (this.canvas) {
@@ -1167,28 +1181,34 @@ Page({
     audio.play('open');
     this.stopLoop();
     audio.loopStop('carriage');
+    this._maskArmed = false;
     this.setData({ showPause: true });
   },
 
   onResume() {
+    if (!this.maskCloseArmed()) return;
     this.setData({ showPause: false }, () => this.afterModal());
   },
 
   onShowHelp() {
     audio.play('open');
+    this._maskArmed = false;
     this.setData({ showHelp: true });
   },
 
   onCloseHelp() {
+    if (!this.maskCloseArmed()) return;
     this.setData({ showHelp: false }, () => this.afterModal());
   },
 
   onShowSettings() {
     audio.play('open');
+    this._maskArmed = false;
     this.setData({ showSettings: true, showPause: false });
   },
 
   onCloseSettings() {
+    if (!this.maskCloseArmed()) return;
     this.setData({ showSettings: false }, () => this.afterModal());
   },
 
@@ -1221,10 +1241,12 @@ Page({
     // 记录面板打开时暂停：物理与计时都由渲染循环驱动，停循环即冻结
     this.stopLoop();
     audio.loopStop('carriage');
+    this._maskArmed = false;
     this.setData({ showRecords: true, records: this.records });
   },
 
   onCloseRecords() {
+    if (!this.maskCloseArmed()) return;
     this.setData({ showRecords: false }, () => this.afterModal());
   },
 

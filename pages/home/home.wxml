@@ -1,4 +1,4 @@
-<view class="home">
+<view class="home" style="--nav-h: {{navH}}px; --status-h: {{statusH}}px">
 
 
   <!-- <web-view id="test" src="{{h5Url}}" bindload="onH5Load" bindmessage="onH5Message"></web-view> -->
@@ -16,5 +16,5 @@
 
 
   <!-- <ad unit-id="adunit-73225c369f75b51c" bindload="adLoad" binderror="adError"></ad> -->
-  <custom-tab-bar bindtabClick="tabClick" indexTab="{{currIndex}}"></custom-tab-bar>
+  <custom-tab-bar mode="canvas" bindtabClick="tabClick" indexTab="{{currIndex}}"></custom-tab-bar>
 </view>

@@ -1,29 +1,60 @@
-<!--
- * @Author: zlc
- * @Date: 2022-09-06 16:39:43
- * @LastEditTime: 2022-09-07 16:51:23
- * @LastEditors: zlc
- * @Description: 
- * @FilePath: \project-template-ui-plus\src\pages\index\index.vue
--->
-
 <view class="content">
-  <view class="head">
-    <t-swiper bindclick="handlerSwiper" current="{{current}}" autoplay="{{autoplay}}" duration="{{duration}}" interval="{{interval}}" list="{{swiperList}}" navigation="{{ { type: 'dots-bar' } }}" />
-  
-    <!-- <view class="cover">
-      <image class="logo" src="https://p2.music.126.net/rNQH185Dp2lcG2yII_Aiwg==/18159534045164927.jpg"></image>
-    </view>
-    <view class="name"> Welcome to shuke lab</view> -->
+  <!-- 层 0：背景 = 静帧打底 + 回文循环视频叠在上面，铺满整屏（含状态栏后方）。纯装饰层，不吃点击 -->
+  <view class="bg">
+    <image class="bg-media" src="{{bgImage}}" mode="aspectFill"></image>
+    <video
+      wx:if="{{bgVideo}}"
+      class="bg-media bg-video {{bgLive ? 'bg-video--on' : ''}}"
+      src="{{bgVideo}}"
+      initial-time="{{bgStart}}"
+      autoplay
+      loop
+      muted
+      object-fit="cover"
+      controls="{{false}}"
+      show-center-play-btn="{{false}}"
+      show-play-btn="{{false}}"
+      show-fullscreen-btn="{{false}}"
+      enable-progress-gesture="{{false}}"
+      enable-play-gesture="{{false}}"
+      vslide-gesture="{{false}}"
+      page-gesture-needed="{{false}}"
+      bindplay="onBgPlay"
+    ></video>
   </view>
-  <view class="bz-box">壁纸</view>
-  <view class="body">
+
+  <!-- 沉浸式导航：标题自绘压在透明导航区，右上角胶囊保持系统原生 -->
+  <view class="nav">
+    <view class="nav-in">
+      <view class="nav-line nav-line--l"></view>
+      <view class="nav-star"></view>
+      <view class="nav-text">首页</view>
+      <view class="nav-star"></view>
+      <view class="nav-line nav-line--r"></view>
+    </view>
+  </view>
+
+  <view class="stage">
     <view class="module-list">
-      <block wx:for="{{list}}" wx:for-item="item" wx:for-index="index" wx:key="{{index}}">
-        <div wx:if="{{item.show}}" style="width: {{item.blockStyle.width}}" class="button" bind:tap="handlerPageRouter" data-params="{{ {item, index} }}">
-          <image class="icon-menu" src="{{item.image}}" style="width: {{item.style.width}};height: {{item.style.height}}"></image>
-          <view class="module-name">{{item.name}}</view>
-        </div>
+      <block wx:for="{{list}}" wx:for-item="item" wx:for-index="index" wx:key="index">
+        <view
+          wx:if="{{item.show}}"
+          class="button hue-{{item.hue}} {{item.hero ? 'button--hero' : ''}} {{item.compact ? 'button--compact' : ''}}"
+          bind:tap="handlerPageRouter"
+          data-params="{{ {item, index} }}"
+        >
+          <!-- 主视觉卡：整张横幅铺满，标题与星盘都在图里，不再叠文字 -->
+          <image wx:if="{{item.hero}}" class="hero-art" src="{{item.image}}" mode="aspectFill"></image>
+          <block wx:else>
+            <view class="module-name">{{item.name}}</view>
+            <!-- 雪碧图动图：WXSS 的 background-image 不认包内本地路径，只能 <image src> + 窗口裁切 + transform 逐帧平移 -->
+            <view wx:if="{{item.sprite}}" class="icon-art sprite-frame">
+              <image class="sprite-strip" src="{{item.image}}" mode="scaleToFill"></image>
+            </view>
+            <image wx:else class="icon-art" src="{{item.image}}" mode="aspectFit"></image>
+            <view wx:if="{{!item.compact}}" class="go"></view>
+          </block>
+        </view>
       </block>
     </view>
   </view>

@@ -1,6 +1,4 @@
 {
   "component": true,
-  "usingComponents": {
-    "t-swiper": "tdesign-miniprogram/swiper/swiper"
-  }
+  "usingComponents": {}
 }

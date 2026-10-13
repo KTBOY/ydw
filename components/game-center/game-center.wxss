@@ -3,7 +3,8 @@
   height: 100vh;
   box-sizing: border-box;
   background: #f2f3f7;
-  padding: 24rpx 24rpx calc(220rpx + env(safe-area-inset-bottom));
+  /* 首页开了沉浸式导航（navigationStyle: custom），三个 tab 内容都要为状态栏+胶囊让位 */
+  padding: calc(24rpx + var(--nav-h, 0px)) 24rpx calc(220rpx + env(safe-area-inset-bottom));
 }
 
 /* 头部 */

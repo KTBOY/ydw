@@ -803,6 +803,7 @@
   display: flex;
   align-items: flex-end;
   background: rgba(51, 26, 48, 0.4);
+  animation: sheetMask 0.24s linear backwards;
 }
 
 .sheet {
@@ -811,6 +812,33 @@
   padding-bottom: calc(31rpx + env(safe-area-inset-bottom));
   border-radius: 31rpx 31rpx 0 0;
   background: #fff8ed;
+  animation: sheetUp 0.3s cubic-bezier(0.32, 0.72, 0, 1) backwards;
+}
+
+/* 抽屉从屏底推上：位移用自身高度百分比，改内容高度也不用调动画 */
+@keyframes sheetUp {
+  from {
+    transform: translateY(100%);
+  }
+
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes sheetMask {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.rm .sheet-mask,
+.rm .sheet {
+  animation: none;
 }
 
 .sheet-head {

@@ -15,11 +15,30 @@ const swiperList = [
   `${imageCdn}/swiper1.png`,
 ];
 
+// 首页开了 navigationStyle: custom（沉浸式），内容会顶到状态栏底下。
+// 这里按系统胶囊位置量出导航高度，以 CSS 变量下发给三个 tab 内容各自让位。
+function measureNav() {
+  const info = wx.getWindowInfo ? wx.getWindowInfo() : wx.getSystemInfoSync();
+  const statusH = info.statusBarHeight || 0;
+  let barH = 44;
+  try {
+    const cap = wx.getMenuButtonBoundingClientRect();
+    if (cap && cap.height) barH = (cap.top - statusH) * 2 + cap.height;
+  } catch (err) {
+    /* 取不到胶囊就用默认 44 */
+  }
+  return { statusH, navH: statusH + barH };
+}
+
+const NAV = measureNav();
+
 Page({
   data: {
     currIndex: 0,
     swiperList,
     list: [],
+    statusH: NAV.statusH,
+    navH: NAV.navH,
     userId: 'u_123456', // 假设从缓存获取用户ID
     h5Url: '' // 动态拼接H5地址
   },

@@ -1,115 +1,313 @@
-page {
-  --font-color: #4c88ff;
-  --bg-color: #f2f3f7;
-  --button-bg-color: #f2f3f7;
-  --button-shadow: -12rpx -12rpx 16rpx rgba(255, 255, 255, 0.9), 10rpx 10rpx 16rpx rgba(0, 0, 0, 0.07);
-  background-color: #f2f3f7;
-}
+/* 首页 · 沉浸式动态星空底 + 三入口卡（v6，按目标截图实测值校型）
+   分层：fixed 循环视频铺满整屏（含状态栏后方，无遮罩无二次模糊）→ 自绘透明导航标题 →
+   半透明玻璃主视觉卡 → 磨砂玻璃双卡。
+   页面开了 navigationStyle: custom，导航高度由 pages/home/home.js 量好以 --nav-h / --status-h 下发。
+
+   令牌挂 .content：组件样式表里的 page{} 选不中节点（menu.json 未开 styleIsolation），
+   自定义属性从祖先节点继承进来才生效。 */
 
 .content {
+  --ink: #2c2150;
+  --gutter: 32rpx;
+  --gap: 26rpx;
+  --radius: 44rpx;
+  --shadow: 0 20rpx 44rpx -16rpx rgba(52, 38, 92, 0.22), 0 2rpx 6rpx rgba(52, 38, 92, 0.06);
+  --shadow-press: 0 8rpx 18rpx -10rpx rgba(52, 38, 92, 0.24);
+
+  /* 双卡色值取自设计稿四角实测（粉 #F8E2F6→#F7C7E7 / 紫 #DBD8F7→#C4B5FD），
+     按 0.6~0.72 透明度落在磨砂底上，云影从卡片后面透出来 */
+  --hue-sage: linear-gradient(180deg, #d3e8d6 0%, #b0d5b9 100%);
+  --hue-amber: linear-gradient(180deg, #f8e3b4 0%, #f3ce8c 100%);
+  --hue-blush: linear-gradient(180deg, rgba(250, 229, 248, 0.92) 0%, rgba(249, 205, 236, 0.82) 100%);
+  --hue-lilac: linear-gradient(180deg, rgba(223, 220, 251, 0.94) 0%, rgba(200, 186, 253, 0.84) 100%);
+
   position: relative;
-
+  box-sizing: border-box;
+  min-height: 100vh;
 }
 
-.bz-box {
-  border: 2rpx solid #fff;
-  text-align: center;
-  border-radius: 15rpx;
-  padding: 10rpx 15rpx;
-  position: absolute;
-  left: 40rpx;
-  top: 30rpx;
-  color: #fff;
-  font-size: 19rpx;
-}
+/* ---------- 层 0：背景静帧 ----------
+   图是 9:16，竖屏机型（≈9:19.5）由 aspectFill 按高铺满，左右各裁约 9%，构图与城堡仍完整。
+   底下垫一层同色系渐变，图解码完成前不闪白。<image> 不是原生组件，层级与点击全走 CSS。 */
 
-.head {
-  padding: 10rpx 25rpx;
-}
-
-/* 轮播 */
-
-.img {
-  width: 100%;
-  height: 100%;
-}
-
-/* 轮播end */
-
-
-button::after {
-  border: none;
-}
-
-.cover {
-  position: relative;
-  width: 120rpx;
-  height: 130rpx;
-  border-radius: 50%;
+.bg {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 0;
   overflow: hidden;
-  border: 2rpx solid #f1f8fd;
-  box-shadow: 20rpx 20rpx 20rpx rgba(0, 0, 0, 0.07), -20rpx -20rpx 20rpx rgba(255, 255, 255, 0.7),
-    6rpx 6rpx 6rpx rgba(0, 0, 0, 0.09), -6rpx -6rpx 6rpx rgba(255, 255, 255, 0.9);
-
-
+  pointer-events: none;
+  background: linear-gradient(180deg, #241d4a 0%, #6d63a8 46%, #cfc4e8 78%, #efe7f6 100%);
 }
 
-.logo {
+.bg-media {
+  display: block;
   width: 100%;
+  height: 100%;
+  background: transparent;
+}
+
+/* 视频严丝合缝盖在静帧上：两者是同一素材、同一 cover 裁切，出画前后构图不位移。
+   开播前先藏起来 —— <video> 在首帧解码出来之前会画一帧黑，它盖在静帧上面就是那下闪黑。 */
+.bg-video {
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+  transition: opacity 420ms ease-out;
+}
+
+.bg-video--on {
+  opacity: 1;
+}
+
+/* ---------- 层 1：沉浸式导航标题 ----------
+   只自绘标题与装饰线，右上角胶囊留给系统原生组件（自己画的那颗盖不上去也点不动）。
+   pointer-events: none —— 这层横在屏幕顶部，绝不能拦住下面卡片的点击。 */
+
+.nav {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  z-index: 3;
+  box-sizing: border-box;
+  height: var(--nav-h, 64px);
+  padding-top: var(--status-h, 20px);
+  pointer-events: none;
+}
+
+.nav-in {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
   height: 100%;
 }
 
-.name {
-  color: #aeafb0;
-  padding: 10rpx 0;
+.nav-text {
+  color: #fff;
+  font-size: 34rpx;
+  font-weight: 600;
+  line-height: 1;
+  text-shadow: 0 2rpx 12rpx rgba(28, 20, 58, 0.45);
 }
 
+.nav-line {
+  width: 72rpx;
+  height: 2rpx;
+}
 
+.nav-line--l {
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.72) 100%);
+}
 
+.nav-line--r {
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.72) 0%, rgba(255, 255, 255, 0) 100%);
+}
 
+/* 四芒星走内联 SVG data-uri，理由同 .go：WXML 不解析 HTML 实体 */
+.nav-star {
+  width: 22rpx;
+  height: 22rpx;
+  margin: 0 16rpx;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ffffff'%3E%3Cpath d='M12 0c1.1 7.2 4.8 10.9 12 12-7.2 1.1-10.9 4.8-12 12-1.1-7.2-4.8-10.9-12-12C7.2 10.9 10.9 7.2 12 0z'/%3E%3C/svg%3E")
+    no-repeat center / contain;
+  opacity: 0.92;
+}
+
+/* ---------- 层 1：内容 ---------- */
+
+.stage {
+  position: relative;
+  z-index: 1;
+  box-sizing: border-box;
+  min-height: 100vh;
+  /* 目标截图主视觉卡顶边落在屏内 265rpx，即导航区底下再留 84rpx */
+  padding: calc(var(--nav-h, 64px) + 84rpx) var(--gutter) calc(env(safe-area-inset-bottom) + 200rpx);
+}
 
 .module-list {
   display: flex;
-  justify-content: space-evenly;
   flex-wrap: wrap;
   flex-direction: row;
+  justify-content: space-between;
 }
 
 .button {
-  color: var(--font-color);
   position: relative;
-  border-radius: 15px;
-  background: var(--button-bg-color);
-  transition: all 100ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  box-shadow: var(--button-shadow);
+  box-sizing: border-box;
+  overflow: hidden;
+  width: calc(50% - var(--gap) / 2);
+  height: 344rpx;
+  margin-bottom: var(--gap);
+  border: 2rpx solid rgba(255, 255, 255, 0.55);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  /* 磨砂玻璃：设计稿的云影是从卡片后面透出来的，卡片本身只带一层浅彩 tint */
+  -webkit-backdrop-filter: blur(28px) saturate(1.5);
+  backdrop-filter: blur(28px) saturate(1.5);
   cursor: pointer;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: left;
-  width: 45%;
-  height: 200rpx;
-  margin-bottom: 20rpx;
-
+  transition: transform 220ms cubic-bezier(0.22, 0.61, 0.36, 1), box-shadow 220ms ease-out;
 }
 
-
-
-/* .button:last-child {
-  width: 95%;
-} */
-
-.icon-menu {
-  width: 100rpx;
-  height: 100rpx;
+.button:active {
+  transform: scale(0.978);
+  box-shadow: var(--shadow-press);
 }
 
+/* 主视觉卡：684×258（目标截图实测 2.65:1）。横幅 PNG 保留了 alpha 通道（61.8% 像素半透），
+   云缘要化进玻璃底，所以这层必须留磨砂；阴影比双卡更轻，避免下缘出现暗边。 */
+.button--hero {
+  width: 100%;
+  height: 258rpx;
+  margin-bottom: var(--gap);
+  border-color: rgba(255, 255, 255, 0.62);
+  background: rgba(255, 255, 255, 0.34);
+  -webkit-backdrop-filter: blur(24px) saturate(1.4);
+  backdrop-filter: blur(24px) saturate(1.4);
+  box-shadow: 0 18rpx 36rpx -20rpx rgba(76, 62, 128, 0.18), 0 2rpx 8rpx rgba(76, 62, 128, 0.05);
+}
 
+.hero-art {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.hue-sage { background: var(--hue-sage); --accent: #6fae7f; }
+.hue-amber { background: var(--hue-amber); --accent: #d9a441; }
+.hue-blush { background: var(--hue-blush); --accent: #d26fc3; }
+.hue-lilac { background: var(--hue-lilac); --accent: #9674fc; }
 
 .module-name {
-  color: #222222;
+  position: absolute;
+  left: 40rpx;
+  right: 40rpx;
+  top: 26rpx;
+  color: var(--ink);
+  font-size: 36rpx;
   font-weight: 700;
-  font-size: 28rpx;
-  margin-top: 10rpx;
+  letter-spacing: 0.5rpx;
+  line-height: 1.3;
 }
+
+/* 标题下的短描线（设计稿：粉卡用 orchid，紫卡用靛蓝） */
+.module-name::after {
+  content: '';
+  display: block;
+  width: 40rpx;
+  height: 4rpx;
+  margin-top: 12rpx;
+  border-radius: 2rpx;
+  background: var(--accent, transparent);
+}
+
+/* 图标盒 256rpx：两张切图的内容各占画布 81% / 72%，落到屏上约 207~218rpx，
+   与设计稿量到的 223×169 / 246×219 对齐；盒底留 26rpx 不贴卡边 */
+.icon-art {
+  position: absolute;
+  left: 50%;
+  bottom: 26rpx;
+  width: 256rpx;
+  height: 256rpx;
+  transform: translateX(-50%);
+}
+
+/* ---------- 雪碧图动图 ----------
+   逐帧平移一律用 px 不用 rpx：1rpx 在 390/414pt 屏折算成 0.52/0.552px，
+   128rpx 的格宽就落到 66.56/70.66px 这种非整数位，每帧会漏进邻帧 1 物理像素的缝。
+   源图 3712×128（29 格 × 128px），整体按 0.75 缩到 96px 格，所有落点都是整数。
+   动的是 transform（合成层），不是 background-position（每帧重绘）。 */
+
+.icon-art.sprite-frame {
+  width: 96px;
+  height: 96px;
+  overflow: hidden;
+}
+
+.sprite-strip {
+  display: block;
+  width: 2784px; /* 29 格 × 96px */
+  height: 96px;
+  will-change: transform;
+  animation: tarot-idle 1.4s steps(28, end) infinite;
+}
+
+/* 28 帧跑完回到第 1 帧；第 29 格是收口用的重复帧，steps(28, end) 取不到它，留着无害 */
+@keyframes tarot-idle {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-2688px, 0, 0); /* 28 × 96 */
+  }
+}
+
+/* ↗ 用内联 SVG data-uri：WXML 不解析 HTML 实体，写 &#8599; 会原样显示成文本 */
+.go {
+  position: absolute;
+  right: 26rpx;
+  bottom: 26rpx;
+  width: 60rpx;
+  height: 60rpx;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.74);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%232c2150' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M7 17L17 7'/%3E%3Cpath d='M9 7h8v8'/%3E%3C/svg%3E");
+  background-size: 26rpx 26rpx;
+  background-position: center;
+  background-repeat: no-repeat;
+  box-shadow: 0 4rpx 10rpx rgba(52, 38, 92, 0.12);
+}
+
+/* ---------- 次要工具（亲戚关系计算器 / 色盲测试）----------
+   首页已不露出（list 里 show 关掉），样式整套留着：改回 true 即按原样恢复。
+   退后靠「形状语言不同 + 饱和度更低 + 尺寸更小」三件事表达，文字一律不调淡，
+   仍用 --ink 满对比（小字调淡会被当成 bug，不是层级）。
+   通栏细行：与上方方卡完全不同形，且 7 字名称在 165rpx 半宽里必然折行。 */
+
+.button--compact {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  height: 108rpx;
+  margin-bottom: 16rpx;
+  padding: 0 32rpx;
+  border: none;
+  box-shadow: 0 10rpx 22rpx -14rpx rgba(52, 38, 92, 0.14);
+  /* 细行保持不透底的浅彩，不做磨砂 */
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
+
+.button--compact .module-name {
+  position: static;
+  flex: 1;
+  transform: none;
+  font-size: 30rpx;
+  font-weight: 600;
+  text-align: left;
+}
+
+.button--compact .module-name::after {
+  display: none;
+}
+
+.button--compact .icon-art {
+  position: static;
+  flex-shrink: 0;
+  order: -1;
+  width: 68rpx;
+  height: 68rpx;
+  margin-right: 24rpx;
+  transform: none;
+}
+
+/* 同色系但把彩度压到主卡的一半，让这两行视觉上退到后面 */
+.button--compact.hue-sage { background: #e7f1e9; }
+.button--compact.hue-amber { background: #f9efdd; }

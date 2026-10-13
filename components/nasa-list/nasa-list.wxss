@@ -9,7 +9,8 @@
 
 /* 头部：头图 + 搜索 + 分类 */
 .nasa-hd {
-  padding: 16rpx 20rpx 10rpx;
+  /* 首页开了沉浸式导航，让位高度由 pages/home/home.wxml 以 --nav-h 下发 */
+  padding: calc(16rpx + var(--nav-h, 0px)) 20rpx 10rpx;
   background: linear-gradient(180deg, #0b1230, #070b16);
 }
 

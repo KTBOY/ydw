@@ -10,17 +10,17 @@
 
 <!-- canvas 模式（默认）：底栏剪影 + 圆钮同帧绘制在画布上，缺口处真实透明，适配任意页面背景；
      画布向上扩展 70rpx 容纳圆钮露出栏外的上半部分；fillet-rpx 可自定义凹唇半径（默认 28，0 = 纯半圆）。
-     开发者工具模拟器里 canvas 2d 非同层会盖住 tab 项，canvasDegraded 置真后自动回退 concave 观感 -->
+     开发者工具模拟器里 canvas 2d 非同层会盖住 tab 项，改由画布自绘图标文字（见 index.js drawGlyphs） -->
 <view
-  class="tabbar-box {{mode === 'canvas' && !canvasDegraded ? 'tabbar-box--canvas' : ''}}"
+  class="tabbar-box {{mode === 'canvas' ? 'tabbar-box--canvas' : ''}}"
   style="--w: {{750 / list.length}}rpx; --color: {{list[currIndex].pageBg || '#f2f3f7'}}; --bg: {{list[currIndex].activeBg || 'rgb(3,3,3)'}};"
 >
-  <canvas wx:if="{{mode === 'canvas' && !canvasDegraded}}" type="2d" id="tabbarCanvas" class="tabbar-canvas"></canvas>
+  <canvas wx:if="{{mode === 'canvas'}}" type="2d" id="tabbarCanvas" class="tabbar-canvas"></canvas>
   <block wx:for="{{list}}" wx:for-item="item" wx:for-index="index" wx:key="text">
     <view class="menu-item {{currIndex==index && 'active'}}" catchtap="tabClick" data-params="{{ {item, index} }}">
       <view class="iconfont {{item.icon}}"></view>
       <text>{{item.text}}</text>
     </view>
   </block>
-  <view wx:if="{{mode !== 'canvas' || canvasDegraded}}" class="active-tabbar-box" style="--n:{{currIndex}}"></view>
+  <view wx:if="{{mode !== 'canvas'}}" class="active-tabbar-box" style="--n:{{currIndex}}"></view>
 </view>

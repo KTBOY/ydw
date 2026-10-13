@@ -51,7 +51,7 @@ packageA/ xingzuo/ bz/ game/ gamehall/  功能分包
 - `gamehall/`：游戏大厅分包，也是首页 `preloadRule` **唯一**预下载的分包
   - `pages/list`：游戏下载库（数据源 `asserts/json/gemes.json`，加载器 `utils/games.js`），`pages/detail`：网盘链接展示（复用 `/components/url-copy/url`）。入口 `components/menu/menu.js` → `/gamehall/pages/list/index`。
   - `images/`：首页 `game-center` 卡片封面（`arrow-escape.png`/`sudoku.png`/`mushies.png`）。封面集中在此是因为**微信分包必须至少含一个页面、不能做纯资源分包**，且 `preloadRule` 里各分包体积之和有 2MB 上限（详见「小程序特有约束」第 2 条）。
-- 首页底部 `custom-tab-bar` 是**内容切换器**（非真实分包跳转）：`currIndex` 0=首页(`menu`)、1=基金(`fund`)、2=游戏中心(`game-center` 组件)。凹槽默认 `mode="canvas"`（底栏剪影 + 相切凹唇 + 半圆缺口与圆钮在 canvas 2d 上**同帧**绘制，缺口真实镂空、页面背景任意；切 tab 用单个 rAF 补间驱动两者，缓动取 CSS ease 贝塞尔避免与图标 CSS 过渡脱节；画布上探 70rpx 容纳圆钮上半部，rAF 仅动画期间占用；`fillet-rpx` 可自定义凹唇半径，默认 28rpx、0 = 纯半圆；开发者工具模拟器 canvas 非同层会盖住 tab 项，自动降级为 concave 观感，真机不受影响）；`mode="concave"` 为旧版伪类光圈方案，要求 item `pageBg` 与页面背景同色。
+- 首页底部 `custom-tab-bar` 是**内容切换器**（非真实分包跳转）：`currIndex` 0=首页(`menu`)、1=基金(`fund`)、2=游戏中心(`game-center` 组件)。凹槽默认 `mode="canvas"`（底栏剪影 + 相切凹唇 + 半圆缺口与圆钮在 canvas 2d 上**同帧**绘制，缺口真实镂空、页面背景任意；切 tab 用单个 rAF 补间驱动两者，缓动取 CSS ease 贝塞尔避免与图标 CSS 过渡脱节；画布上探 70rpx 容纳圆钮上半部，rAF 仅动画期间占用；`fillet-rpx` 可自定义凹唇半径，默认 28rpx、0 = 纯半圆；开发者工具模拟器 canvas 非同层会恒盖在 view 之上（白色剪影遮没图标文字），故该环境下由画布自绘图标与文字补偿（`index.js` 的 `drawGlyphs` + `data.js` 每项的 `glyph` 码点），真机仍是 DOM 图标 + 画布剪影）；`mode="concave"` 为旧版伪类光圈方案，要求 item `pageBg` 与页面背景同色。
 
 ## 代码规范
 - **ESLint + Prettier**（`.eslintrc.js` extends `plugin:prettier/recommended`）：2 空格缩进、`linebreak-style: unix`、`prefer-const`、`eqeqeq`、`camelcase`、`no-console`（仅允许 `warn`/`error`）。

@@ -9,6 +9,10 @@
       {
         "type": "folder",
         "value": "vibe_images"
+      },
+      {
+        "type": "folder",
+        "value": "test-image"
       }
     ],
     "include": []

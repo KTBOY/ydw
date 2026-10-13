@@ -1,5 +1,5 @@
 <!--mushies/pages/index/index.wxml-->
-<view class="page">
+<view class="page {{reducedMotion ? 'rm' : ''}}">
   <!-- 原版竖屏 HUD：紫绒 header band 内两行浮动小卡，右上角 44×52 图标暂停键 -->
   <view class="hud">
     <view class="hud-row">
@@ -59,7 +59,7 @@
     </view>
   </view>
 
-  <view class="overlay" wx:if="{{showRecords}}" catchtap="onCloseRecords">
+  <view class="overlay" wx:if="{{showRecords}}" bindtouchstart="onMaskTouchStart" catchtap="onCloseRecords">
     <view class="dialog" catchtap="noop">
       <view class="dialog-title">🏆 最高分</view>
       <scroll-view wx:if="{{records.length}}" scroll-y class="rec-list">
@@ -78,7 +78,7 @@
   </view>
 
   <!-- 首页（对应原版 route=title 的竖屏/mobile 分支）：整屏 key art + 灯牌 + 缎带 + 底部糖果菜单 -->
-  <view class="home {{reducedMotion ? 'rm' : ''}}" wx:if="{{status === 'title'}}">
+  <view class="home" wx:if="{{status === 'title'}}">
     <image class="hm-art" src="/mushies/images/title.jpg" mode="aspectFill" />
 
     <view class="hm-hearts">
@@ -132,7 +132,7 @@
   </view>
 
   <!-- 玩法说明 -->
-  <view class="overlay" wx:if="{{showHelp}}" catchtap="onCloseHelp">
+  <view class="overlay" wx:if="{{showHelp}}" bindtouchstart="onMaskTouchStart" catchtap="onCloseHelp">
     <view class="dialog" catchtap="noop">
       <view class="dialog-title">玩法说明</view>
       <view class="help-body">
@@ -149,7 +149,7 @@
   </view>
 
   <!-- 设置（原版 Settings 弹框的移动端子集：音频静音 + 减少动效） -->
-  <view class="overlay" wx:if="{{showSettings}}" catchtap="onCloseSettings">
+  <view class="overlay" wx:if="{{showSettings}}" bindtouchstart="onMaskTouchStart" catchtap="onCloseSettings">
     <view class="dialog" catchtap="noop">
       <view class="dialog-title">设置</view>
       <view class="set-row">
@@ -168,7 +168,7 @@
   </view>
 
   <!-- 暂停：原版移动端是底部 MobileSheet（奶白底 + 紫绒标题带 + 返回键 + 竖排按钮） -->
-  <view class="sheet-mask" wx:if="{{showPause}}" catchtap="onResume">
+  <view class="sheet-mask" wx:if="{{showPause}}" bindtouchstart="onMaskTouchStart" catchtap="onResume">
     <view class="sheet" catchtap="noop">
       <view class="sheet-head">
         <view class="sheet-title">已暂停</view>
